@@ -13,8 +13,10 @@ export function updateConfigForExtensionSupport(
   switch (manifest.manifest_version) {
     case 2:
       config.build.target = ["chrome64", "firefox89"]; // minimum browsers with import.meta.url and content script dynamic import
+      break;
     case 3:
       config.build.target = ["chrome91"];
+      break;
   }
 
   config.build.rollupOptions ??= {};
