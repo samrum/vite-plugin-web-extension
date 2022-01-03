@@ -1,0 +1,11 @@
+export { default as BackgroundHtml } from "./backgroundHtml";
+export { default as BackgroundScript } from "./backgroundScript";
+export { default as ContentCss } from "./contentCss";
+export { default as ContentWithDynamicImport } from "./contentWithDynamicImport";
+export { default as ContentWithChunkedImport } from "./contentWithChunkedImport";
+export { default as ContentWithUnchunkedImport } from "./contentWithUnchunkedImport";
+export { default as ContentWithNoImports } from "./contentWithNoImports";
+export { default as ContentWithSameScriptName } from "./contentWithSameScriptName";
+export { default as OptionsHtml } from "./optionsHtml";
+export { default as PopupHtml } from "./popupHtml";
+export { default as WebAccessibleResourceHtml } from "./webAccessibleResourceHtml";

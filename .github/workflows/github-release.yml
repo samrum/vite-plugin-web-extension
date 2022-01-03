@@ -1,0 +1,25 @@
+name: Create Github Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
+
+      - name: Create release
+        run: |
+          gh release create "${GITHUB_REF#refs/tags/}" -n "$RELEASE_NOTES"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          RELEASE_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}

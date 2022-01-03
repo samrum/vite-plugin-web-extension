@@ -1,0 +1,80 @@
+{
+  "name": "@samrum/vite-plugin-web-extension",
+  "version": "0.1.0",
+  "description": "A vite plugin for generating cross browser platform, ES module based web extensions",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "types/index.d.ts",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "dist",
+    "types",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit && rollup -c",
+    "dev": "rollup -c -w",
+    "lint": "prettier --write --loglevel warn .",
+    "test": "jest",
+    "prepare": "husky install",
+    "release": "standard-version --sign"
+  },
+  "standard-version": {
+    "scripts": {
+      "prerelease": "pnpm test && pnpm build"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samrum/vite-plugin-web-extension.git"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "web",
+    "extension",
+    "browser",
+    "chrome",
+    "firefox",
+    "edge",
+    "manifest"
+  ],
+  "author": "Ruben Medina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samrum/vite-plugin-web-extension/issues"
+  },
+  "homepage": "https://github.com/samrum/vite-plugin-web-extension#readme",
+  "devDependencies": {
+    "@rollup/plugin-sucrase": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.2.5",
+    "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.4.9",
+    "husky": ">=6",
+    "jest": "^27.0.6",
+    "lint-staged": ">=10",
+    "prettier": "2.4.1",
+    "rollup": "^2.55.1",
+    "standard-version": "^9.3.1",
+    "ts-jest": "^27.0.4",
+    "tslib": "^2.3.0",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.14"
+  },
+  "peerDependencies": {
+    "vite": "^2.6.14"
+  },
+  "lint-staged": {
+    "*.{js,ts,css,md}": "prettier --write"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.174",
+    "@types/etag": "^1.8.1",
+    "etag": "^1.8.1",
+    "fs-extra": "^10.0.0",
+    "magic-string": "^0.25.7"
+  }
+}
