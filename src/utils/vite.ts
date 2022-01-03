@@ -21,7 +21,7 @@ export function updateConfigForExtensionSupport(
   }
 
   config.build.rollupOptions ??= {};
-  config.build.rollupOptions.input ??= `\0${DUMMY_PLUGIN_INPUT_ID}`;
+  config.build.rollupOptions.input ??= DUMMY_PLUGIN_INPUT_ID;
 
   config.server ??= {};
 

@@ -70,7 +70,7 @@ export default function webExtension(
         options.input
       );
 
-      delete options.input[`\0${DUMMY_PLUGIN_INPUT_ID}`];
+      delete options.input[DUMMY_PLUGIN_INPUT_ID];
 
       emitQueue = emitQueue.concat(emitFiles);
 

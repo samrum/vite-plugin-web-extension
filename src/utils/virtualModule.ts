@@ -1,4 +1,4 @@
-export const DUMMY_PLUGIN_INPUT_ID = "VITE_PLUGIN_WEB_EXTENSION";
+export const DUMMY_PLUGIN_INPUT_ID = "\0VITE_PLUGIN_WEB_EXTENSION";
 
 const virtualModules = new Map<string, string>();
 
