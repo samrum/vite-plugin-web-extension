@@ -1,6 +1,6 @@
 import type { EmittedFile } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
-import type { RollupWebExtensionOptions } from "../types";
+import type { ViteWebExtensionOptions } from "../types";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
@@ -13,7 +13,7 @@ import {
 } from "./utils/vite";
 
 export default function webExtension(
-  pluginOptions: RollupWebExtensionOptions
+  pluginOptions: ViteWebExtensionOptions
 ): Plugin {
   if (!pluginOptions.manifest) {
     throw new Error("Missing manifest definition");

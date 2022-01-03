@@ -1,6 +1,6 @@
 import type { Plugin } from "vite";
 
-interface RollupWebExtensionOptions {
+interface ViteWebExtensionOptions {
   /**
    * The manifest file to use as a base for the generated extension
    */
@@ -8,11 +8,9 @@ interface RollupWebExtensionOptions {
 }
 
 /**
- * Build cross platform, module-based web extensions using rollup
+ * Build cross platform, module-based web extensions using vite
  */
-export default function webExtension(
-  options?: RollupWebExtensionOptions
-): Plugin;
+export default function webExtension(options?: ViteWebExtensionOptions): Plugin;
 
 // TODO: Have this automatically included on plugin usage
 interface ImportMeta {
