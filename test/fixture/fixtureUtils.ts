@@ -5,7 +5,6 @@ export function getExpectedHtml(asset: string): string {
     <meta charset="UTF-8" />
     
 
-    <script src="http://example.com/httpScript.js"></script>
     <script type="module" src="http://example.com/httpModuleScript.js"></script>
     <script type="module" crossorigin src="/assets/${asset}.js"></script>
   </head>
