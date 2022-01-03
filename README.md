@@ -18,12 +18,12 @@ A vite plugin for generating cross browser platform, ES module based web extensi
 
 ## Quick Start
 
-Build an [example extension](https://github.com/samrum/vite-web-extension) that uses this plugin:
+Build an [example extension](https://github.com/samrum/vite-vue-web-extension) that uses this plugin:
 
 <details>
   <summary>With npm</summary>
 
-    npx degit https://github.com/samrum/vite-web-extension
+    npx degit https://github.com/samrum/vite-vue-web-extension
     cd vite-web-extension
     npm install
     npm run build
@@ -33,7 +33,7 @@ Build an [example extension](https://github.com/samrum/vite-web-extension) that 
 <details>
   <summary>With pnpm</summary>
 
-    pnpm dlx degit https://github.com/samrum/vite-web-extension
+    pnpm dlx degit https://github.com/samrum/vite-vue-web-extension
     cd vite-web-extension
     pnpm install
     pnpm build
@@ -121,7 +121,7 @@ A sample of supported browsers:
 | Chromium | 64          | 91                                                                                     |
 | Firefox  | 89          | N/A ([In development](https://blog.mozilla.org/addons/2021/05/27/manifest-v3-update/)) |
 
-The plugin will automatically default vite's `build.target` config option to these minimum browser versions.
+The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
 
 # How it works
 
