@@ -1,6 +1,7 @@
 import MagicString from "magic-string";
 import { OutputBundle, PluginContext } from "rollup";
 import type { Manifest, ResolvedConfig, UserConfig } from "vite";
+import { DUMMY_PLUGIN_INPUT_ID } from "./virtualModule";
 
 // Update vite user config with settings necessary for the plugin to work
 export function updateConfigForExtensionSupport(
@@ -20,7 +21,7 @@ export function updateConfigForExtensionSupport(
   }
 
   config.build.rollupOptions ??= {};
-  config.build.rollupOptions.input ??= undefined;
+  config.build.rollupOptions.input ??= `\0${DUMMY_PLUGIN_INPUT_ID}`;
 
   config.server ??= {};
 
