@@ -5,7 +5,7 @@ import getEtag from "etag";
 //  Needed to support HMR styles in shadow DOM rendered content
 //  Also supports multiple content script shadow DOMs rendered on the same page
 const contentScriptStyleHandler: Connect.NextHandleFunction = (
-  _req,
+  req,
   res,
   next
 ) => {
@@ -13,7 +13,7 @@ const contentScriptStyleHandler: Connect.NextHandleFunction = (
 
   // @ts-ignore
   res.end = function end(chunk, ...otherArgs) {
-    if (this.req.url === "/@vite/client" && typeof chunk === "string") {
+    if (req.url === "/@vite/client" && typeof chunk === "string") {
       if (
         !/const sheetsMap/.test(chunk) ||
         !/document\.head\.appendChild\(style\)/.test(chunk) ||
