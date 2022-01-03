@@ -23,8 +23,8 @@ Build an [example extension](https://github.com/samrum/vite-vue-web-extension) t
 <details>
   <summary>With npm</summary>
 
-    npx degit https://github.com/samrum/vite-vue-web-extension
-    cd vite-web-extension
+    npx degit https://github.com/samrum/vite-vue-web-extension vue-web-extension
+    cd vue-web-extension
     npm install
     npm run build
     npm run serve:chrome
@@ -33,8 +33,8 @@ Build an [example extension](https://github.com/samrum/vite-vue-web-extension) t
 <details>
   <summary>With pnpm</summary>
 
-    pnpm dlx degit https://github.com/samrum/vite-vue-web-extension
-    cd vite-web-extension
+    pnpm dlx degit https://github.com/samrum/vite-vue-web-extension vue-web-extension
+    cd vue-web-extension
     pnpm install
     pnpm build
     pnpm serve:chrome
