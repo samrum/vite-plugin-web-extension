@@ -59,7 +59,7 @@ export default function webExtension(
 
     async options(options) {
       manifestParser = ManifestParserFactory.getParser(
-        pluginOptions.manifest,
+        JSON.parse(JSON.stringify(pluginOptions.manifest)),
         viteConfig
       );
 
