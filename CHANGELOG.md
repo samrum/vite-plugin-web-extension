@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.2...v0.1.3) (2022-01-06)
+
+### Bug Fixes
+
+- make manifest parsers use a copy of input manifest ([2c0ab12](https://github.com/samrum/vite-plugin-web-extension/commit/2c0ab12a986bbcd2f3d55313a9bb3fd11c067a26))
+- normalize filenames on output manifest matching ([b899410](https://github.com/samrum/vite-plugin-web-extension/commit/b899410a889b93726392e33695b8db52ea19ff5d))
+
 ### [0.1.2](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.1...v0.1.2) (2022-01-03)
 
 ### Features
