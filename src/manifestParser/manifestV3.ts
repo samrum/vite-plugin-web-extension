@@ -6,6 +6,7 @@ import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
+import { findChunkInManifestByFileName } from "../utils/vite";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -80,9 +81,6 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           viteManifest,
           outputBundle
         );
-        if (!parsedContentScript) {
-          return;
-        }
 
         script.js![index] = parsedContentScript.scriptFileName;
 
@@ -116,9 +114,14 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       return result;
     }
 
-    const manifestChunk = viteManifest[serviceWorkerFileName];
+    const manifestChunk = findChunkInManifestByFileName(
+      viteManifest,
+      serviceWorkerFileName
+    );
     if (!manifestChunk) {
-      throw new Error("Failed to build service worker");
+      throw new Error(
+        `Failed to find output chunk for ${serviceWorkerFileName}`
+      );
     }
 
     const serviceWorkerLoader = getServiceWorkerLoaderFile(manifestChunk.file);

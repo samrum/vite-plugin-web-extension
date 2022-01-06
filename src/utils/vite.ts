@@ -1,6 +1,7 @@
 import MagicString from "magic-string";
 import { OutputBundle, PluginContext } from "rollup";
-import type { Manifest, ResolvedConfig, UserConfig } from "vite";
+import type { Manifest, ManifestChunk, ResolvedConfig, UserConfig } from "vite";
+import { getNormalizedFileName } from "./file";
 import { DUMMY_PLUGIN_INPUT_ID } from "./virtualModule";
 
 // Update vite user config with settings necessary for the plugin to work
@@ -125,4 +126,11 @@ export function overrideManifestPlugin({
       args[1]
     );
   };
+}
+
+export function findChunkInManifestByFileName(
+  manifest: Manifest,
+  fileName: string
+): ManifestChunk | undefined {
+  return manifest[getNormalizedFileName(fileName)];
 }

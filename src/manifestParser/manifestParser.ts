@@ -5,6 +5,7 @@ import { getOutputFileName } from "../utils/file";
 import type { Manifest as ViteManifest } from "vite";
 import { EmittedFile, OutputBundle } from "rollup";
 import { getContentScriptLoaderForManifestChunk } from "../utils/loader";
+import { findChunkInManifestByFileName } from "../utils/vite";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -142,10 +143,13 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>,
     viteManifest: ViteManifest,
     outputBundle: OutputBundle
-  ): { scriptFileName: string; webAccessibleFiles: Set<string> } | null {
-    const manifestChunk = viteManifest[scriptFileName];
+  ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
+    const manifestChunk = findChunkInManifestByFileName(
+      viteManifest,
+      scriptFileName
+    );
     if (!manifestChunk) {
-      return null;
+      throw new Error(`Failed to find output chunk for ${scriptFileName}`);
     }
 
     const scriptLoaderFile =
@@ -204,7 +208,7 @@ export default abstract class ManifestParser<
   ): Set<string> {
     const files = new Set<string>();
 
-    const manifestChunk = viteManifest[chunkId];
+    const manifestChunk = findChunkInManifestByFileName(viteManifest, chunkId);
     if (!manifestChunk) {
       return files;
     }

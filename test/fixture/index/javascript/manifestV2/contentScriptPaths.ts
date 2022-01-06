@@ -2,15 +2,16 @@ import { getExpectedCode } from "../shared/contentWithChunkedImport";
 
 const resourceDir =
   "test/fixture/index/javascript/resources/contentWithChunkedImport";
-
+const resourceDirRoot = `/${resourceDir}`;
+const resourceDirRelative = `./${resourceDir}`;
 const inputManifest = {
   content_scripts: [
     {
-      js: [`${resourceDir}/content1.js`],
+      js: [`${resourceDirRoot}/content1.js`],
       matches: ["https://*/*", "http://*/*"],
     },
     {
-      js: [`${resourceDir}/content2.js`],
+      js: [`${resourceDirRelative}/content2.js`],
       matches: ["https://*/*", "http://*/*"],
     },
   ],

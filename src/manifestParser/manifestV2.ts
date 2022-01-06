@@ -86,9 +86,6 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           viteManifest,
           outputBundle
         );
-        if (!parsedContentScript) {
-          return;
-        }
 
         script.js![index] = parsedContentScript.scriptFileName;
 

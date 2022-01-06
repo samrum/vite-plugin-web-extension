@@ -1,4 +1,6 @@
 export { default as BackgroundServiceWorker } from "./backgroundServiceWorker";
+export { default as BackgroundServiceWorkerRelative } from "./backgroundServiceWorkerRelative";
+export { default as BackgroundServiceWorkerRoot } from "./backgroundServiceWorkerRoot";
 export { default as ContentCss } from "./contentCss";
 export { default as ContentWithDynamicImport } from "./contentWithDynamicImport";
 export { default as ContentWithChunkedImport } from "./contentWithChunkedImport";
