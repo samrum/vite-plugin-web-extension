@@ -1,4 +1,4 @@
-# vite-plugin-web-extension
+# @samrum/vite-plugin-web-extension
 
 A vite plugin for generating cross browser platform, ES module based web extensions.
 
@@ -9,12 +9,12 @@ A vite plugin for generating cross browser platform, ES module based web extensi
   - Including content scripts!
 - Vite based html and static asset handling
   - Including content scripts!
-- HMR support for all manifest properties
-  - Including content scripts!
+- HMR support for all manifest properties (excluding Manifest V3)
+  - Including content scripts! (excluding Firefox)
 - HMR support for CSS styles in content scripts
   - Including shadow DOM rendered content!
 
-# Usage
+# Setup
 
 ## Quick Start
 
@@ -41,9 +41,25 @@ Build an [example extension](https://github.com/samrum/vite-vue-web-extension) t
 
 </details>
 
+## Manual Install
+
+Pick your favorite package manager
+
+```
+npm i @samrum/vite-plugin-web-extension
+```
+
+```
+pnpm i @samrum/vite-plugin-web-extension
+```
+
+# Usage
+
 ## Vite Config
 
 - All manifest file names should be relative to the root of the project.
+
+### Examples
 
 <details>
   <summary>Manifest V2</summary>
