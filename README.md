@@ -1,5 +1,8 @@
 # @samrum/vite-plugin-web-extension
 
+[![npm version](https://badge.fury.io/js/@samrum%2Fvite-plugin-web-extension.svg)](https://badge.fury.io/js/@samrum%2Fvite-plugin-web-extension)
+[![ci](https://github.com/samrum/vite-plugin-web-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/samrum/vite-plugin-web-extension/actions/workflows/ci.yml)
+
 A vite plugin for generating cross browser platform, ES module based web extensions.
 
 ## Features
