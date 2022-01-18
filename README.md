@@ -19,11 +19,13 @@ A vite plugin for generating cross browser platform, ES module based web extensi
 
 ## Quick Start
 
-Generate a new vite web extension project
+Create a new Vite web extension project
 
 ```sh
 npm init @samrum/vite-plugin-web-extension
 ```
+
+Supports creating choice of Manifest, TypeScript, and various framework (Vanilla, Vue) projects
 
 ## Manual Install
 
