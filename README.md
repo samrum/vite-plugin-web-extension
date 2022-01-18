@@ -17,52 +17,27 @@ A vite plugin for generating cross browser platform, ES module based web extensi
 - HMR support for CSS styles in content scripts
   - Including shadow DOM rendered content!
 
-# Setup
-
 ## Quick Start
 
-Build an [example extension](https://github.com/samrum/vite-vue-web-extension) that uses this plugin:
+Generate a new vite web extension project
 
-<details>
-  <summary>With npm</summary>
-
-    npx degit https://github.com/samrum/vite-vue-web-extension vue-web-extension
-    cd vue-web-extension
-    npm install
-    npm run build
-    npm run serve:chrome
-
-</details>
-<details>
-  <summary>With pnpm</summary>
-
-    pnpm dlx degit https://github.com/samrum/vite-vue-web-extension vue-web-extension
-    cd vue-web-extension
-    pnpm install
-    pnpm build
-    pnpm serve:chrome
-
-</details>
+```sh
+npm init @samrum/vite-plugin-web-extension
+```
 
 ## Manual Install
 
-Pick your favorite package manager
-
-```
-npm i @samrum/vite-plugin-web-extension
+```sh
+npm install @samrum/vite-plugin-web-extension
 ```
 
-```
-pnpm i @samrum/vite-plugin-web-extension
-```
+## Usage
 
-# Usage
-
-## Vite Config
+### Vite Config
 
 - All manifest file names should be relative to the root of the project.
 
-### Examples
+#### Examples
 
 <details>
   <summary>Manifest V2</summary>
@@ -112,11 +87,11 @@ pnpm i @samrum/vite-plugin-web-extension
 
 </details>
 
-## Content Scripts
+### Content Scripts
 
 - For HMR style support within shadow DOMs, use the `addStyleTarget` function to add the shadowRoot of your element as a style target:
 
-  ```
+  ```js
   if (import.meta.hot) {
     const { addStyleTarget } = await import("/@vite/client");
 
@@ -126,7 +101,7 @@ pnpm i @samrum/vite-plugin-web-extension
 
 - For builds, use the `import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL` constant to reference the first generated CSS file associated with the current content script chunk.
 
-## Browser Support
+### Browser Support
 
 The following requirements must be met by the browser:
 
@@ -142,7 +117,7 @@ A sample of supported browsers:
 
 The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
 
-# How it works
+## How it works
 
 The plugin will take the provided manifest, parse rollup input scripts from all supported manifest properties, then output an ES module based web extension.
 
@@ -153,22 +128,28 @@ This includes:
 - Modifying Vite's static asset handling to maintain `import.meta.url` usages instead of rewriting to `self.location`. Needed so content script static asset handling can function correctly.
 - Modifying Vite's HMR client to add support for targeting specific elements as style injection locations. Needed to support HMR styles in shadow DOM rendered content.
 
-## Why this is a Vite specific plugin
+### Why this is a Vite specific plugin
 
 The plugin relies on Vite to parse and handle html files in addition to relying on Vite's manifest generation in order to map generated files to the eventual extension manifest.
 
-# Development
+## Development
 
 This project uses [pnpm](https://pnpm.io/) for package management.
 
-## Lint
+### Lint
 
-    pnpm lint
+```sh
+pnpm lint
+```
 
-## Tests
+### Tests
 
-    pnpm test
+```sh
+pnpm test
+```
 
-## Build
+### Build
 
-    pnpm build
+```sh
+pnpm build
+```
