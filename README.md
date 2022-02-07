@@ -12,7 +12,7 @@ A vite plugin for generating cross browser platform, ES module based web extensi
   - Including content scripts!
 - Vite based html and static asset handling
   - Including content scripts!
-- HMR support for all manifest properties (excluding Manifest V3)
+- HMR support for all manifest properties ([excluding Manifest V3](https://bugs.chromium.org/p/chromium/issues/detail?id=1290188))
   - Including content scripts! (excluding Firefox)
 - HMR support for CSS styles in content scripts
   - Including shadow DOM rendered content!
