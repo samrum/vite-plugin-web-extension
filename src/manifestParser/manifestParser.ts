@@ -1,7 +1,7 @@
 import { readFileSync } from "fs-extra";
 import { ManifestChunk, ResolvedConfig } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
-import { getOutputFileName } from "../utils/file";
+import { getInputFileName, getOutputFileName } from "../utils/file";
 import type { Manifest as ViteManifest } from "vite";
 import { EmittedFile, OutputBundle } from "rollup";
 import { getContentScriptLoaderForManifestChunk } from "../utils/loader";
@@ -106,9 +106,10 @@ export default abstract class ManifestParser<
   ): ParseResult<Manifest> {
     result.manifest.content_scripts?.forEach((script) => {
       script.js?.forEach((scriptFile) => {
+        const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
         const outputFile = getOutputFileName(scriptFile);
 
-        result.inputScripts.push([outputFile, scriptFile]);
+        result.inputScripts.push([outputFile, inputFile]);
       });
 
       script.css?.forEach((cssFile) => {
@@ -131,9 +132,10 @@ export default abstract class ManifestParser<
       return result;
     }
 
+    const inputFile = getInputFileName(htmlFileName, this.viteConfig.root);
     const outputFile = getOutputFileName(htmlFileName);
 
-    result.inputScripts.push([outputFile, htmlFileName]);
+    result.inputScripts.push([outputFile, inputFile]);
 
     return result;
   }

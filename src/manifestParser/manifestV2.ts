@@ -1,7 +1,11 @@
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
 import { ParseResult } from "./manifestParser";
-import { isSingleHtmlFilename, getOutputFileName } from "../utils/file";
+import {
+  isSingleHtmlFilename,
+  getOutputFileName,
+  getInputFileName,
+} from "../utils/file";
 import type { Manifest as ViteManifest } from "vite";
 import { OutputBundle } from "rollup";
 import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
@@ -57,11 +61,15 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       })
     );
 
-    setVirtualModule(htmlLoaderFile.fileName, htmlLoaderFile.source);
-
+    const inputFile = getInputFileName(
+      htmlLoaderFile.fileName,
+      this.viteConfig.root
+    );
     const outputFile = getOutputFileName(htmlLoaderFile.fileName);
 
-    result.inputScripts.push([outputFile, htmlLoaderFile.fileName]);
+    result.inputScripts.push([outputFile, inputFile]);
+
+    setVirtualModule(inputFile, htmlLoaderFile.source);
 
     delete result.manifest.background.scripts;
     result.manifest.background.page = htmlLoaderFile.fileName;
