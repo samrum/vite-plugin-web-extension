@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.3...v0.1.4) (2022-02-09)
+
+### Bug Fixes
+
+- fix windows path handling ([#1](https://github.com/samrum/vite-plugin-web-extension/issues/1)) ([db03637](https://github.com/samrum/vite-plugin-web-extension/commit/db03637dac8f2d9ceaa725750bd0be99781b7625))
+
 ### [0.1.3](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.2...v0.1.3) (2022-01-06)
 
 ### Bug Fixes
