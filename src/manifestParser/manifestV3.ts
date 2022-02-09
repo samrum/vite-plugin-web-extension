@@ -1,5 +1,9 @@
 import { ParseResult } from "./manifestParser";
-import { isSingleHtmlFilename, getOutputFileName } from "../utils/file";
+import {
+  isSingleHtmlFilename,
+  getOutputFileName,
+  getInputFileName,
+} from "../utils/file";
 import type { Manifest as ViteManifest } from "vite";
 import { OutputBundle } from "rollup";
 import ManifestParser from "./manifestParser";
@@ -55,9 +59,13 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
     const serviceWorkerScript = result.manifest.background?.service_worker;
 
+    const inputFile = getInputFileName(
+      serviceWorkerScript,
+      this.viteConfig.root
+    );
     const outputFile = getOutputFileName(serviceWorkerScript);
 
-    result.inputScripts.push([outputFile, serviceWorkerScript]);
+    result.inputScripts.push([outputFile, inputFile]);
 
     result.manifest.background.type = "module";
 
