@@ -2,7 +2,7 @@ import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
 import { ResolvedConfig } from "vite";
 import { getContentScriptLoaderFile } from "../utils/loader";
-import { getOutputFileName } from "../utils/file";
+import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 
 export default abstract class DevBuilder<
@@ -69,19 +69,21 @@ export default abstract class DevBuilder<
 
   protected async writeManifestHtmlFiles(htmlFileNames: string[]) {
     for (const fileName of htmlFileNames) {
+      const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
+
       let content =
-        getVirtualModule(fileName) ??
-        (await readFile(fileName, {
+        getVirtualModule(absoluteFileName) ??
+        (await readFile(absoluteFileName, {
           encoding: "utf-8",
         }));
 
       // update root paths
-      content = content.replace('src="/', `src="${this.hmrServerOrigin}/`);
+      content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
 
       // update relative paths
       const inputFileDir = path.dirname(fileName);
       content = content.replace(
-        'src="./',
+        /src="\.\//g,
         `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
       );
 
