@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.4...v0.1.5) (2022-02-10)
+
+### Bug Fixes
+
+- background.html missing in dev mode ([#2](https://github.com/samrum/vite-plugin-web-extension/issues/2)) ([1fa4d47](https://github.com/samrum/vite-plugin-web-extension/commit/1fa4d47a8271ef578d6cab969d8249ac27511582))
+
 ### [0.1.4](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.3...v0.1.4) (2022-02-09)
 
 ### Bug Fixes
