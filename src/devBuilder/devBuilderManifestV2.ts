@@ -1,8 +1,7 @@
+import crypto from "crypto";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.ManifestV2> {
-  protected async writeBuildFiles(): Promise<void> {}
-
   protected updateContentSecurityPolicyForHmr(
     manifest: chrome.runtime.ManifestV2
   ): chrome.runtime.ManifestV2 {
@@ -12,5 +11,15 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
       );
 
     return manifest;
+  }
+
+  protected parseInlineScriptHashes(content: string) {
+    const matches = content.matchAll(/<script.*?>([^<]+)<\/script>/gs);
+    for (const match of matches) {
+      const shasum = crypto.createHash("sha256");
+      shasum.update(match[1]);
+
+      this.inlineScriptHashes.add(`'sha256-${shasum.digest("base64")}'`);
+    }
   }
 }

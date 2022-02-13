@@ -1,6 +1,5 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
-import crypto from "crypto";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import { getContentScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
@@ -10,7 +9,7 @@ export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
 > {
   protected hmrServerOrigin = "";
-  private inlineScriptHashes = new Set<string>();
+  protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
 
   constructor(
@@ -51,10 +50,10 @@ export default abstract class DevBuilder<
     manifest: Manifest
   ): Manifest;
 
-  protected abstract writeBuildFiles(
-    manifest: Manifest,
-    manifestHtmlFiles: string[]
-  ): Promise<void>;
+  protected async writeBuildFiles(
+    _manifest: Manifest,
+    _manifestHtmlFiles: string[]
+  ): Promise<void> {}
 
   protected getContentSecurityPolicyWithHmrSupport(
     contentSecurityPolicy: string | undefined
@@ -103,14 +102,7 @@ export default abstract class DevBuilder<
         `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
       );
 
-      // parse inline scripts
-      const matches = content.matchAll(/<script.*?>([^<]+)<\/script>/gs);
-      for (const match of matches) {
-        const shasum = crypto.createHash("sha256");
-        shasum.update(match[1]);
-
-        this.inlineScriptHashes.add(`'sha256-${shasum.digest("base64")}'`);
-      }
+      this.parseInlineScriptHashes(content);
 
       const outFile = `${this.outDir}/${fileName}`;
 
@@ -121,6 +113,8 @@ export default abstract class DevBuilder<
       await writeFile(outFile, content);
     }
   }
+
+  protected parseInlineScriptHashes(_content: string): void {}
 
   protected async writeManifestContentScriptFiles(manifest: Manifest) {
     if (!manifest.content_scripts) {
