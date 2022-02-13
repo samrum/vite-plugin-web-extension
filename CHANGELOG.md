@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.5...v0.1.6) (2022-02-13)
+
+### Features
+
+- **dev:** apply plugin html transforms, add CSP inline script hashes ([#4](https://github.com/samrum/vite-plugin-web-extension/issues/4)) ([44c10b0](https://github.com/samrum/vite-plugin-web-extension/commit/44c10b0584f41068c5aa5ef2f9aeb75c8b993d3c))
+
+### Bug Fixes
+
+- ensure dev server is set for dev builds, add object-src to dev CSP ([#5](https://github.com/samrum/vite-plugin-web-extension/issues/5)) ([056547c](https://github.com/samrum/vite-plugin-web-extension/commit/056547c8d1a23f71bdd9ec70837a9448126c0c7e))
+- only set script hashes in manifest V2 CSP ([#6](https://github.com/samrum/vite-plugin-web-extension/issues/6)) ([ad3580d](https://github.com/samrum/vite-plugin-web-extension/commit/ad3580d7b44ae8978004e569c99ad7c1dfe87f4d))
+
 ### [0.1.5](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.4...v0.1.5) (2022-02-10)
 
 ### Bug Fixes
