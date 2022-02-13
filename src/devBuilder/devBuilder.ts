@@ -1,6 +1,7 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
-import { ResolvedConfig } from "vite";
+import crypto from "crypto";
+import { ResolvedConfig, ViteDevServer } from "vite";
 import { getContentScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
@@ -8,10 +9,14 @@ import { getVirtualModule } from "../utils/virtualModule";
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
 > {
-  protected hmrServerOrigin: string = "";
+  protected hmrServerOrigin = "";
+  private inlineScriptHashes = new Set<string>();
   protected outDir: string;
 
-  constructor(private viteConfig: ResolvedConfig) {
+  constructor(
+    private viteConfig: ResolvedConfig,
+    private viteDevServer?: ViteDevServer
+  ) {
     this.outDir = this.viteConfig.build.outDir;
   }
 
@@ -54,7 +59,12 @@ export default abstract class DevBuilder<
   protected getContentSecurityPolicyWithHmrSupport(
     contentSecurityPolicy: string | undefined
   ): string {
-    const cspHmrScriptSrc = `script-src ${this.hmrServerOrigin}; object-src 'self'`;
+    const scriptSrcs = [
+      [...this.inlineScriptHashes].join(" "),
+      this.hmrServerOrigin,
+    ];
+
+    const cspHmrScriptSrc = `script-src ${scriptSrcs.join(" ")}`;
 
     if (!contentSecurityPolicy) {
       return cspHmrScriptSrc;
@@ -77,8 +87,12 @@ export default abstract class DevBuilder<
           encoding: "utf-8",
         }));
 
+      // apply plugin transforms
+      content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+
       // update root paths
       content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
+      content = content.replace(/from "\//g, `from "${this.hmrServerOrigin}/`);
 
       // update relative paths
       const inputFileDir = path.dirname(fileName);
@@ -86,6 +100,15 @@ export default abstract class DevBuilder<
         /src="\.\//g,
         `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
       );
+
+      // parse inline scripts
+      const matches = content.matchAll(/<script.*?>([^<]+)<\/script>/gs);
+      for (const match of matches) {
+        const shasum = crypto.createHash("sha256");
+        shasum.update(match[1]);
+
+        this.inlineScriptHashes.add(`'sha256-${shasum.digest("base64")}'`);
+      }
 
       const outFile = `${this.outDir}/${fileName}`;
 

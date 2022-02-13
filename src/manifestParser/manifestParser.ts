@@ -1,5 +1,5 @@
 import { readFileSync } from "fs-extra";
-import { ManifestChunk, ResolvedConfig } from "vite";
+import { ManifestChunk, ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import type { Manifest as ViteManifest } from "vite";
@@ -16,6 +16,8 @@ export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
 export default abstract class ManifestParser<
   Manifest extends chrome.runtime.Manifest
 > {
+  protected viteDevServer: ViteDevServer | undefined;
+
   constructor(
     protected inputManifest: Manifest,
     protected viteConfig: ResolvedConfig
@@ -71,6 +73,10 @@ export default abstract class ManifestParser<
     });
 
     return result;
+  }
+
+  setDevServer(server: ViteDevServer) {
+    this.viteDevServer = server;
   }
 
   protected abstract createDevBuilder(): DevBuilder<Manifest>;
