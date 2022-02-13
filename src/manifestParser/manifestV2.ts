@@ -17,7 +17,7 @@ type ManifestParseResult = ParseResult<Manifest>;
 
 export default class ManifestV2 extends ManifestParser<Manifest> {
   protected createDevBuilder(): DevBuilder<Manifest> {
-    return new DevBuilderManifestV2(this.viteConfig);
+    return new DevBuilderManifestV2(this.viteConfig, this.viteDevServer);
   }
 
   protected getHtmlFileNames(manifest: Manifest): string[] {

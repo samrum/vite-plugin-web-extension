@@ -50,6 +50,8 @@ export default function webExtension(
     },
 
     configureServer(server) {
+      manifestParser.setDevServer(server);
+
       server.middlewares.use(contentScriptStyleHandler);
 
       server.httpServer!.once("listening", () => {
