@@ -64,7 +64,9 @@ export default abstract class DevBuilder<
       this.hmrServerOrigin,
     ];
 
-    const cspHmrScriptSrc = `script-src ${scriptSrcs.join(" ")}`;
+    const cspHmrScriptSrc = `script-src ${scriptSrcs.join(
+      " "
+    )}; object-src 'self'`;
 
     if (!contentSecurityPolicy) {
       return cspHmrScriptSrc;
