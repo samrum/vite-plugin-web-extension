@@ -82,36 +82,51 @@ export default abstract class DevBuilder<
     for (const fileName of htmlFileNames) {
       const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
-      let content =
-        getVirtualModule(absoluteFileName) ??
-        (await readFile(absoluteFileName, {
-          encoding: "utf-8",
-        }));
+      await this.writeManifestHtmlFile(fileName, absoluteFileName);
 
-      // apply plugin transforms
-      content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+      this.viteDevServer!.watcher.on("change", async (path) => {
+        if (path !== absoluteFileName) {
+          return;
+        }
 
-      // update root paths
-      content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
-      content = content.replace(/from "\//g, `from "${this.hmrServerOrigin}/`);
-
-      // update relative paths
-      const inputFileDir = path.dirname(fileName);
-      content = content.replace(
-        /src="\.\//g,
-        `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
-      );
-
-      this.parseInlineScriptHashes(content);
-
-      const outFile = `${this.outDir}/${fileName}`;
-
-      const outFileDir = path.dirname(outFile);
-
-      await ensureDir(outFileDir);
-
-      await writeFile(outFile, content);
+        await this.writeManifestHtmlFile(fileName, absoluteFileName);
+      });
     }
+  }
+
+  private async writeManifestHtmlFile(
+    fileName: string,
+    absoluteFileName: string
+  ): Promise<void> {
+    let content =
+      getVirtualModule(absoluteFileName) ??
+      (await readFile(absoluteFileName, {
+        encoding: "utf-8",
+      }));
+
+    // apply plugin transforms
+    content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+
+    // update root paths
+    content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
+    content = content.replace(/from "\//g, `from "${this.hmrServerOrigin}/`);
+
+    // update relative paths
+    const inputFileDir = path.dirname(fileName);
+    content = content.replace(
+      /src="\.\//g,
+      `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
+    );
+
+    this.parseInlineScriptHashes(content);
+
+    const outFile = `${this.outDir}/${fileName}`;
+
+    const outFileDir = path.dirname(outFile);
+
+    await ensureDir(outFileDir);
+
+    await writeFile(outFile, content);
   }
 
   protected parseInlineScriptHashes(_content: string): void {}
