@@ -39,7 +39,9 @@
     "chrome",
     "firefox",
     "edge",
-    "manifest"
+    "manifest",
+    "manifest V2",
+    "manifest V3"
   ],
   "author": "Ruben Medina",
   "license": "MIT",
