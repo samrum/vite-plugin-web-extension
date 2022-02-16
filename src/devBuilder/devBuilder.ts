@@ -1,6 +1,6 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
-import { ResolvedConfig, ViteDevServer } from "vite";
+import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
 import { getContentScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
@@ -85,7 +85,7 @@ export default abstract class DevBuilder<
       await this.writeManifestHtmlFile(fileName, absoluteFileName);
 
       this.viteDevServer!.watcher.on("change", async (path) => {
-        if (path !== absoluteFileName) {
+        if (normalizePath(path) !== absoluteFileName) {
           return;
         }
 

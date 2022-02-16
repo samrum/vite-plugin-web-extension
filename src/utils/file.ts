@@ -1,12 +1,11 @@
 import path from "path";
+import { normalizePath } from "vite";
 
 export function getNormalizedFileName(
   fileName: string,
   includeExt = true
 ): string {
-  let { dir, name, ext } = path.parse(
-    path.normalize(fileName).replace(/\\/g, "/")
-  );
+  let { dir, name, ext } = path.parse(normalizePath(path.normalize(fileName)));
 
   if (!dir) {
     return `${name}${includeExt ? ext : ""}`;
