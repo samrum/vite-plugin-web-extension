@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.6...v0.1.7) (2022-02-18)
+
+### Features
+
+- **dev:** reprocess manifest HTML files on change ([#7](https://github.com/samrum/vite-plugin-web-extension/issues/7)) ([d643e5e](https://github.com/samrum/vite-plugin-web-extension/commit/d643e5ef9965e5c90beb42b04b6e3531265288be))
+
 ### [0.1.6](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.5...v0.1.6) (2022-02-13)
 
 ### Features
