@@ -59,6 +59,7 @@ export default abstract class DevBuilder<
     contentSecurityPolicy: string | undefined
   ): string {
     const scriptSrcs = [
+      "'self'",
       [...this.inlineScriptHashes].join(" "),
       this.hmrServerOrigin,
     ];
