@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.7...v0.1.8) (2022-03-28)
+
+### Bug Fixes
+
+- **devBuilder:** add missing csp source for firefox ([#10](https://github.com/samrum/vite-plugin-web-extension/issues/10)) ([cb2f239](https://github.com/samrum/vite-plugin-web-extension/commit/cb2f2391cfda75e764d7a0776322f00c6601fe3a))
+
 ### [0.1.7](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.6...v0.1.7) (2022-02-18)
 
 ### Features
