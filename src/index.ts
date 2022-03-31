@@ -7,7 +7,6 @@ import ManifestParserFactory from "./manifestParser/manifestParserFactory";
 import { DUMMY_PLUGIN_INPUT_ID, getVirtualModule } from "./utils/virtualModule";
 import contentScriptStyleHandler from "./middleware/contentScriptStyleHandler";
 import {
-  overrideManifestPlugin,
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
 } from "./utils/vite";
@@ -35,18 +34,6 @@ export default function webExtension(
 
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig;
-
-      overrideManifestPlugin({
-        viteConfig,
-        onManifestGenerated: async (manifest, pluginContext, outputBundle) => {
-          const { emitFiles } = await manifestParser.parseOutput(
-            manifest,
-            outputBundle
-          );
-
-          emitFiles.forEach(pluginContext.emitFile);
-        },
-      });
     },
 
     configureServer(server) {
@@ -100,12 +87,37 @@ export default function webExtension(
       return transformSelfLocationAssets(code, viteConfig);
     },
 
-    resolveImportMeta(prop, options) {
-      if (prop === "CURRENT_CONTENT_SCRIPT_CSS_URL") {
-        return `"${options.chunkId.replace(".js", ".css")}"`;
+    renderStart() {
+      manifestParser.resetRenderedChunks();
+    },
+
+    renderChunk(code, chunk, _options) {
+      const renderedChunk = {
+        viteMetadata: {
+          importedCss: new Set<string>(),
+          importedAssets: new Set<string>(),
+        },
+        ...chunk,
+      };
+
+      manifestParser.setRenderedChunk(renderedChunk);
+
+      if (renderedChunk.viteMetadata.importedCss.size) {
+        const [cssAsset] = renderedChunk.viteMetadata.importedCss;
+
+        return code.replace(
+          "import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL",
+          `"${cssAsset}"`
+        );
       }
 
       return null;
+    },
+
+    async generateBundle(_options) {
+      const { emitFiles } = await manifestParser.parseOutput();
+
+      emitFiles.forEach(this.emitFile);
     },
   };
 }

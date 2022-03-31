@@ -6,8 +6,6 @@ import {
   getOutputFileName,
   getInputFileName,
 } from "../utils/file";
-import type { Manifest as ViteManifest } from "vite";
-import { OutputBundle } from "rollup";
 import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "./../devBuilder/devBuilder";
@@ -36,9 +34,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   }
 
   protected getParseOutputMethods(): ((
-    result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
     return [];
   }
@@ -78,9 +74,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputContentScripts(
-    result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ManifestParseResult
   ): Promise<ManifestParseResult> {
     const webAccessibleResources = new Set(
       result.manifest.web_accessible_resources ?? []
@@ -90,9 +84,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       script.js?.forEach((scriptFileName, index) => {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
-          result,
-          viteManifest,
-          outputBundle
+          result
         );
 
         script.js![index] = parsedContentScript.scriptFileName;

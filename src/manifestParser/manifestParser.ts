@@ -1,11 +1,16 @@
 import { readFileSync } from "fs-extra";
-import { ManifestChunk, ResolvedConfig, ViteDevServer } from "vite";
+import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
-import { getInputFileName, getOutputFileName } from "../utils/file";
-import type { Manifest as ViteManifest } from "vite";
-import { EmittedFile, OutputBundle } from "rollup";
-import { getContentScriptLoaderForManifestChunk } from "../utils/loader";
-import { findChunkInManifestByFileName } from "../utils/vite";
+import {
+  getInputFileName,
+  getNormalizedFileName,
+  getOutputFileName,
+} from "../utils/file";
+import type {
+  EmittedFile,
+  RenderedChunk as RenderedChunk_Rollup,
+} from "rollup";
+import { getContentScriptLoaderForRenderedChunk } from "../utils/loader";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -13,15 +18,32 @@ export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   manifest: Manifest;
 }
 
+interface RenderedChunk extends RenderedChunk_Rollup {
+  viteMetadata: {
+    importedCss: Set<string>;
+    importedAssets: Set<string>;
+  };
+}
+
 export default abstract class ManifestParser<
   Manifest extends chrome.runtime.Manifest
 > {
   protected viteDevServer: ViteDevServer | undefined;
 
+  protected renderedChunks = new Set<RenderedChunk>();
+
   constructor(
     protected inputManifest: Manifest,
     protected viteConfig: ResolvedConfig
   ) {}
+
+  setRenderedChunk(chunk: RenderedChunk) {
+    this.renderedChunks.add(chunk);
+  }
+
+  resetRenderedChunks() {
+    this.renderedChunks = new Set<RenderedChunk>();
+  }
 
   async parseInput(): Promise<ParseResult<Manifest>> {
     const parseResult: ParseResult<Manifest> = {
@@ -46,24 +68,17 @@ export default abstract class ManifestParser<
     });
   }
 
-  async parseOutput(
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
-  ): Promise<ParseResult<Manifest>> {
+  async parseOutput(): Promise<ParseResult<Manifest>> {
     let result: ParseResult<Manifest> = {
       inputScripts: [],
       emitFiles: [],
       manifest: this.inputManifest,
     };
 
-    result = await this.parseOutputContentScripts(
-      result,
-      viteManifest,
-      outputBundle
-    );
+    result = await this.parseOutputContentScripts(result);
 
     for (const parseMethod of this.getParseOutputMethods()) {
-      result = await parseMethod(result, viteManifest, outputBundle);
+      result = await parseMethod(result);
     }
 
     result.emitFiles.push({
@@ -88,15 +103,11 @@ export default abstract class ManifestParser<
   ) => ParseResult<Manifest>)[];
 
   protected abstract getParseOutputMethods(): ((
-    result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ParseResult<Manifest>
   ) => Promise<ParseResult<Manifest>>)[];
 
   protected abstract parseOutputContentScripts(
-    result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ParseResult<Manifest>
   ): Promise<ParseResult<Manifest>>;
 
   protected parseInputHtmlFiles(result: ParseResult<Manifest>) {
@@ -146,22 +157,29 @@ export default abstract class ManifestParser<
     return result;
   }
 
+  protected getRenderedChunk(chunkId: string): RenderedChunk | undefined {
+    const normalizedId = getNormalizedFileName(chunkId);
+
+    return [...this.renderedChunks].find(
+      (chunk) =>
+        chunk.facadeModuleId?.endsWith(normalizedId) ||
+        chunk.fileName.endsWith(normalizedId)
+    );
+  }
+
   protected parseOutputContentScript(
     scriptFileName: string,
-    result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ParseResult<Manifest>
   ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
-    const manifestChunk = findChunkInManifestByFileName(
-      viteManifest,
-      scriptFileName
-    );
-    if (!manifestChunk) {
-      throw new Error(`Failed to find output chunk for ${scriptFileName}`);
+    const data = this.getRenderedChunk(scriptFileName);
+    if (!data) {
+      throw new Error(`Failed to find rendered chunk for ${scriptFileName}`);
     }
 
-    const scriptLoaderFile =
-      getContentScriptLoaderForManifestChunk(manifestChunk);
+    const scriptLoaderFile = getContentScriptLoaderForRenderedChunk(
+      scriptFileName,
+      data
+    );
 
     if (scriptLoaderFile.source) {
       result.emitFiles.push({
@@ -171,13 +189,10 @@ export default abstract class ManifestParser<
       });
     }
 
-    this.rewriteCssInBundleForManifestChunk(manifestChunk, outputBundle);
-
     return {
       scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: this.getWebAccessibleFilesForManifestChunk(
-        viteManifest,
-        scriptFileName,
+      webAccessibleFiles: this.getWebAccessibleFilesForRenderedChunk(
+        data.fileName,
         Boolean(scriptLoaderFile.source)
       ),
     };
@@ -190,53 +205,33 @@ export default abstract class ManifestParser<
     );
   }
 
-  protected rewriteCssInBundleForManifestChunk(
-    manifestChunk: ManifestChunk,
-    outputBundle: OutputBundle
-  ) {
-    if (!manifestChunk.css?.length) {
-      return;
-    }
-
-    const outputChunk = outputBundle[manifestChunk.file];
-    if (outputChunk.type !== "chunk") {
-      return;
-    }
-
-    outputChunk.code = outputChunk.code.replace(
-      new RegExp(manifestChunk.file.replace(".js", ".css"), "g"),
-      manifestChunk.css[0]
-    );
-  }
-
-  private getWebAccessibleFilesForManifestChunk(
-    viteManifest: ViteManifest,
+  private getWebAccessibleFilesForRenderedChunk(
     chunkId: string,
     includeChunkFile = true
   ): Set<string> {
     const files = new Set<string>();
 
-    const manifestChunk = findChunkInManifestByFileName(viteManifest, chunkId);
-    if (!manifestChunk) {
+    const data = this.getRenderedChunk(chunkId);
+    if (!data) {
       return files;
     }
 
     if (includeChunkFile) {
-      files.add(manifestChunk.file);
+      files.add(data.fileName);
     }
 
-    manifestChunk.css?.forEach(files.add, files);
-    manifestChunk.assets?.forEach(files.add, files);
+    data.viteMetadata.importedCss.forEach(files.add, files);
+    data.viteMetadata.importedAssets.forEach(files.add, files);
 
-    manifestChunk.imports?.forEach((chunkId) =>
-      this.getWebAccessibleFilesForManifestChunk(viteManifest, chunkId).forEach(
+    data.imports.forEach((chunkId) =>
+      this.getWebAccessibleFilesForRenderedChunk(chunkId).forEach(
         files.add,
         files
       )
     );
 
-    manifestChunk.dynamicImports?.forEach((chunkId) =>
-      this.getWebAccessibleFilesForManifestChunk(viteManifest, chunkId).forEach(
+    data.dynamicImports.forEach((chunkId) =>
+      this.getWebAccessibleFilesForRenderedChunk(chunkId).forEach(
         files.add,
         files
       )

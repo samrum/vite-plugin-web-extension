@@ -1,4 +1,4 @@
-import { ManifestChunk } from "vite";
+import { RenderedChunk } from "rollup";
 import { getOutputFileName } from "./file";
 
 export function getScriptHtmlLoaderFile(name: string, scriptSrcs: string[]) {
@@ -41,14 +41,15 @@ export function getServiceWorkerLoaderFile(serviceWorkerFileName: string) {
   };
 }
 
-export function getContentScriptLoaderForManifestChunk(
-  manifestChunk: ManifestChunk
+export function getContentScriptLoaderForRenderedChunk(
+  contentScriptFileName: string,
+  chunk: RenderedChunk
 ): { fileName: string; source?: string } {
-  if (!manifestChunk.imports?.length && !manifestChunk.dynamicImports?.length) {
+  if (!chunk.imports.length && !chunk.dynamicImports.length) {
     return {
-      fileName: manifestChunk.file,
+      fileName: chunk.fileName,
     };
   }
 
-  return getContentScriptLoaderFile(manifestChunk.src!, manifestChunk.file);
+  return getContentScriptLoaderFile(contentScriptFileName, chunk.fileName);
 }

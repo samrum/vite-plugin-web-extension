@@ -4,13 +4,10 @@ import {
   getOutputFileName,
   getInputFileName,
 } from "../utils/file";
-import type { Manifest as ViteManifest } from "vite";
-import { OutputBundle } from "rollup";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
-import { findChunkInManifestByFileName } from "../utils/vite";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -43,11 +40,9 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected getParseOutputMethods(): ((
-    result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
-    return [this.parseOutputServiceWorker];
+    return [this.parseOutputServiceWorker.bind(this)];
   }
 
   protected parseInputBackgroundServiceWorker(
@@ -73,9 +68,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputContentScripts(
-    result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    result: ManifestParseResult
   ): Promise<ManifestParseResult> {
     const webAccessibleResources = new Set(
       result.manifest.web_accessible_resources ?? []
@@ -85,9 +78,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       script.js?.forEach((scriptFileName, index) => {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
-          result,
-          viteManifest,
-          outputBundle
+          result
         );
 
         script.js![index] = parsedContentScript.scriptFileName;
@@ -113,8 +104,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputServiceWorker(
-    result: ManifestParseResult,
-    viteManifest: ViteManifest
+    result: ManifestParseResult
   ): Promise<ManifestParseResult> {
     const serviceWorkerFileName = result.manifest.background?.service_worker;
 
@@ -122,17 +112,14 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       return result;
     }
 
-    const manifestChunk = findChunkInManifestByFileName(
-      viteManifest,
-      serviceWorkerFileName
-    );
-    if (!manifestChunk) {
+    const data = this.getRenderedChunk(serviceWorkerFileName);
+    if (!data) {
       throw new Error(
-        `Failed to find output chunk for ${serviceWorkerFileName}`
+        `Failed to find rendered chunk for ${serviceWorkerFileName}`
       );
     }
 
-    const serviceWorkerLoader = getServiceWorkerLoaderFile(manifestChunk.file);
+    const serviceWorkerLoader = getServiceWorkerLoaderFile(data.fileName);
 
     result.manifest.background!.service_worker = serviceWorkerLoader.fileName;
 
