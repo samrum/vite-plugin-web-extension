@@ -1,16 +1,10 @@
 import { readFileSync } from "fs-extra";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
-import {
-  getInputFileName,
-  getNormalizedFileName,
-  getOutputFileName,
-} from "../utils/file";
-import type {
-  EmittedFile,
-  RenderedChunk as RenderedChunk_Rollup,
-} from "rollup";
-import { getContentScriptLoaderForRenderedChunk } from "../utils/loader";
+import { getInputFileName, getOutputFileName } from "../utils/file";
+import type { EmittedFile, OutputBundle } from "rollup";
+import { getContentScriptLoaderForOutputChunk } from "../utils/loader";
+import { getChunkInfoFromBundle } from "../utils/rollup";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -18,32 +12,15 @@ export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   manifest: Manifest;
 }
 
-interface RenderedChunk extends RenderedChunk_Rollup {
-  viteMetadata: {
-    importedCss: Set<string>;
-    importedAssets: Set<string>;
-  };
-}
-
 export default abstract class ManifestParser<
   Manifest extends chrome.runtime.Manifest
 > {
   protected viteDevServer: ViteDevServer | undefined;
 
-  protected renderedChunks = new Set<RenderedChunk>();
-
   constructor(
     protected inputManifest: Manifest,
     protected viteConfig: ResolvedConfig
   ) {}
-
-  setRenderedChunk(chunk: RenderedChunk) {
-    this.renderedChunks.add(chunk);
-  }
-
-  resetRenderedChunks() {
-    this.renderedChunks = new Set<RenderedChunk>();
-  }
 
   async parseInput(): Promise<ParseResult<Manifest>> {
     const parseResult: ParseResult<Manifest> = {
@@ -68,17 +45,17 @@ export default abstract class ManifestParser<
     });
   }
 
-  async parseOutput(): Promise<ParseResult<Manifest>> {
+  async parseOutput(bundle: OutputBundle): Promise<ParseResult<Manifest>> {
     let result: ParseResult<Manifest> = {
       inputScripts: [],
       emitFiles: [],
       manifest: this.inputManifest,
     };
 
-    result = await this.parseOutputContentScripts(result);
+    result = await this.parseOutputContentScripts(result, bundle);
 
     for (const parseMethod of this.getParseOutputMethods()) {
-      result = await parseMethod(result);
+      result = await parseMethod(result, bundle);
     }
 
     result.emitFiles.push({
@@ -103,11 +80,13 @@ export default abstract class ManifestParser<
   ) => ParseResult<Manifest>)[];
 
   protected abstract getParseOutputMethods(): ((
-    result: ParseResult<Manifest>
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
   ) => Promise<ParseResult<Manifest>>)[];
 
   protected abstract parseOutputContentScripts(
-    result: ParseResult<Manifest>
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
 
   protected parseInputHtmlFiles(result: ParseResult<Manifest>) {
@@ -157,28 +136,19 @@ export default abstract class ManifestParser<
     return result;
   }
 
-  protected getRenderedChunk(chunkId: string): RenderedChunk | undefined {
-    const normalizedId = getNormalizedFileName(chunkId);
-
-    return [...this.renderedChunks].find(
-      (chunk) =>
-        chunk.facadeModuleId?.endsWith(normalizedId) ||
-        chunk.fileName.endsWith(normalizedId)
-    );
-  }
-
   protected parseOutputContentScript(
     scriptFileName: string,
-    result: ParseResult<Manifest>
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
   ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
-    const data = this.getRenderedChunk(scriptFileName);
-    if (!data) {
-      throw new Error(`Failed to find rendered chunk for ${scriptFileName}`);
+    const chunkInfo = getChunkInfoFromBundle(bundle, scriptFileName);
+    if (!chunkInfo) {
+      throw new Error(`Failed to find chunk info for ${scriptFileName}`);
     }
 
-    const scriptLoaderFile = getContentScriptLoaderForRenderedChunk(
+    const scriptLoaderFile = getContentScriptLoaderForOutputChunk(
       scriptFileName,
-      data
+      chunkInfo
     );
 
     if (scriptLoaderFile.source) {
@@ -191,8 +161,9 @@ export default abstract class ManifestParser<
 
     return {
       scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: this.getWebAccessibleFilesForRenderedChunk(
-        data.fileName,
+      webAccessibleFiles: this.getWebAccessibleFilesForOutputChunk(
+        chunkInfo.fileName,
+        bundle,
         Boolean(scriptLoaderFile.source)
       ),
     };
@@ -205,33 +176,34 @@ export default abstract class ManifestParser<
     );
   }
 
-  private getWebAccessibleFilesForRenderedChunk(
+  private getWebAccessibleFilesForOutputChunk(
     chunkId: string,
+    bundle: OutputBundle,
     includeChunkFile = true
   ): Set<string> {
     const files = new Set<string>();
 
-    const data = this.getRenderedChunk(chunkId);
-    if (!data) {
+    const chunkInfo = getChunkInfoFromBundle(bundle, chunkId);
+    if (!chunkInfo) {
       return files;
     }
 
     if (includeChunkFile) {
-      files.add(data.fileName);
+      files.add(chunkInfo.fileName);
     }
 
-    data.viteMetadata.importedCss.forEach(files.add, files);
-    data.viteMetadata.importedAssets.forEach(files.add, files);
+    chunkInfo.viteMetadata.importedCss.forEach(files.add, files);
+    chunkInfo.viteMetadata.importedAssets.forEach(files.add, files);
 
-    data.imports.forEach((chunkId) =>
-      this.getWebAccessibleFilesForRenderedChunk(chunkId).forEach(
+    chunkInfo.imports.forEach((chunkId) =>
+      this.getWebAccessibleFilesForOutputChunk(chunkId, bundle).forEach(
         files.add,
         files
       )
     );
 
-    data.dynamicImports.forEach((chunkId) =>
-      this.getWebAccessibleFilesForRenderedChunk(chunkId).forEach(
+    chunkInfo.dynamicImports.forEach((chunkId) =>
+      this.getWebAccessibleFilesForOutputChunk(chunkId, bundle).forEach(
         files.add,
         files
       )

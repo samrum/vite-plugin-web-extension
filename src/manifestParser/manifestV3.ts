@@ -8,6 +8,8 @@ import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
+import { OutputBundle } from "rollup";
+import { getChunkInfoFromBundle } from "../utils/rollup";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -40,9 +42,10 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected getParseOutputMethods(): ((
-    result: ManifestParseResult
+    result: ManifestParseResult,
+    bundle: OutputBundle
   ) => Promise<ManifestParseResult>)[] {
-    return [this.parseOutputServiceWorker.bind(this)];
+    return [this.parseOutputServiceWorker];
   }
 
   protected parseInputBackgroundServiceWorker(
@@ -68,7 +71,8 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputContentScripts(
-    result: ManifestParseResult
+    result: ManifestParseResult,
+    bundle: OutputBundle
   ): Promise<ManifestParseResult> {
     const webAccessibleResources = new Set(
       result.manifest.web_accessible_resources ?? []
@@ -78,7 +82,8 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       script.js?.forEach((scriptFileName, index) => {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
-          result
+          result,
+          bundle
         );
 
         script.js![index] = parsedContentScript.scriptFileName;
@@ -104,7 +109,8 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputServiceWorker(
-    result: ManifestParseResult
+    result: ManifestParseResult,
+    bundle: OutputBundle
   ): Promise<ManifestParseResult> {
     const serviceWorkerFileName = result.manifest.background?.service_worker;
 
@@ -112,14 +118,12 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       return result;
     }
 
-    const data = this.getRenderedChunk(serviceWorkerFileName);
-    if (!data) {
-      throw new Error(
-        `Failed to find rendered chunk for ${serviceWorkerFileName}`
-      );
+    const chunkInfo = getChunkInfoFromBundle(bundle, serviceWorkerFileName);
+    if (!chunkInfo) {
+      throw new Error(`Failed to find chunk info for ${serviceWorkerFileName}`);
     }
 
-    const serviceWorkerLoader = getServiceWorkerLoaderFile(data.fileName);
+    const serviceWorkerLoader = getServiceWorkerLoaderFile(chunkInfo.fileName);
 
     result.manifest.background!.service_worker = serviceWorkerLoader.fileName;
 

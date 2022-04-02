@@ -1,4 +1,4 @@
-import type { EmittedFile } from "rollup";
+import type { EmittedFile, OutputBundle, RenderedChunk } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
@@ -87,23 +87,11 @@ export default function webExtension(
       return transformSelfLocationAssets(code, viteConfig);
     },
 
-    renderStart() {
-      manifestParser.resetRenderedChunks();
-    },
-
     renderChunk(code, chunk, _options) {
-      const renderedChunk = {
-        viteMetadata: {
-          importedCss: new Set<string>(),
-          importedAssets: new Set<string>(),
-        },
-        ...chunk,
-      };
+      const importedCss = (chunk as RenderedChunk).viteMetadata.importedCss;
 
-      manifestParser.setRenderedChunk(renderedChunk);
-
-      if (renderedChunk.viteMetadata.importedCss.size) {
-        const [cssAsset] = renderedChunk.viteMetadata.importedCss;
+      if (importedCss.size) {
+        const [cssAsset] = importedCss;
 
         return code.replace(
           "import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL",
@@ -114,8 +102,10 @@ export default function webExtension(
       return null;
     },
 
-    async generateBundle(_options) {
-      const { emitFiles } = await manifestParser.parseOutput();
+    async generateBundle(_options, bundle) {
+      const { emitFiles } = await manifestParser.parseOutput(
+        bundle as OutputBundle
+      );
 
       emitFiles.forEach(this.emitFile);
     },

@@ -9,6 +9,7 @@ import {
 import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "./../devBuilder/devBuilder";
+import { OutputBundle } from "rollup";
 
 type Manifest = chrome.runtime.ManifestV2;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -74,7 +75,8 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   }
 
   protected async parseOutputContentScripts(
-    result: ManifestParseResult
+    result: ManifestParseResult,
+    bundle: OutputBundle
   ): Promise<ManifestParseResult> {
     const webAccessibleResources = new Set(
       result.manifest.web_accessible_resources ?? []
@@ -84,7 +86,8 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       script.js?.forEach((scriptFileName, index) => {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
-          result
+          result,
+          bundle
         );
 
         script.js![index] = parsedContentScript.scriptFileName;

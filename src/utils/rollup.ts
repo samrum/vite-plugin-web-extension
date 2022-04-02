@@ -1,4 +1,5 @@
-import type { InputOptions } from "rollup";
+import type { InputOptions, OutputBundle, OutputChunk } from "rollup";
+import { getNormalizedFileName } from "./file";
 
 export function addInputScriptsToOptionsInput(
   inputScripts: [string, string][],
@@ -37,4 +38,22 @@ function getOptionsInputAsObject(input: InputOptions["input"]): {
   }
 
   return input ?? {};
+}
+
+export function getChunkInfoFromBundle(
+  bundle: OutputBundle,
+  chunkId: string
+): OutputChunk | undefined {
+  const normalizedId = getNormalizedFileName(chunkId);
+
+  return Object.values(bundle).find((chunk) => {
+    if (chunk.type === "asset") {
+      return false;
+    }
+
+    return (
+      chunk.facadeModuleId?.endsWith(normalizedId) ||
+      chunk.fileName.endsWith(normalizedId)
+    );
+  }) as OutputChunk | undefined;
 }

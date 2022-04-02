@@ -1,4 +1,4 @@
-import { RenderedChunk } from "rollup";
+import { OutputChunk } from "rollup";
 import { getOutputFileName } from "./file";
 
 export function getScriptHtmlLoaderFile(name: string, scriptSrcs: string[]) {
@@ -41,9 +41,9 @@ export function getServiceWorkerLoaderFile(serviceWorkerFileName: string) {
   };
 }
 
-export function getContentScriptLoaderForRenderedChunk(
+export function getContentScriptLoaderForOutputChunk(
   contentScriptFileName: string,
-  chunk: RenderedChunk
+  chunk: OutputChunk
 ): { fileName: string; source?: string } {
   if (!chunk.imports.length && !chunk.dynamicImports.length) {
     return {
