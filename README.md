@@ -103,6 +103,14 @@ npm install @samrum/vite-plugin-web-extension
 
 - For builds, use the `import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL` constant to reference the first generated CSS file associated with the current content script chunk.
 
+#### TypeScript
+
+In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` values:
+
+```ts
+/// <reference types="@samrum/vite-plugin-web-extension/client" />
+```
+
 ### Browser Support
 
 The following requirements must be met by the browser:
