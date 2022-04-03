@@ -91,11 +91,9 @@ export default function webExtension(
       const importedCss = (chunk as RenderedChunk).viteMetadata.importedCss;
 
       if (importedCss.size) {
-        const [cssAsset] = importedCss;
-
         return code.replace(
-          "import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL",
-          `"${cssAsset}"`
+          "import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS",
+          `[${[...importedCss].map((path) => `"${path}"`).join(",")}]`
         );
       }
 

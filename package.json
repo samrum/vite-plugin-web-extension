@@ -9,10 +9,11 @@
     "node": ">=12.0.0"
   },
   "files": [
-    "dist",
-    "types",
+    "client.js",
     "client.d.ts",
-    "README.md"
+    "dist",
+    "README.md",
+    "types"
   ],
   "scripts": {
     "build": "tsc --noEmit && rollup -c",
