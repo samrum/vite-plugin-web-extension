@@ -11,6 +11,7 @@
   "files": [
     "dist",
     "types",
+    "client.d.ts",
     "README.md"
   ],
   "scripts": {
