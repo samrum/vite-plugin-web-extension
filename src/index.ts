@@ -90,14 +90,10 @@ export default function webExtension(
     renderChunk(code, chunk, _options) {
       const importedCss = (chunk as RenderedChunk).viteMetadata.importedCss;
 
-      if (importedCss.size) {
-        return code.replace(
-          "import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS",
-          `[${[...importedCss].map((path) => `"${path}"`).join(",")}]`
-        );
-      }
-
-      return null;
+      return code.replace(
+        "import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS",
+        `[${[...importedCss].map((path) => `"${path}"`).join(",")}]`
+      );
     },
 
     async generateBundle(_options, bundle) {
