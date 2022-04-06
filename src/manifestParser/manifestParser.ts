@@ -187,7 +187,7 @@ export default abstract class ManifestParser<
     chunkId: string,
     bundle: OutputBundle,
     includeChunkAsAsset: boolean,
-    metaData: {
+    metadata: {
       css: Set<string>;
       assets: Set<string>;
     } = {
@@ -200,29 +200,29 @@ export default abstract class ManifestParser<
   } {
     const chunkInfo = getChunkInfoFromBundle(bundle, chunkId);
     if (!chunkInfo) {
-      return metaData;
+      return metadata;
     }
 
     if (includeChunkAsAsset) {
-      metaData.assets.add(chunkInfo.fileName);
+      metadata.assets.add(chunkInfo.fileName);
     }
 
-    chunkInfo.viteMetadata.importedCss.forEach(metaData.css.add, metaData.css);
+    chunkInfo.viteMetadata.importedCss.forEach(metadata.css.add, metadata.css);
     chunkInfo.viteMetadata.importedAssets.forEach(
-      metaData.assets.add,
-      metaData.assets
+      metadata.assets.add,
+      metadata.assets
     );
 
     chunkInfo.imports.forEach(
       (chunkId) =>
-        (metaData = this.getMetadataforChunk(chunkId, bundle, true, metaData))
+        (metadata = this.getMetadataforChunk(chunkId, bundle, true, metadata))
     );
 
     chunkInfo.dynamicImports.forEach(
       (chunkId) =>
-        (metaData = this.getMetadataforChunk(chunkId, bundle, true, metaData))
+        (metadata = this.getMetadataforChunk(chunkId, bundle, true, metadata))
     );
 
-    return metaData;
+    return metadata;
   }
 }
