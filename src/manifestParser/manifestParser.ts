@@ -159,13 +159,20 @@ export default abstract class ManifestParser<
       });
     }
 
+    const metadata = this.getMetadataforChunk(
+      chunkInfo.fileName,
+      bundle,
+      Boolean(scriptLoaderFile.source)
+    );
+
+    chunkInfo.code = chunkInfo.code.replace(
+      new RegExp("import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS", "g"),
+      `[${[...metadata.css].map((path) => `"${path}"`).join(",")}]`
+    );
+
     return {
       scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: this.getWebAccessibleFilesForOutputChunk(
-        chunkInfo.fileName,
-        bundle,
-        Boolean(scriptLoaderFile.source)
-      ),
+      webAccessibleFiles: new Set([...metadata.assets, ...metadata.css]),
     };
   }
 
@@ -176,39 +183,46 @@ export default abstract class ManifestParser<
     );
   }
 
-  private getWebAccessibleFilesForOutputChunk(
+  private getMetadataforChunk(
     chunkId: string,
     bundle: OutputBundle,
-    includeChunkFile = true
-  ): Set<string> {
-    const files = new Set<string>();
-
+    includeChunkAsAsset: boolean,
+    metaData: {
+      css: Set<string>;
+      assets: Set<string>;
+    } = {
+      css: new Set<string>(),
+      assets: new Set<string>(),
+    }
+  ): {
+    css: Set<string>;
+    assets: Set<string>;
+  } {
     const chunkInfo = getChunkInfoFromBundle(bundle, chunkId);
     if (!chunkInfo) {
-      return files;
+      return metaData;
     }
 
-    if (includeChunkFile) {
-      files.add(chunkInfo.fileName);
+    if (includeChunkAsAsset) {
+      metaData.assets.add(chunkInfo.fileName);
     }
 
-    chunkInfo.viteMetadata.importedCss.forEach(files.add, files);
-    chunkInfo.viteMetadata.importedAssets.forEach(files.add, files);
-
-    chunkInfo.imports.forEach((chunkId) =>
-      this.getWebAccessibleFilesForOutputChunk(chunkId, bundle).forEach(
-        files.add,
-        files
-      )
+    chunkInfo.viteMetadata.importedCss.forEach(metaData.css.add, metaData.css);
+    chunkInfo.viteMetadata.importedAssets.forEach(
+      metaData.assets.add,
+      metaData.assets
     );
 
-    chunkInfo.dynamicImports.forEach((chunkId) =>
-      this.getWebAccessibleFilesForOutputChunk(chunkId, bundle).forEach(
-        files.add,
-        files
-      )
+    chunkInfo.imports.forEach(
+      (chunkId) =>
+        (metaData = this.getMetadataforChunk(chunkId, bundle, true, metaData))
     );
 
-    return files;
+    chunkInfo.dynamicImports.forEach(
+      (chunkId) =>
+        (metaData = this.getMetadataforChunk(chunkId, bundle, true, metaData))
+    );
+
+    return metaData;
   }
 }

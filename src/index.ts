@@ -1,4 +1,4 @@
-import type { EmittedFile, OutputBundle, RenderedChunk } from "rollup";
+import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
@@ -85,15 +85,6 @@ export default function webExtension(
 
     transform(code) {
       return transformSelfLocationAssets(code, viteConfig);
-    },
-
-    renderChunk(code, chunk, _options) {
-      const importedCss = (chunk as RenderedChunk).viteMetadata.importedCss;
-
-      return code.replace(
-        "import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS",
-        `[${[...importedCss].map((path) => `"${path}"`).join(",")}]`
-      );
     },
 
     async generateBundle(_options, bundle) {
