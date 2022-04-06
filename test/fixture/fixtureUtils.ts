@@ -60,6 +60,13 @@ export function getExpectedLogFromDynamicChunk(message: string): string {
 `;
 }
 
+export function getExpectedCss(id: string): string {
+  return `#${id} {
+  display: flex;
+}
+`;
+}
+
 export function getPreloadHelper(): string {
   return `null`;
 }
