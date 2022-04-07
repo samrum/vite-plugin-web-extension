@@ -8,6 +8,8 @@ console.log(["assets/test/fixture/index/javascript/resources/chunkCssRewrite/con
     [`assets/${resourceDir}/content2.js`]: `/* empty css                               */var content2 = "";
 console.log(["assets/test/fixture/index/javascript/resources/chunkCssRewrite/content2.css","assets/contentShared.css"]);
 `,
+    [`assets/${resourceDir}/contentNoCss.js`]: `console.log([]);
+`,
   };
 
   const assetCode = {
