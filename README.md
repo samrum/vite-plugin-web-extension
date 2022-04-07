@@ -29,6 +29,8 @@ Supports choice of Manifest, TypeScript, and framework (Vanilla, Vue, React, Pre
 
 ## Manual Install
 
+Requires Vite 2.9+
+
 ```sh
 npm install @samrum/vite-plugin-web-extension
 ```
@@ -95,17 +97,19 @@ npm install @samrum/vite-plugin-web-extension
 
   ```js
   if (import.meta.hot) {
-    const { addStyleTarget } = await import("/@vite/client");
+    const { addViteStyleTarget } = await import(
+      "@samrum/vite-plugin-web-extension/client"
+    );
 
-    addStyleTarget(shadowRoot);
+    await addViteStyleTarget(appContainer);
   }
   ```
 
-- For builds, use the `import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL` constant to reference the first generated CSS file associated with the current content script chunk.
+- For builds, use the `import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS` variable to reference an array of CSS asset paths associated with the current output chunk.
 
 #### TypeScript
 
-In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` values:
+In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` variables as well as plugin client functions:
 
 ```ts
 /// <reference types="@samrum/vite-plugin-web-extension/client" />

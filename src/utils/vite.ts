@@ -1,5 +1,4 @@
 import MagicString from "magic-string";
-import { OutputBundle, PluginContext } from "rollup";
 import type { Manifest, ManifestChunk, ResolvedConfig, UserConfig } from "vite";
 import { getNormalizedFileName } from "./file";
 import { DUMMY_PLUGIN_INPUT_ID } from "./virtualModule";
@@ -10,7 +9,6 @@ export function updateConfigForExtensionSupport(
   manifest: chrome.runtime.Manifest
 ): UserConfig {
   config.build ??= {};
-  config.build.manifest = true;
 
   if (!config.build.target) {
     switch (manifest.manifest_version) {
@@ -74,58 +72,6 @@ export function transformSelfLocationAssets(
   }
 
   return null;
-}
-
-// Override emitFile for vite's manifest plugin so we can use its output to set up our outputted extension manifest
-export function overrideManifestPlugin({
-  viteConfig,
-  onManifestGenerated,
-}: {
-  viteConfig: ResolvedConfig;
-  onManifestGenerated: (
-    manifest: Manifest,
-    pluginContext: PluginContext,
-    outputBundle: OutputBundle
-  ) => Promise<void>;
-}) {
-  const manifestPlugin = viteConfig.plugins.find(
-    ({ name }) => name === "vite:manifest"
-  )!;
-
-  if (!manifestPlugin) {
-    return;
-  }
-
-  const _generateBundle = manifestPlugin.generateBundle!;
-  manifestPlugin.generateBundle = async function (...args) {
-    let manifestSource = "";
-
-    await _generateBundle.apply(
-      {
-        ...this,
-        emitFile: (file) => {
-          if (file.type === "asset" && file.fileName === "manifest.json") {
-            manifestSource = file.source as string;
-
-            return "manifestIgnoredId";
-          }
-
-          return this.emitFile(file);
-        },
-      },
-      args
-    );
-
-    if (!manifestSource) {
-      throw new Error("Failed to get vite generated manifest file!");
-    }
-
-    await onManifestGenerated(
-      JSON.parse(manifestSource) as Manifest,
-      this,
-      args[1]
-    );
-  };
 }
 
 export function findChunkInManifestByFileName(

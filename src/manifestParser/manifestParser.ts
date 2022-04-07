@@ -1,11 +1,10 @@
 import { readFileSync } from "fs-extra";
-import { ManifestChunk, ResolvedConfig, ViteDevServer } from "vite";
+import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";
-import type { Manifest as ViteManifest } from "vite";
-import { EmittedFile, OutputBundle } from "rollup";
-import { getContentScriptLoaderForManifestChunk } from "../utils/loader";
-import { findChunkInManifestByFileName } from "../utils/vite";
+import type { EmittedFile, OutputBundle } from "rollup";
+import { getContentScriptLoaderForOutputChunk } from "../utils/loader";
+import { getChunkInfoFromBundle } from "../utils/rollup";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -46,24 +45,17 @@ export default abstract class ManifestParser<
     });
   }
 
-  async parseOutput(
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
-  ): Promise<ParseResult<Manifest>> {
+  async parseOutput(bundle: OutputBundle): Promise<ParseResult<Manifest>> {
     let result: ParseResult<Manifest> = {
       inputScripts: [],
       emitFiles: [],
       manifest: this.inputManifest,
     };
 
-    result = await this.parseOutputContentScripts(
-      result,
-      viteManifest,
-      outputBundle
-    );
+    result = await this.parseOutputContentScripts(result, bundle);
 
     for (const parseMethod of this.getParseOutputMethods()) {
-      result = await parseMethod(result, viteManifest, outputBundle);
+      result = await parseMethod(result, bundle);
     }
 
     result.emitFiles.push({
@@ -89,14 +81,12 @@ export default abstract class ManifestParser<
 
   protected abstract getParseOutputMethods(): ((
     result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    bundle: OutputBundle
   ) => Promise<ParseResult<Manifest>>)[];
 
   protected abstract parseOutputContentScripts(
     result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
 
   protected parseInputHtmlFiles(result: ParseResult<Manifest>) {
@@ -149,19 +139,17 @@ export default abstract class ManifestParser<
   protected parseOutputContentScript(
     scriptFileName: string,
     result: ParseResult<Manifest>,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    bundle: OutputBundle
   ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
-    const manifestChunk = findChunkInManifestByFileName(
-      viteManifest,
-      scriptFileName
-    );
-    if (!manifestChunk) {
-      throw new Error(`Failed to find output chunk for ${scriptFileName}`);
+    const chunkInfo = getChunkInfoFromBundle(bundle, scriptFileName);
+    if (!chunkInfo) {
+      throw new Error(`Failed to find chunk info for ${scriptFileName}`);
     }
 
-    const scriptLoaderFile =
-      getContentScriptLoaderForManifestChunk(manifestChunk);
+    const scriptLoaderFile = getContentScriptLoaderForOutputChunk(
+      scriptFileName,
+      chunkInfo
+    );
 
     if (scriptLoaderFile.source) {
       result.emitFiles.push({
@@ -171,15 +159,20 @@ export default abstract class ManifestParser<
       });
     }
 
-    this.rewriteCssInBundleForManifestChunk(manifestChunk, outputBundle);
+    const metadata = this.getMetadataforChunk(
+      chunkInfo.fileName,
+      bundle,
+      Boolean(scriptLoaderFile.source)
+    );
+
+    chunkInfo.code = chunkInfo.code.replace(
+      new RegExp("import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS", "g"),
+      `[${[...metadata.css].map((path) => `"${path}"`).join(",")}]`
+    );
 
     return {
       scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: this.getWebAccessibleFilesForManifestChunk(
-        viteManifest,
-        scriptFileName,
-        Boolean(scriptLoaderFile.source)
-      ),
+      webAccessibleFiles: new Set([...metadata.assets, ...metadata.css]),
     };
   }
 
@@ -190,58 +183,46 @@ export default abstract class ManifestParser<
     );
   }
 
-  protected rewriteCssInBundleForManifestChunk(
-    manifestChunk: ManifestChunk,
-    outputBundle: OutputBundle
-  ) {
-    if (!manifestChunk.css?.length) {
-      return;
-    }
-
-    const outputChunk = outputBundle[manifestChunk.file];
-    if (outputChunk.type !== "chunk") {
-      return;
-    }
-
-    outputChunk.code = outputChunk.code.replace(
-      new RegExp(manifestChunk.file.replace(".js", ".css"), "g"),
-      manifestChunk.css[0]
-    );
-  }
-
-  private getWebAccessibleFilesForManifestChunk(
-    viteManifest: ViteManifest,
+  private getMetadataforChunk(
     chunkId: string,
-    includeChunkFile = true
-  ): Set<string> {
-    const files = new Set<string>();
-
-    const manifestChunk = findChunkInManifestByFileName(viteManifest, chunkId);
-    if (!manifestChunk) {
-      return files;
+    bundle: OutputBundle,
+    includeChunkAsAsset: boolean,
+    metadata: {
+      css: Set<string>;
+      assets: Set<string>;
+    } = {
+      css: new Set<string>(),
+      assets: new Set<string>(),
+    }
+  ): {
+    css: Set<string>;
+    assets: Set<string>;
+  } {
+    const chunkInfo = getChunkInfoFromBundle(bundle, chunkId);
+    if (!chunkInfo) {
+      return metadata;
     }
 
-    if (includeChunkFile) {
-      files.add(manifestChunk.file);
+    if (includeChunkAsAsset) {
+      metadata.assets.add(chunkInfo.fileName);
     }
 
-    manifestChunk.css?.forEach(files.add, files);
-    manifestChunk.assets?.forEach(files.add, files);
-
-    manifestChunk.imports?.forEach((chunkId) =>
-      this.getWebAccessibleFilesForManifestChunk(viteManifest, chunkId).forEach(
-        files.add,
-        files
-      )
+    chunkInfo.viteMetadata.importedCss.forEach(metadata.css.add, metadata.css);
+    chunkInfo.viteMetadata.importedAssets.forEach(
+      metadata.assets.add,
+      metadata.assets
     );
 
-    manifestChunk.dynamicImports?.forEach((chunkId) =>
-      this.getWebAccessibleFilesForManifestChunk(viteManifest, chunkId).forEach(
-        files.add,
-        files
-      )
+    chunkInfo.imports.forEach(
+      (chunkId) =>
+        (metadata = this.getMetadataforChunk(chunkId, bundle, true, metadata))
     );
 
-    return files;
+    chunkInfo.dynamicImports.forEach(
+      (chunkId) =>
+        (metadata = this.getMetadataforChunk(chunkId, bundle, true, metadata))
+    );
+
+    return metadata;
   }
 }

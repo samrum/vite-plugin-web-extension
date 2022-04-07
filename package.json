@@ -9,10 +9,11 @@
     "node": ">=12.0.0"
   },
   "files": [
-    "dist",
-    "types",
+    "client.js",
     "client.d.ts",
-    "README.md"
+    "dist",
+    "README.md",
+    "types"
   ],
   "scripts": {
     "build": "tsc --noEmit && rollup -c",
@@ -66,7 +67,7 @@
     "typescript": "^4.4.3"
   },
   "peerDependencies": {
-    "vite": "^2.7.10"
+    "vite": "^2.9.0"
   },
   "lint-staged": {
     "*.{js,ts,css,md}": "prettier --write"
@@ -77,6 +78,6 @@
     "etag": "^1.8.1",
     "fs-extra": "^10.0.0",
     "magic-string": "^0.25.7",
-    "vite": "^2.7.10"
+    "vite": "~2.9.0"
   }
 }

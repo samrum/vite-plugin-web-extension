@@ -1,4 +1,4 @@
-import type { EmittedFile } from "rollup";
+import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
@@ -7,7 +7,6 @@ import ManifestParserFactory from "./manifestParser/manifestParserFactory";
 import { DUMMY_PLUGIN_INPUT_ID, getVirtualModule } from "./utils/virtualModule";
 import contentScriptStyleHandler from "./middleware/contentScriptStyleHandler";
 import {
-  overrideManifestPlugin,
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
 } from "./utils/vite";
@@ -35,18 +34,6 @@ export default function webExtension(
 
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig;
-
-      overrideManifestPlugin({
-        viteConfig,
-        onManifestGenerated: async (manifest, pluginContext, outputBundle) => {
-          const { emitFiles } = await manifestParser.parseOutput(
-            manifest,
-            outputBundle
-          );
-
-          emitFiles.forEach(pluginContext.emitFile);
-        },
-      });
     },
 
     configureServer(server) {
@@ -100,12 +87,12 @@ export default function webExtension(
       return transformSelfLocationAssets(code, viteConfig);
     },
 
-    resolveImportMeta(prop, options) {
-      if (prop === "CURRENT_CONTENT_SCRIPT_CSS_URL") {
-        return `"${options.chunkId.replace(".js", ".css")}"`;
-      }
+    async generateBundle(_options, bundle) {
+      const { emitFiles } = await manifestParser.parseOutput(
+        bundle as OutputBundle
+      );
 
-      return null;
+      emitFiles.forEach(this.emitFile);
     },
   };
 }

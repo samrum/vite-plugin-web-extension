@@ -4,13 +4,12 @@ import {
   getOutputFileName,
   getInputFileName,
 } from "../utils/file";
-import type { Manifest as ViteManifest } from "vite";
-import { OutputBundle } from "rollup";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
-import { findChunkInManifestByFileName } from "../utils/vite";
+import { OutputBundle } from "rollup";
+import { getChunkInfoFromBundle } from "../utils/rollup";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -44,8 +43,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
   protected getParseOutputMethods(): ((
     result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    bundle: OutputBundle
   ) => Promise<ManifestParseResult>)[] {
     return [this.parseOutputServiceWorker];
   }
@@ -74,8 +72,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
   protected async parseOutputContentScripts(
     result: ManifestParseResult,
-    viteManifest: ViteManifest,
-    outputBundle: OutputBundle
+    bundle: OutputBundle
   ): Promise<ManifestParseResult> {
     const webAccessibleResources = new Set(
       result.manifest.web_accessible_resources ?? []
@@ -86,8 +83,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
           result,
-          viteManifest,
-          outputBundle
+          bundle
         );
 
         script.js![index] = parsedContentScript.scriptFileName;
@@ -114,7 +110,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
   protected async parseOutputServiceWorker(
     result: ManifestParseResult,
-    viteManifest: ViteManifest
+    bundle: OutputBundle
   ): Promise<ManifestParseResult> {
     const serviceWorkerFileName = result.manifest.background?.service_worker;
 
@@ -122,17 +118,12 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       return result;
     }
 
-    const manifestChunk = findChunkInManifestByFileName(
-      viteManifest,
-      serviceWorkerFileName
-    );
-    if (!manifestChunk) {
-      throw new Error(
-        `Failed to find output chunk for ${serviceWorkerFileName}`
-      );
+    const chunkInfo = getChunkInfoFromBundle(bundle, serviceWorkerFileName);
+    if (!chunkInfo) {
+      throw new Error(`Failed to find chunk info for ${serviceWorkerFileName}`);
     }
 
-    const serviceWorkerLoader = getServiceWorkerLoaderFile(manifestChunk.file);
+    const serviceWorkerLoader = getServiceWorkerLoaderFile(chunkInfo.fileName);
 
     result.manifest.background!.service_worker = serviceWorkerLoader.fileName;
 
