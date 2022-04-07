@@ -12,6 +12,10 @@ const inputManifest = {
       js: [`${resourceDir}/content2.js`],
       matches: ["https://*/*", "http://*/*"],
     },
+    {
+      js: [`${resourceDir}/contentNoCss.js`],
+      matches: ["https://*/*", "http://*/*"],
+    },
   ],
 };
 
@@ -23,6 +27,10 @@ const expectedManifest = {
     },
     {
       js: [`assets/${resourceDir}/content2.js`],
+      matches: ["https://*/*", "http://*/*"],
+    },
+    {
+      js: [`assets/${resourceDir}/contentNoCss.js`],
       matches: ["https://*/*", "http://*/*"],
     },
   ],
