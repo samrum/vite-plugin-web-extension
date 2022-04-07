@@ -1,4 +1,4 @@
-import { build } from "vite";
+import { build, normalizePath } from "vite";
 import type { RollupOutput } from "rollup";
 import webExtension from "../../src/index";
 
@@ -70,29 +70,31 @@ async function validateFixture<ManifestType extends chrome.runtime.Manifest>(
     Object.keys(chunkCode).length + Object.keys(assetCode).length;
 
   output.forEach((file) => {
+    const outputFileName = normalizePath(file.fileName);
+
     if (file.type === "chunk") {
-      if (["assets/preload-helper.js"].includes(file.fileName)) {
-        delete chunkCode[file.fileName];
+      if (["assets/preload-helper.js"].includes(outputFileName)) {
+        delete chunkCode[outputFileName];
         return;
       }
 
-      if (!chunkCode[file.fileName]) {
+      if (!chunkCode[outputFileName]) {
         throw new Error(
-          `Missing expected output chunk definition for: ${file.fileName}`
+          `Missing expected output chunk definition for: ${outputFileName}`
         );
       }
 
-      expect(file.code).toEqual(chunkCode[file.fileName]);
-      delete chunkCode[file.fileName];
+      expect(file.code).toEqual(chunkCode[outputFileName]);
+      delete chunkCode[outputFileName];
     } else {
-      if (!assetCode[file.fileName]) {
+      if (!assetCode[outputFileName]) {
         throw new Error(
-          `Missing expected output asset definition for: ${file.fileName}`
+          `Missing expected output asset definition for: ${outputFileName}`
         );
       }
 
-      expect(file.source).toEqual(assetCode[file.fileName]);
-      delete assetCode[file.fileName];
+      expect(file.source).toEqual(assetCode[outputFileName]);
+      delete assetCode[outputFileName];
     }
   });
 
