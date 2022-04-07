@@ -19,6 +19,7 @@
     "build": "tsc --noEmit && rollup -c",
     "dev": "rollup -c -w",
     "lint": "prettier --write --loglevel warn .",
+    "lint:check": "prettier --check .",
     "test": "jest",
     "prepare": "husky install",
     "release": "standard-version --sign"
