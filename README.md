@@ -32,7 +32,7 @@ Supports choice of Manifest, TypeScript, and framework (Vanilla, Vue, React, Pre
 Requires Vite 2.9+
 
 ```sh
-npm install @samrum/vite-plugin-web-extension
+npm install @samrum/vite-plugin-web-extension@latest
 ```
 
 ## Usage
