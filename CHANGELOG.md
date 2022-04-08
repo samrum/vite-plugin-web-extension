@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.8...v1.0.0) (2022-04-08)
+
+### ⚠ BREAKING CHANGES
+
+- import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL has been replaced with import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS. Minimum supported version of Vite is now 2.9.0
+
+### Features
+
+- add client types for plugin users ([#11](https://github.com/samrum/vite-plugin-web-extension/issues/11)) ([8b96fac](https://github.com/samrum/vite-plugin-web-extension/commit/8b96facdfbc0b491fa19ca7e33f18f6276f15ddb))
+
+### Bug Fixes
+
+- multiple css dependencies in content scripts, shared css across chunks ([#13](https://github.com/samrum/vite-plugin-web-extension/issues/13)) ([c2dbe8f](https://github.com/samrum/vite-plugin-web-extension/commit/c2dbe8f6c77096e63cb7cc1757eac0f44cecd631))
+
 ### [0.1.8](https://github.com/samrum/vite-plugin-web-extension/compare/v0.1.7...v0.1.8) (2022-03-28)
 
 ### Bug Fixes
