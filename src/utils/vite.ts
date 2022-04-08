@@ -1,7 +1,6 @@
 import MagicString from "magic-string";
 import type { Manifest, ManifestChunk, ResolvedConfig, UserConfig } from "vite";
 import { getNormalizedFileName } from "./file";
-import { DUMMY_PLUGIN_INPUT_ID } from "./virtualModule";
 
 // Update vite user config with settings necessary for the plugin to work
 export function updateConfigForExtensionSupport(
@@ -22,7 +21,7 @@ export function updateConfigForExtensionSupport(
   }
 
   config.build.rollupOptions ??= {};
-  config.build.rollupOptions.input ??= DUMMY_PLUGIN_INPUT_ID;
+  config.build.rollupOptions.input ??= {};
 
   config.server ??= {};
 

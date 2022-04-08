@@ -4,7 +4,7 @@ import type { ViteWebExtensionOptions } from "../types";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
-import { DUMMY_PLUGIN_INPUT_ID, getVirtualModule } from "./utils/virtualModule";
+import { getVirtualModule } from "./utils/virtualModule";
 import contentScriptStyleHandler from "./middleware/contentScriptStyleHandler";
 import {
   transformSelfLocationAssets,
@@ -57,8 +57,6 @@ export default function webExtension(
         inputScripts,
         options.input
       );
-
-      delete options.input[DUMMY_PLUGIN_INPUT_ID];
 
       emitQueue = emitQueue.concat(emitFiles);
 
