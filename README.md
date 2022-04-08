@@ -22,7 +22,7 @@ A vite plugin for generating cross browser platform, ES module based web extensi
 Create a new Vite web extension project
 
 ```sh
-npm init @samrum/vite-plugin-web-extension
+npm init @samrum/vite-plugin-web-extension@latest
 ```
 
 Supports choice of Manifest, TypeScript, and framework (Vanilla, Vue, React, Preact, Svelte)
@@ -32,7 +32,7 @@ Supports choice of Manifest, TypeScript, and framework (Vanilla, Vue, React, Pre
 Requires Vite 2.9+
 
 ```sh
-npm install @samrum/vite-plugin-web-extension@latest
+npm install @samrum/vite-plugin-web-extension
 ```
 
 ## Usage
