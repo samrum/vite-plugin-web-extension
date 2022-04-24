@@ -1,6 +1,7 @@
 import MagicString from "magic-string";
 import type { Manifest, ManifestChunk, ResolvedConfig, UserConfig } from "vite";
 import { getNormalizedFileName } from "./file";
+import { addToExternal } from "./rollup";
 
 // Update vite user config with settings necessary for the plugin to work
 export function updateConfigForExtensionSupport(
@@ -22,6 +23,10 @@ export function updateConfigForExtensionSupport(
 
   config.build.rollupOptions ??= {};
   config.build.rollupOptions.input ??= {};
+  config.build.rollupOptions.external = addToExternal(
+    ["/@vite/client"],
+    config.build.rollupOptions.external
+  );
 
   config.server ??= {};
 

@@ -1,5 +1,5 @@
 export async function addViteStyleTarget(element) {
-  const { addStyleTarget } = await import(/* @vite-ignore */ "/@vite/client");
+  const { addStyleTarget } = await import("/@vite/client");
 
   addStyleTarget(element);
 }

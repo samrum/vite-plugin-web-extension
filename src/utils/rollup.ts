@@ -1,4 +1,9 @@
-import type { InputOptions, OutputBundle, OutputChunk } from "rollup";
+import type {
+  InputOptions,
+  OutputBundle,
+  OutputChunk,
+  RollupOptions,
+} from "rollup";
 import { getNormalizedFileName } from "./file";
 
 export function addInputScriptsToOptionsInput(
@@ -56,4 +61,31 @@ export function getChunkInfoFromBundle(
       chunk.fileName.endsWith(normalizedId)
     );
   }) as OutputChunk | undefined;
+}
+
+export function addToExternal(
+  moduleIds: string[],
+  inExternal: RollupOptions["external"]
+): RollupOptions["external"] {
+  let outExternal: RollupOptions["external"];
+
+  if (typeof inExternal === "function") {
+    const srcExternal = inExternal;
+
+    outExternal = (source, importer, isResolve) => {
+      if (moduleIds.includes(source)) {
+        return true;
+      }
+
+      return srcExternal(source, importer, isResolve);
+    };
+  } else if (Array.isArray(inExternal)) {
+    outExternal = [...inExternal, ...moduleIds];
+  } else if (inExternal) {
+    outExternal = [inExternal, ...moduleIds];
+  } else {
+    outExternal = [...moduleIds];
+  }
+
+  return outExternal;
 }
