@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2-beta.0](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.1...v1.0.2-beta.0) (2022-04-24)
+
+### Bug Fixes
+
+- force /@vite/client to be external ([#26](https://github.com/samrum/vite-plugin-web-extension/issues/26)) ([9c11af5](https://github.com/samrum/vite-plugin-web-extension/commit/9c11af582a0651e50ea8785be210445848be2a76))
+
 ### [1.0.1](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.0...v1.0.1) (2022-04-23)
 
 ### Bug Fixes
