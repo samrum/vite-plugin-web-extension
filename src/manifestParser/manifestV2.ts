@@ -74,6 +74,19 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
     return result;
   }
 
+  protected parseInputWebAccessibleScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    result.manifest.web_accessible_resources?.forEach((scriptFile) => {
+      const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
+      const outputFile = getOutputFileName(scriptFile);
+
+      result.inputScripts.push([outputFile, inputFile]);
+    });
+
+    return result;
+  }
+
   protected async parseOutputContentScripts(
     result: ManifestParseResult,
     bundle: OutputBundle
@@ -97,6 +110,20 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           webAccessibleResources
         );
       });
+    });
+
+    (result.manifest.web_accessible_resources ?? []).forEach((resource) => {
+      if (this.pluginExtras.webAccessibleScriptsFilter(resource)) {
+        const parsedWebAccessibleScript = this.parseOutputContentScript(
+          resource,
+          result,
+          bundle
+        );
+
+        webAccessibleResources.add(parsedWebAccessibleScript.scriptFileName);
+      } else {
+        webAccessibleResources.add(resource);
+      }
     });
 
     if (webAccessibleResources.size > 0) {

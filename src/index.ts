@@ -10,6 +10,11 @@ import {
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
 } from "./utils/vite";
+import { createFilter } from "@rollup/pluginutils";
+
+export interface PluginExtras {
+  webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
+}
 
 export default function webExtension(
   pluginOptions: ViteWebExtensionOptions
@@ -23,6 +28,13 @@ export default function webExtension(
   let manifestParser:
     | ManifestParser<chrome.runtime.ManifestV2>
     | ManifestParser<chrome.runtime.ManifestV3>;
+
+  const webConfig = pluginOptions.webAccessibleScripts;
+  let webAccessibleScriptsFilter = createFilter(
+    webConfig?.include || /\.([cem]?js|ts)$/,
+    webConfig?.exclude || "",
+    webConfig?.options
+  );
 
   return {
     name: "webExtension",
@@ -48,6 +60,7 @@ export default function webExtension(
     async options(options) {
       manifestParser = ManifestParserFactory.getParser(
         JSON.parse(JSON.stringify(pluginOptions.manifest)),
+        { webAccessibleScriptsFilter },
         viteConfig
       );
 

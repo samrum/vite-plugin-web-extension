@@ -70,13 +70,31 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     return result;
   }
 
+  protected parseInputWebAccessibleScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    result.manifest.web_accessible_resources?.forEach((struct) => {
+      struct.resources.forEach((scriptFile) => {
+        const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
+        const outputFile = getOutputFileName(scriptFile);
+
+        result.inputScripts.push([outputFile, inputFile]);
+      });
+    });
+
+    return result;
+  }
+
   protected async parseOutputContentScripts(
     result: ManifestParseResult,
     bundle: OutputBundle
   ): Promise<ManifestParseResult> {
-    const webAccessibleResources = new Set(
-      result.manifest.web_accessible_resources ?? []
-    );
+    const webAccessibleResources = new Set<
+      Exclude<
+        chrome.runtime.ManifestV3["web_accessible_resources"],
+        undefined
+      >[number]
+    >();
 
     result.manifest.content_scripts?.forEach((script) => {
       script.js?.forEach((scriptFileName, index) => {
@@ -97,6 +115,22 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           });
         }
       });
+    });
+
+    (result.manifest.web_accessible_resources ?? []).forEach((struct) => {
+      struct.resources.forEach((resourceFileName, index) => {
+        if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
+          const parsedWebAccessibleScript = this.parseOutputContentScript(
+            resourceFileName,
+            result,
+            bundle
+          );
+
+          struct.resources[index] = parsedWebAccessibleScript.scriptFileName;
+        }
+      });
+
+      webAccessibleResources.add(struct);
     });
 
     if (webAccessibleResources.size > 0) {
