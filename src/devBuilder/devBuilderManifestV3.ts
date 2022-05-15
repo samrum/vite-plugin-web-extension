@@ -1,6 +1,11 @@
 import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
-import { getServiceWorkerLoaderFile } from "../utils/loader";
+import { PluginExtras } from "..";
+import { getOutputFileName } from "../utils/file";
+import {
+  getContentScriptLoaderFile,
+  getServiceWorkerLoaderFile,
+} from "../utils/loader";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.ManifestV3> {
@@ -43,5 +48,46 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
     await ensureDir(outFileDir);
 
     await writeFile(outFile, serviceWorkerLoader.source);
+  }
+
+  protected async writeManifestWebAccessibleScriptFiles(
+    manifest: chrome.runtime.ManifestV3,
+    webAccessibleScriptsFilter: PluginExtras["webAccessibleScriptsFilter"]
+  ) {
+    if (!manifest.web_accessible_resources) {
+      return;
+    }
+
+    for (const [
+      webAccessibleResourceIndex,
+      struct,
+    ] of manifest.web_accessible_resources.entries()) {
+      if (!struct || !struct.resources.length) {
+        continue;
+      }
+
+      for (const [scriptJsIndex, fileName] of struct.resources.entries()) {
+        if (!webAccessibleScriptsFilter(fileName)) continue;
+
+        const outputFileName = getOutputFileName(fileName);
+
+        const scriptLoaderFile = getContentScriptLoaderFile(
+          outputFileName,
+          `${this.hmrServerOrigin}/${fileName}`
+        );
+
+        manifest.web_accessible_resources[webAccessibleResourceIndex].resources[
+          scriptJsIndex
+        ] = scriptLoaderFile.fileName;
+
+        const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
+
+        const outFileDir = path.dirname(outFile);
+
+        await ensureDir(outFileDir);
+
+        await writeFile(outFile, scriptLoaderFile.source);
+      }
+    }
   }
 }
