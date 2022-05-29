@@ -57,6 +57,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.4.9",
+    "@types/firefox-webext-browser": "^94.0.1", 
     "husky": ">=6",
     "jest": "^27.0.6",
     "lint-staged": ">=10",
