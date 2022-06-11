@@ -81,11 +81,15 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected parseInputWebAccessibleScripts(
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
-    result.manifest.web_accessible_resources?.forEach((scriptFile) => {
-      const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
-      const outputFile = getOutputFileName(scriptFile);
+    result.manifest.web_accessible_resources?.forEach((resource) => {
+      if (resource.includes("*")) return;
 
-      result.inputScripts.push([outputFile, inputFile]);
+      const inputFile = getInputFileName(resource, this.viteConfig.root);
+      const outputFile = getOutputFileName(resource);
+
+      if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+        result.inputScripts.push([outputFile, inputFile]);
+      }
     });
 
     return result;
@@ -124,9 +128,11 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           bundle
         );
 
+        webAccessibleResources.delete(resource);
         webAccessibleResources.add(parsedWebAccessibleScript.scriptFileName);
-      } else {
-        webAccessibleResources.add(resource);
+        for (const file of parsedWebAccessibleScript.webAccessibleFiles) {
+          webAccessibleResources.add(file);
+        }
       }
     });
 

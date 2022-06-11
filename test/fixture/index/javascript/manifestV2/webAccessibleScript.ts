@@ -9,7 +9,7 @@ const inputManifest = {
 };
 
 const expectedManifest = {
-  web_accessible_resources: [`${resourceDir}/webAccessibleScript.js`],
+  web_accessible_resources: [`assets/${resourceDir}/webAccessibleScript.js`],
 };
 
 export default {

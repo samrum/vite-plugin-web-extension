@@ -10,4 +10,5 @@ export { default as ContentWithSameScriptName } from "./contentWithSameScriptNam
 export { default as OptionsHtml } from "./optionsHtml";
 export { default as PopupHtml } from "./popupHtml";
 export { default as WebAccessibleResourceHtml } from "./webAccessibleResourceHtml";
+export { default as WebAccessibleScript } from "./webAccessibleScript";
 export { default as ContentScriptPaths } from "./contentScriptPaths";

@@ -78,11 +78,15 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
     result.manifest.web_accessible_resources?.forEach((struct) => {
-      struct.resources.forEach((scriptFile) => {
-        const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
-        const outputFile = getOutputFileName(scriptFile);
+      struct.resources.forEach((resource) => {
+        if (resource.includes("*")) return;
 
-        result.inputScripts.push([outputFile, inputFile]);
+        const inputFile = getInputFileName(resource, this.viteConfig.root);
+        const outputFile = getOutputFileName(resource);
+
+        if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+          result.inputScripts.push([outputFile, inputFile]);
+        }
       });
     });
 
