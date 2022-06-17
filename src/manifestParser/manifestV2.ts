@@ -16,7 +16,11 @@ type ManifestParseResult = ParseResult<Manifest>;
 
 export default class ManifestV2 extends ManifestParser<Manifest> {
   protected createDevBuilder(): DevBuilder<Manifest> {
-    return new DevBuilderManifestV2(this.viteConfig, this.viteDevServer);
+    return new DevBuilderManifestV2(
+      this.viteConfig,
+      this.pluginExtras,
+      this.viteDevServer
+    );
   }
 
   protected getHtmlFileNames(manifest: Manifest): string[] {
@@ -74,6 +78,23 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
     return result;
   }
 
+  protected parseInputWebAccessibleScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    result.manifest.web_accessible_resources?.forEach((resource) => {
+      if (resource.includes("*")) return;
+
+      const inputFile = getInputFileName(resource, this.viteConfig.root);
+      const outputFile = getOutputFileName(resource);
+
+      if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+        result.inputScripts.push([outputFile, inputFile]);
+      }
+    });
+
+    return result;
+  }
+
   protected async parseOutputContentScripts(
     result: ManifestParseResult,
     bundle: OutputBundle
@@ -97,6 +118,22 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           webAccessibleResources
         );
       });
+    });
+
+    (result.manifest.web_accessible_resources ?? []).forEach((resource) => {
+      if (this.pluginExtras.webAccessibleScriptsFilter(resource)) {
+        const parsedWebAccessibleScript = this.parseOutputContentScript(
+          resource,
+          result,
+          bundle
+        );
+
+        webAccessibleResources.delete(resource);
+        webAccessibleResources.add(parsedWebAccessibleScript.scriptFileName);
+        for (const file of parsedWebAccessibleScript.webAccessibleFiles) {
+          webAccessibleResources.add(file);
+        }
+      }
     });
 
     if (webAccessibleResources.size > 0) {

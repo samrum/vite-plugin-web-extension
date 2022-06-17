@@ -16,7 +16,11 @@ type ManifestParseResult = ParseResult<Manifest>;
 
 export default class ManifestV3 extends ManifestParser<Manifest> {
   protected createDevBuilder(): DevBuilder<Manifest> {
-    return new DevBuilderManifestV3(this.viteConfig, this.viteDevServer);
+    return new DevBuilderManifestV3(
+      this.viteConfig,
+      this.pluginExtras,
+      this.viteDevServer
+    );
   }
 
   protected getHtmlFileNames(manifest: Manifest): string[] {
@@ -70,13 +74,35 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     return result;
   }
 
+  protected parseInputWebAccessibleScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    result.manifest.web_accessible_resources?.forEach((struct) => {
+      struct.resources.forEach((resource) => {
+        if (resource.includes("*")) return;
+
+        const inputFile = getInputFileName(resource, this.viteConfig.root);
+        const outputFile = getOutputFileName(resource);
+
+        if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+          result.inputScripts.push([outputFile, inputFile]);
+        }
+      });
+    });
+
+    return result;
+  }
+
   protected async parseOutputContentScripts(
     result: ManifestParseResult,
     bundle: OutputBundle
   ): Promise<ManifestParseResult> {
-    const webAccessibleResources = new Set(
-      result.manifest.web_accessible_resources ?? []
-    );
+    const webAccessibleResources = new Set<
+      Exclude<
+        chrome.runtime.ManifestV3["web_accessible_resources"],
+        undefined
+      >[number]
+    >();
 
     result.manifest.content_scripts?.forEach((script) => {
       script.js?.forEach((scriptFileName, index) => {
@@ -97,6 +123,22 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           });
         }
       });
+    });
+
+    (result.manifest.web_accessible_resources ?? []).forEach((struct) => {
+      struct.resources.forEach((resourceFileName, index) => {
+        if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
+          const parsedWebAccessibleScript = this.parseOutputContentScript(
+            resourceFileName,
+            result,
+            bundle
+          );
+
+          struct.resources[index] = parsedWebAccessibleScript.scriptFileName;
+        }
+      });
+
+      webAccessibleResources.add(struct);
     });
 
     if (webAccessibleResources.size > 0) {

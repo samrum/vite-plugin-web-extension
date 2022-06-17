@@ -1,7 +1,8 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@rollup/plugin-typescript': ^8.2.5
+  '@rollup/pluginutils': ^4.2.1
   '@types/chrome': ^0.0.174
   '@types/etag': ^1.8.1
   '@types/fs-extra': ^9.0.13
@@ -30,7 +31,8 @@ dependencies:
   vite: 2.9.0
 
 devDependencies:
-  '@rollup/plugin-typescript': 8.2.5_d671d3387afbf1a138cd7f3f4762053b
+  '@rollup/plugin-typescript': 8.2.5_2zy5god27py2cognp47uoyqfhm
+  '@rollup/pluginutils': 4.2.1
   '@types/fs-extra': 9.0.13
   '@types/jest': 27.0.1
   '@types/node': 16.9.1
@@ -40,7 +42,7 @@ devDependencies:
   prettier: 2.4.1
   rollup: 2.56.3
   standard-version: 9.3.1
-  ts-jest: 27.0.5_77a678c07bcdbdfd88181ff63fe325b2
+  ts-jest: 27.0.5_o6thrqd3zw673cayd73d7yzfwi
   tslib: 2.3.1
   typescript: 4.4.3
 
@@ -228,6 +230,8 @@ packages:
     resolution: {integrity: sha512-S/TSCcsRuCkmpUuoWijua0Snt+f3ewU/8spLo+4AXJCZfT0bVCzLD5MuOKdrx0mlAptbKzn5AdgEIIKXxXkz9Q==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.15.6
     dev: true
 
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.15.5:
@@ -599,7 +603,7 @@ packages:
       chalk: 4.1.2
     dev: true
 
-  /@rollup/plugin-typescript/8.2.5_d671d3387afbf1a138cd7f3f4762053b:
+  /@rollup/plugin-typescript/8.2.5_2zy5god27py2cognp47uoyqfhm:
     resolution: {integrity: sha512-QL/LvDol/PAGB2O0S7/+q2HpSUNodpw7z6nGn9BfoVCPOZ0r4EALrojFU29Bkoi2Hr2jgTocTejJ5GGWZfOxbQ==}
     engines: {node: '>=8.0.0'}
     peerDependencies:
@@ -624,6 +628,14 @@ packages:
       estree-walker: 1.0.1
       picomatch: 2.3.0
       rollup: 2.56.3
+    dev: true
+
+  /@rollup/pluginutils/4.2.1:
+    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.0
     dev: true
 
   /@sinonjs/commons/1.8.3:
@@ -1760,6 +1772,10 @@ packages:
 
   /estree-walker/1.0.1:
     resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
+    dev: true
+
+  /estree-walker/2.0.2:
+    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
   /esutils/2.0.3:
@@ -3926,7 +3942,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /ts-jest/27.0.5_77a678c07bcdbdfd88181ff63fe325b2:
+  /ts-jest/27.0.5_o6thrqd3zw673cayd73d7yzfwi:
     resolution: {integrity: sha512-lIJApzfTaSSbtlksfFNHkWOzLJuuSm4faFAfo5kvzOiRAuoN4/eKxVJ2zEAho8aecE04qX6K1pAzfH5QHL1/8w==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true

@@ -5,6 +5,7 @@ import { getInputFileName, getOutputFileName } from "../utils/file";
 import type { EmittedFile, OutputBundle } from "rollup";
 import { getContentScriptLoaderForOutputChunk } from "../utils/loader";
 import { getChunkInfoFromBundle } from "../utils/rollup";
+import { PluginExtras } from "..";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -19,6 +20,7 @@ export default abstract class ManifestParser<
 
   constructor(
     protected inputManifest: Manifest,
+    protected pluginExtras: PluginExtras,
     protected viteConfig: ResolvedConfig
   ) {}
 
@@ -33,6 +35,7 @@ export default abstract class ManifestParser<
       parseResult,
       this.parseInputHtmlFiles,
       this.parseInputContentScripts,
+      this.parseInputWebAccessibleScripts,
       ...this.getParseInputMethods()
     );
   }
@@ -119,6 +122,10 @@ export default abstract class ManifestParser<
 
     return result;
   }
+
+  protected abstract parseInputWebAccessibleScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest>;
 
   protected parseInputHtmlFile(
     htmlFileName: string | undefined,

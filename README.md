@@ -107,6 +107,28 @@ npm install @samrum/vite-plugin-web-extension
 
 - For builds, use the `import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS` variable to reference an array of CSS asset paths associated with the current output chunk.
 
+#### Web Accessible Scripts
+
+This plugin will detect scripts under `web_accessible_resources` and apply the same transformations to them as your content scripts. This can be very useful for developers who need to inject scripts into a live page, usually to mutate or extend properties on the `window` object.
+
+By default, it will include scripts matching `/\.([cem]?js|ts)$/`, but you can provide custom filter options in the call to `webExtension(options?: ViteWebExtensionOptions)`:
+
+```ts
+type Pattern = string | RegExp | Array<string | RegExp>;
+
+interface ViteWebExtensionOptions {
+  manifest: chrome.runtime.Manifest;
+
+  webAccessibleScripts?: {
+    include?: Pattern;
+    exclude?: Pattern;
+    options?: {
+      resolve?: string | false | null;
+    };
+  };
+}
+```
+
 #### TypeScript
 
 In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` variables as well as plugin client functions:

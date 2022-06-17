@@ -4,6 +4,7 @@ import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
 import { getContentScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
+import { PluginExtras } from "..";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -14,6 +15,7 @@ export default abstract class DevBuilder<
 
   constructor(
     private viteConfig: ResolvedConfig,
+    private pluginExtras: PluginExtras,
     private viteDevServer?: ViteDevServer
   ) {
     this.outDir = this.viteConfig.build.outDir;
@@ -35,6 +37,10 @@ export default abstract class DevBuilder<
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles(manifest);
+    await this.writeManifestWebAccessibleScriptFiles(
+      manifest,
+      this.pluginExtras.webAccessibleScriptsFilter
+    );
 
     await this.writeBuildFiles(manifest, manifestHtmlFiles);
 
@@ -166,6 +172,11 @@ export default abstract class DevBuilder<
       }
     }
   }
+
+  protected abstract writeManifestWebAccessibleScriptFiles(
+    manifest: Manifest,
+    webAccessibleScriptsFilter: PluginExtras["webAccessibleScriptsFilter"]
+  ): Promise<void>;
 
   private getHmrServerOrigin(devServerPort: number): string {
     if (typeof this.viteConfig.server.hmr! === "boolean") {
