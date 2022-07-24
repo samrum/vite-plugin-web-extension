@@ -58,7 +58,7 @@ export {
 export function getExpectedLogFromDynamicChunk(message: string): string {
   return `import { _ as __vitePreload } from "../../../../../../preload-helper.js";
 (async () => {
-  const log = await __vitePreload(() => import("../../../../../../log.js"), true ? [] : void 0);
+  const log = await __vitePreload(() => import((chrome != null ? chrome : browser).runtime.getURL("../../../../../../log.js")), true ? [] : void 0);
   log("${message}");
 })();
 `;

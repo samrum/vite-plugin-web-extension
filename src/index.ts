@@ -84,6 +84,13 @@ export default function webExtension(
       emitQueue = [];
     },
 
+    renderDynamicImport() {
+      return {
+        left: "import((chrome != null ? chrome : browser).runtime.getURL(",
+        right: "))",
+      };
+    },
+
     resolveId(id) {
       const module = getVirtualModule(id);
 
