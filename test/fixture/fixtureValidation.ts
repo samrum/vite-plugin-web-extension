@@ -1,3 +1,4 @@
+import { test, expect } from "vitest";
 import { build, normalizePath } from "vite";
 import type { RollupOutput } from "rollup";
 import webExtension from "../../src/index";
