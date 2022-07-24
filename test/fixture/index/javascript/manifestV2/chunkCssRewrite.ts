@@ -35,9 +35,9 @@ const expectedManifest = {
     },
   ],
   web_accessible_resources: [
-    `assets/${resourceDir}/content1.css`,
+    `assets/content1.css`,
     `assets/contentShared.css`,
-    `assets/${resourceDir}/content2.css`,
+    `assets/content2.css`,
   ],
 };
 

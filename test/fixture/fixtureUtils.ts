@@ -33,7 +33,9 @@ export function getExpectedLogChunk(): string {
   return `function log(message) {
   console.log(message);
 }
-export { log as l };
+export {
+  log as l
+};
 `;
 }
 
@@ -47,7 +49,9 @@ export function getExpectedLogDynamicChunk(): string {
   return `function log(message) {
   console.log(message);
 }
-export { log as default };
+export {
+  log as default
+};
 `;
 }
 
