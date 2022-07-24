@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { addInputScriptsToOptionsInput } from "./../../src/utils/rollup";
 
 describe("Rollup Utils", () => {

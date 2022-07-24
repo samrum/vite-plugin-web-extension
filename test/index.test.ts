@@ -1,3 +1,4 @@
+import { describe } from "vitest";
 import {
   validateManifestV2Fixtures,
   validateManifestV3Fixtures,
