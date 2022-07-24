@@ -13,22 +13,31 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
+      - uses: pnpm/action-setup@v2.2.2
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.16.0
           run_install: true
 
       - name: lint
         run: |
           pnpm lint:check
+
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          run_install: true
+
+      - name: test
+        run: |
+          pnpm test
 
   build:
     runs-on: ${{ matrix.os }}
@@ -40,45 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
+      - uses: pnpm/action-setup@v2.2.2
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.16.0
           run_install: true
 
       - name: build
         run: |
           pnpm build
-  test:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Cache pnpm modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.16.0
-          run_install: true
-
-      - name: test
-        run: |
-          pnpm test
