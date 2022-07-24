@@ -1,3 +1,4 @@
+import { createFilter } from "vite";
 import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
@@ -10,7 +11,6 @@ import {
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
 } from "./utils/vite";
-import { createFilter } from "@rollup/pluginutils";
 
 export interface PluginExtras {
   webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
@@ -92,9 +92,7 @@ export default function webExtension(
     },
 
     resolveId(id) {
-      const module = getVirtualModule(id);
-
-      return module ? id : null;
+      return getVirtualModule(id) ? id : null;
     },
 
     load(id) {

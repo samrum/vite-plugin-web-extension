@@ -55,7 +55,6 @@
   "homepage": "https://github.com/samrum/vite-plugin-web-extension#readme",
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.5",
-    "@rollup/pluginutils": "^4.2.1",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.4.9",
     "husky": "^8.0.1",

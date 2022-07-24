@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@rollup/plugin-typescript': ^8.2.5
-  '@rollup/pluginutils': ^4.2.1
   '@types/chrome': ^0.0.193
   '@types/etag': ^1.8.1
   '@types/fs-extra': ^9.0.13
@@ -30,7 +29,6 @@ dependencies:
 
 devDependencies:
   '@rollup/plugin-typescript': 8.2.5_25ya7mrrsrxjsticp2bpsu7cge
-  '@rollup/pluginutils': 4.2.1
   '@types/fs-extra': 9.0.13
   '@types/node': 16.9.1
   husky: 8.0.1
@@ -95,14 +93,6 @@ packages:
       estree-walker: 1.0.1
       picomatch: 2.3.0
       rollup: 2.56.3
-    dev: true
-
-  /@rollup/pluginutils/4.2.1:
-    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
-    engines: {node: '>= 8.0.0'}
-    dependencies:
-      estree-walker: 2.0.2
-      picomatch: 2.3.0
     dev: true
 
   /@types/chai-subset/1.3.3:
@@ -847,10 +837,6 @@ packages:
 
   /estree-walker/1.0.1:
     resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
-    dev: true
-
-  /estree-walker/2.0.2:
-    resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
   /etag/1.8.1:

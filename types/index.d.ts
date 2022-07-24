@@ -1,6 +1,4 @@
-import type { Plugin, ChunkMetadata } from "vite";
-
-type Pattern = string | RegExp | Array<string | RegExp>;
+import type { Plugin, ChunkMetadata, FilterPattern } from "vite";
 
 interface ViteWebExtensionOptions {
   /**
@@ -13,10 +11,10 @@ interface ViteWebExtensionOptions {
    * <https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter>
    */
   webAccessibleScripts?: {
-    include?: Pattern;
-    exclude?: Pattern;
+    include?: FilterPattern | undefined;
+    exclude?: FilterPattern | undefined;
     options?: {
-      resolve?: string | false | null;
+      resolve?: string | false | null | undefined;
     };
   };
 }
