@@ -1,9 +1,3 @@
-import {
-  getExpectedContentLoaderHtml,
-  getExpectedLogDynamicChunk,
-  getExpectedLogFromDynamicChunk,
-  getPreloadHelper,
-} from "../../../fixtureUtils";
 import { getExpectedCode } from "../shared/contentWithDynamicImport";
 
 const resourceDir =
