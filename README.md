@@ -153,6 +153,47 @@ A sample of supported browsers:
 
 The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
 
+### Devtools
+
+If you want to create a developer tools, add `devtools_page` in your manifest
+
+```js
+  devtools_page: "src/entries/devtools/index.html",
+```
+
+Place a script `devtools.js` in `public` dir.
+
+```js
+var _browser;
+if (chrome) {
+  _browser = chrome;
+} else {
+  _browser = browser;
+}
+_browser.devtools.panels.create(
+  "My Panel", // title
+  "images/icon-16.png", // icon
+  "src/entries/devtools/index.html" // content
+);
+```
+
+Then load the script from your devtools html which placed in `src/entries/devtools/index.html`.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Devtools</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./main.ts"></script>
+    <script src="/devtools.js"></script>
+  </body>
+</html>
+```
+
 ## How it works
 
 The plugin will take the provided manifest, parse rollup input scripts from all supported manifest properties, then output an ES module based web extension.

@@ -28,6 +28,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       manifest.background?.page,
       manifest.browser_action?.default_popup,
       manifest.options_ui?.page,
+      manifest.devtools_page,
       ...(manifest.web_accessible_resources ?? []).filter(isSingleHtmlFilename),
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }

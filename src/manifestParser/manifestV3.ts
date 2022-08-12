@@ -35,6 +35,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     return [
       manifest.action?.default_popup,
       manifest.options_ui?.page,
+      manifest.devtools_page,
       ...webAccessibleResourcesHtmlFileNames,
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }
