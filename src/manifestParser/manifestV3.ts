@@ -143,6 +143,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
             ];
           }
 
+          // include non-script resources as-is
           return resourceFileName;
         }
       );
