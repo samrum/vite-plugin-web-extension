@@ -127,17 +127,29 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     });
 
     (result.manifest.web_accessible_resources ?? []).forEach((struct) => {
-      struct.resources.forEach((resourceFileName, index) => {
-        if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
-          const parsedWebAccessibleScript = this.parseOutputContentScript(
-            resourceFileName,
-            result,
-            bundle
-          );
+      const flattenedResources: string[] = struct.resources.flatMap(
+        (resourceFileName) => {
+          if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
+            const parsedWebAccessibleScript = this.parseOutputContentScript(
+              resourceFileName,
+              result,
+              bundle
+            );
 
-          struct.resources[index] = parsedWebAccessibleScript.scriptFileName;
+            // merge `scriptFileName` along with the set of resources the script imports
+            return [
+              parsedWebAccessibleScript.scriptFileName,
+              ...parsedWebAccessibleScript.webAccessibleFiles,
+            ];
+          }
+
+          // include non-script resources as-is
+          return resourceFileName;
         }
-      });
+      );
+
+      // removes any duplicates from the flattened resources
+      struct.resources = Array.from(new Set(flattenedResources));
 
       webAccessibleResources.add(struct);
     });
