@@ -36,6 +36,9 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       manifest.action?.default_popup,
       manifest.options_ui?.page,
       manifest.devtools_page,
+      manifest.chrome_url_overrides?.newtab,
+      manifest.chrome_url_overrides?.history,
+      manifest.chrome_url_overrides?.bookmarks,
       ...webAccessibleResourcesHtmlFileNames,
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }
