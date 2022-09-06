@@ -153,12 +153,14 @@ A sample of supported browsers:
 
 The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
 
-### Devtools
+## Usage Specific Examples
 
-If you want to create a developer tools, add `devtools_page` in your manifest
+<details>
+  <summary>Devtools</summary>
+  To add content to the browser dev tools, add `devtools_page` to your manifest
 
 ```js
-  devtools_page: "src/entries/devtools/index.html",
+devtools_page: "src/entries/devtools/index.html",
 ```
 
 Place a script `devtools.js` in `public` dir.
@@ -193,6 +195,8 @@ Then load the script from your devtools html which placed in `src/entries/devtoo
   </body>
 </html>
 ```
+
+</details>
 
 ## How it works
 
