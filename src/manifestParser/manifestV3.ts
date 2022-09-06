@@ -1,5 +1,4 @@
 import { OutputBundle } from "rollup";
-import { URL } from "url";
 import { ParseResult } from "./manifestParser";
 import {
   isSingleHtmlFilename,
@@ -123,13 +122,17 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           webAccessibleResources.add({
             resources: Array.from(parsedContentScript.webAccessibleFiles),
             matches: script.matches!.map((matchPattern) => {
-              const url = new URL(matchPattern);
-
-              if (url.pathname === "/") {
-                return `${url}`;
+              const pathMatch = /[^:\/]\//.exec(matchPattern);
+              if (!pathMatch) {
+                return matchPattern;
               }
 
-              return `${url.origin}/*`;
+              const path = matchPattern.slice(pathMatch.index + 1);
+              if (["/", "/*"].includes(path)) {
+                return matchPattern;
+              }
+
+              return matchPattern.replace(path, "/*");
             }),
             // @ts-ignore - use_dynamic_url is a newly supported option
             use_dynamic_url: true,
