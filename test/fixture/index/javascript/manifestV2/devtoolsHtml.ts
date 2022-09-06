@@ -1,4 +1,3 @@
-import { getExpectedHtml, getExpectedLog } from "../../../fixtureUtils";
 import { getExpectedCode } from "../shared/devtoolsHtml";
 
 const resourceDir = "test/fixture/index/javascript/resources/devtoolsHtml";
