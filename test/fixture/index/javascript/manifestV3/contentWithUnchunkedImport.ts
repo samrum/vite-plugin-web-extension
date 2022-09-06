@@ -8,7 +8,14 @@ const inputManifest = {
   content_scripts: [
     {
       js: [`${resourceDir}/content.js`],
-      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
+      matches: [
+        "*://*/*",
+        "https://*/*",
+        "*://example.com/",
+        "https://example.com/",
+        "*://example.com/subpath/*",
+        "https://example.com/subpath/*",
+      ],
     },
   ],
 };
@@ -17,7 +24,14 @@ const expectedManifest = {
   content_scripts: [
     {
       js: [`assets/${resourceDir}/content.js`],
-      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
+      matches: [
+        "*://*/*",
+        "https://*/*",
+        "*://example.com/",
+        "https://example.com/",
+        "*://example.com/subpath/*",
+        "https://example.com/subpath/*",
+      ],
     },
   ],
 };
