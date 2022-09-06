@@ -1,8 +1,3 @@
-import {
-  getExpectedContentLoaderHtml,
-  getExpectedLogChunk,
-  getExpectedLogFromChunk,
-} from "../../../fixtureUtils";
 import { getExpectedCode } from "../shared/contentWithChunkedImport";
 
 const resourceDir =
@@ -12,11 +7,11 @@ const inputManifest = {
   content_scripts: [
     {
       js: [`${resourceDir}/content1.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
     {
       js: [`${resourceDir}/content2.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
   ],
 };
@@ -25,22 +20,22 @@ const expectedManifest = {
   content_scripts: [
     {
       js: [`${resourceDir}/content1.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
     {
       js: [`${resourceDir}/content2.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
   ],
   web_accessible_resources: [
     {
       resources: [`assets/${resourceDir}/content1.js`, "assets/log.js"],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/*"],
       use_dynamic_url: true,
     },
     {
       resources: [`assets/${resourceDir}/content2.js`, "assets/log.js"],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/*"],
       use_dynamic_url: true,
     },
   ],

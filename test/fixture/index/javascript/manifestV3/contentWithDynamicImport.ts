@@ -7,11 +7,11 @@ const inputManifest = {
   content_scripts: [
     {
       js: [`${resourceDir}/content1.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
     {
       js: [`${resourceDir}/content2.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
   ],
 };
@@ -20,11 +20,11 @@ const expectedManifest = {
   content_scripts: [
     {
       js: [`${resourceDir}/content1.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
     {
       js: [`${resourceDir}/content2.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/subpath/*"],
     },
   ],
   web_accessible_resources: [
@@ -34,7 +34,7 @@ const expectedManifest = {
         "assets/preload-helper.js",
         "assets/log.js",
       ],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/*"],
       use_dynamic_url: true,
     },
     {
@@ -43,7 +43,7 @@ const expectedManifest = {
         "assets/preload-helper.js",
         "assets/log.js",
       ],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["https://*/*", "http://*/*", "http://example.com/*"],
       use_dynamic_url: true,
     },
   ],
