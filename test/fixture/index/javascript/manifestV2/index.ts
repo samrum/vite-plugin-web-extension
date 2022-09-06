@@ -1,5 +1,6 @@
 export { default as BackgroundHtml } from "./backgroundHtml";
 export { default as BackgroundScript } from "./backgroundScript";
+export { default as ChromeUrlOverridesHtml } from "./chromeUrlOverridesHtml";
 export { default as ChunkCssRewrite } from "./chunkCssRewrite";
 export { default as ContentCss } from "./contentCss";
 export { default as ContentWithDynamicImport } from "./contentWithDynamicImport";
