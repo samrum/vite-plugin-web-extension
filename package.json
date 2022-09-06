@@ -22,12 +22,13 @@
     "lint": "prettier --write --loglevel warn .",
     "lint:check": "prettier --check .",
     "test": "vitest",
+    "test:run": "vitest run",
     "prepare": "husky install",
     "release": "standard-version --sign"
   },
   "standard-version": {
     "scripts": {
-      "prerelease": "pnpm test && pnpm build"
+      "prerelease": "pnpm test:run && pnpm build"
     }
   },
   "repository": {
