@@ -1,5 +1,4 @@
 import { OutputBundle } from "rollup";
-import { URL } from "url";
 import { ParseResult } from "./manifestParser";
 import {
   isSingleHtmlFilename,
