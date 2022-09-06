@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.2...v2.0.0) (2022-09-06)
+
+### ⚠ BREAKING CHANGES
+
+- Vite 3 is now the minimum supported version of Vite
+
+### Features
+
+- add devtools support ([#40](https://github.com/samrum/vite-plugin-web-extension/issues/40)) ([627e7f0](https://github.com/samrum/vite-plugin-web-extension/commit/627e7f0e47dd22b4c61e2355521ed83cc6520e10))
+- add missing html file entry points ([#45](https://github.com/samrum/vite-plugin-web-extension/issues/45)) ([178205a](https://github.com/samrum/vite-plugin-web-extension/commit/178205a72aca6ada9d57268862c86e5dbcaa66be))
+- web accessible scripts ([#31](https://github.com/samrum/vite-plugin-web-extension/issues/31)) ([32c24a4](https://github.com/samrum/vite-plugin-web-extension/commit/32c24a46e7d7867229cccf6d43761edfea5ac204))
+
+### Bug Fixes
+
+- include imports from web accessible scripts in manifest v3 ([#41](https://github.com/samrum/vite-plugin-web-extension/issues/41)) ([65d52f5](https://github.com/samrum/vite-plugin-web-extension/commit/65d52f5afeec9c5c3475b638546e34380d5d6b7d))
+- make dynamic imports resolve relative to extension host ([#37](https://github.com/samrum/vite-plugin-web-extension/issues/37)) ([7948164](https://github.com/samrum/vite-plugin-web-extension/commit/7948164fe42997d1bae952fc17094dae29adc040))
+- **manifest V3:** correct matches property in web accessible resources ([#47](https://github.com/samrum/vite-plugin-web-extension/issues/47)) ([17d97d3](https://github.com/samrum/vite-plugin-web-extension/commit/17d97d3a4ff34249874c512e3b525b197a38d509))
+- **manifest v3:** web accessible resource match rewrite is broken ([#48](https://github.com/samrum/vite-plugin-web-extension/issues/48)) ([4e2ba91](https://github.com/samrum/vite-plugin-web-extension/commit/4e2ba919d4a73abaee50b15ce6f929951e958165))
+
+- bump Vite to 3.0.2 ([#36](https://github.com/samrum/vite-plugin-web-extension/issues/36)) ([bdfa480](https://github.com/samrum/vite-plugin-web-extension/commit/bdfa4809958e0946fed351b1dc4f2101f231158b))
+
 ### [1.0.2](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.2-beta.1...v1.0.2) (2022-04-24)
 
 ### [1.0.2-beta.1](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.2-beta.0...v1.0.2-beta.1) (2022-04-24)
