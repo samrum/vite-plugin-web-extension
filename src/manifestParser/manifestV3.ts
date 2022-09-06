@@ -1,3 +1,5 @@
+import { OutputBundle } from "rollup";
+import { URL } from "url";
 import { ParseResult } from "./manifestParser";
 import {
   isSingleHtmlFilename,
@@ -8,7 +10,6 @@ import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
-import { OutputBundle } from "rollup";
 import { getChunkInfoFromBundle } from "../utils/rollup";
 
 type Manifest = chrome.runtime.ManifestV3;
@@ -121,7 +122,15 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         if (parsedContentScript.webAccessibleFiles.size) {
           webAccessibleResources.add({
             resources: Array.from(parsedContentScript.webAccessibleFiles),
-            matches: script.matches!,
+            matches: script.matches!.map((matchPattern) => {
+              const url = new URL(matchPattern);
+
+              if (url.pathname === "/") {
+                return `${url}`;
+              }
+
+              return `${url.origin}/*`;
+            }),
             // @ts-ignore - use_dynamic_url is a newly supported option
             use_dynamic_url: true,
           });
