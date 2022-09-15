@@ -162,7 +162,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     >();
 
     result.manifest.web_accessible_resources?.forEach((resource) => {
-      resource.resources?.forEach((fileName, index) => {
+      resource.resources?.forEach((fileName) => {
         if (fileName.includes("*")) return;
 
         if (!this.pluginExtras.webAccessibleScriptsFilter(fileName)) {
@@ -174,8 +174,6 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           result,
           bundle
         );
-
-        resource.resources![index] = parsedScript.scriptFileName;
 
         parsedScript.webAccessibleFiles.add(parsedScript.scriptFileName);
 

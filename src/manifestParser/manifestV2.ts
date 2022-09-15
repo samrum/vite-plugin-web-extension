@@ -146,7 +146,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       result.manifest.web_accessible_resources ?? []
     );
 
-    result.manifest.web_accessible_resources?.forEach((resource, index) => {
+    result.manifest.web_accessible_resources?.forEach((resource) => {
       if (resource.includes("*")) return;
 
       const inputFile = getInputFileName(resource, this.viteConfig.root);
@@ -161,8 +161,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
         bundle
       );
 
-      result.manifest.web_accessible_resources![index] =
-        parsedContentScript.scriptFileName;
+      webAccessibleResources.add(parsedContentScript.scriptFileName);
 
       parsedContentScript.webAccessibleFiles.forEach(
         webAccessibleResources.add,
