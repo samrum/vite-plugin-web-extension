@@ -3,7 +3,7 @@ import path from "path";
 import { PluginExtras } from "..";
 import { getOutputFileName } from "../utils/file";
 import {
-  getContentScriptLoaderFile,
+  getScriptLoaderFile,
   getServiceWorkerLoaderFile,
 } from "../utils/loader";
 import DevBuilder from "./devBuilder";
@@ -71,7 +71,7 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
 
         const outputFileName = getOutputFileName(fileName);
 
-        const scriptLoaderFile = getContentScriptLoaderFile(
+        const scriptLoaderFile = getScriptLoaderFile(
           outputFileName,
           `${this.hmrServerOrigin}/${fileName}`
         );

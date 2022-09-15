@@ -124,20 +124,50 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       });
     });
 
-    (result.manifest.web_accessible_resources ?? []).forEach((resource) => {
-      if (this.pluginExtras.webAccessibleScriptsFilter(resource)) {
-        const parsedWebAccessibleScript = this.parseOutputContentScript(
-          resource,
-          result,
-          bundle
-        );
-
-        webAccessibleResources.delete(resource);
-        webAccessibleResources.add(parsedWebAccessibleScript.scriptFileName);
-        for (const file of parsedWebAccessibleScript.webAccessibleFiles) {
-          webAccessibleResources.add(file);
-        }
+    if (webAccessibleResources.size > 0) {
+      if (this.viteConfig.build.watch) {
+        // expose all files in watch mode to allow web-ext reloading to work when manifest changes are not applied on reload (eg. Firefox)
+        webAccessibleResources.add("*.js");
       }
+
+      result.manifest.web_accessible_resources = Array.from(
+        webAccessibleResources
+      );
+    }
+
+    return result;
+  }
+
+  protected async parseOutputWebAccessibleScripts(
+    result: ManifestParseResult,
+    bundle: OutputBundle
+  ): Promise<ManifestParseResult> {
+    const webAccessibleResources = new Set(
+      result.manifest.web_accessible_resources ?? []
+    );
+
+    result.manifest.web_accessible_resources?.forEach((resource, index) => {
+      if (resource.includes("*")) return;
+
+      const inputFile = getInputFileName(resource, this.viteConfig.root);
+
+      if (!this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+        return;
+      }
+
+      const parsedContentScript = this.parseOutputWebAccessibleScript(
+        resource,
+        result,
+        bundle
+      );
+
+      result.manifest.web_accessible_resources![index] =
+        parsedContentScript.scriptFileName;
+
+      parsedContentScript.webAccessibleFiles.forEach(
+        webAccessibleResources.add,
+        webAccessibleResources
+      );
     });
 
     if (webAccessibleResources.size > 0) {

@@ -141,32 +141,65 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       });
     });
 
-    (result.manifest.web_accessible_resources ?? []).forEach((struct) => {
-      const flattenedResources: string[] = struct.resources.flatMap(
-        (resourceFileName) => {
-          if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
-            const parsedWebAccessibleScript = this.parseOutputContentScript(
-              resourceFileName,
-              result,
-              bundle
-            );
-
-            // merge `scriptFileName` along with the set of resources the script imports
-            return [
-              parsedWebAccessibleScript.scriptFileName,
-              ...parsedWebAccessibleScript.webAccessibleFiles,
-            ];
-          }
-
-          // include non-script resources as-is
-          return resourceFileName;
-        }
+    if (webAccessibleResources.size > 0) {
+      result.manifest.web_accessible_resources = Array.from(
+        webAccessibleResources
       );
+    }
 
-      // removes any duplicates from the flattened resources
-      struct.resources = Array.from(new Set(flattenedResources));
+    return result;
+  }
 
-      webAccessibleResources.add(struct);
+  protected async parseOutputWebAccessibleScripts(
+    result: ManifestParseResult,
+    bundle: OutputBundle
+  ): Promise<ManifestParseResult> {
+    const webAccessibleResources = new Set<
+      Exclude<
+        chrome.runtime.ManifestV3["web_accessible_resources"],
+        undefined
+      >[number]
+    >();
+
+    result.manifest.web_accessible_resources?.forEach((resource) => {
+      resource.resources?.forEach((fileName, index) => {
+        if (fileName.includes("*")) return;
+
+        if (!this.pluginExtras.webAccessibleScriptsFilter(fileName)) {
+          return;
+        }
+
+        const parsedScript = this.parseOutputWebAccessibleScript(
+          fileName,
+          result,
+          bundle
+        );
+
+        resource.resources![index] = parsedScript.scriptFileName;
+
+        parsedScript.webAccessibleFiles.add(parsedScript.scriptFileName);
+
+        if (parsedScript.webAccessibleFiles.size) {
+          webAccessibleResources.add({
+            resources: Array.from(parsedScript.webAccessibleFiles),
+            matches: resource.matches!.map((matchPattern) => {
+              const pathMatch = /[^:\/]\//.exec(matchPattern);
+              if (!pathMatch) {
+                return matchPattern;
+              }
+
+              const path = matchPattern.slice(pathMatch.index + 1);
+              if (["/", "/*"].includes(path)) {
+                return matchPattern;
+              }
+
+              return matchPattern.replace(path, "/*");
+            }),
+            // @ts-ignore - use_dynamic_url is a newly supported option
+            use_dynamic_url: true,
+          });
+        }
+      });
     });
 
     if (webAccessibleResources.size > 0) {

@@ -1,4 +1,3 @@
-import { getExpectedHtml, getExpectedLog } from "../../../fixtureUtils";
 import { getExpectedCode } from "../shared/webAccessibleScript";
 
 const resourceDir =
@@ -9,7 +8,10 @@ const inputManifest = {
 };
 
 const expectedManifest = {
-  web_accessible_resources: [`assets/${resourceDir}/webAccessibleScript.js`],
+  web_accessible_resources: [
+    `${resourceDir}/webAccessibleScript.js`,
+    `assets/${resourceDir}/webAccessibleScript.js`,
+  ],
 };
 
 export default {

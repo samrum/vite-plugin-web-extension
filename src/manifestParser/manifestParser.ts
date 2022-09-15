@@ -3,7 +3,10 @@ import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import type { EmittedFile, OutputBundle } from "rollup";
-import { getContentScriptLoaderForOutputChunk } from "../utils/loader";
+import {
+  getContentScriptLoaderForOutputChunk,
+  getWebAccessibleScriptLoaderForOutputChunk,
+} from "../utils/loader";
 import { getChunkInfoFromBundle } from "../utils/rollup";
 import { PluginExtras } from "..";
 
@@ -55,6 +58,7 @@ export default abstract class ManifestParser<
       manifest: this.inputManifest,
     };
 
+    result = await this.parseOutputWebAccessibleScripts(result, bundle);
     result = await this.parseOutputContentScripts(result, bundle);
 
     for (const parseMethod of this.getParseOutputMethods()) {
@@ -88,6 +92,11 @@ export default abstract class ManifestParser<
   ) => Promise<ParseResult<Manifest>>)[];
 
   protected abstract parseOutputContentScripts(
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
+  ): Promise<ParseResult<Manifest>>;
+
+  protected abstract parseOutputWebAccessibleScripts(
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
@@ -154,6 +163,46 @@ export default abstract class ManifestParser<
     }
 
     const scriptLoaderFile = getContentScriptLoaderForOutputChunk(
+      scriptFileName,
+      chunkInfo
+    );
+
+    if (scriptLoaderFile.source) {
+      result.emitFiles.push({
+        type: "asset",
+        fileName: scriptLoaderFile.fileName,
+        source: scriptLoaderFile.source,
+      });
+    }
+
+    const metadata = this.getMetadataforChunk(
+      chunkInfo.fileName,
+      bundle,
+      Boolean(scriptLoaderFile.source)
+    );
+
+    chunkInfo.code = chunkInfo.code.replace(
+      new RegExp("import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS", "g"),
+      `[${[...metadata.css].map((path) => `"${path}"`).join(",")}]`
+    );
+
+    return {
+      scriptFileName: scriptLoaderFile.fileName,
+      webAccessibleFiles: new Set([...metadata.assets, ...metadata.css]),
+    };
+  }
+
+  protected parseOutputWebAccessibleScript(
+    scriptFileName: string,
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
+  ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
+    const chunkInfo = getChunkInfoFromBundle(bundle, scriptFileName);
+    if (!chunkInfo) {
+      throw new Error(`Failed to find chunk info for ${scriptFileName}`);
+    }
+
+    const scriptLoaderFile = getWebAccessibleScriptLoaderForOutputChunk(
       scriptFileName,
       chunkInfo
     );

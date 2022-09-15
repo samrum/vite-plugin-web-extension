@@ -1,5 +1,7 @@
-import { getExpectedHtml, getExpectedLog } from "../../../fixtureUtils";
-
+import {
+  getExpectedContentLoaderHtml,
+  getExpectedLog,
+} from "../../../fixtureUtils";
 export function getExpectedCode(resourceDir: string) {
   const chunkCode = {
     [`assets/${resourceDir}/webAccessibleScript.js`]: getExpectedLog(
@@ -7,7 +9,11 @@ export function getExpectedCode(resourceDir: string) {
     ),
   };
 
-  const assetCode = {};
+  const assetCode = {
+    [`${resourceDir}/webAccessibleScript.js`]: getExpectedContentLoaderHtml(
+      `assets/${resourceDir}/webAccessibleScript.js`
+    ),
+  };
 
   return {
     chunkCode,

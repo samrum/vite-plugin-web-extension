@@ -14,10 +14,13 @@ export function getScriptHtmlLoaderFile(name: string, scriptSrcs: string[]) {
   };
 }
 
-export function getContentScriptLoaderFile(
+export function getScriptLoaderFile(
   scriptFileName: string,
   outputChunkFileName: string
-) {
+): {
+  fileName: string;
+  source: string;
+} {
   const outputFile = getOutputFileName(scriptFileName);
 
   const importPath = outputChunkFileName.startsWith("http")
@@ -51,5 +54,12 @@ export function getContentScriptLoaderForOutputChunk(
     };
   }
 
-  return getContentScriptLoaderFile(contentScriptFileName, chunk.fileName);
+  return getScriptLoaderFile(contentScriptFileName, chunk.fileName);
+}
+
+export function getWebAccessibleScriptLoaderForOutputChunk(
+  contentScriptFileName: string,
+  chunk: OutputChunk
+): { fileName: string; source?: string } {
+  return getScriptLoaderFile(contentScriptFileName, chunk.fileName);
 }

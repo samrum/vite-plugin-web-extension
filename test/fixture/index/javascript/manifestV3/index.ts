@@ -13,3 +13,4 @@ export { default as OptionsHtml } from "./optionsHtml";
 export { default as PopupHtml } from "./popupHtml";
 export { default as WebAccessibleResourceHtml } from "./webAccessibleResourceHtml";
 export { default as WebAccessibleScript } from "./webAccessibleScript";
+export { default as WebAccessibleScriptWithChunkedImport } from "./webAccessibleScriptWithChunkedImport";
