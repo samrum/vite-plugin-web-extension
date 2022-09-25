@@ -16,11 +16,10 @@ const expectedManifest = {
   web_accessible_resources: [
     {
       resources: [
-        `assets/${resourceDir}/webAccessibleScript.js`,
         `${resourceDir}/webAccessibleScript.js`,
+        `assets/${resourceDir}/webAccessibleScript.js`,
       ],
       matches: ["https://*/*", "http://*/*"],
-      use_dynamic_url: true,
     },
   ],
 };

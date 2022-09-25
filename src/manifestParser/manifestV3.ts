@@ -106,7 +106,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         chrome.runtime.ManifestV3["web_accessible_resources"],
         undefined
       >[number]
-    >();
+    >([...(result.manifest.web_accessible_resources ?? [])]);
 
     result.manifest.content_scripts?.forEach((script) => {
       script.js?.forEach((scriptFileName, index) => {
@@ -154,19 +154,21 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     result: ManifestParseResult,
     bundle: OutputBundle
   ): Promise<ManifestParseResult> {
-    const webAccessibleResources = new Set<
-      Exclude<
-        chrome.runtime.ManifestV3["web_accessible_resources"],
-        undefined
-      >[number]
-    >();
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
 
-    result.manifest.web_accessible_resources?.forEach((resource) => {
-      resource.resources?.forEach((fileName) => {
-        if (fileName.includes("*")) return;
+    for (const resource of result.manifest.web_accessible_resources) {
+      if (!resource.resources) {
+        continue;
+      }
 
-        if (!this.pluginExtras.webAccessibleScriptsFilter(fileName)) {
-          return;
+      for (const fileName of resource.resources) {
+        if (
+          fileName.includes("*") ||
+          !this.pluginExtras.webAccessibleScriptsFilter(fileName)
+        ) {
+          continue;
         }
 
         const parsedScript = this.parseOutputWebAccessibleScript(
@@ -175,35 +177,13 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           bundle
         );
 
-        parsedScript.webAccessibleFiles.add(parsedScript.scriptFileName);
-
         if (parsedScript.webAccessibleFiles.size) {
-          webAccessibleResources.add({
-            resources: Array.from(parsedScript.webAccessibleFiles),
-            matches: resource.matches!.map((matchPattern) => {
-              const pathMatch = /[^:\/]\//.exec(matchPattern);
-              if (!pathMatch) {
-                return matchPattern;
-              }
-
-              const path = matchPattern.slice(pathMatch.index + 1);
-              if (["/", "/*"].includes(path)) {
-                return matchPattern;
-              }
-
-              return matchPattern.replace(path, "/*");
-            }),
-            // @ts-ignore - use_dynamic_url is a newly supported option
-            use_dynamic_url: true,
-          });
+          resource.resources = [
+            ...resource.resources,
+            ...parsedScript.webAccessibleFiles,
+          ];
         }
-      });
-    });
-
-    if (webAccessibleResources.size > 0) {
-      result.manifest.web_accessible_resources = Array.from(
-        webAccessibleResources
-      );
+      }
     }
 
     return result;

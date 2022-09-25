@@ -7,7 +7,7 @@ const inputManifest = {
   web_accessible_resources: [
     {
       resources: [`${resourceDir}/webAccessibleScript1.js`],
-      matches: ["https://*/*", "http://*/*"],
+      matches: ["<all_urls>"],
     },
     {
       resources: [`${resourceDir}/webAccessibleScript2.js`],
@@ -20,21 +20,19 @@ const expectedManifest = {
   web_accessible_resources: [
     {
       resources: [
+        `${resourceDir}/webAccessibleScript1.js`,
         `assets/${resourceDir}/webAccessibleScript1.js`,
         "assets/log.js",
-        `${resourceDir}/webAccessibleScript1.js`,
       ],
-      matches: ["https://*/*", "http://*/*"],
-      use_dynamic_url: true,
+      matches: ["<all_urls>"],
     },
     {
       resources: [
+        `${resourceDir}/webAccessibleScript2.js`,
         `assets/${resourceDir}/webAccessibleScript2.js`,
         "assets/log.js",
-        `${resourceDir}/webAccessibleScript2.js`,
       ],
       matches: ["https://*/*", "http://*/*"],
-      use_dynamic_url: true,
     },
   ],
 };
