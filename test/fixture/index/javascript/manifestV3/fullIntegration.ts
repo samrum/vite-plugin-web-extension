@@ -35,9 +35,6 @@ const inputManifest = {
 };
 
 const expectedManifest = {
-  version: "1.0.0",
-  name: "Manifest Name",
-  manifest_version: 3,
   action: {
     default_icon: {
       "32": "test/fixture/index/javascript/resources/fullIntegration/src/assets/logo.svg",
@@ -89,5 +86,5 @@ const expectedManifest = {
 export default {
   inputManifest,
   expectedManifest,
-  ...getExpectedCode(resourceDir),
+  ...getExpectedCode(resourceDir, 3),
 };
