@@ -39,13 +39,13 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected getParseInputMethods(): ((
     result: ManifestParseResult
   ) => ManifestParseResult)[] {
-    return [this.parseInputBackgroundScripts, this.parseWatchModeSupport];
+    return [this.parseInputBackgroundScripts];
   }
 
   protected getParseOutputMethods(): ((
     result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
-    return [];
+    return [this.parseWatchModeSupport];
   }
 
   private parseInputBackgroundScripts(
