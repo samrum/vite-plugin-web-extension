@@ -17,7 +17,7 @@ export function getExpectedHtmlLoader(asset: string): string {
 </head></html>`;
 }
 
-export function getExpectedContentLoaderHtml(scriptFileName: string): string {
+export function getExpectedScriptLoaderHtml(scriptFileName: string): string {
   return `(async()=>{await import(chrome.runtime.getURL("${scriptFileName}"))})();`;
 }
 

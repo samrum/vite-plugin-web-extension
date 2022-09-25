@@ -1,5 +1,5 @@
 import {
-  getExpectedContentLoaderHtml,
+  getExpectedScriptLoaderHtml,
   getExpectedLogChunk,
   getExpectedLogFromChunk,
 } from "../../../fixtureUtils";
@@ -12,10 +12,10 @@ export function getExpectedCode(resourceDir: string) {
   };
 
   const assetCode = {
-    [`${resourceDir}/content1.js`]: getExpectedContentLoaderHtml(
+    [`${resourceDir}/content1.js`]: getExpectedScriptLoaderHtml(
       `assets/${resourceDir}/content1.js`
     ),
-    [`${resourceDir}/content2.js`]: getExpectedContentLoaderHtml(
+    [`${resourceDir}/content2.js`]: getExpectedScriptLoaderHtml(
       `assets/${resourceDir}/content2.js`
     ),
   };
