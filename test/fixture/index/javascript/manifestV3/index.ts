@@ -13,5 +13,5 @@ export { default as fullIntegration } from "./fullIntegration";
 export { default as OptionsHtml } from "./optionsHtml";
 export { default as PopupHtml } from "./popupHtml";
 export { default as WebAccessibleResourceHtml } from "./webAccessibleResourceHtml";
-export { default as WebAccessibleScript } from "./webAccessibleScript";
+export { default as WebAccessibleScriptWithNoImport } from "./webAccessibleScriptWithNoImport";
 export { default as WebAccessibleScriptWithChunkedImport } from "./webAccessibleScriptWithChunkedImport";

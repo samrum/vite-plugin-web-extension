@@ -45,7 +45,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected getParseOutputMethods(): ((
     result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
-    return [this.parseWatchModeSupport];
+    return [this.parseWatchModeSupport.bind(this)];
   }
 
   private parseInputBackgroundScripts(
