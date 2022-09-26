@@ -3,7 +3,7 @@ import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
 import { PluginExtras } from "..";
 import { getOutputFileName } from "../utils/file";
-import { getContentScriptLoaderFile } from "../utils/loader";
+import { getScriptLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.ManifestV2> {
@@ -48,7 +48,7 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
 
       const outputFileName = getOutputFileName(resourceFileName);
 
-      const scriptLoaderFile = getContentScriptLoaderFile(
+      const scriptLoaderFile = getScriptLoaderFile(
         outputFileName,
         `${this.hmrServerOrigin}/${resourceFileName}`
       );

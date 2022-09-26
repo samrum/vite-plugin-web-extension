@@ -45,7 +45,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected getParseOutputMethods(): ((
     result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
-    return [];
+    return [this.parseWatchModeSupport.bind(this)];
   }
 
   private parseInputBackgroundScripts(
@@ -124,31 +124,59 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       });
     });
 
-    (result.manifest.web_accessible_resources ?? []).forEach((resource) => {
-      if (this.pluginExtras.webAccessibleScriptsFilter(resource)) {
-        const parsedWebAccessibleScript = this.parseOutputContentScript(
-          resource,
-          result,
-          bundle
-        );
-
-        webAccessibleResources.delete(resource);
-        webAccessibleResources.add(parsedWebAccessibleScript.scriptFileName);
-        for (const file of parsedWebAccessibleScript.webAccessibleFiles) {
-          webAccessibleResources.add(file);
-        }
-      }
-    });
-
     if (webAccessibleResources.size > 0) {
-      if (this.viteConfig.build.watch) {
-        // expose all files in watch mode to allow web-ext reloading to work when manifest changes are not applied on reload (eg. Firefox)
-        webAccessibleResources.add("*.js");
-      }
-
       result.manifest.web_accessible_resources = Array.from(
         webAccessibleResources
       );
+    }
+
+    return result;
+  }
+
+  protected async parseOutputWebAccessibleScripts(
+    result: ManifestParseResult,
+    bundle: OutputBundle
+  ): Promise<ManifestParseResult> {
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
+
+    for (const resource of result.manifest.web_accessible_resources) {
+      if (
+        resource.includes("*") ||
+        !this.pluginExtras.webAccessibleScriptsFilter(resource)
+      ) {
+        continue;
+      }
+
+      const parsedContentScript = this.parseOutputWebAccessibleScript(
+        resource,
+        result,
+        bundle
+      );
+
+      result.manifest.web_accessible_resources = [
+        ...result.manifest.web_accessible_resources,
+        ...parsedContentScript.webAccessibleFiles,
+      ];
+    }
+
+    return result;
+  }
+
+  protected async parseWatchModeSupport(
+    result: ManifestParseResult
+  ): Promise<ManifestParseResult> {
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
+
+    if (
+      result.manifest.web_accessible_resources.length > 0 &&
+      this.viteConfig.build.watch
+    ) {
+      // expose all files in watch mode to allow web-ext reloading to work when manifest changes are not applied on reload (eg. Firefox)
+      result.manifest.web_accessible_resources.push("*.js");
     }
 
     return result;

@@ -1,7 +1,7 @@
-import { getExpectedCode } from "../shared/webAccessibleScript";
+import { getExpectedCode } from "../shared/webAccessibleScriptWithNoImport";
 
 const resourceDir =
-  "test/fixture/index/javascript/resources/webAccessibleScript";
+  "test/fixture/index/javascript/resources/webAccessibleScriptWithNoImport";
 
 const inputManifest = {
   web_accessible_resources: [
@@ -15,7 +15,10 @@ const inputManifest = {
 const expectedManifest = {
   web_accessible_resources: [
     {
-      resources: [`assets/${resourceDir}/webAccessibleScript.js`],
+      resources: [
+        `${resourceDir}/webAccessibleScript.js`,
+        `assets/${resourceDir}/webAccessibleScript.js`,
+      ],
       matches: ["https://*/*", "http://*/*"],
     },
   ],

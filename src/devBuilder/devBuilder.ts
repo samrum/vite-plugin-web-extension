@@ -1,7 +1,7 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
 import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
-import { getContentScriptLoaderFile } from "../utils/loader";
+import { getScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { PluginExtras } from "..";
@@ -154,7 +154,7 @@ export default abstract class DevBuilder<
       for (const [scriptJsIndex, fileName] of script.js.entries()) {
         const outputFileName = getOutputFileName(fileName);
 
-        const scriptLoaderFile = getContentScriptLoaderFile(
+        const scriptLoaderFile = getScriptLoaderFile(
           outputFileName,
           `${this.hmrServerOrigin}/${fileName}`
         );

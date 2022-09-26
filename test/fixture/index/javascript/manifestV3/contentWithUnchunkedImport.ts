@@ -36,12 +36,6 @@ const expectedManifest = {
   ],
 };
 
-const chunkCode = {
-  [`assets/content.js`]: getExpectedLog("content"),
-};
-
-const assetCode = {};
-
 export default {
   inputManifest,
   expectedManifest,

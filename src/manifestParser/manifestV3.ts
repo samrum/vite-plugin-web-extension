@@ -106,7 +106,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         chrome.runtime.ManifestV3["web_accessible_resources"],
         undefined
       >[number]
-    >();
+    >([...(result.manifest.web_accessible_resources ?? [])]);
 
     result.manifest.content_scripts?.forEach((script) => {
       script.js?.forEach((scriptFileName, index) => {
@@ -141,38 +141,49 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       });
     });
 
-    (result.manifest.web_accessible_resources ?? []).forEach((struct) => {
-      const flattenedResources: string[] = struct.resources.flatMap(
-        (resourceFileName) => {
-          if (this.pluginExtras.webAccessibleScriptsFilter(resourceFileName)) {
-            const parsedWebAccessibleScript = this.parseOutputContentScript(
-              resourceFileName,
-              result,
-              bundle
-            );
-
-            // merge `scriptFileName` along with the set of resources the script imports
-            return [
-              parsedWebAccessibleScript.scriptFileName,
-              ...parsedWebAccessibleScript.webAccessibleFiles,
-            ];
-          }
-
-          // include non-script resources as-is
-          return resourceFileName;
-        }
-      );
-
-      // removes any duplicates from the flattened resources
-      struct.resources = Array.from(new Set(flattenedResources));
-
-      webAccessibleResources.add(struct);
-    });
-
     if (webAccessibleResources.size > 0) {
       result.manifest.web_accessible_resources = Array.from(
         webAccessibleResources
       );
+    }
+
+    return result;
+  }
+
+  protected async parseOutputWebAccessibleScripts(
+    result: ManifestParseResult,
+    bundle: OutputBundle
+  ): Promise<ManifestParseResult> {
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
+
+    for (const resource of result.manifest.web_accessible_resources) {
+      if (!resource.resources) {
+        continue;
+      }
+
+      for (const fileName of resource.resources) {
+        if (
+          fileName.includes("*") ||
+          !this.pluginExtras.webAccessibleScriptsFilter(fileName)
+        ) {
+          continue;
+        }
+
+        const parsedScript = this.parseOutputWebAccessibleScript(
+          fileName,
+          result,
+          bundle
+        );
+
+        if (parsedScript.webAccessibleFiles.size) {
+          resource.resources = [
+            ...resource.resources,
+            ...parsedScript.webAccessibleFiles,
+          ];
+        }
+      }
     }
 
     return result;

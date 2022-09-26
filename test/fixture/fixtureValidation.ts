@@ -94,7 +94,11 @@ async function validateFixture<ManifestType extends chrome.runtime.Manifest>(
         );
       }
 
-      expect(file.source).toEqual(assetCode[outputFileName]);
+      expect(
+        typeof file.source === "string"
+          ? file.source
+          : JSON.stringify(file.source)
+      ).toEqual(assetCode[outputFileName]);
       delete assetCode[outputFileName];
     }
   });

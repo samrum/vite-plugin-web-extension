@@ -1,3 +1,3 @@
 import log from "../shared/log";
 
-log("webAccessibleScript");
+log("webAccessibleScript1");
