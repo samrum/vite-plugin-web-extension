@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.0.0...v2.1.0) (2022-09-26)
+
+### Features
+
+- generate loader files for web accessible scripts ([#52](https://github.com/samrum/vite-plugin-web-extension/issues/52)) ([da38880](https://github.com/samrum/vite-plugin-web-extension/commit/da388808adb59f28ff79196f490525bd89c611f9))
+
 ## [2.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v1.0.2...v2.0.0) (2022-09-06)
 
 ### ⚠ BREAKING CHANGES
