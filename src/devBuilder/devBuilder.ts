@@ -5,6 +5,7 @@ import { getScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { PluginExtras } from "..";
+import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -64,25 +65,11 @@ export default abstract class DevBuilder<
   protected getContentSecurityPolicyWithHmrSupport(
     contentSecurityPolicy: string | undefined
   ): string {
-    const scriptSrcs = [
-      "'self'",
-      [...this.inlineScriptHashes].join(" "),
+    return addHmrSupportToCsp(
       this.hmrServerOrigin,
-    ];
-
-    const cspHmrScriptSrc = `script-src ${scriptSrcs.join(
-      " "
-    )}; object-src 'self'`;
-
-    if (!contentSecurityPolicy) {
-      return cspHmrScriptSrc;
-    }
-
-    if (contentSecurityPolicy.includes("script-src")) {
-      return contentSecurityPolicy.replace(`script-src`, cspHmrScriptSrc);
-    }
-
-    return (contentSecurityPolicy += `; ${cspHmrScriptSrc}`);
+      this.inlineScriptHashes,
+      contentSecurityPolicy
+    );
   }
 
   protected async writeManifestHtmlFiles(htmlFileNames: string[]) {
