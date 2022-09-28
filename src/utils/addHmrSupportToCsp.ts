@@ -2,7 +2,7 @@ import parse from "content-security-policy-parser";
 
 export const addHmrSupportToCsp = (
   hmrServerOrigin: string,
-  inlineScriptHashes: string[] | Set<string>,
+  inlineScriptHashes: Set<string>,
   contentSecurityPolicyStr?: string | undefined
 ): string => {
   const inlineScriptHashesArr = Array.from(inlineScriptHashes);

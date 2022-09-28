@@ -29,10 +29,10 @@ describe("Creating an HMR friendly CSP document", () => {
   it("should let us include inline hashes", () => {
     const cspStr = addHmrSupportToCsp(
       "http://localhost:5173",
-      [
+      new Set([
         "sha256-B2yPHKaXnvFWtRChIbabYmUBFZdVfKKXHbWtWidDVF8=",
         "sha256-B2yPHKaXnvFWtRChIbabYmUBFZdVfKKXHbWtWidDVF7=",
-      ],
+      ]),
       basicCsp
     );
     const csp = parse(cspStr);
@@ -43,11 +43,10 @@ describe("Creating an HMR friendly CSP document", () => {
   it("should let dedupe values", () => {
     const cspStr = addHmrSupportToCsp(
       "http://localhost:5173",
-      [
-        "sha256-B2yPHKaXnvFWtRChIbabYmUBFZdVfKKXHbWtWidDVF8=",
+      new Set([
         "sha256-B2yPHKaXnvFWtRChIbabYmUBFZdVfKKXHbWtWidDVF8=",
         "sha256-B2yPHKaXnvFWtRChIbabYmUBFZdVfKKXHbWtWidDVF7=",
-      ],
+      ]),
       basicCspWithDupes
     );
     const csp = parse(cspStr);
