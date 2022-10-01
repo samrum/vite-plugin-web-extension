@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/samrum/vite-plugin-web-extension/compare/v2.1.0...v2.1.1) (2022-10-01)
+
+### Bug Fixes
+
+- improve the way CSP is modified in HMR mode ([#54](https://github.com/samrum/vite-plugin-web-extension/issues/54)) ([6143dfe](https://github.com/samrum/vite-plugin-web-extension/commit/6143dfe3a9d6468b05b485650b97695355595e34))
+
 ## [2.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.0.0...v2.1.0) (2022-09-26)
 
 ### Features

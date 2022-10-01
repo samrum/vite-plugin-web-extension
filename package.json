@@ -1,6 +1,6 @@
 {
   "name": "@samrum/vite-plugin-web-extension",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A vite plugin for generating cross browser platform, ES module based web extensions",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
