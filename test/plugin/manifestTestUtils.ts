@@ -1,9 +1,14 @@
+import path from "path";
 import { expect, test } from "vitest";
-import { build } from "vite";
+import { build, normalizePath } from "vite";
 import type { RollupOutput } from "rollup";
 import webExtension from "../../src/index";
 
 type InputManifestGenerator<ManifestType> = () => Partial<ManifestType>;
+
+function normalizeFileName(fileName: string): string {
+  return normalizePath(path.normalize(fileName));
+}
 
 async function bundleGenerate(
   manifest: chrome.runtime.Manifest
@@ -63,7 +68,7 @@ async function runTest<ManifestType extends chrome.runtime.Manifest>(
           exports: file.exports,
           facadeModuleId:
             file.facadeModuleId?.replace(repoDir, "/mocked-repo-dir") ?? null,
-          fileName: file.fileName,
+          fileName: normalizeFileName(file.fileName),
           implicitlyLoadedBefore: file.implicitlyLoadedBefore,
           importedBindings: file.importedBindings,
           imports: file.imports,
@@ -72,7 +77,7 @@ async function runTest<ManifestType extends chrome.runtime.Manifest>(
           isImplicitEntry: file.isImplicitEntry,
           map: file.map,
           modules: modules,
-          name: file.name,
+          name: normalizeFileName(file.name),
           referencedFiles: file.referencedFiles,
           type: file.type,
           viteMetadata: file.viteMetadata,
@@ -81,8 +86,11 @@ async function runTest<ManifestType extends chrome.runtime.Manifest>(
 
       if (file.type === "asset") {
         return {
-          fileName: file.fileName,
-          name: file.name,
+          fileName: normalizeFileName(file.fileName),
+          name:
+            typeof file.name === "undefined"
+              ? undefined
+              : normalizeFileName(file.name),
           source: file.source,
           type: file.type,
         };
