@@ -1,0 +1,87 @@
+// Vitest Snapshot v1
+
+exports[`popupHtml - Manifest V2 1`] = `
+[
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+log(\\"popup\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.html",
+    "fileName": "assets/test/manifest/resources/popupHtml/popup.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.html": {
+        "code": null,
+        "originalLength": 224,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 0,
+      },
+      "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.js": {
+        "code": "log(\\"popup\\");",
+        "originalLength": 50,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 13,
+      },
+      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "test/manifest/resources/popupHtml/popup",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/popupHtml/popup.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    
+
+    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/popupHtml/popup.js\\"></script>
+  </head>
+</html>
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"browser_action\\": {
+    \\"default_popup\\": \\"test/manifest/resources/popupHtml/popup.html\\"
+  }
+}",
+    "type": "asset",
+  },
+]
+`;

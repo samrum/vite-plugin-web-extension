@@ -1,0 +1,219 @@
+// Vitest Snapshot v1
+
+exports[`chunkCssRewrite - Manifest V3 1`] = `
+[
+  {
+    "code": "/* empty css                         */const content1 = \\"\\";
+console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.js",
+    "fileName": "assets/test/manifest/resources/chunkCssRewrite/content1.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/contentShared.js": [],
+    },
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.css": {
+        "code": "const content1 = '';",
+        "originalLength": 31,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 20,
+      },
+      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.js": {
+        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
+        "originalLength": 113,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 56,
+      },
+    },
+    "name": "test/manifest/resources/chunkCssRewrite/content1",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {
+        "assets/content1.css",
+        "assets/contentShared.css",
+      },
+    },
+  },
+  {
+    "code": "/* empty css                         */const content2 = \\"\\";
+console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.js",
+    "fileName": "assets/test/manifest/resources/chunkCssRewrite/content2.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/contentShared.js": [],
+    },
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.css": {
+        "code": "const content2 = '';",
+        "originalLength": 31,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 20,
+      },
+      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.js": {
+        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
+        "originalLength": 113,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 56,
+      },
+    },
+    "name": "test/manifest/resources/chunkCssRewrite/content2",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {
+        "assets/content2.css",
+        "assets/contentShared.css",
+      },
+    },
+  },
+  {
+    "code": "console.log([]);
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
+    "fileName": "assets/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/contentNoCss.js": {
+        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
+        "originalLength": 57,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 56,
+      },
+    },
+    "name": "test/manifest/resources/chunkCssRewrite/contentNoCss",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "assets/content1.css",
+    "name": "test/manifest/resources/chunkCssRewrite/content1.css",
+    "source": "#content1 {
+  display: flex;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "assets/contentShared.css",
+    "name": "contentShared.css",
+    "source": "#contentShared {
+  display: flex;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "assets/content2.css",
+    "name": "test/manifest/resources/chunkCssRewrite/content2.css",
+    "source": "#content2 {
+  display: flex;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"content_scripts\\": [
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/chunkCssRewrite/content1.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ]
+    },
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/chunkCssRewrite/content2.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ]
+    },
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/chunkCssRewrite/contentNoCss.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ]
+    }
+  ],
+  \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"assets/content1.css\\",
+        \\"assets/contentShared.css\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ],
+      \\"use_dynamic_url\\": true
+    },
+    {
+      \\"resources\\": [
+        \\"assets/content2.css\\",
+        \\"assets/contentShared.css\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ],
+      \\"use_dynamic_url\\": true
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

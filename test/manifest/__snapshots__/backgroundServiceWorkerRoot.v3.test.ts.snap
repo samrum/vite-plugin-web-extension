@@ -1,0 +1,57 @@
+// Vitest Snapshot v1
+
+exports[`backgroundServiceWorker - Manifest V3 1`] = `
+[
+  {
+    "code": "console.log(\\"serviceWorker\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/backgroundServiceWorker/serviceWorker.js",
+    "fileName": "assets/test/manifest/resources/backgroundServiceWorker/serviceWorker.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/backgroundServiceWorker/serviceWorker.js": {
+        "code": "console.log(\\"serviceWorker\\");",
+        "originalLength": 30,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 29,
+      },
+    },
+    "name": "test/manifest/resources/backgroundServiceWorker/serviceWorker",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "serviceWorker.js",
+    "name": undefined,
+    "source": "import \\"/assets/test/manifest/resources/backgroundServiceWorker/serviceWorker.js\\";",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"background\\": {
+    \\"service_worker\\": \\"serviceWorker.js\\",
+    \\"type\\": \\"module\\"
+  }
+}",
+    "type": "asset",
+  },
+]
+`;

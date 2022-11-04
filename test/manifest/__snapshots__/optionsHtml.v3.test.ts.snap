@@ -1,0 +1,87 @@
+// Vitest Snapshot v1
+
+exports[`optionsHtml - Manifest V3 1`] = `
+[
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+log(\\"options\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.html",
+    "fileName": "assets/test/manifest/resources/optionsHtml/options.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.html": {
+        "code": null,
+        "originalLength": 226,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 0,
+      },
+      "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.js": {
+        "code": "log(\\"options\\");",
+        "originalLength": 52,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 15,
+      },
+      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "test/manifest/resources/optionsHtml/options",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/optionsHtml/options.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    
+
+    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/optionsHtml/options.js\\"></script>
+  </head>
+</html>
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"options_ui\\": {
+    \\"page\\": \\"test/manifest/resources/optionsHtml/options.html\\"
+  }
+}",
+    "type": "asset",
+  },
+]
+`;

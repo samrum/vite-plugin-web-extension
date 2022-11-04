@@ -65,13 +65,15 @@
     "standard-version": "^9.5.0",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4",
-    "vitest": "^0.18.1"
+    "vitest": "^0.24.4"
   },
   "peerDependencies": {
     "vite": "^3.0.2"
   },
   "lint-staged": {
-    "*.{js,ts,css,md,yml}": "prettier --write"
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ]
   },
   "dependencies": {
     "@types/chrome": "^0.0.193",

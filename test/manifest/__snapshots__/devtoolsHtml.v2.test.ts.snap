@@ -1,0 +1,85 @@
+// Vitest Snapshot v1
+
+exports[`devtoolsHtml - Manifest V2 1`] = `
+[
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+log(\\"devtools\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.html",
+    "fileName": "assets/test/manifest/resources/devtoolsHtml/devtools.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.html": {
+        "code": null,
+        "originalLength": 227,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 0,
+      },
+      "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.js": {
+        "code": "log(\\"devtools\\");",
+        "originalLength": 53,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 16,
+      },
+      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "test/manifest/resources/devtoolsHtml/devtools",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/devtoolsHtml/devtools.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    
+
+    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/devtoolsHtml/devtools.js\\"></script>
+  </head>
+</html>
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"devtools_page\\": \\"test/manifest/resources/devtoolsHtml/devtools.html\\"
+}",
+    "type": "asset",
+  },
+]
+`;
