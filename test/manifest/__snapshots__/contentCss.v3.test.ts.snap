@@ -1,0 +1,69 @@
+// Vitest Snapshot v1
+
+exports[`contentCss - Manifest V3 1`] = `
+[
+  {
+    "code": "console.log(\\"content\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentCss/content.js",
+    "fileName": "assets/test/manifest/resources/contentCss/content.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/contentCss/content.js": {
+        "code": "console.log(\\"content\\");",
+        "originalLength": 24,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 23,
+      },
+    },
+    "name": "test/manifest/resources/contentCss/content",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/contentCss/content.css",
+    "name": undefined,
+    "source": ".css {
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"content_scripts\\": [
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/contentCss/content.js\\"
+      ],
+      \\"css\\": [
+        \\"test/manifest/resources/contentCss/content.css\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ]
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

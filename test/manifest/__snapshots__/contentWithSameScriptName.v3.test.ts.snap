@@ -1,0 +1,106 @@
+// Vitest Snapshot v1
+
+exports[`contentWithSameScriptName - Manifest V3 1`] = `
+[
+  {
+    "code": "console.log(\\"content1\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content1/content.js",
+    "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content1/content.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content1/content.js": {
+        "code": "console.log(\\"content1\\");",
+        "originalLength": 25,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 24,
+      },
+    },
+    "name": "test/manifest/resources/contentWithSameScriptName/content1/content",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "console.log(\\"content2\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content2/content.js",
+    "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content2/content.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content2/content.js": {
+        "code": "console.log(\\"content2\\");",
+        "originalLength": 25,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 24,
+      },
+    },
+    "name": "test/manifest/resources/contentWithSameScriptName/content2/content",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"content_scripts\\": [
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/contentWithSameScriptName/content1/content.js\\"
+      ],
+      \\"matches\\": [
+        \\"*://*/*\\",
+        \\"https://*/*\\",
+        \\"*://example.com/\\",
+        \\"https://example.com/\\",
+        \\"*://example.com/subpath/*\\",
+        \\"https://example.com/subpath/*\\"
+      ]
+    },
+    {
+      \\"js\\": [
+        \\"assets/test/manifest/resources/contentWithSameScriptName/content2/content.js\\"
+      ],
+      \\"matches\\": [
+        \\"*://*/*\\",
+        \\"https://*/*\\",
+        \\"*://example.com/\\",
+        \\"https://example.com/\\",
+        \\"*://example.com/subpath/*\\",
+        \\"https://example.com/subpath/*\\"
+      ]
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

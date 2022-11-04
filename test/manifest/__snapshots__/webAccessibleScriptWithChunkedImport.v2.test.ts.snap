@@ -1,0 +1,153 @@
+// Vitest Snapshot v1
+
+exports[`webAccessibleScriptWithChunkedImport - Manifest V2 1`] = `
+[
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"webAccessibleScript1\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
+    "fileName": "assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js": {
+        "code": "log(\\"webAccessibleScript1\\");",
+        "originalLength": 63,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 28,
+      },
+    },
+    "name": "test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"webAccessibleScript2\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
+    "fileName": "assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js": {
+        "code": "log(\\"webAccessibleScript2\\");",
+        "originalLength": 63,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 28,
+      },
+    },
+    "name": "test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+export {
+  log as l
+};
+",
+    "dynamicImports": [],
+    "exports": [
+      "l",
+    ],
+    "facadeModuleId": null,
+    "fileName": "assets/log.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": false,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "log",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js\\",
+    \\"test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js\\",
+    \\"assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js\\",
+    \\"assets/log.js\\",
+    \\"assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js\\"
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

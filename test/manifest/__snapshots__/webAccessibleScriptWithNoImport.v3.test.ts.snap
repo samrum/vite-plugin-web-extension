@@ -1,0 +1,65 @@
+// Vitest Snapshot v1
+
+exports[`webAccessibleScriptWithNoImport - Manifest V3 1`] = `
+[
+  {
+    "code": "console.log(\\"webAccessibleScript\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
+    "fileName": "assets/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js": {
+        "code": "console.log(\\"webAccessibleScript\\");",
+        "originalLength": 36,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 35,
+      },
+    },
+    "name": "test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js\\",
+        \\"assets/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://*/*\\",
+        \\"http://*/*\\"
+      ]
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

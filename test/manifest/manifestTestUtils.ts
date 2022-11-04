@@ -37,11 +37,11 @@ async function bundleGenerate(
   return bundle as RollupOutput;
 }
 
-async function runTest<ManifestType extends chrome.runtime.Manifest>(
+export async function runTest<ManifestType extends chrome.runtime.Manifest>(
   inputManifestGenerator: InputManifestGenerator<ManifestType>,
   manifestVersion: ManifestType["manifest_version"]
 ): Promise<void> {
-  const [repoDir] = __dirname.split("/test/plugin");
+  const [repoDir] = __dirname.split("/test/manifest");
 
   const baseManifest: chrome.runtime.Manifest = {
     version: "1.0.0",
@@ -101,22 +101,24 @@ async function runTest<ManifestType extends chrome.runtime.Manifest>(
   ).toMatchSnapshot();
 }
 
-export async function runManifestV2Tests(tests: {
-  [key: string]: InputManifestGenerator<chrome.runtime.ManifestV2>;
-}) {
-  Object.entries(tests).forEach(([testName, inputManifestGenerator]) => {
-    test(testName, async () => {
-      await runTest(inputManifestGenerator, 2);
-    });
+export function getResourceDir(path: string): string {
+  return `test/manifest/resources/${path}`;
+}
+
+export async function runManifestV2Test(
+  testName: string,
+  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV2>
+) {
+  test(`${testName} - Manifest V2`, async () => {
+    await runTest(manifestGenerator, 2);
   });
 }
 
-export async function runManifestV3Tests(tests: {
-  [key: string]: InputManifestGenerator<chrome.runtime.ManifestV3>;
-}) {
-  Object.entries(tests).forEach(([testName, inputManifestGenerator]) => {
-    test(testName, async () => {
-      await runTest(inputManifestGenerator, 3);
-    });
+export async function runManifestV3Test(
+  testName: string,
+  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV3>
+) {
+  test(`${testName} - Manifest V3`, async () => {
+    await runTest(manifestGenerator, 3);
   });
 }
