@@ -1,22 +1,21 @@
 import { ResolvedConfig } from "vite";
-import { PluginExtras } from "..";
+import { ViteWebExtensionOptions } from "../../types";
 import ManifestParser from "./manifestParser";
 import ManifestV2 from "./manifestV2";
 import ManifestV3 from "./manifestV3";
 
 export default class ManifestParserFactory {
   static getParser(
-    manifest: chrome.runtime.Manifest,
-    pluginExtras: PluginExtras,
+    pluginOptions: ViteWebExtensionOptions,
     viteConfig: ResolvedConfig
   ):
     | ManifestParser<chrome.runtime.ManifestV2>
     | ManifestParser<chrome.runtime.ManifestV3> {
-    switch (manifest.manifest_version) {
+    switch (pluginOptions.manifest.manifest_version) {
       case 2:
-        return new ManifestV2(manifest, pluginExtras, viteConfig);
+        return new ManifestV2(pluginOptions, viteConfig);
       case 3:
-        return new ManifestV3(manifest, pluginExtras, viteConfig);
+        return new ManifestV3(pluginOptions, viteConfig);
       default:
         throw new Error(
           `No parser available for manifest_version ${

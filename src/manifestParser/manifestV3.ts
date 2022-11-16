@@ -18,7 +18,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
   protected createDevBuilder(): DevBuilder<Manifest> {
     return new DevBuilderManifestV3(
       this.viteConfig,
-      this.pluginExtras,
+      this.pluginOptions,
       this.viteDevServer
     );
   }
@@ -88,7 +88,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         const inputFile = getInputFileName(resource, this.viteConfig.root);
         const outputFile = getOutputFileName(resource);
 
-        if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+        if (this.webAccessibleScriptsFilter(inputFile)) {
           result.inputScripts.push([outputFile, inputFile]);
         }
       });
@@ -119,7 +119,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         script.js![index] = parsedContentScript.scriptFileName;
 
         if (parsedContentScript.webAccessibleFiles.size) {
-          webAccessibleResources.add({
+          const resource = {
             resources: Array.from(parsedContentScript.webAccessibleFiles),
             matches: script.matches!.map((matchPattern) => {
               const pathMatch = /[^:\/]\//.exec(matchPattern);
@@ -134,9 +134,14 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
               return matchPattern.replace(path, "/*");
             }),
-            // @ts-ignore - use_dynamic_url is a newly supported option
-            use_dynamic_url: true,
-          });
+          };
+
+          if (this.pluginOptions.useDynamicUrlContentScripts !== false) {
+            // @ts-ignore - use_dynamic_url is supported, but not typed
+            resource.use_dynamic_url = true;
+          }
+
+          webAccessibleResources.add(resource);
         }
       });
     });
@@ -166,7 +171,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       for (const fileName of resource.resources) {
         if (
           fileName.includes("*") ||
-          !this.pluginExtras.webAccessibleScriptsFilter(fileName)
+          !this.webAccessibleScriptsFilter(fileName)
         ) {
           continue;
         }

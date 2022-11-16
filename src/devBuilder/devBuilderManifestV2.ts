@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
-import { PluginExtras } from "..";
+import { createFilter } from "vite";
 import { getOutputFileName } from "../utils/file";
 import { getScriptLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";
@@ -30,7 +30,7 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
 
   protected async writeManifestWebAccessibleScriptFiles(
     manifest: chrome.runtime.ManifestV2,
-    webAccessibleScriptsFilter: PluginExtras["webAccessibleScriptsFilter"]
+    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
   ) {
     if (!manifest.web_accessible_resources) {
       return;

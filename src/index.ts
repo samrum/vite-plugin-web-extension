@@ -1,4 +1,3 @@
-import { createFilter } from "vite";
 import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
@@ -12,10 +11,6 @@ import {
   updateConfigForExtensionSupport,
 } from "./utils/vite";
 
-export interface PluginExtras {
-  webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
-}
-
 export default function webExtension(
   pluginOptions: ViteWebExtensionOptions
 ): Plugin {
@@ -28,13 +23,6 @@ export default function webExtension(
   let manifestParser:
     | ManifestParser<chrome.runtime.ManifestV2>
     | ManifestParser<chrome.runtime.ManifestV3>;
-
-  const webConfig = pluginOptions.webAccessibleScripts;
-  let webAccessibleScriptsFilter = createFilter(
-    webConfig?.include || /\.([cem]?js|ts)$/,
-    webConfig?.exclude || "",
-    webConfig?.options
-  );
 
   return {
     name: "webExtension",
@@ -59,8 +47,7 @@ export default function webExtension(
 
     async options(options) {
       manifestParser = ManifestParserFactory.getParser(
-        JSON.parse(JSON.stringify(pluginOptions.manifest)),
-        { webAccessibleScriptsFilter },
+        pluginOptions,
         viteConfig
       );
 

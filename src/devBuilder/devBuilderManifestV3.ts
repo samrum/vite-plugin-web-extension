@@ -1,6 +1,6 @@
 import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
-import { PluginExtras } from "..";
+import { createFilter } from "vite";
 import { getOutputFileName } from "../utils/file";
 import {
   getScriptLoaderFile,
@@ -52,7 +52,7 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
 
   protected async writeManifestWebAccessibleScriptFiles(
     manifest: chrome.runtime.ManifestV3,
-    webAccessibleScriptsFilter: PluginExtras["webAccessibleScriptsFilter"]
+    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
   ) {
     if (!manifest.web_accessible_resources) {
       return;

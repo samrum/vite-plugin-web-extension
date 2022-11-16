@@ -1,5 +1,3 @@
-import { getScriptHtmlLoaderFile } from "../utils/loader";
-import { setVirtualModule } from "../utils/virtualModule";
 import { ParseResult } from "./manifestParser";
 import {
   isSingleHtmlFilename,
@@ -18,7 +16,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected createDevBuilder(): DevBuilder<Manifest> {
     return new DevBuilderManifestV2(
       this.viteConfig,
-      this.pluginExtras,
+      this.pluginOptions,
       this.viteDevServer
     );
   }
@@ -39,47 +37,13 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected getParseInputMethods(): ((
     result: ManifestParseResult
   ) => ManifestParseResult)[] {
-    return [this.parseInputBackgroundScripts];
+    return [];
   }
 
   protected getParseOutputMethods(): ((
     result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
     return [this.parseWatchModeSupport.bind(this)];
-  }
-
-  private parseInputBackgroundScripts(
-    result: ManifestParseResult
-  ): ManifestParseResult {
-    if (!result.manifest.background?.scripts) {
-      return result;
-    }
-
-    const htmlLoaderFile = getScriptHtmlLoaderFile(
-      "background",
-      result.manifest.background.scripts.map((script) => {
-        if (/^[\.\/]/.test(script)) {
-          return script;
-        }
-
-        return `/${script}`;
-      })
-    );
-
-    const inputFile = getInputFileName(
-      htmlLoaderFile.fileName,
-      this.viteConfig.root
-    );
-    const outputFile = getOutputFileName(htmlLoaderFile.fileName);
-
-    result.inputScripts.push([outputFile, inputFile]);
-
-    setVirtualModule(inputFile, htmlLoaderFile.source);
-
-    delete result.manifest.background.scripts;
-    result.manifest.background.page = htmlLoaderFile.fileName;
-
-    return result;
   }
 
   protected parseInputWebAccessibleScripts(
@@ -91,7 +55,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       const inputFile = getInputFileName(resource, this.viteConfig.root);
       const outputFile = getOutputFileName(resource);
 
-      if (this.pluginExtras.webAccessibleScriptsFilter(inputFile)) {
+      if (this.webAccessibleScriptsFilter(inputFile)) {
         result.inputScripts.push([outputFile, inputFile]);
       }
     });
@@ -144,7 +108,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
     for (const resource of result.manifest.web_accessible_resources) {
       if (
         resource.includes("*") ||
-        !this.pluginExtras.webAccessibleScriptsFilter(resource)
+        !this.webAccessibleScriptsFilter(resource)
       ) {
         continue;
       }
