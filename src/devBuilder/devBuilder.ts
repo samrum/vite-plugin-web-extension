@@ -11,6 +11,7 @@ import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import { ViteWebExtensionOptions } from "../../types";
+import { createWebAccessibleScriptsFilter } from "../utils/filter";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -27,11 +28,8 @@ export default abstract class DevBuilder<
   ) {
     this.outDir = this.viteConfig.build.outDir;
 
-    const webConfig = this.pluginOptions.webAccessibleScripts;
-    this.webAccessibleScriptsFilter = createFilter(
-      webConfig?.include || /\.([cem]?js|ts)$/,
-      webConfig?.exclude || "",
-      webConfig?.options
+    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
+      this.pluginOptions.webAccessibleScripts
     );
   }
 

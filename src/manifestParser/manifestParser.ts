@@ -12,6 +12,7 @@ import { getChunkInfoFromBundle } from "../utils/rollup";
 import type { ViteWebExtensionOptions } from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
+import { createWebAccessibleScriptsFilter } from "../utils/filter";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -34,11 +35,8 @@ export default abstract class ManifestParser<
       JSON.stringify(this.pluginOptions.manifest)
     );
 
-    const webConfig = this.pluginOptions.webAccessibleScripts;
-    this.webAccessibleScriptsFilter = createFilter(
-      webConfig?.include || /\.([cem]?js|ts)$/,
-      webConfig?.exclude || "",
-      webConfig?.options
+    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
+      this.pluginOptions.webAccessibleScripts
     );
   }
 

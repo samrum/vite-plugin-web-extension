@@ -15,6 +15,11 @@ interface ViteWebExtensionOptions {
   /**
    * Options for compiling web accessible scripts
    * <https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter>
+   *
+   * Default: {
+   *   include: /\.([cem]?js|ts)$/,
+   *   exclude: "",
+   * }
    */
   webAccessibleScripts?: {
     include?: FilterPattern | undefined;
