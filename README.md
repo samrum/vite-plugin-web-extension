@@ -156,6 +156,22 @@ The plugin will automatically default vite's `build.target` config option to the
 ## Usage Specific Examples
 
 <details>
+  <summary>Manifest V3 usage with Firefox</summary>
+  For Firefox experimental manifest V3 support, there are two configurations an extension needs to make:
+  
+  1. Background service workers are not supported, so you are required to use a background script.
+  2. The `use_dynamic_url` property is not supported for web accessible resources. In the plugin options, set the `useDynamicUrlContentScripts` option to false:
+
+      ```js
+        webExtension({
+          ...
+          useDynamicUrlContentScripts: false,
+        }),
+      ```
+
+</details>
+
+<details>
   <summary>Devtools</summary>
   To add content to the browser dev tools, add `devtools_page` to your manifest
 
