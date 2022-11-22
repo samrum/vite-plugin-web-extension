@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.1.1...v2.2.0) (2022-11-22)
+
+### Features
+
+- firefox experimental manifest V3 support ([#63](https://github.com/samrum/vite-plugin-web-extension/issues/63)) ([fd62c7d](https://github.com/samrum/vite-plugin-web-extension/commit/fd62c7d35c3475b9463b620161d7040e6836e30f))
+
 ### [2.1.1](https://github.com/samrum/vite-plugin-web-extension/compare/v2.1.0...v2.1.1) (2022-10-01)
 
 ### Bug Fixes
