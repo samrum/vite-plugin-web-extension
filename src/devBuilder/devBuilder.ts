@@ -1,11 +1,17 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
-import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
+import {
+  ResolvedConfig,
+  ViteDevServer,
+  normalizePath,
+  createFilter,
+} from "vite";
 import { getScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
-import { PluginExtras } from "..";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
+import { ViteWebExtensionOptions } from "../../types";
+import { createWebAccessibleScriptsFilter } from "../utils/filter";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -13,13 +19,18 @@ export default abstract class DevBuilder<
   protected hmrServerOrigin = "";
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
+  protected webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
 
   constructor(
     private viteConfig: ResolvedConfig,
-    private pluginExtras: PluginExtras,
+    private pluginOptions: ViteWebExtensionOptions,
     private viteDevServer?: ViteDevServer
   ) {
     this.outDir = this.viteConfig.build.outDir;
+
+    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
+      this.pluginOptions.webAccessibleScripts
+    );
   }
 
   async writeBuild({
@@ -40,7 +51,7 @@ export default abstract class DevBuilder<
     await this.writeManifestContentScriptFiles(manifest);
     await this.writeManifestWebAccessibleScriptFiles(
       manifest,
-      this.pluginExtras.webAccessibleScriptsFilter
+      this.webAccessibleScriptsFilter
     );
 
     await this.writeBuildFiles(manifest, manifestHtmlFiles);
@@ -162,7 +173,7 @@ export default abstract class DevBuilder<
 
   protected abstract writeManifestWebAccessibleScriptFiles(
     manifest: Manifest,
-    webAccessibleScriptsFilter: PluginExtras["webAccessibleScriptsFilter"]
+    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
   ): Promise<void>;
 
   private getHmrServerOrigin(devServerPort: number): string {

@@ -1,3 +1,4 @@
+import { createFilter } from "vite";
 import { readFileSync } from "fs-extra";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
@@ -8,7 +9,10 @@ import {
   getWebAccessibleScriptLoaderForOutputChunk,
 } from "../utils/loader";
 import { getChunkInfoFromBundle } from "../utils/rollup";
-import { PluginExtras } from "..";
+import type { ViteWebExtensionOptions } from "../../types";
+import { getScriptHtmlLoaderFile } from "../utils/loader";
+import { setVirtualModule } from "../utils/virtualModule";
+import { createWebAccessibleScriptsFilter } from "../utils/filter";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -19,13 +23,22 @@ export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
 export default abstract class ManifestParser<
   Manifest extends chrome.runtime.Manifest
 > {
+  protected inputManifest: Manifest;
+  protected webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
   protected viteDevServer: ViteDevServer | undefined;
 
   constructor(
-    protected inputManifest: Manifest,
-    protected pluginExtras: PluginExtras,
+    protected pluginOptions: ViteWebExtensionOptions,
     protected viteConfig: ResolvedConfig
-  ) {}
+  ) {
+    this.inputManifest = JSON.parse(
+      JSON.stringify(this.pluginOptions.manifest)
+    );
+
+    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
+      this.pluginOptions.webAccessibleScripts
+    );
+  }
 
   async parseInput(): Promise<ParseResult<Manifest>> {
     const parseResult: ParseResult<Manifest> = {
@@ -39,6 +52,7 @@ export default abstract class ManifestParser<
       this.parseInputHtmlFiles,
       this.parseInputContentScripts,
       this.parseInputWebAccessibleScripts,
+      this.parseInputBackgroundScripts,
       ...this.getParseInputMethods()
     );
   }
@@ -280,5 +294,43 @@ export default abstract class ManifestParser<
     );
 
     return metadata;
+  }
+
+  private parseInputBackgroundScripts(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    // @ts-expect-error - Force support of event pages in manifest V3
+    if (!result.manifest.background?.scripts) {
+      return result;
+    }
+
+    const htmlLoaderFile = getScriptHtmlLoaderFile(
+      "background",
+      // @ts-expect-error - Force support of event pages in manifest V3
+      result.manifest.background.scripts.map((script) => {
+        if (/^[\.\/]/.test(script)) {
+          return script;
+        }
+
+        return `/${script}`;
+      })
+    );
+
+    const inputFile = getInputFileName(
+      htmlLoaderFile.fileName,
+      this.viteConfig.root
+    );
+    const outputFile = getOutputFileName(htmlLoaderFile.fileName);
+
+    result.inputScripts.push([outputFile, inputFile]);
+
+    setVirtualModule(inputFile, htmlLoaderFile.source);
+
+    // @ts-expect-error - Force support of event pages in manifest V3
+    delete result.manifest.background.scripts;
+    // @ts-expect-error - Force support of event pages in manifest V3
+    result.manifest.background.page = htmlLoaderFile.fileName;
+
+    return result;
   }
 }
