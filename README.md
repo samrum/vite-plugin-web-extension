@@ -3,19 +3,18 @@
 [![npm version](https://badge.fury.io/js/@samrum%2Fvite-plugin-web-extension.svg)](https://badge.fury.io/js/@samrum%2Fvite-plugin-web-extension)
 [![ci](https://github.com/samrum/vite-plugin-web-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/samrum/vite-plugin-web-extension/actions/workflows/ci.yml)
 
-A vite plugin for generating cross browser platform, ES module based web extensions.
-
-## Features
+> Generate cross browser platform, ES module based web extensions.
 
 - Manifest V2 & V3 Support
 - Completely ES module based extensions
-  - Including content scripts!
+  - Including in content scripts!
 - Vite based html and static asset handling
-  - Including content scripts!
-- HMR support for all manifest properties ([excluding Manifest V3](https://bugs.chromium.org/p/chromium/issues/detail?id=1290188))
-  - Including content scripts! (excluding Firefox)
-- HMR support for CSS styles in content scripts
-  - Including shadow DOM rendered content!
+  - Including in content scripts!
+- In Manifest V2:
+  - HMR support for all manifest properties
+    - Including content scripts when using a Chromium browser!
+  - HMR support for CSS styles in content scripts
+    - Including shadow DOM rendered content!
 
 ## Quick Start
 
@@ -25,142 +24,82 @@ Create a new Vite web extension project
 npm init @samrum/vite-plugin-web-extension@latest
 ```
 
-Supports choice of Manifest, TypeScript, and framework (Vanilla, Vue, React, Preact, Svelte)
+Supports choice of Manifest version, TypeScript support, and framework (Vanilla, Vue, React, Preact, Svelte).
 
-## Manual Install
+Check the README of the generated extension for usage information.
 
-Requires Vite 2.9+
+## Usage
+
+Requires Vite 3+
 
 ```sh
 npm install @samrum/vite-plugin-web-extension
 ```
 
-## Usage
-
-### Vite Config
-
-- All manifest file names should be relative to the root of the project.
-
-#### Examples
+### Examples
 
 <details>
   <summary>Manifest V2</summary>
 
-    import { defineConfig } from "vite";
-    import webExtension from "@samrum/vite-plugin-web-extension";
+vite.config.js:
 
-    export default defineConfig({
-      plugins: [
-        webExtension({
-          manifest: {
-            name: pkg.name,
-            description: pkg.description,
-            version: pkg.version,
-            manifest_version: 2,
-            background: {
-              scripts: ["src/background/script.js"],
-            },
-          },
-        }),
-      ],
-    });
+```js
+import { defineConfig } from "vite";
+import webExtension from "@samrum/vite-plugin-web-extension";
+
+export default defineConfig({
+  plugins: [
+    webExtension({
+      manifest: {
+        name: pkg.name,
+        description: pkg.description,
+        version: pkg.version,
+        manifest_version: 2,
+        background: {
+          scripts: ["src/background/script.js"],
+        },
+      },
+    }),
+  ],
+});
+```
 
 </details>
 
 <details>
   <summary>Manifest V3</summary>
 
-    import { defineConfig } from "vite";
-    import webExtension from "@samrum/vite-plugin-web-extension";
+vite.config.js:
 
-    export default defineConfig({
-      plugins: [
-        webExtension({
-          manifest: {
-            name: pkg.name,
-            description: pkg.description,
-            version: pkg.version,
-            manifest_version: 3,
-            background: {
-              service_worker: "src/background/serviceWorker.js",
-            },
-          },
-        }),
-      ],
-    });
+```js
+import { defineConfig } from "vite";
+import webExtension from "@samrum/vite-plugin-web-extension";
+
+export default defineConfig({
+  plugins: [
+    webExtension({
+      manifest: {
+        name: pkg.name,
+        description: pkg.description,
+        version: pkg.version,
+        manifest_version: 3,
+        background: {
+          service_worker: "src/background/serviceWorker.js",
+        },
+      },
+    }),
+  ],
+});
+```
 
 </details>
 
-### Content Scripts
-
-- For HMR style support within shadow DOMs, use the `addStyleTarget` function to add the shadowRoot of your element as a style target:
-
-  ```js
-  if (import.meta.hot) {
-    const { addViteStyleTarget } = await import(
-      "@samrum/vite-plugin-web-extension/client"
-    );
-
-    await addViteStyleTarget(appContainer);
-  }
-  ```
-
-- For builds, use the `import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS` variable to reference an array of CSS asset paths associated with the current output chunk.
-
-#### Web Accessible Scripts
-
-This plugin will detect scripts under `web_accessible_resources` and apply the same transformations to them as your content scripts. This can be very useful for developers who need to inject scripts into a live page, usually to mutate or extend properties on the `window` object.
-
-By default, it will include scripts matching `/\.([cem]?js|ts)$/`, but you can provide custom filter options in the call to `webExtension(options?: ViteWebExtensionOptions)`:
-
-```ts
-type Pattern = string | RegExp | Array<string | RegExp>;
-
-interface ViteWebExtensionOptions {
-  manifest: chrome.runtime.Manifest;
-
-  webAccessibleScripts?: {
-    include?: Pattern;
-    exclude?: Pattern;
-    options?: {
-      resolve?: string | false | null;
-    };
-  };
-}
-```
-
-#### TypeScript
-
-In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` variables as well as plugin client functions:
-
-```ts
-/// <reference types="@samrum/vite-plugin-web-extension/client" />
-```
-
-### Browser Support
-
-The following requirements must be met by the browser:
-
-- Must support dynamic module imports made by web extension content scripts.
-- Must support `import.meta.url`
-
-A sample of supported browsers:
-
-|          | Manifest V2 | Manifest V3                                                                            |
-| -------- | ----------- | -------------------------------------------------------------------------------------- |
-| Chromium | 64          | 91                                                                                     |
-| Firefox  | 89          | N/A ([In development](https://blog.mozilla.org/addons/2021/05/27/manifest-v3-update/)) |
-
-The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
-
-## Usage Specific Examples
-
 <details>
-  <summary>Manifest V3 usage with Firefox</summary>
-  For Firefox experimental manifest V3 support, there are two configurations an extension needs to make:
+  <summary>Firefox Experimental Manifest V3 </summary>
+  There are two configurations an extension needs to make for experimental manifest V3 support:
   
   1. Background service workers are not supported, so you are required to use a background script.
-  2. The `use_dynamic_url` property is not supported for web accessible resources. In the plugin options, set the `useDynamicUrlContentScripts` option to false:
+  2. The `use_dynamic_url` property is not supported for web accessible resources. In the plugin options, set `useDynamicUrlContentScripts` to false:
 
       ```js
         webExtension({
@@ -214,9 +153,72 @@ Then load the script from your devtools html which placed in `src/entries/devtoo
 
 </details>
 
+### Options
+
+manifest
+
+- The [manifest](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) definition for your extension
+- All manifest property file names should be relative to the root of the project.
+
+useDynamicUrlContentScripts: boolean (optional)
+
+- Adds the `use_dynamic_url` property to web accessible resources generated by the plugin
+- Default: `true`
+
+webAccessibleScripts: [rollup filter](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) (optional)
+
+- A filter that will be applied to `web_accessible_resources` entries in the provided manifest. When the filter matches a resource, it will be parsed by the plugin and treated as a content script. This can be useful to generate content scripts that will be manually injected at runtime.
+- Default:
+  ```js
+  {
+    include: /\.([cem]?js|ts)$/,
+    exclude: "",
+  }
+  ```
+
+### Content Scripts
+
+- For HMR style support within shadow DOMs, use the `addStyleTarget` function to add the shadowRoot of your element as a style target:
+
+  ```js
+  if (import.meta.hot) {
+    const { addViteStyleTarget } = await import(
+      "@samrum/vite-plugin-web-extension/client"
+    );
+
+    await addViteStyleTarget(appContainer);
+  }
+  ```
+
+- For builds, use the `import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS` variable to reference an array of CSS asset paths associated with the current output chunk.
+
+### TypeScript
+
+In an [env.d.ts file](https://vitejs.dev/guide/env-and-mode.html#intellisense-for-typescript), add the following type reference to define the plugin specific `import.meta` variables as well as plugin client functions:
+
+```ts
+/// <reference types="@samrum/vite-plugin-web-extension/client" />
+```
+
+### Browser Support
+
+The following requirements must be met by the browser:
+
+- Must support dynamic module imports made by web extension content scripts.
+- Must support `import.meta.url`
+
+A sample of supported browsers:
+
+|          | Manifest V2 | Manifest V3                                                                            |
+| -------- | ----------- | -------------------------------------------------------------------------------------- |
+| Chromium | 64          | 91                                                                                     |
+| Firefox  | 89          | N/A ([In development](https://blog.mozilla.org/addons/2021/05/27/manifest-v3-update/)) |
+
+The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
+
 ## How it works
 
-The plugin will take the provided manifest, parse rollup input scripts from all supported manifest properties, then output an ES module based web extension.
+The plugin will take the provided manifest, generate rollup input scripts for supported manifest properties, then output an ES module based web extension.
 
 This includes:
 
