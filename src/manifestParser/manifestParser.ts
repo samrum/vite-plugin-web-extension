@@ -26,6 +26,7 @@ export default abstract class ManifestParser<
   protected inputManifest: Manifest;
   protected webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
   protected viteDevServer: ViteDevServer | undefined;
+  protected parsedMetaDataChunkIds = new Set<string>();
 
   constructor(
     protected pluginOptions: ViteWebExtensionOptions,
@@ -260,14 +261,24 @@ export default abstract class ManifestParser<
     metadata: {
       css: Set<string>;
       assets: Set<string>;
-    } = {
-      css: new Set<string>(),
-      assets: new Set<string>(),
-    }
+    } | null = null
   ): {
     css: Set<string>;
     assets: Set<string>;
   } {
+    if (metadata === null) {
+      this.parsedMetaDataChunkIds.clear();
+
+      metadata = {
+        css: new Set<string>(),
+        assets: new Set<string>(),
+      };
+    }
+
+    if (this.parsedMetaDataChunkIds.has(chunkId)) {
+      return metadata;
+    }
+
     const chunkInfo = getChunkInfoFromBundle(bundle, chunkId);
     if (!chunkInfo) {
       return metadata;
@@ -282,6 +293,8 @@ export default abstract class ManifestParser<
       metadata.assets.add,
       metadata.assets
     );
+
+    this.parsedMetaDataChunkIds.add(chunkId);
 
     chunkInfo.imports.forEach(
       (chunkId) =>
