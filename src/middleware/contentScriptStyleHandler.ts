@@ -18,7 +18,8 @@ const contentScriptStyleHandler: Connect.NextHandleFunction = (
         !/const sheetsMap/.test(chunk) ||
         !/document\.head\.appendChild\(style\)/.test(chunk) ||
         !/document\.head\.removeChild\(style\)/.test(chunk) ||
-        !/style\.innerHTML = content/.test(chunk)
+        (!/style\.textContent = content/.test(chunk) &&
+          !/style\.innerHTML = content/.test(chunk))
       ) {
         console.error(
           "Content script HMR style support disabled -- failed to rewrite vite client"
@@ -44,14 +45,19 @@ const contentScriptStyleHandler: Connect.NextHandleFunction = (
         "styleTargetsStyleMap.get(style) ? styleTargetsStyleMap.get(style).forEach(style => style.parentNode.removeChild(style)) : document.head.removeChild(style)"
       );
 
-      const lastStyleInnerHtml = chunk.lastIndexOf("style.innerHTML = content");
+      const styleProperty = /style\.textContent = content/.test(chunk)
+        ? "style.textContent"
+        : "style.innerHTML";
+      const lastStyleInnerHtml = chunk.lastIndexOf(
+        `${styleProperty} = content`
+      );
       chunk =
         chunk.slice(0, lastStyleInnerHtml) +
         chunk
           .slice(lastStyleInnerHtml)
           .replace(
-            "style.innerHTML = content",
-            "style.innerHTML = content; styleTargetsStyleMap.get(style)?.forEach(style => style.innerHTML = content)"
+            `${styleProperty} = content`,
+            `${styleProperty} = content; styleTargetsStyleMap.get(style)?.forEach(style => ${styleProperty} = content)`
           );
 
       chunk += `
