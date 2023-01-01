@@ -71,7 +71,11 @@ export default function webExtension(
       emitQueue = [];
     },
 
-    renderDynamicImport() {
+    renderDynamicImport({ moduleId }) {
+      if (moduleId.includes("node_modules")) {
+        return null;
+      }
+
       return {
         left: "import((chrome != null ? chrome : browser).runtime.getURL(",
         right: "))",
