@@ -10,7 +10,7 @@ log(\\"options\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.html",
     "fileName": "assets/test/manifest/resources/optionsHtml/options.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,21 +20,21 @@ log(\\"options\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.html": {
+      "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.html": {
         "code": null,
         "originalLength": 226,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/optionsHtml/options.js": {
+      "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.js": {
         "code": "log(\\"options\\");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 15,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

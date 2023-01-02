@@ -10,7 +10,7 @@ log(\\"chromeUrlOverridesHtml\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html",
     "fileName": "assets/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,21 +20,21 @@ log(\\"chromeUrlOverridesHtml\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html": {
+      "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html": {
         "code": null,
         "originalLength": 241,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js": {
+      "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js": {
         "code": "log(\\"chromeUrlOverridesHtml\\");",
         "originalLength": 67,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 30,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

@@ -7,7 +7,7 @@ exports[`backgroundServiceWorker - Manifest V3 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/backgroundServiceWorker/serviceWorker.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/backgroundServiceWorker/serviceWorker.js",
     "fileName": "assets/test/manifest/resources/backgroundServiceWorker/serviceWorker.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -17,7 +17,7 @@ exports[`backgroundServiceWorker - Manifest V3 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/backgroundServiceWorker/serviceWorker.js": {
+      "vite-plugin-web-extension/test/manifest/resources/backgroundServiceWorker/serviceWorker.js": {
         "code": "console.log(\\"serviceWorker\\");",
         "originalLength": 30,
         "removedExports": [],

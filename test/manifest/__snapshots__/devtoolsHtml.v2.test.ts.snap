@@ -10,7 +10,7 @@ log(\\"devtools\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.html",
     "fileName": "assets/test/manifest/resources/devtoolsHtml/devtools.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,21 +20,21 @@ log(\\"devtools\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.html": {
+      "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.html": {
         "code": null,
         "originalLength": 227,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/devtoolsHtml/devtools.js": {
+      "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.js": {
         "code": "log(\\"devtools\\");",
         "originalLength": 53,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 16,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

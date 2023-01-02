@@ -10,7 +10,7 @@ log(\\"webAccessibleResource\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.html",
     "fileName": "assets/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,7 +20,7 @@ log(\\"webAccessibleResource\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",
@@ -31,14 +31,14 @@ log(\\"webAccessibleResource\\");
         ],
         "renderedLength": 49,
       },
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.html": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.html": {
         "code": null,
         "originalLength": 240,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.js": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleResourceHtml/webAccessibleResource.js": {
         "code": "log(\\"webAccessibleResource\\");",
         "originalLength": 66,
         "removedExports": [],

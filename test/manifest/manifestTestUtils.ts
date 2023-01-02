@@ -36,6 +36,10 @@ async function bundleGenerate(
   return bundle as RollupOutput;
 }
 
+function trimFilePathToRepoDirectory(filePath: string): string {
+  return filePath.substring(filePath.lastIndexOf("vite-plugin-web-extension"));
+}
+
 export async function runTest<ManifestType extends chrome.runtime.Manifest>(
   inputManifestGenerator: InputManifestGenerator<ManifestType>,
   manifestVersion: ManifestType["manifest_version"]
@@ -58,15 +62,16 @@ export async function runTest<ManifestType extends chrome.runtime.Manifest>(
       if (file.type === "chunk") {
         const modules = {};
         for (const [key, value] of Object.entries(file.modules)) {
-          modules[key.replace(repoDir, "/mocked-repo-dir")] = value;
+          modules[trimFilePathToRepoDirectory(key)] = value;
         }
 
         return {
           code: file.code,
           dynamicImports: file.dynamicImports,
           exports: file.exports,
-          facadeModuleId:
-            file.facadeModuleId?.replace(repoDir, "/mocked-repo-dir") ?? null,
+          facadeModuleId: file.facadeModuleId
+            ? trimFilePathToRepoDirectory(file.facadeModuleId)
+            : null,
           fileName: normalizeFileName(file.fileName),
           implicitlyLoadedBefore: file.implicitlyLoadedBefore,
           importedBindings: file.importedBindings,

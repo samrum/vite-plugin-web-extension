@@ -8,7 +8,7 @@ log(\\"content\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithChunkedImport/content1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content1.js",
     "fileName": "assets/test/manifest/resources/contentWithChunkedImport/content1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -24,7 +24,7 @@ log(\\"content\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithChunkedImport/content1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content1.js": {
         "code": "log(\\"content\\");",
         "originalLength": 52,
         "removedExports": [],
@@ -46,7 +46,7 @@ log(\\"content2\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithChunkedImport/content2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content2.js",
     "fileName": "assets/test/manifest/resources/contentWithChunkedImport/content2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -62,7 +62,7 @@ log(\\"content2\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithChunkedImport/content2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content2.js": {
         "code": "log(\\"content2\\");",
         "originalLength": 53,
         "removedExports": [],
@@ -100,7 +100,7 @@ export {
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

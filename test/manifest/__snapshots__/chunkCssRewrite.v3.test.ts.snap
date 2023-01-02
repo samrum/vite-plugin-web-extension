@@ -8,7 +8,7 @@ console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.js",
     "fileName": "assets/test/manifest/resources/chunkCssRewrite/content1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -20,7 +20,7 @@ console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.css": {
+      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.css": {
         "code": "const content1 = '';",
         "originalLength": 31,
         "removedExports": [],
@@ -29,7 +29,7 @@ console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
         ],
         "renderedLength": 20,
       },
-      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.js": {
         "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
         "originalLength": 113,
         "removedExports": [],
@@ -54,7 +54,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.js",
     "fileName": "assets/test/manifest/resources/chunkCssRewrite/content2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -66,7 +66,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.css": {
+      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.css": {
         "code": "const content2 = '';",
         "originalLength": 31,
         "removedExports": [],
@@ -75,7 +75,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
         ],
         "renderedLength": 20,
       },
-      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/content2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.js": {
         "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
         "originalLength": 113,
         "removedExports": [],
@@ -99,7 +99,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
     "fileName": "assets/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -109,7 +109,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/chunkCssRewrite/contentNoCss.js": {
+      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/contentNoCss.js": {
         "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
         "originalLength": 57,
         "removedExports": [],

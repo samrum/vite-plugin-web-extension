@@ -7,7 +7,7 @@ exports[`webAccessibleScriptWithNoImport - Manifest V3 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
     "fileName": "assets/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -17,7 +17,7 @@ exports[`webAccessibleScriptWithNoImport - Manifest V3 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js": {
         "code": "console.log(\\"webAccessibleScript\\");",
         "originalLength": 36,
         "removedExports": [],

@@ -12,7 +12,7 @@ exports[`contentWithDynamicImport - Manifest V2 1`] = `
       "assets/log.js",
     ],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithDynamicImport/content1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content1.js",
     "fileName": "assets/test/manifest/resources/contentWithDynamicImport/content1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -22,7 +22,7 @@ exports[`contentWithDynamicImport - Manifest V2 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithDynamicImport/content1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content1.js": {
         "code": "(async () => {
   const log = await import((chrome != null ? chrome : browser).runtime.getURL('../../../../log.js'));
 
@@ -52,7 +52,7 @@ exports[`contentWithDynamicImport - Manifest V2 1`] = `
       "assets/log.js",
     ],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithDynamicImport/content2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content2.js",
     "fileName": "assets/test/manifest/resources/contentWithDynamicImport/content2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -62,7 +62,7 @@ exports[`contentWithDynamicImport - Manifest V2 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithDynamicImport/content2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content2.js": {
         "code": "(async () => {
   const log = await import((chrome != null ? chrome : browser).runtime.getURL('../../../../log.js'));
 
@@ -94,7 +94,7 @@ export {
     "exports": [
       "default",
     ],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/shared/log.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/shared/log.js",
     "fileName": "assets/log.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -104,7 +104,7 @@ export {
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

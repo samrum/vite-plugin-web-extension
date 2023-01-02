@@ -7,7 +7,7 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content1/content.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content1/content.js",
     "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content1/content.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -17,7 +17,7 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content1/content.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content1/content.js": {
         "code": "console.log(\\"content1\\");",
         "originalLength": 25,
         "removedExports": [],
@@ -38,7 +38,7 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content2/content.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content2/content.js",
     "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content2/content.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -48,7 +48,7 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithSameScriptName/content2/content.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content2/content.js": {
         "code": "console.log(\\"content2\\");",
         "originalLength": 25,
         "removedExports": [],
