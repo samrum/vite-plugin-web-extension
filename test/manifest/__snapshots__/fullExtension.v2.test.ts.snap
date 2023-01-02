@@ -277,7 +277,7 @@ export {
     "map": null,
     "modules": {
       "/mocked-repo-dir/test/manifest/resources/fullExtension/src/assets/logo.svg": {
-        "code": "const logo = \\"__VITE_ASSET__fe34c295__\\";",
+        "code": "const logo = \\"__VITE_ASSET__c2b3a5f0__\\";",
         "originalLength": 41,
         "removedExports": [],
         "renderedExports": [
@@ -298,7 +298,7 @@ export {
   },
   {
     "fileName": "assets/logo.svg",
-    "name": "test/manifest/resources/fullExtension/src/assets/logo.svg",
+    "name": "logo.svg",
     "source": {
       "data": [
         60,
@@ -3326,7 +3326,7 @@ export {
   },
   {
     "fileName": "assets/index.css",
-    "name": "test/manifest/resources/fullExtension/src/entries/options/index.css",
+    "name": "index.css",
     "source": "#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -3343,7 +3343,7 @@ h1 {
   },
   {
     "fileName": "assets/main.css",
-    "name": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.css",
+    "name": "main.css",
     "source": ".logo {
   z-index: 99999;
   position: fixed;

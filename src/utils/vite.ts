@@ -20,6 +20,8 @@ export function updateConfigForExtensionSupport(
     }
   }
 
+  config.build.modulePreload ??= false;
+
   config.build.rollupOptions ??= {};
   config.build.rollupOptions.input ??= {};
 

@@ -127,7 +127,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
   },
   {
     "fileName": "assets/content1.css",
-    "name": "test/manifest/resources/chunkCssRewrite/content1.css",
+    "name": "content1.css",
     "source": "#content1 {
   display: flex;
 }
@@ -145,7 +145,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
   },
   {
     "fileName": "assets/content2.css",
-    "name": "test/manifest/resources/chunkCssRewrite/content2.css",
+    "name": "content2.css",
     "source": "#content2 {
   display: flex;
 }

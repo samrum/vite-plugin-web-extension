@@ -18,7 +18,6 @@ async function bundleGenerate(
     build: {
       write: false,
       minify: false,
-      polyfillModulePreload: false,
       rollupOptions: {
         output: {
           entryFileNames: `assets/[name].js`,
