@@ -10,11 +10,12 @@
   - Including in content scripts!
 - Vite based html and static asset handling
   - Including in content scripts!
-- In Manifest V2:
-  - HMR support for all manifest properties
+- HMR support
+  - All Manifest entry points
     - Including content scripts when using a Chromium browser!
-  - HMR support for CSS styles in content scripts
+  - CSS styles in content scripts
     - Including shadow DOM rendered content!
+  - Including Manifest V3 support since Chromium 110!
 
 ## Quick Start
 
@@ -215,6 +216,8 @@ A sample of supported browsers:
 | Firefox  | 89          | N/A ([In development](https://blog.mozilla.org/addons/2021/05/27/manifest-v3-update/)) |
 
 The plugin will automatically default vite's `build.target` config option to these minimum browser versions if not already defined by the user.
+
+For dev mode support in Manifest V3, Chromium version must be at least 110.
 
 ## How it works
 
