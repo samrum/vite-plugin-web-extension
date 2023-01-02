@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/samrum/vite-plugin-web-extension/compare/v2.2.0...v2.2.1) (2023-01-02)
+
+### Bug Fixes
+
+- getMetadataForChunk infinitely loops when parsing build output ([#67](https://github.com/samrum/vite-plugin-web-extension/issues/67)) ([6092362](https://github.com/samrum/vite-plugin-web-extension/commit/6092362234eb8266ec9061b98180e40ee8715b2a))
+- hmr not working since vite 3.2.3 ([#69](https://github.com/samrum/vite-plugin-web-extension/issues/69)) ([b49f05f](https://github.com/samrum/vite-plugin-web-extension/commit/b49f05fe383a99959bbbc70483c728514d1a1316))
+- node_modules dependencies shouldn't have dynamic imports modified ([#68](https://github.com/samrum/vite-plugin-web-extension/issues/68)) ([232b90f](https://github.com/samrum/vite-plugin-web-extension/commit/232b90fc4780bc5db619b6f3ae8d88cbc5d5a84a))
+
 ## [2.2.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.1.1...v2.2.0) (2022-11-22)
 
 ### Features
