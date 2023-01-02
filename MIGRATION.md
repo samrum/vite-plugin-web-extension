@@ -1,12 +1,21 @@
 # Migration
 
+- [Version 2.x.x to 3.0.0](#version-2xx-to-300)
 - [Version 0.x.x to 1.0.0](#version-0xx-to-100)
+
+## Version 2.x.x to 3.0.0
+
+- Upgrade Vite to 4.0.3
+
+  - Upgrade any Vite framework plugins
+
+- The build.modulePreload Vite config option is now defaulted to false by the plugin. Prevent using this default by defining the option in your project's Vite config.
 
 ## Version 0.x.x to 1.0.0
 
 - Upgrade Vite to 2.9.x
 
-  - Upgrade any vite framework plugins as well
+  - Upgrade any Vite framework plugins
 
 - Replace usages of `import.meta.CURRENT_CONTENT_SCRIPT_CSS_URL` with `import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS`
 
