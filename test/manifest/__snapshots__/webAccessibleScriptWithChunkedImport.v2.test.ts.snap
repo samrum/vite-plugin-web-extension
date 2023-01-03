@@ -8,7 +8,7 @@ log(\\"webAccessibleScript1\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
     "fileName": "assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -24,7 +24,7 @@ log(\\"webAccessibleScript1\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript1.js": {
         "code": "log(\\"webAccessibleScript1\\");",
         "originalLength": 63,
         "removedExports": [],
@@ -46,7 +46,7 @@ log(\\"webAccessibleScript2\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
     "fileName": "assets/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -62,7 +62,7 @@ log(\\"webAccessibleScript2\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithChunkedImport/webAccessibleScript2.js": {
         "code": "log(\\"webAccessibleScript2\\");",
         "originalLength": 63,
         "removedExports": [],
@@ -100,7 +100,7 @@ export {
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

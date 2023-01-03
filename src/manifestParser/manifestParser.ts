@@ -1,5 +1,5 @@
 import { createFilter } from "vite";
-import { readFileSync } from "fs-extra";
+import { readFileSync } from "fs";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";

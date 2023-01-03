@@ -10,7 +10,7 @@ log(\\"background\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/backgroundHtml/background.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/backgroundHtml/background.html",
     "fileName": "assets/test/manifest/resources/backgroundHtml/background.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,21 +20,21 @@ log(\\"background\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/backgroundHtml/background.html": {
+      "vite-plugin-web-extension/test/manifest/resources/backgroundHtml/background.html": {
         "code": null,
         "originalLength": 229,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/backgroundHtml/background.js": {
+      "vite-plugin-web-extension/test/manifest/resources/backgroundHtml/background.js": {
         "code": "log(\\"background\\");",
         "originalLength": 55,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 18,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

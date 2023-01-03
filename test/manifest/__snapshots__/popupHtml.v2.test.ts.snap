@@ -10,7 +10,7 @@ log(\\"popup\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.html",
     "fileName": "assets/test/manifest/resources/popupHtml/popup.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,21 +20,21 @@ log(\\"popup\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.html": {
+      "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.html": {
         "code": null,
         "originalLength": 224,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/popupHtml/popup.js": {
+      "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.js": {
         "code": "log(\\"popup\\");",
         "originalLength": 50,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 13,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",

@@ -10,7 +10,7 @@ log(\\"webAccessibleScript\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
     "fileName": "assets/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,7 +20,7 @@ log(\\"webAccessibleScript\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",
@@ -31,7 +31,7 @@ log(\\"webAccessibleScript\\");
         ],
         "renderedLength": 49,
       },
-      "/mocked-repo-dir/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js": {
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js": {
         "code": "log(\\"webAccessibleScript\\");",
         "originalLength": 64,
         "removedExports": [],

@@ -7,7 +7,7 @@ exports[`contentWithNoImports - Manifest V3 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithNoImports/content.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithNoImports/content.js",
     "fileName": "assets/test/manifest/resources/contentWithNoImports/content.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -17,7 +17,7 @@ exports[`contentWithNoImports - Manifest V3 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithNoImports/content.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithNoImports/content.js": {
         "code": "console.log(\\"content\\");",
         "originalLength": 24,
         "removedExports": [],

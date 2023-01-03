@@ -14,7 +14,7 @@ document.querySelector(\\"#app\\").innerHTML = \`
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/options/index.html",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html",
     "fileName": "assets/test/manifest/resources/fullExtension/src/entries/options/index.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -30,14 +30,14 @@ document.querySelector(\\"#app\\").innerHTML = \`
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/options/index.html": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html": {
         "code": null,
         "originalLength": 212,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 0,
       },
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/options/main.js": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/main.js": {
         "code": "const imageUrl = new URL(logo, import.meta.url).href;
 
 document.querySelector(\\"#app\\").innerHTML = \`
@@ -50,7 +50,7 @@ document.querySelector(\\"#app\\").innerHTML = \`
         "renderedExports": [],
         "renderedLength": 249,
       },
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/options/style.css": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/style.css": {
         "code": "const style = '';",
         "originalLength": 202,
         "removedExports": [],
@@ -89,7 +89,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
     "fileName": "assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
@@ -105,7 +105,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js": {
         "code": "renderContent(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS, (appRoot) => {
   const logoImageUrl = new URL(logo, import.meta.url).href;
 
@@ -122,7 +122,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
         "renderedExports": [],
         "renderedLength": 306,
       },
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/contentScript/primary/style.css": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/style.css": {
         "code": "const style = '';",
         "originalLength": 296,
         "removedExports": [],
@@ -131,7 +131,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
         ],
         "renderedLength": 17,
       },
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/contentScript/renderContent.js": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/renderContent.js": {
         "code": "async function renderContent(
   cssPaths,
   render = (_appRoot) => {}
@@ -161,7 +161,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/fullExtension/src/lib.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/lib.js",
     "fileName": "assets/test/manifest/resources/fullExtension/src/lib.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -171,7 +171,7 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/lib.js": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/lib.js": {
         "code": "console.log(\\"lib.js\\");",
         "originalLength": 23,
         "removedExports": [],
@@ -206,7 +206,7 @@ async function getCurrentTab() {
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/background/main.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/background/main.js",
     "fileName": "assets/test/manifest/resources/fullExtension/src/entries/background/main.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -216,7 +216,7 @@ async function getCurrentTab() {
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/entries/background/main.js": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/background/main.js": {
         "code": "browser.runtime.onInstalled.addListener(() => {
   console.log(\\"Extension installed\\");
 });
@@ -269,8 +269,8 @@ export {
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/assets/logo.svg": {
-        "code": "const logo = \\"__VITE_ASSET__fe34c295__\\";",
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/assets/logo.svg": {
+        "code": "const logo = \\"__VITE_ASSET__c2b3a5f0__\\";",
         "originalLength": 41,
         "removedExports": [],
         "renderedExports": [
@@ -291,7 +291,7 @@ export {
   },
   {
     "fileName": "assets/logo.svg",
-    "name": "test/manifest/resources/fullExtension/src/assets/logo.svg",
+    "name": "logo.svg",
     "source": {
       "data": [
         60,
@@ -3319,7 +3319,7 @@ export {
   },
   {
     "fileName": "assets/index.css",
-    "name": "test/manifest/resources/fullExtension/src/entries/options/index.css",
+    "name": "index.css",
     "source": "#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -3336,7 +3336,7 @@ h1 {
   },
   {
     "fileName": "assets/main.css",
-    "name": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.css",
+    "name": "main.css",
     "source": ".logo {
   z-index: 99999;
   position: fixed;

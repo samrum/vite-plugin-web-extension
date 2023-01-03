@@ -7,7 +7,7 @@ exports[`contentCss - Manifest V2 1`] = `
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentCss/content.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentCss/content.js",
     "fileName": "assets/test/manifest/resources/contentCss/content.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -17,7 +17,7 @@ exports[`contentCss - Manifest V2 1`] = `
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentCss/content.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentCss/content.js": {
         "code": "console.log(\\"content\\");",
         "originalLength": 24,
         "removedExports": [],

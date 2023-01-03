@@ -10,7 +10,7 @@ log(\\"content\\");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/contentWithUnchunkedImport/content.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithUnchunkedImport/content.js",
     "fileName": "assets/test/manifest/resources/contentWithUnchunkedImport/content.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {},
@@ -20,14 +20,14 @@ log(\\"content\\");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "/mocked-repo-dir/test/manifest/resources/contentWithUnchunkedImport/content.js": {
+      "vite-plugin-web-extension/test/manifest/resources/contentWithUnchunkedImport/content.js": {
         "code": "log(\\"content\\");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
         "renderedLength": 15,
       },
-      "/mocked-repo-dir/test/manifest/resources/shared/log.js": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
   console.log(message);
 }",
