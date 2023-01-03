@@ -222,13 +222,11 @@ export default abstract class ManifestParser<
       chunkInfo
     );
 
-    if (scriptLoaderFile.source) {
-      result.emitFiles.push({
-        type: "asset",
-        fileName: scriptLoaderFile.fileName,
-        source: scriptLoaderFile.source,
-      });
-    }
+    result.emitFiles.push({
+      type: "asset",
+      fileName: scriptLoaderFile.fileName,
+      source: scriptLoaderFile.source ?? chunkInfo.code,
+    });
 
     const metadata = this.getMetadataforChunk(
       chunkInfo.fileName,
