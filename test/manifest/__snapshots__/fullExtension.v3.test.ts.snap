@@ -157,6 +157,37 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
     },
   },
   {
+    "code": "console.log(\\"lib.js\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "/mocked-repo-dir/test/manifest/resources/fullExtension/src/lib.js",
+    "fileName": "assets/test/manifest/resources/fullExtension/src/lib.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "/mocked-repo-dir/test/manifest/resources/fullExtension/src/lib.js": {
+        "code": "console.log(\\"lib.js\\");",
+        "originalLength": 23,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 22,
+      },
+    },
+    "name": "test/manifest/resources/fullExtension/src/lib",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
     "code": "browser.runtime.onInstalled.addListener(() => {
   console.log(\\"Extension installed\\");
 });
@@ -3287,13 +3318,6 @@ export {
     "type": "asset",
   },
   {
-    "fileName": "assets/test/manifest/resources/fullExtension/src/lib.js",
-    "name": undefined,
-    "source": "console.log(\\"lib.js\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "assets/index.css",
     "name": "test/manifest/resources/fullExtension/src/entries/options/index.css",
     "source": "#app {
@@ -3356,6 +3380,13 @@ img {
     "type": "asset",
   },
   {
+    "fileName": "test/manifest/resources/fullExtension/src/lib.js",
+    "name": undefined,
+    "source": "console.log(\\"lib.js\\");
+",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
     "name": undefined,
     "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js\\"))})();",
@@ -3413,7 +3444,8 @@ img {
         \\"<all_urls>\\"
       ],
       \\"resources\\": [
-        \\"test/manifest/resources/fullExtension/src/lib.js\\"
+        \\"test/manifest/resources/fullExtension/src/lib.js\\",
+        \\"assets/test/manifest/resources/fullExtension/src/lib.js\\"
       ]
     },
     {
