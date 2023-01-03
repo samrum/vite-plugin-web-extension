@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.2.1...v3.0.0) (2023-01-03)
+
+### ⚠ BREAKING CHANGES
+
+- dynamic imports in content scripts are broken (#71)
+
+### Features
+
+- don't create loader for web accessible scripts with no imports ([#72](https://github.com/samrum/vite-plugin-web-extension/issues/72)) ([8acfaec](https://github.com/samrum/vite-plugin-web-extension/commit/8acfaecdf653a491938d361dfe07d3da5ac6bb94))
+- Vite 4 support ([#70](https://github.com/samrum/vite-plugin-web-extension/issues/70)) ([49330cd](https://github.com/samrum/vite-plugin-web-extension/commit/49330cd89e3f96bb00bbd5a902cc6ff04eeee260))
+
+### Bug Fixes
+
+- dynamic imports in content scripts are broken ([#71](https://github.com/samrum/vite-plugin-web-extension/issues/71)) ([fe888e4](https://github.com/samrum/vite-plugin-web-extension/commit/fe888e4c72178ef09121ce864d2fc5124188f62d))
+- web accessible scripts with no loader have incorrect filename ([#73](https://github.com/samrum/vite-plugin-web-extension/issues/73)) ([5d04de4](https://github.com/samrum/vite-plugin-web-extension/commit/5d04de45d8603a1a9efc020a780f6373a17ea50e))
+
 ### [2.2.1](https://github.com/samrum/vite-plugin-web-extension/compare/v2.2.0...v2.2.1) (2023-01-02)
 
 ### Bug Fixes
