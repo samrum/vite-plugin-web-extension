@@ -61,5 +61,12 @@ export function getWebAccessibleScriptLoaderForOutputChunk(
   contentScriptFileName: string,
   chunk: OutputChunk
 ): { fileName: string; source?: string } {
+  if (!chunk.imports.length && !chunk.dynamicImports.length) {
+    return {
+      fileName: contentScriptFileName,
+      source: chunk.code,
+    };
+  }
+
   return getScriptLoaderFile(contentScriptFileName, chunk.fileName);
 }

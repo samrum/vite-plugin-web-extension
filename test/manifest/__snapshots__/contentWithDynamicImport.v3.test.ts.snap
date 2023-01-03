@@ -4,7 +4,7 @@ exports[`contentWithDynamicImport - Manifest V3 1`] = `
 [
   {
     "code": "(async () => {
-  const log = await import((chrome != null ? chrome : browser).runtime.getURL(\\"../../../../log.js\\"));
+  const log = await import(\\"../../../../log.js\\");
   log(\\"content\\");
 })();
 ",
@@ -24,14 +24,14 @@ exports[`contentWithDynamicImport - Manifest V3 1`] = `
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content1.js": {
         "code": "(async () => {
-  const log = await import((chrome != null ? chrome : browser).runtime.getURL('../../../../log.js'));
+  const log = await import('../../../../log.js');
 
   log(\\"content\\");
 })();",
         "originalLength": 87,
         "removedExports": [],
         "renderedExports": [],
-        "renderedLength": 141,
+        "renderedLength": 89,
       },
     },
     "name": "test/manifest/resources/contentWithDynamicImport/content1",
@@ -44,7 +44,7 @@ exports[`contentWithDynamicImport - Manifest V3 1`] = `
   },
   {
     "code": "(async () => {
-  const log = await import((chrome != null ? chrome : browser).runtime.getURL(\\"../../../../log.js\\"));
+  const log = await import(\\"../../../../log.js\\");
   log(\\"content2\\");
 })();
 ",
@@ -64,14 +64,14 @@ exports[`contentWithDynamicImport - Manifest V3 1`] = `
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/contentWithDynamicImport/content2.js": {
         "code": "(async () => {
-  const log = await import((chrome != null ? chrome : browser).runtime.getURL('../../../../log.js'));
+  const log = await import('../../../../log.js');
 
   log(\\"content2\\");
 })();",
         "originalLength": 88,
         "removedExports": [],
         "renderedExports": [],
-        "renderedLength": 142,
+        "renderedLength": 90,
       },
     },
     "name": "test/manifest/resources/contentWithDynamicImport/content2",

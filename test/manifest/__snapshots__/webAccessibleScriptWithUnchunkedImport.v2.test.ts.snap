@@ -1,0 +1,75 @@
+// Vitest Snapshot v1
+
+exports[`webAccessibleScriptWithUnchunkedImport - Manifest V2 1`] = `
+[
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+log(\\"webAccessibleScript\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
+    "fileName": "assets/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js": {
+        "code": "log(\\"webAccessibleScript\\");",
+        "originalLength": 64,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 27,
+      },
+    },
+    "name": "test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js",
+    "name": undefined,
+    "source": "function log(message) {
+  console.log(message);
+}
+log(\\"webAccessibleScript\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js\\",
+    \\"assets/test/manifest/resources/webAccessibleScriptWithUnchunkedImport/webAccessibleScript.js\\"
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

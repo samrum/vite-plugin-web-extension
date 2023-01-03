@@ -36,7 +36,8 @@ exports[`webAccessibleScriptWithNoImport - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/webAccessibleScriptWithNoImport/webAccessibleScript.js\\"))})();",
+    "source": "console.log(\\"webAccessibleScript\\");
+",
     "type": "asset",
   },
   {

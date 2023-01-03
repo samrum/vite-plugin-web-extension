@@ -3382,7 +3382,8 @@ img {
   {
     "fileName": "test/manifest/resources/fullExtension/src/lib.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/fullExtension/src/lib.js\\"))})();",
+    "source": "console.log(\\"lib.js\\");
+",
     "type": "asset",
   },
   {
