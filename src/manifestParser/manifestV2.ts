@@ -86,6 +86,15 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           webAccessibleResources
         );
       });
+
+      script.css?.forEach((cssFileName, index) => {
+        const parsedContentCss = this.parseOutputContentCss(
+          cssFileName,
+          bundle
+        );
+
+        script.css![index] = parsedContentCss.cssFileName;
+      });
     });
 
     if (webAccessibleResources.size > 0) {
