@@ -9,7 +9,7 @@ import {
   getWebAccessibleScriptLoaderForOutputChunk,
 } from "../utils/loader";
 import { getChunkInfoFromBundle } from "../utils/rollup";
-import type { ViteWebExtensionOptions } from "../../types";
+import type { ContentScript, ViteWebExtensionOptions } from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
 import { createWebAccessibleScriptsFilter } from "../utils/filter";
@@ -124,10 +124,14 @@ export default abstract class ManifestParser<
     return result;
   }
 
+  protected getContentScripts(result: ParseResult<Manifest>): ContentScript[] {
+    return (result.manifest.content_scripts || []).concat(JSON.parse(JSON.stringify(this.pluginOptions.extraContentScripts || [])))
+  }
+
   protected parseInputContentScripts(
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
-    result.manifest.content_scripts?.forEach((script) => {
+    this.getContentScripts(result).forEach((script) => {
       script.js?.forEach((scriptFile) => {
         const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
         const outputFile = getOutputFileName(scriptFile);

@@ -39,6 +39,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       manifest.chrome_url_overrides?.newtab,
       manifest.chrome_url_overrides?.history,
       manifest.chrome_url_overrides?.bookmarks,
+      ...(this.pluginOptions.extraHtmlPages || []),
       ...webAccessibleResourcesHtmlFileNames,
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }
@@ -108,7 +109,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       >[number]
     >([...(result.manifest.web_accessible_resources ?? [])]);
 
-    result.manifest.content_scripts?.forEach((script) => {
+    this.getContentScripts(result).forEach((script) => {
       script.js?.forEach((scriptFileName, index) => {
         const parsedContentScript = this.parseOutputContentScript(
           scriptFileName,
