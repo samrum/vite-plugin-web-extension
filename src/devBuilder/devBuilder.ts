@@ -49,6 +49,7 @@ export default abstract class DevBuilder<
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles(manifest);
+    await this.writeManifestContentCssFiles(manifest);
     await this.writeManifestWebAccessibleScriptFiles(
       manifest,
       this.webAccessibleScriptsFilter
@@ -169,6 +170,68 @@ export default abstract class DevBuilder<
         await writeFile(outFile, scriptLoaderFile.source);
       }
     }
+  }
+
+  protected async writeManifestContentCssFiles(manifest: Manifest) {
+    if (!manifest.content_scripts) {
+      return;
+    }
+
+    for (const [
+      contentScriptIndex,
+      script,
+    ] of manifest.content_scripts.entries()) {
+      if (!script.css) {
+        continue;
+      }
+
+      for (const [cssIndex, fileName] of script.css.entries()) {
+        const absoluteFileName = getInputFileName(
+          fileName,
+          this.viteConfig.root
+        );
+
+        const outputFileName = `${getOutputFileName(fileName)}.css`;
+
+        manifest.content_scripts[contentScriptIndex].css![cssIndex] =
+          outputFileName;
+
+        await this.writeManifestContentCssFile(
+          outputFileName,
+          absoluteFileName
+        );
+
+        this.viteDevServer!.watcher.on("change", async (path) => {
+          if (normalizePath(path) !== absoluteFileName) {
+            return;
+          }
+
+          await this.writeManifestContentCssFile(outputFileName, fileName);
+        });
+      }
+    }
+  }
+
+  protected async writeManifestContentCssFile(
+    outputFileName: string,
+    fileName: string
+  ) {
+    const { default: source } = (await this.viteDevServer!.ssrLoadModule(
+      fileName
+    )) as { default: string };
+
+    const loaderFile = {
+      fileName: outputFileName,
+      source,
+    };
+
+    const outFile = `${this.outDir}/${loaderFile.fileName}`;
+
+    const outFileDir = path.dirname(outFile);
+
+    await ensureDir(outFileDir);
+
+    await writeFile(outFile, loaderFile.source);
   }
 
   protected abstract writeManifestWebAccessibleScriptFiles(
