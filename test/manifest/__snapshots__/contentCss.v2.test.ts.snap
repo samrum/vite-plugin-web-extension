@@ -34,8 +34,8 @@ exports[`contentCss - Manifest V2 1`] = `
     },
   },
   {
-    "fileName": "test/manifest/resources/contentCss/content.css",
-    "name": undefined,
+    "fileName": "assets/content.css",
+    "name": "content.css",
     "source": ".css {
 }
 ",
@@ -54,7 +54,7 @@ exports[`contentCss - Manifest V2 1`] = `
         \\"assets/test/manifest/resources/contentCss/content.js\\"
       ],
       \\"css\\": [
-        \\"test/manifest/resources/contentCss/content.css\\"
+        \\"assets/content.css\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",

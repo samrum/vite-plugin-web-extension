@@ -1,4 +1,9 @@
-import type { InputOptions, OutputBundle, OutputChunk } from "rollup";
+import type {
+  InputOptions,
+  OutputAsset,
+  OutputBundle,
+  OutputChunk,
+} from "rollup";
 import { getNormalizedFileName } from "./file";
 
 export function addInputScriptsToOptionsInput(
@@ -56,4 +61,22 @@ export function getChunkInfoFromBundle(
       chunk.fileName.endsWith(normalizedId)
     );
   }) as OutputChunk | undefined;
+}
+
+export function getCssAssetInfoFromBundle(
+  bundle: OutputBundle,
+  assetFileName: string
+): OutputAsset | undefined {
+  const normalizedFileName = getNormalizedFileName(assetFileName).replace(
+    /\.[^/.]+$/,
+    ".css"
+  );
+
+  return Object.values(bundle).find((chunk) => {
+    if (chunk.type === "chunk") {
+      return;
+    }
+
+    return normalizedFileName.endsWith(chunk.name ?? chunk.fileName);
+  }) as OutputAsset | undefined;
 }

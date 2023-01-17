@@ -1,5 +1,4 @@
 import { createFilter } from "vite";
-import { readFileSync } from "fs";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";
@@ -8,7 +7,10 @@ import {
   getContentScriptLoaderForOutputChunk,
   getWebAccessibleScriptLoaderForOutputChunk,
 } from "../utils/loader";
-import { getChunkInfoFromBundle } from "../utils/rollup";
+import {
+  getCssAssetInfoFromBundle,
+  getChunkInfoFromBundle,
+} from "../utils/rollup";
 import type { ViteWebExtensionOptions } from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
@@ -136,11 +138,10 @@ export default abstract class ManifestParser<
       });
 
       script.css?.forEach((cssFile) => {
-        result.emitFiles.push({
-          type: "asset",
-          fileName: cssFile,
-          source: readFileSync(cssFile, "utf-8"),
-        });
+        const inputFile = getInputFileName(cssFile, this.viteConfig.root);
+        const outputFile = `${getOutputFileName(cssFile)}css`;
+
+        result.inputScripts.push([outputFile, inputFile]);
       });
     });
 
@@ -165,6 +166,20 @@ export default abstract class ManifestParser<
     result.inputScripts.push([outputFile, inputFile]);
 
     return result;
+  }
+
+  protected parseOutputContentCss(
+    cssFileName: string,
+    bundle: OutputBundle
+  ): { cssFileName: string } {
+    const cssAssetInfo = getCssAssetInfoFromBundle(bundle, cssFileName);
+    if (!cssAssetInfo) {
+      throw new Error(`Failed to find CSS asset info for ${cssFileName}`);
+    }
+
+    return {
+      cssFileName: cssAssetInfo.fileName,
+    };
   }
 
   protected parseOutputContentScript(
