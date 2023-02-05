@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v3.0.0...v3.1.0) (2023-02-05)
+
+### Features
+
+- content_scripts css property processing by Vite ([#77](https://github.com/samrum/vite-plugin-web-extension/issues/77)) ([84ff1ab](https://github.com/samrum/vite-plugin-web-extension/commit/84ff1abdae21ed007230e0df506e9a93e19e4341))
+
+### Bug Fixes
+
+- DevBuilder’s output path should respect the `root` property of ViteConfig ([#81](https://github.com/samrum/vite-plugin-web-extension/issues/81)) ([9307b79](https://github.com/samrum/vite-plugin-web-extension/commit/9307b799dac985a2912e3f5cc0f97cf2a4846fea))
+
 ## [3.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v2.2.1...v3.0.0) (2023-01-03)
 
 ### ⚠ BREAKING CHANGES
