@@ -26,7 +26,11 @@ export default abstract class DevBuilder<
     private pluginOptions: ViteWebExtensionOptions,
     private viteDevServer?: ViteDevServer
   ) {
-    this.outDir = this.viteConfig.build.outDir;
+    this.outDir = path.resolve(
+      process.cwd(),
+      this.viteConfig.root,
+      this.viteConfig.build.outDir
+    );
 
     this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
       this.pluginOptions.webAccessibleScripts
@@ -45,7 +49,12 @@ export default abstract class DevBuilder<
     this.hmrServerOrigin = this.getHmrServerOrigin(devServerPort);
 
     await emptyDir(this.outDir);
-    copy("public", this.outDir);
+    const publicDir = path.resolve(
+      process.cwd(),
+      this.viteConfig.root,
+      this.viteConfig.publicDir
+    );
+    copy(publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles(manifest);
