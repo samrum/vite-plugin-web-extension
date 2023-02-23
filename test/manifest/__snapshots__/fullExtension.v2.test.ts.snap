@@ -3382,7 +3382,6 @@ img {
     <meta charset=\\"UTF-8\\" />
     <title>Options</title>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/fullExtension/src/entries/options/index.js\\"></script>
-    <link rel=\\"modulepreload\\" crossorigin href=\\"/assets/logo.js\\">
     <link rel=\\"stylesheet\\" href=\\"/assets/index.css\\">
   </head>
   <body>
