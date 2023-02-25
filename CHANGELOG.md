@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.1](https://github.com/samrum/vite-plugin-web-extension/compare/v3.1.0...v3.1.1) (2023-02-25)
+
+### Bug Fixes
+
+- internal viteMetadata type conflicts with Vite ([#83](https://github.com/samrum/vite-plugin-web-extension/issues/83)) ([9043206](https://github.com/samrum/vite-plugin-web-extension/commit/9043206da401bed9d113b315602286cae5493652))
+
 ## [3.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v3.0.0...v3.1.0) (2023-02-05)
 
 ### Features
