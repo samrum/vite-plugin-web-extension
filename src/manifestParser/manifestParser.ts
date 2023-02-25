@@ -301,8 +301,8 @@ export default abstract class ManifestParser<
       metadata.assets.add(chunkInfo.fileName);
     }
 
-    chunkInfo.viteMetadata.importedCss.forEach(metadata.css.add, metadata.css);
-    chunkInfo.viteMetadata.importedAssets.forEach(
+    chunkInfo.viteMetadata!.importedCss.forEach(metadata.css.add, metadata.css);
+    chunkInfo.viteMetadata!.importedAssets.forEach(
       metadata.assets.add,
       metadata.assets
     );

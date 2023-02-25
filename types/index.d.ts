@@ -34,9 +34,3 @@ interface ViteWebExtensionOptions {
  * Build cross platform, module-based web extensions using vite
  */
 export default function webExtension(options?: ViteWebExtensionOptions): Plugin;
-
-declare module "rollup" {
-  export interface RenderedChunk {
-    viteMetadata: ChunkMetadata;
-  }
-}
