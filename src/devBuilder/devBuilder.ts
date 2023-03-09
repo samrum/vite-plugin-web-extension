@@ -119,8 +119,10 @@ export default abstract class DevBuilder<
         encoding: "utf-8",
       }));
 
-    // apply plugin transforms
-    content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+    if (this.pluginOptions.devHtmlTransform) {
+      // apply plugin transforms
+      content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+    }
 
     // update root paths
     content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
