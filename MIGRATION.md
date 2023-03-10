@@ -1,7 +1,12 @@
 # Migration
 
+- [Version 3.x.x to 4.0.0](#version-3xx-to-400)
 - [Version 2.x.x to 3.0.0](#version-2xx-to-300)
 - [Version 0.x.x to 1.0.0](#version-0xx-to-100)
+
+## Version 3.x.x to 4.0.0
+
+- Dev mode HTML transforms are no longer applied by default. Enable via the new devHtmlTransform option if still needed.
 
 ## Version 2.x.x to 3.0.0
 
