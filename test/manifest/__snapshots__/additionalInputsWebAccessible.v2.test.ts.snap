@@ -1,0 +1,64 @@
+// Vitest Snapshot v1
+
+exports[`additionalInputsWebAccessible - Manifest V2 1`] = `
+[
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script1.js",
+    "name": undefined,
+    "source": "console.log(\\"script1\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script2.js",
+    "name": undefined,
+    "source": "console.log(\\"script2\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script3.js",
+    "name": undefined,
+    "source": "console.log(\\"script3\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script4.js",
+    "name": undefined,
+    "source": "console.log(\\"script4\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script5.js",
+    "name": undefined,
+    "source": "console.log(\\"script5\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script6.js",
+    "name": undefined,
+    "source": "console.log(\\"script6\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script4.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script6.js\\"
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

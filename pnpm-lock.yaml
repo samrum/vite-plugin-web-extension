@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@rollup/plugin-typescript': ^10.0.1
-  '@types/chrome': ^0.0.206
+  '@types/chrome': ^0.0.227
   '@types/etag': ^1.8.1
   '@types/fs-extra': ^9.0.13
   '@types/node': ^18.11.18
@@ -21,7 +21,7 @@ specifiers:
   vitest: ^0.26.3
 
 dependencies:
-  '@types/chrome': 0.0.206
+  '@types/chrome': 0.0.227
   '@types/etag': 1.8.1
   content-security-policy-parser: 0.4.1
   etag: 1.8.1
@@ -295,8 +295,8 @@ packages:
     resolution: {integrity: sha512-KnRanxnpfpjUTqTCXslZSEdLfXExwgNxYPdiO2WGUj8+HDjFi8R3k5RVKPeSCzLjCcshCAtVO2QBbVuAV4kTnw==}
     dev: true
 
-  /@types/chrome/0.0.206:
-    resolution: {integrity: sha512-fQnTFjghPB9S4UzbfublUB6KmsBkvvJeGXGaaoD5Qu+ZxrDUfgJnKN5egLSzDcGAH5YxQubDgbCdNwwUGewQHg==}
+  /@types/chrome/0.0.227:
+    resolution: {integrity: sha512-l1sVnf/1wZ/oNPw5X7OJMZjQlqVf3tPO50aE/aETHQRbrYhlHZkwv7lcuOWCimRSkFdHvAW4M+RIBAZACblXng==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.10

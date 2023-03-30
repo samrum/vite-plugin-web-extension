@@ -1,29 +1,24 @@
 import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
-import { createFilter } from "vite";
-import { getOutputFileName } from "../utils/file";
 import {
-  getScriptLoaderFile,
-  getServiceWorkerLoaderFile,
-} from "../utils/loader";
+  ViteWebExtensionOptions,
+  WebAccessibleResourceDefinition,
+} from "../../types";
+import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.ManifestV3> {
-  async writeBuildFiles(manifest: chrome.runtime.ManifestV3): Promise<void> {
-    await this.writeManifestServiceWorkerFiles(manifest);
+  async writeBuildFiles(): Promise<void> {
+    await this.writeManifestServiceWorkerFiles(this.manifest);
   }
 
-  updateContentSecurityPolicyForHmr(
-    manifest: chrome.runtime.ManifestV3
-  ): chrome.runtime.ManifestV3 {
-    manifest.content_security_policy ??= {};
+  updateContentSecurityPolicyForHmr(): void {
+    this.manifest.content_security_policy ??= {};
 
-    manifest.content_security_policy.extension_pages =
+    this.manifest.content_security_policy.extension_pages =
       this.getContentSecurityPolicyWithHmrSupport(
-        manifest.content_security_policy.extension_pages
+        this.manifest.content_security_policy.extension_pages
       );
-
-    return manifest;
   }
 
   private async writeManifestServiceWorkerFiles(
@@ -50,44 +45,46 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
     await writeFile(outFile, serviceWorkerLoader.source);
   }
 
-  protected async writeManifestWebAccessibleScriptFiles(
-    manifest: chrome.runtime.ManifestV3,
-    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
-  ) {
-    if (!manifest.web_accessible_resources) {
+  protected async writeManifestAdditionalInputFiles(): Promise<void> {
+    if (!this.pluginOptions.additionalInputs) {
       return;
     }
 
-    for (const [
-      webAccessibleResourceIndex,
-      struct,
-    ] of manifest.web_accessible_resources.entries()) {
-      if (!struct || !struct.resources.length) {
-        continue;
+    for (const [type, inputs] of Object.entries(
+      this.pluginOptions.additionalInputs
+    )) {
+      if (!inputs) {
+        return;
       }
 
-      for (const [scriptJsIndex, fileName] of struct.resources.entries()) {
-        if (!webAccessibleScriptsFilter(fileName)) continue;
+      for (const input of inputs) {
+        if (!input) {
+          continue;
+        }
 
-        const outputFileName = getOutputFileName(fileName);
-
-        const scriptLoaderFile = getScriptLoaderFile(
-          outputFileName,
-          `${this.hmrServerOrigin}/${fileName}`
+        await this.writeManifestAdditionalInputFile(
+          type as keyof NonNullable<
+            ViteWebExtensionOptions["additionalInputs"]
+          >,
+          input
         );
-
-        manifest.web_accessible_resources[webAccessibleResourceIndex].resources[
-          scriptJsIndex
-        ] = scriptLoaderFile.fileName;
-
-        const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
-
-        const outFileDir = path.dirname(outFile);
-
-        await ensureDir(outFileDir);
-
-        await writeFile(outFile, scriptLoaderFile.source);
       }
     }
+  }
+
+  protected addWebAccessibleResource({
+    fileName,
+    webAccessibleResource,
+  }: {
+    fileName: string;
+    webAccessibleResource: WebAccessibleResourceDefinition;
+  }): void {
+    this.manifest.web_accessible_resources ??= [];
+
+    // @ts-expect-error - allow additional web_accessible_resources properties
+    this.manifest.web_accessible_resources.push({
+      resources: [fileName],
+      ...webAccessibleResource,
+    });
   }
 }

@@ -76,7 +76,7 @@
     ]
   },
   "dependencies": {
-    "@types/chrome": "^0.0.206",
+    "@types/chrome": "^0.0.227",
     "@types/etag": "^1.8.1",
     "content-security-policy-parser": "^0.4.1",
     "etag": "^1.8.1",

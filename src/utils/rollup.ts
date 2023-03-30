@@ -4,6 +4,7 @@ import type {
   OutputBundle,
   OutputChunk,
 } from "rollup";
+import { ViteWebExtensionOptions } from "../../types";
 import { getNormalizedFileName } from "./file";
 
 export function addInputScriptsToOptionsInput(
@@ -63,20 +64,48 @@ export function getChunkInfoFromBundle(
   }) as OutputChunk | undefined;
 }
 
-export function getCssAssetInfoFromBundle(
+function findMatchingOutputAsset(
   bundle: OutputBundle,
-  assetFileName: string
+  normalizedInputId: string
 ): OutputAsset | undefined {
-  const normalizedFileName = getNormalizedFileName(assetFileName).replace(
-    /\.[^/.]+$/,
-    ".css"
-  );
-
   return Object.values(bundle).find((chunk) => {
     if (chunk.type === "chunk") {
       return;
     }
 
-    return normalizedFileName.endsWith(chunk.name ?? chunk.fileName);
+    if (chunk.name) {
+      return normalizedInputId.endsWith(chunk.name);
+    }
+
+    return chunk.fileName.endsWith(normalizedInputId);
   }) as OutputAsset | undefined;
+}
+
+export function getOutputInfoFromBundle(
+  type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
+  bundle: OutputBundle,
+  inputId: string
+): OutputAsset | OutputChunk | undefined {
+  switch (type) {
+    case "styles":
+      return getCssAssetInfoFromBundle(bundle, inputId);
+    case "scripts":
+      return getChunkInfoFromBundle(bundle, inputId);
+    case "html":
+      return findMatchingOutputAsset(bundle, inputId);
+    default:
+      throw new Error(`Invalid additionalInput type of ${type}`);
+  }
+}
+
+export function getCssAssetInfoFromBundle(
+  bundle: OutputBundle,
+  assetFileName: string
+): OutputAsset | undefined {
+  const normalizedInputId = getNormalizedFileName(assetFileName).replace(
+    /\.[^/.]+$/,
+    ".css"
+  );
+
+  return findMatchingOutputAsset(bundle, normalizedInputId);
 }

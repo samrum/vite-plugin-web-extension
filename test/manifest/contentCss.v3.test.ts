@@ -6,7 +6,7 @@ runManifestV3Test("contentCss", () => ({
   content_scripts: [
     {
       js: [`${resourceDir}/content.js`],
-      css: [`${resourceDir}/content.css`],
+      css: [`${resourceDir}/content1.css`, `${resourceDir}/content2.scss`],
       matches: ["https://*/*", "http://*/*"],
     },
   ],

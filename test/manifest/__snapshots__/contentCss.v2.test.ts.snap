@@ -3,41 +3,26 @@
 exports[`contentCss - Manifest V2 1`] = `
 [
   {
-    "code": "console.log(\\"content\\");
+    "fileName": "assets/content1.css",
+    "name": "content1.css",
+    "source": ".css {
+  color: red;
+}
 ",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentCss/content.js",
-    "fileName": "assets/test/manifest/resources/contentCss/content.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/contentCss/content.js": {
-        "code": "console.log(\\"content\\");",
-        "originalLength": 24,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 23,
-      },
-    },
-    "name": "test/manifest/resources/contentCss/content",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
+    "type": "asset",
   },
   {
-    "fileName": "assets/content.css",
-    "name": "content.css",
+    "fileName": "assets/content2.css",
+    "name": "content2.css",
     "source": ".css {
-}
+  color: green;
+}",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentCss/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content\\");
 ",
     "type": "asset",
   },
@@ -51,10 +36,11 @@ exports[`contentCss - Manifest V2 1`] = `
   \\"content_scripts\\": [
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/contentCss/content.js\\"
+        \\"test/manifest/resources/contentCss/content.js\\"
       ],
       \\"css\\": [
-        \\"assets/content.css\\"
+        \\"assets/content1.css\\",
+        \\"assets/content2.css\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",

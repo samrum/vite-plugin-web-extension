@@ -1,0 +1,30 @@
+// Vitest Snapshot v1
+
+exports[`additionalInputsScriptsTypes - Manifest V2 1`] = `
+[
+  {
+    "fileName": "test/manifest/resources/additionalInputsScriptsTypes/script1.js",
+    "name": undefined,
+    "source": "console.log(\\"script1\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsScriptsTypes/script2.js",
+    "name": undefined,
+    "source": "console.log(\\"script2\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2
+}",
+    "type": "asset",
+  },
+]
+`;

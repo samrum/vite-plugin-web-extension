@@ -3,66 +3,18 @@
 exports[`contentWithSameScriptName - Manifest V3 1`] = `
 [
   {
-    "code": "console.log(\\"content1\\");
+    "fileName": "test/manifest/resources/contentWithSameScriptName/content1/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content1\\");
 ",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content1/content.js",
-    "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content1/content.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content1/content.js": {
-        "code": "console.log(\\"content1\\");",
-        "originalLength": 25,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 24,
-      },
-    },
-    "name": "test/manifest/resources/contentWithSameScriptName/content1/content",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
+    "type": "asset",
   },
   {
-    "code": "console.log(\\"content2\\");
+    "fileName": "test/manifest/resources/contentWithSameScriptName/content2/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content2\\");
 ",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content2/content.js",
-    "fileName": "assets/test/manifest/resources/contentWithSameScriptName/content2/content.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/contentWithSameScriptName/content2/content.js": {
-        "code": "console.log(\\"content2\\");",
-        "originalLength": 25,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 24,
-      },
-    },
-    "name": "test/manifest/resources/contentWithSameScriptName/content2/content",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
+    "type": "asset",
   },
   {
     "fileName": "manifest.json",
@@ -74,7 +26,7 @@ exports[`contentWithSameScriptName - Manifest V3 1`] = `
   \\"content_scripts\\": [
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/contentWithSameScriptName/content1/content.js\\"
+        \\"test/manifest/resources/contentWithSameScriptName/content1/content.js\\"
       ],
       \\"matches\\": [
         \\"*://*/*\\",
@@ -87,7 +39,7 @@ exports[`contentWithSameScriptName - Manifest V3 1`] = `
     },
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/contentWithSameScriptName/content2/content.js\\"
+        \\"test/manifest/resources/contentWithSameScriptName/content2/content.js\\"
       ],
       \\"matches\\": [
         \\"*://*/*\\",

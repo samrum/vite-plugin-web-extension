@@ -23,7 +23,3 @@ export function getInputFileName(inputFileName: string, root: string): string {
 export function getOutputFileName(inputFileName: string): string {
   return getNormalizedFileName(inputFileName, false);
 }
-
-export function isSingleHtmlFilename(fileName: string): boolean {
-  return /[^*]+.html$/.test(fileName);
-}

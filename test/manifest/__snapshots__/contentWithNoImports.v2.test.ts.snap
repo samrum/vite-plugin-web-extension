@@ -3,35 +3,11 @@
 exports[`contentWithNoImports - Manifest V2 1`] = `
 [
   {
-    "code": "console.log(\\"content\\");
+    "fileName": "test/manifest/resources/contentWithNoImports/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content\\");
 ",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/contentWithNoImports/content.js",
-    "fileName": "assets/test/manifest/resources/contentWithNoImports/content.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/contentWithNoImports/content.js": {
-        "code": "console.log(\\"content\\");",
-        "originalLength": 24,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 23,
-      },
-    },
-    "name": "test/manifest/resources/contentWithNoImports/content",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
+    "type": "asset",
   },
   {
     "fileName": "manifest.json",
@@ -43,7 +19,7 @@ exports[`contentWithNoImports - Manifest V2 1`] = `
   \\"content_scripts\\": [
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/contentWithNoImports/content.js\\"
+        \\"test/manifest/resources/contentWithNoImports/content.js\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",

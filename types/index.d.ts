@@ -1,5 +1,24 @@
 import type { Plugin, ChunkMetadata, FilterPattern } from "vite";
 
+type WebAccessibleResourceDefinition =
+  | {
+      matches: string[];
+      extension_ids?: string[];
+      use_dynamic_url?: boolean;
+    }
+  | {
+      matches?: string[];
+      extension_ids: string[];
+      use_dynamic_url?: boolean;
+    };
+
+type AdditionalInput =
+  | string
+  | {
+      fileName: string;
+      webAccessibleResource: boolean | WebAccessibleResourceDefinition;
+    };
+
 interface ViteWebExtensionOptions {
   /**
    * The manifest file to use as a base for the generated extension
@@ -19,20 +38,14 @@ interface ViteWebExtensionOptions {
   useDynamicUrlContentScripts?: boolean;
 
   /**
-   * Options for compiling web accessible scripts
-   * <https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter>
-   *
-   * Default: {
-   *   include: /\.([cem]?js|ts)$/,
-   *   exclude: "",
-   * }
+   * Additional input files that should be processed and treated as web extension inputs.
+   * Useful for dynamically injected scripts and dynamically opened HTML pages.
+   * By default, inputs are not web accessible. This is configurable via the `webAccessibleResource` property. When set to true, defaults to <all_urls>.
    */
-  webAccessibleScripts?: {
-    include?: FilterPattern | undefined;
-    exclude?: FilterPattern | undefined;
-    options?: {
-      resolve?: string | false | null | undefined;
-    };
+  additionalInputs?: {
+    scripts?: AdditionalInput[];
+    html?: AdditionalInput[];
+    styles?: AdditionalInput[];
   };
 }
 

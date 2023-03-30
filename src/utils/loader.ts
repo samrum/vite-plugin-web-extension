@@ -44,28 +44,12 @@ export function getServiceWorkerLoaderFile(serviceWorkerFileName: string) {
   };
 }
 
-export function getContentScriptLoaderForOutputChunk(
+export function getScriptLoaderForOutputChunk(
   contentScriptFileName: string,
   chunk: OutputChunk
-): { fileName: string; source?: string } {
+): { fileName: string; source: string } | null {
   if (!chunk.imports.length && !chunk.dynamicImports.length) {
-    return {
-      fileName: chunk.fileName,
-    };
-  }
-
-  return getScriptLoaderFile(contentScriptFileName, chunk.fileName);
-}
-
-export function getWebAccessibleScriptLoaderForOutputChunk(
-  contentScriptFileName: string,
-  chunk: OutputChunk
-): { fileName: string; source?: string } {
-  if (!chunk.imports.length && !chunk.dynamicImports.length) {
-    return {
-      fileName: contentScriptFileName,
-      source: chunk.code,
-    };
+    return null;
   }
 
   return getScriptLoaderFile(contentScriptFileName, chunk.fileName);

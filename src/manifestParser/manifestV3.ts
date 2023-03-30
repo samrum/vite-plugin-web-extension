@@ -1,15 +1,12 @@
 import { OutputBundle } from "rollup";
 import { ParseResult } from "./manifestParser";
-import {
-  isSingleHtmlFilename,
-  getOutputFileName,
-  getInputFileName,
-} from "../utils/file";
+import { getOutputFileName, getInputFileName } from "../utils/file";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
 import { getChunkInfoFromBundle } from "../utils/rollup";
+import { ViteWebExtensionOptions } from "../../types";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -19,19 +16,12 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     return new DevBuilderManifestV3(
       this.viteConfig,
       this.pluginOptions,
-      this.viteDevServer
+      this.viteDevServer,
+      this.inputManifest
     );
   }
 
   protected getHtmlFileNames(manifest: Manifest): string[] {
-    const webAccessibleResourcesHtmlFileNames: string[] = [];
-
-    (manifest.web_accessible_resources ?? []).forEach(({ resources }) =>
-      resources.filter(isSingleHtmlFilename).forEach((html) => {
-        webAccessibleResourcesHtmlFileNames.push(html);
-      })
-    );
-
     return [
       manifest.action?.default_popup,
       manifest.options_ui?.page,
@@ -39,7 +29,6 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       manifest.chrome_url_overrides?.newtab,
       manifest.chrome_url_overrides?.history,
       manifest.chrome_url_overrides?.bookmarks,
-      ...webAccessibleResourcesHtmlFileNames,
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }
 
@@ -74,25 +63,6 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     result.inputScripts.push([outputFile, inputFile]);
 
     result.manifest.background.type = "module";
-
-    return result;
-  }
-
-  protected parseInputWebAccessibleScripts(
-    result: ParseResult<Manifest>
-  ): ParseResult<Manifest> {
-    result.manifest.web_accessible_resources?.forEach((struct) => {
-      struct.resources.forEach((resource) => {
-        if (resource.includes("*")) return;
-
-        const inputFile = getInputFileName(resource, this.viteConfig.root);
-        const outputFile = getOutputFileName(resource);
-
-        if (this.webAccessibleScriptsFilter(inputFile)) {
-          result.inputScripts.push([outputFile, inputFile]);
-        }
-      });
-    });
 
     return result;
   }
@@ -164,38 +134,44 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     return result;
   }
 
-  protected async parseOutputWebAccessibleScripts(
+  protected async parseOutputAdditionalInputs(
     result: ManifestParseResult,
     bundle: OutputBundle
   ): Promise<ManifestParseResult> {
-    if (!result.manifest.web_accessible_resources) {
+    if (!this.pluginOptions.additionalInputs) {
       return result;
     }
 
-    for (const resource of result.manifest.web_accessible_resources) {
-      if (!resource.resources) {
-        continue;
-      }
+    for (const [type, inputs] of Object.entries(
+      this.pluginOptions.additionalInputs
+    )) {
+      for (const input of inputs) {
+        const fileName = typeof input === "string" ? input : input.fileName;
 
-      for (const fileName of resource.resources) {
-        if (
-          fileName.includes("*") ||
-          !this.webAccessibleScriptsFilter(fileName)
-        ) {
-          continue;
-        }
-
-        const parsedScript = this.parseOutputWebAccessibleScript(
+        const parsedFile = this.parseOutputAdditionalInput(
+          type as keyof NonNullable<
+            ViteWebExtensionOptions["additionalInputs"]
+          >,
           fileName,
           result,
-          bundle
+          bundle,
+          typeof input !== "string" && Boolean(input.webAccessibleResource)
         );
 
-        if (parsedScript.webAccessibleFiles.size) {
-          resource.resources = [
-            ...resource.resources,
-            ...parsedScript.webAccessibleFiles,
-          ];
+        if (parsedFile.webAccessibleFiles.size) {
+          result.manifest.web_accessible_resources ??= [];
+          const resourceProperties =
+            typeof input === "string" || input.webAccessibleResource === true
+              ? {
+                  matches: ["<all_urls>"],
+                }
+              : input.webAccessibleResource;
+
+          // @ts-expect-error - allow additional web_accessible_resources properties
+          result.manifest.web_accessible_resources.push({
+            resources: [...parsedFile.webAccessibleFiles],
+            ...resourceProperties,
+          });
         }
       }
     }

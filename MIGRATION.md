@@ -7,6 +7,7 @@
 ## Version 3.x.x to 4.0.0
 
 - Dev mode HTML transforms are no longer applied by default. Enable via the new devHtmlTransform option if still needed.
+- The webAccessibleScripts option has been removed and replaced by the additionalInputs option. For similar functionality, move scripts to additionalInputs.scripts and html files to additionalInputs.html. Check the README for detailed usage instructions.
 
 ## Version 2.x.x to 3.0.0
 

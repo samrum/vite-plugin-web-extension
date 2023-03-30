@@ -3,129 +3,6 @@
 exports[`chunkCssRewrite - Manifest V2 1`] = `
 [
   {
-    "code": "/* empty css                         */const content1 = \\"\\";
-console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.js",
-    "fileName": "assets/test/manifest/resources/chunkCssRewrite/content1.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/contentShared.js": [],
-    },
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.css": {
-        "code": "const content1 = '';",
-        "originalLength": 31,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 20,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content1.js": {
-        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
-        "originalLength": 113,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 56,
-      },
-    },
-    "name": "test/manifest/resources/chunkCssRewrite/content1",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {
-        "assets/content1.css",
-        "assets/contentShared.css",
-      },
-    },
-  },
-  {
-    "code": "/* empty css                         */const content2 = \\"\\";
-console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.js",
-    "fileName": "assets/test/manifest/resources/chunkCssRewrite/content2.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/contentShared.js": [],
-    },
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.css": {
-        "code": "const content2 = '';",
-        "originalLength": 31,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 20,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/content2.js": {
-        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
-        "originalLength": 113,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 56,
-      },
-    },
-    "name": "test/manifest/resources/chunkCssRewrite/content2",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {
-        "assets/content2.css",
-        "assets/contentShared.css",
-      },
-    },
-  },
-  {
-    "code": "console.log([]);
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
-    "fileName": "assets/test/manifest/resources/chunkCssRewrite/contentNoCss.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/chunkCssRewrite/contentNoCss.js": {
-        "code": "console.log(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS);",
-        "originalLength": 57,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 56,
-      },
-    },
-    "name": "test/manifest/resources/chunkCssRewrite/contentNoCss",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
-  },
-  {
     "fileName": "assets/content1.css",
     "name": "content1.css",
     "source": "#content1 {
@@ -153,6 +30,29 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     "type": "asset",
   },
   {
+    "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
+    "name": undefined,
+    "source": "/* empty css                         */const content1 = \\"\\";
+console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
+    "name": undefined,
+    "source": "/* empty css                         */const content2 = \\"\\";
+console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/chunkCssRewrite/contentNoCss.js",
+    "name": undefined,
+    "source": "console.log([]);
+",
+    "type": "asset",
+  },
+  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -162,7 +62,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
   \\"content_scripts\\": [
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/chunkCssRewrite/content1.js\\"
+        \\"test/manifest/resources/chunkCssRewrite/content1.js\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",
@@ -171,7 +71,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     },
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/chunkCssRewrite/content2.js\\"
+        \\"test/manifest/resources/chunkCssRewrite/content2.js\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",
@@ -180,7 +80,7 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     },
     {
       \\"js\\": [
-        \\"assets/test/manifest/resources/chunkCssRewrite/contentNoCss.js\\"
+        \\"test/manifest/resources/chunkCssRewrite/contentNoCss.js\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",
