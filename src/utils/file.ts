@@ -31,11 +31,11 @@ export function getAdditionalInput(
   return typeof input === "string"
     ? {
         fileName: input,
-        webAccessibleResource: true,
+        webAccessible: true,
         isEntryWebAccessible: false,
       }
     : {
-        webAccessibleResource: true,
+        webAccessible: true,
         isEntryWebAccessible: false,
         ...input,
       };

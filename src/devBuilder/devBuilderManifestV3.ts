@@ -1,9 +1,6 @@
 import { ensureDir, writeFile } from "fs-extra";
 import path from "path";
-import {
-  ViteWebExtensionOptions,
-  WebAccessibleResourceDefinition,
-} from "../../types";
+import { ViteWebExtensionOptions, WebAccessibleDefinition } from "../../types";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";
 
@@ -74,17 +71,17 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
 
   protected addWebAccessibleResource({
     fileName,
-    webAccessibleResource,
+    webAccessible,
   }: {
     fileName: string;
-    webAccessibleResource: WebAccessibleResourceDefinition;
+    webAccessible: WebAccessibleDefinition;
   }): void {
     this.manifest.web_accessible_resources ??= [];
 
     // @ts-expect-error - allow additional web_accessible_resources properties
     this.manifest.web_accessible_resources.push({
       resources: [fileName],
-      ...webAccessibleResource,
+      ...webAccessible,
     });
   }
 }

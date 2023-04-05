@@ -1,3 +1,3 @@
 import log from "./../shared/log";
 
-log("webAccessibleResource");
+log("webAccessible");

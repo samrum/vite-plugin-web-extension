@@ -183,7 +183,7 @@ additionalInputs (optional)
       | {
           fileName: string;
           isEntryWebAccessible?: boolean;
-          webAccessibleResource?:
+          webAccessible?:
             | boolean
             | {
                 matches: string[];
@@ -206,7 +206,7 @@ additionalInputs (optional)
 
 - Additional input files that should be processed and treated as web extension inputs.
 - Useful for dynamically injected scripts or dynamically opened HTML pages.
-- The webAccessibleResource option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: <all_urls>`.
+- The webAccessible option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: <all_urls>`.
 - The isEntryWebAccessible option configures whether the input file itself is included in `web_accessible_resources`. Defaults to false.
 - Example
   ```ts
@@ -217,7 +217,7 @@ additionalInputs (optional)
           'src/entries/dynamicallyInjectedScript.js',
           {
             fileName: 'src/entries/privateScript.js',
-            webAccessibleResource: false,
+            webAccessible: false,
           }
         ],
       },

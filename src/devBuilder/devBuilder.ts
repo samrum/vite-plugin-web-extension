@@ -12,7 +12,7 @@ import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import {
   AdditionalInput,
   ViteWebExtensionOptions,
-  WebAccessibleResourceDefinition,
+  WebAccessibleDefinition,
 } from "../../types";
 
 export default abstract class DevBuilder<
@@ -41,10 +41,10 @@ export default abstract class DevBuilder<
 
   protected abstract addWebAccessibleResource({
     fileName,
-    webAccessibleResource,
+    webAccessible,
   }: {
     fileName: string;
-    webAccessibleResource: WebAccessibleResourceDefinition;
+    webAccessible: WebAccessibleDefinition;
   }): void;
 
   async writeBuild({
@@ -256,7 +256,7 @@ export default abstract class DevBuilder<
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
     input: AdditionalInput
   ): Promise<void> {
-    const { fileName, webAccessibleResource } = getAdditionalInput(input);
+    const { fileName, webAccessible } = getAdditionalInput(input);
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
@@ -283,15 +283,15 @@ export default abstract class DevBuilder<
         throw new Error(`Invalid additionalInput type of ${type}`);
     }
 
-    if (webAccessibleResource) {
+    if (webAccessible) {
       this.addWebAccessibleResource({
         fileName: outputFileName,
-        webAccessibleResource:
-          webAccessibleResource === true
+        webAccessible:
+          webAccessible === true
             ? {
                 matches: ["<all_urls>"],
               }
-            : webAccessibleResource,
+            : webAccessible,
       });
     }
   }

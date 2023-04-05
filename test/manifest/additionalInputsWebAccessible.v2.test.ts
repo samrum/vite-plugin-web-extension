@@ -8,27 +8,27 @@ runManifestV2Test("additionalInputsWebAccessible", () => ({}), {
       `${resourceDir}/script1.js`,
       {
         fileName: `${resourceDir}/script2.js`,
-        webAccessibleResource: false,
+        webAccessible: false,
       },
       {
         fileName: `${resourceDir}/script3.js`,
-        webAccessibleResource: true,
+        webAccessible: true,
       },
       {
         fileName: `${resourceDir}/script4.js`,
-        webAccessibleResource: {
+        webAccessible: {
           matches: ["https://example.com/"],
         },
       },
       {
         fileName: `${resourceDir}/script5.ts`,
-        webAccessibleResource: {
+        webAccessible: {
           extension_ids: ["oilkjaldkfjlasdf"],
         },
       },
       {
         fileName: `${resourceDir}/script6.js`,
-        webAccessibleResource: {
+        webAccessible: {
           matches: ["https://example.com/"],
           use_dynamic_url: true,
         },
@@ -36,13 +36,13 @@ runManifestV2Test("additionalInputsWebAccessible", () => ({}), {
       {
         fileName: `${resourceDir}/chunkedScript1.js`,
         isEntryWebAccessible: false,
-        webAccessibleResource: {
+        webAccessible: {
           matches: ["https://example.com/"],
         },
       },
       {
         fileName: `${resourceDir}/chunkedScript2.js`,
-        webAccessibleResource: {
+        webAccessible: {
           matches: ["https://example.com/"],
         },
       },

@@ -6,7 +6,7 @@ exports[`additionalInputsHtml - Manifest V2 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"webAccessibleResource\\");
+log(\\"webAccessible\\");
 const style = \\"\\";
 ",
     "dynamicImports": [],
@@ -29,11 +29,11 @@ const style = \\"\\";
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/script.js": {
-        "code": "log(\\"webAccessibleResource\\");",
-        "originalLength": 66,
+        "code": "log(\\"webAccessible\\");",
+        "originalLength": 58,
         "removedExports": [],
         "renderedExports": [],
-        "renderedLength": 29,
+        "renderedLength": 21,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/style.css": {
         "code": "const style = '';",

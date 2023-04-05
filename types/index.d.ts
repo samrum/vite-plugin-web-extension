@@ -1,6 +1,6 @@
 import type { Plugin, ChunkMetadata, FilterPattern } from "vite";
 
-type WebAccessibleResourceDefinition =
+type WebAccessibleDefinition =
   | {
       matches: string[];
       extension_ids?: string[];
@@ -16,7 +16,7 @@ type AdditionalInput =
   | string
   | {
       fileName: string;
-      webAccessibleResource?: boolean | WebAccessibleResourceDefinition;
+      webAccessible?: boolean | WebAccessibleDefinition;
       isEntryWebAccessible?: boolean;
     };
 
@@ -41,7 +41,7 @@ interface ViteWebExtensionOptions {
   /**
    * Additional input files that should be processed and treated as web extension inputs.
    * Useful for dynamically injected scripts and dynamically opened HTML pages.
-   * The webAccessibleResource option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: <all_urls>`.
+   * The webAccessible option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: <all_urls>`.
    * The isEntryWebAccessible option configures whether the input file itself is included in `web_accessible_resources`. Defaults to false.
    */
   additionalInputs?: {

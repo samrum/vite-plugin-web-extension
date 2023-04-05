@@ -141,7 +141,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
     )) {
       for (const input of inputs) {
         const additionalInput = getAdditionalInput(input);
-        const { webAccessibleResource } = additionalInput;
+        const { webAccessible } = additionalInput;
 
         const parsedFile = this.parseOutputAdditionalInput(
           type as keyof NonNullable<
@@ -155,11 +155,11 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         if (parsedFile.webAccessibleFiles.size) {
           result.manifest.web_accessible_resources ??= [];
           const resourceProperties =
-            webAccessibleResource === true
+            webAccessible === true
               ? {
                   matches: ["<all_urls>"],
                 }
-              : webAccessibleResource;
+              : webAccessible;
 
           // @ts-expect-error - allow additional web_accessible_resources properties
           result.manifest.web_accessible_resources.push({
