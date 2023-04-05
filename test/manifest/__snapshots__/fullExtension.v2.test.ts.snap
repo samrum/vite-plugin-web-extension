@@ -3409,7 +3409,6 @@ img {
     \\"*://*/*\\"
   ],
   \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/fullExtension/src/lib.js\\",
     \\"assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js\\",
     \\"assets/logo.js\\",
     \\"assets/logo.svg\\",

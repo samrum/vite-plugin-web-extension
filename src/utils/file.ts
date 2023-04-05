@@ -32,11 +32,11 @@ export function getAdditionalInput(
     ? {
         fileName: input,
         webAccessibleResource: true,
-        isEntryWebAccessible: true,
+        isEntryWebAccessible: false,
       }
     : {
         webAccessibleResource: true,
-        isEntryWebAccessible: true,
+        isEntryWebAccessible: false,
         ...input,
       };
 }

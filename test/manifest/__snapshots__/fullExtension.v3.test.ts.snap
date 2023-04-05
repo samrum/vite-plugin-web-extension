@@ -3409,14 +3409,6 @@ img {
   \\"web_accessible_resources\\": [
     {
       \\"resources\\": [
-        \\"test/manifest/resources/fullExtension/src/lib.js\\"
-      ],
-      \\"matches\\": [
-        \\"<all_urls>\\"
-      ]
-    },
-    {
-      \\"resources\\": [
         \\"assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js\\",
         \\"assets/logo.js\\",
         \\"assets/logo.svg\\",

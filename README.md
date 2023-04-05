@@ -205,16 +205,16 @@ additionalInputs (optional)
   ```
 
 - Additional input files that should be processed and treated as web extension inputs.
-- Useful for dynamically injected scripts and dynamically opened HTML pages.
-- The webAccessibleResource option configures the `web_accessible_resources` properties of the entry file and its dependencies. Defaults to true which will use `matches: <all_urls>`.
-- The isEntryWebAccessible option configures whether the entry file is included in `web_accessible_resources`. Defaults to true.
+- Useful for dynamically injected scripts or dynamically opened HTML pages.
+- The webAccessibleResource option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: <all_urls>`.
+- The isEntryWebAccessible option configures whether the input file itself is included in `web_accessible_resources`. Defaults to false.
 - Example
   ```ts
     webExtension({
       manifest: ...,
       additionalInputs: {
         scripts: [
-          'src/entries/webAccessibleScript.js',
+          'src/entries/dynamicallyInjectedScript.js',
           {
             fileName: 'src/entries/privateScript.js',
             webAccessibleResource: false,

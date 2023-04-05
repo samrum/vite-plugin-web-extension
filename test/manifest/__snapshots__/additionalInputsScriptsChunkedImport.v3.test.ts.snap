@@ -143,8 +143,7 @@ export {
     {
       \\"resources\\": [
         \\"assets/test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\",
-        \\"assets/log.js\\",
-        \\"test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\"
+        \\"assets/log.js\\"
       ],
       \\"matches\\": [
         \\"<all_urls>\\"
@@ -153,8 +152,7 @@ export {
     {
       \\"resources\\": [
         \\"assets/test/manifest/resources/additionalInputsScriptsChunkedImport/script2.js\\",
-        \\"assets/log.js\\",
-        \\"test/manifest/resources/additionalInputsScriptsChunkedImport/script2.js\\"
+        \\"assets/log.js\\"
       ],
       \\"matches\\": [
         \\"<all_urls>\\"
