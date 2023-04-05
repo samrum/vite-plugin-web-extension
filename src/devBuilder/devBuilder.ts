@@ -256,7 +256,8 @@ export default abstract class DevBuilder<
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
     input: AdditionalInput
   ): Promise<void> {
-    const { fileName, webAccessible } = getAdditionalInput(input);
+    const { fileName, webAccessible, isEntryWebAccessible } =
+      getAdditionalInput(input);
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
@@ -283,7 +284,7 @@ export default abstract class DevBuilder<
         throw new Error(`Invalid additionalInput type of ${type}`);
     }
 
-    if (webAccessible) {
+    if (webAccessible && isEntryWebAccessible) {
       this.addWebAccessibleResource({
         fileName: outputFileName,
         webAccessible:
