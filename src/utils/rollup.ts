@@ -102,10 +102,7 @@ export function getCssAssetInfoFromBundle(
   bundle: OutputBundle,
   assetFileName: string
 ): OutputAsset | undefined {
-  const normalizedInputId = getNormalizedFileName(assetFileName).replace(
-    /\.[^/.]+$/,
-    ".css"
-  );
+  const normalizedInputId = getNormalizedFileName(assetFileName, false);
 
-  return findMatchingOutputAsset(bundle, normalizedInputId);
+  return findMatchingOutputAsset(bundle, `${normalizedInputId}.css`);
 }
