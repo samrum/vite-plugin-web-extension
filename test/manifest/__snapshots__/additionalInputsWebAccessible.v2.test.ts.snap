@@ -25,7 +25,7 @@ log(\\"chunkedScript1\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js": {
-        "code": "log('chunkedScript1');",
+        "code": "log(\\"chunkedScript1\\");",
         "originalLength": 57,
         "removedExports": [],
         "renderedExports": [],
@@ -63,7 +63,7 @@ log(\\"chunkedScript2\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js": {
-        "code": "log('chunkedScript2');",
+        "code": "log(\\"chunkedScript2\\");",
         "originalLength": 57,
         "removedExports": [],
         "renderedExports": [],
