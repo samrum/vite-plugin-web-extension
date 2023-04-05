@@ -154,13 +154,13 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
     result.manifest.content_scripts?.forEach((script) => {
-      script.js?.forEach((fileName) => {
-        this.addInputToParseResult(fileName, result);
-      });
+      script.js?.forEach((fileName) =>
+        this.addInputToParseResult(fileName, result)
+      );
 
-      script.css?.forEach((fileName) => {
-        this.addInputToParseResult(fileName, result);
-      });
+      script.css?.forEach((fileName) =>
+        this.addInputToParseResult(fileName, result)
+      );
     });
 
     return result;
@@ -396,14 +396,14 @@ export default abstract class ManifestParser<
   private parseInputBackgroundScripts(
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     if (!result.manifest.background?.scripts) {
       return result;
     }
 
     const htmlLoaderFile = getScriptHtmlLoaderFile(
       "background",
-      // @ts-expect-error - Force support of event pages in manifest V3
+      // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
       result.manifest.background.scripts.map((script) => {
         if (/^[\.\/]/.test(script)) {
           return script;
@@ -423,9 +423,9 @@ export default abstract class ManifestParser<
 
     setVirtualModule(inputFile, htmlLoaderFile.source);
 
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     delete result.manifest.background.scripts;
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     result.manifest.background.page = htmlLoaderFile.fileName;
 
     return result;

@@ -2,7 +2,11 @@ import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
 import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
 import { getScriptLoaderFile } from "../utils/loader";
-import { getInputFileName, getOutputFileName } from "../utils/file";
+import {
+  getAdditionalInput,
+  getInputFileName,
+  getOutputFileName,
+} from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import {
@@ -252,10 +256,7 @@ export default abstract class DevBuilder<
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
     input: AdditionalInput
   ): Promise<void> {
-    const { fileName, webAccessibleResource } =
-      typeof input === "string"
-        ? { fileName: input, webAccessibleResource: false }
-        : input;
+    const { fileName, webAccessibleResource } = getAdditionalInput(input);
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 

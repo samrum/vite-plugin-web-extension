@@ -6,6 +6,7 @@ import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
 import { getChunkInfoFromBundle } from "../utils/rollup";
 import { ViteWebExtensionOptions } from "../../types";
+import { getAdditionalInput } from "../utils/file";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -139,7 +140,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       this.pluginOptions.additionalInputs
     )) {
       for (const input of inputs) {
-        const fileName = typeof input === "string" ? input : input.fileName;
+        const { fileName, webAccessibleResource } = getAdditionalInput(input);
 
         const parsedFile = this.parseOutputAdditionalInput(
           type as keyof NonNullable<
@@ -148,17 +149,17 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           fileName,
           result,
           bundle,
-          typeof input !== "string" && Boolean(input.webAccessibleResource)
+          Boolean(webAccessibleResource)
         );
 
         if (parsedFile.webAccessibleFiles.size) {
           result.manifest.web_accessible_resources ??= [];
           const resourceProperties =
-            typeof input === "string" || input.webAccessibleResource === true
+            webAccessibleResource === true
               ? {
                   matches: ["<all_urls>"],
                 }
-              : input.webAccessibleResource;
+              : webAccessibleResource;
 
           // @ts-expect-error - allow additional web_accessible_resources properties
           result.manifest.web_accessible_resources.push({
