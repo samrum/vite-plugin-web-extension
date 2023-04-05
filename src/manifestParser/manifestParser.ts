@@ -130,14 +130,11 @@ export default abstract class ManifestParser<
 
           if (fileName.includes("*")) {
             throw new Error(
-              `additionalInput "${additionalInput}" is not a valid input file name`
+              `additionalInput "${fileName}" is invalid. Must be a single file.`
             );
           }
 
-          const inputFile = getInputFileName(fileName, this.viteConfig.root);
-          const outputFile = getOutputFileName(fileName);
-
-          result.inputScripts.push([outputFile, inputFile]);
+          this.addInputToParseResult(fileName, result);
         });
       }
     );
@@ -157,18 +154,12 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
     result.manifest.content_scripts?.forEach((script) => {
-      script.js?.forEach((scriptFile) => {
-        const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
-        const outputFile = getOutputFileName(scriptFile);
-
-        result.inputScripts.push([outputFile, inputFile]);
+      script.js?.forEach((fileName) => {
+        this.addInputToParseResult(fileName, result);
       });
 
-      script.css?.forEach((cssFile) => {
-        const inputFile = getInputFileName(cssFile, this.viteConfig.root);
-        const outputFile = `${getOutputFileName(cssFile)}css`;
-
-        result.inputScripts.push([outputFile, inputFile]);
+      script.css?.forEach((fileName) => {
+        this.addInputToParseResult(fileName, result);
       });
     });
 
@@ -183,12 +174,7 @@ export default abstract class ManifestParser<
       return result;
     }
 
-    const inputFile = getInputFileName(htmlFileName, this.viteConfig.root);
-    const outputFile = getOutputFileName(htmlFileName);
-
-    result.inputScripts.push([outputFile, inputFile]);
-
-    return result;
+    return this.addInputToParseResult(htmlFileName, result);
   }
 
   protected parseOutputContentCss(
@@ -331,6 +317,18 @@ export default abstract class ManifestParser<
       default:
         throw new Error(`Unknown additionalInput type of ${type}`);
     }
+  }
+
+  protected addInputToParseResult(
+    fileName: string,
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    const inputFile = getInputFileName(fileName, this.viteConfig.root);
+    const outputFile = getOutputFileName(fileName);
+
+    result.inputScripts.push([outputFile, inputFile]);
+
+    return result;
   }
 
   protected pipe<T>(initialValue: T, ...fns: ((result: T) => T)[]): T {

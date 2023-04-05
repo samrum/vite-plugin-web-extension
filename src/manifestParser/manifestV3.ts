@@ -1,6 +1,5 @@
 import { OutputBundle } from "rollup";
 import { ParseResult } from "./manifestParser";
-import { getOutputFileName, getInputFileName } from "../utils/file";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
@@ -54,13 +53,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
     const serviceWorkerScript = result.manifest.background?.service_worker;
 
-    const inputFile = getInputFileName(
-      serviceWorkerScript,
-      this.viteConfig.root
-    );
-    const outputFile = getOutputFileName(serviceWorkerScript);
-
-    result.inputScripts.push([outputFile, inputFile]);
+    this.addInputToParseResult(serviceWorkerScript, result);
 
     result.manifest.background.type = "module";
 
