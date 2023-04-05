@@ -140,16 +140,16 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       this.pluginOptions.additionalInputs
     )) {
       for (const input of inputs) {
-        const { fileName, webAccessibleResource } = getAdditionalInput(input);
+        const additionalInput = getAdditionalInput(input);
+        const { webAccessibleResource } = additionalInput;
 
         const parsedFile = this.parseOutputAdditionalInput(
           type as keyof NonNullable<
             ViteWebExtensionOptions["additionalInputs"]
           >,
-          fileName,
+          additionalInput,
           result,
-          bundle,
-          Boolean(webAccessibleResource)
+          bundle
         );
 
         if (parsedFile.webAccessibleFiles.size) {

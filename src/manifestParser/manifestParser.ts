@@ -13,7 +13,7 @@ import {
   getChunkInfoFromBundle,
   getOutputInfoFromBundle,
 } from "../utils/rollup";
-import type { ViteWebExtensionOptions } from "../../types";
+import type { AdditionalInput, ViteWebExtensionOptions } from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
 
@@ -206,22 +206,23 @@ export default abstract class ManifestParser<
 
   protected parseOutputAdditionalInput(
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
-    inputFileName: string,
+    additionalInput: Exclude<AdditionalInput, string>,
     result: ParseResult<Manifest>,
-    bundle: OutputBundle,
-    makeWebAccessible: boolean
+    bundle: OutputBundle
   ): { webAccessibleFiles: Set<string> } {
-    const chunkInfo = getOutputInfoFromBundle(type, bundle, inputFileName);
+    const { fileName, webAccessibleResource } = additionalInput;
+
+    const chunkInfo = getOutputInfoFromBundle(type, bundle, fileName);
     if (!chunkInfo) {
-      throw new Error(`Failed to find chunk info for ${inputFileName}`);
+      throw new Error(`Failed to find chunk info for ${fileName}`);
     }
 
     const parseResult =
       chunkInfo.type === "asset"
-        ? this.parseOutputAsset(type, inputFileName, chunkInfo, result, bundle)
-        : this.parseOutputChunk(inputFileName, chunkInfo, result, bundle);
+        ? this.parseOutputAsset(type, fileName, chunkInfo, result, bundle)
+        : this.parseOutputChunk(fileName, chunkInfo, result, bundle);
 
-    if (makeWebAccessible) {
+    if (Boolean(webAccessibleResource)) {
       parseResult.webAccessibleFiles.add(parseResult.fileName);
     } else {
       parseResult.webAccessibleFiles.clear();
