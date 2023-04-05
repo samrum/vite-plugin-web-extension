@@ -21,7 +21,7 @@ runManifestV2Test("additionalInputsWebAccessible", () => ({}), {
         },
       },
       {
-        fileName: `${resourceDir}/script5.js`,
+        fileName: `${resourceDir}/script5.ts`,
         webAccessibleResource: {
           extension_ids: ["oilkjaldkfjlasdf"],
         },

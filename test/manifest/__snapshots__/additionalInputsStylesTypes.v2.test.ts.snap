@@ -3,8 +3,8 @@
 exports[`additionalInputsStylesTypes - Manifest V2 1`] = `
 [
   {
-    "fileName": "assets/style1.css",
-    "name": "style1.css",
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style1.css",
+    "name": undefined,
     "source": "body {
   color: red;
 }
@@ -12,8 +12,8 @@ exports[`additionalInputsStylesTypes - Manifest V2 1`] = `
     "type": "asset",
   },
   {
-    "fileName": "assets/style2.css",
-    "name": "style2.css",
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style2.css",
+    "name": undefined,
     "source": "body {
   color: green;
 }",

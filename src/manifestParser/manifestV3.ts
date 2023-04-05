@@ -86,7 +86,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
           bundle
         );
 
-        script.js![index] = parsedContentScript.scriptFileName;
+        script.js![index] = parsedContentScript.fileName;
 
         if (parsedContentScript.webAccessibleFiles.size) {
           const resource = {

@@ -58,7 +58,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           bundle
         );
 
-        script.js![index] = parsedContentScript.scriptFileName;
+        script.js![index] = parsedContentScript.fileName;
 
         parsedContentScript.webAccessibleFiles.forEach(
           webAccessibleResources.add,
