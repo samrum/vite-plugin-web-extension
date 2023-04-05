@@ -22,7 +22,25 @@ exports[`additionalInputsScriptsNoImport - Manifest V3 1`] = `
     "source": "{
   \\"version\\": \\"1.0.0\\",
   \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3
+  \\"manifest_version\\": 3,
+  \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsScriptsNoImport/script1.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsScriptsNoImport/script2.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    }
+  ]
 }",
     "type": "asset",
   },

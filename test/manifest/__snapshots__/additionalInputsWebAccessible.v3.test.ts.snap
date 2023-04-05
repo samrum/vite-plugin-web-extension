@@ -3,6 +3,124 @@
 exports[`additionalInputsWebAccessible - Manifest V3 1`] = `
 [
   {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"chunkedScript1\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "fileName": "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js": {
+        "code": "log('chunkedScript1');",
+        "originalLength": 57,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 22,
+      },
+    },
+    "name": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"chunkedScript2\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "fileName": "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js": {
+        "code": "log('chunkedScript2');",
+        "originalLength": 57,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 22,
+      },
+    },
+    "name": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+export {
+  log as l
+};
+",
+    "dynamicImports": [],
+    "exports": [
+      "l",
+    ],
+    "facadeModuleId": null,
+    "fileName": "assets/log.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": false,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "log",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script1.js",
     "name": undefined,
     "source": "console.log(\\"script1\\");
@@ -45,6 +163,18 @@ exports[`additionalInputsWebAccessible - Manifest V3 1`] = `
     "type": "asset",
   },
   {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"))})();",
+    "type": "asset",
+  },
+  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -52,6 +182,14 @@ exports[`additionalInputsWebAccessible - Manifest V3 1`] = `
   \\"name\\": \\"Manifest Name\\",
   \\"manifest_version\\": 3,
   \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
     {
       \\"resources\\": [
         \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\"
@@ -84,6 +222,25 @@ exports[`additionalInputsWebAccessible - Manifest V3 1`] = `
         \\"https://example.com/\\"
       ],
       \\"use_dynamic_url\\": true
+    },
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
+        \\"assets/log.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://example.com/\\"
+      ]
+    },
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
+        \\"assets/log.js\\",
+        \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://example.com/\\"
+      ]
     }
   ]
 }",

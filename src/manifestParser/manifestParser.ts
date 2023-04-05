@@ -210,7 +210,8 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): { webAccessibleFiles: Set<string> } {
-    const { fileName, webAccessibleResource } = additionalInput;
+    const { fileName, webAccessibleResource, isEntryWebAccessible } =
+      additionalInput;
 
     const chunkInfo = getOutputInfoFromBundle(type, bundle, fileName);
     if (!chunkInfo) {
@@ -222,9 +223,11 @@ export default abstract class ManifestParser<
         ? this.parseOutputAsset(type, fileName, chunkInfo, result, bundle)
         : this.parseOutputChunk(fileName, chunkInfo, result, bundle);
 
-    if (Boolean(webAccessibleResource)) {
+    if (isEntryWebAccessible) {
       parseResult.webAccessibleFiles.add(parseResult.fileName);
-    } else {
+    }
+
+    if (!Boolean(webAccessibleResource)) {
       parseResult.webAccessibleFiles.clear();
     }
 

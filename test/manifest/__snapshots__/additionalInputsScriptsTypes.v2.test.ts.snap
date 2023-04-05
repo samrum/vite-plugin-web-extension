@@ -22,7 +22,11 @@ exports[`additionalInputsScriptsTypes - Manifest V2 1`] = `
     "source": "{
   \\"version\\": \\"1.0.0\\",
   \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsScriptsTypes/script1.js\\",
+    \\"test/manifest/resources/additionalInputsScriptsTypes/script2.js\\"
+  ]
 }",
     "type": "asset",
   },

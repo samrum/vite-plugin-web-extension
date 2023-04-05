@@ -29,6 +29,14 @@ export function getAdditionalInput(
   input: AdditionalInput
 ): Exclude<AdditionalInput, string> {
   return typeof input === "string"
-    ? { fileName: input, webAccessibleResource: false }
-    : input;
+    ? {
+        fileName: input,
+        webAccessibleResource: true,
+        isEntryWebAccessible: true,
+      }
+    : {
+        webAccessibleResource: true,
+        isEntryWebAccessible: true,
+        ...input,
+      };
 }

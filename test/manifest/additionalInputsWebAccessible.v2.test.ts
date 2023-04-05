@@ -33,6 +33,19 @@ runManifestV2Test("additionalInputsWebAccessible", () => ({}), {
           use_dynamic_url: true,
         },
       },
+      {
+        fileName: `${resourceDir}/chunkedScript1.js`,
+        isEntryWebAccessible: false,
+        webAccessibleResource: {
+          matches: ["https://example.com/"],
+        },
+      },
+      {
+        fileName: `${resourceDir}/chunkedScript2.js`,
+        webAccessibleResource: {
+          matches: ["https://example.com/"],
+        },
+      },
     ],
   },
 });

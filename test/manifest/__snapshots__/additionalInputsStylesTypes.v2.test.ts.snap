@@ -25,7 +25,11 @@ exports[`additionalInputsStylesTypes - Manifest V2 1`] = `
     "source": "{
   \\"version\\": \\"1.0.0\\",
   \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsStylesTypes/style1.css\\",
+    \\"test/manifest/resources/additionalInputsStylesTypes/style2.css\\"
+  ]
 }",
     "type": "asset",
   },
