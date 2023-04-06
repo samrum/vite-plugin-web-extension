@@ -100,7 +100,9 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
             }),
           };
 
-          if (this.pluginOptions.useDynamicUrlContentScripts !== false) {
+          if (
+            this.pluginOptions.useDynamicUrlWebAccessibleResources !== false
+          ) {
             // @ts-ignore - use_dynamic_url is supported, but not typed
             resource.use_dynamic_url = true;
           }

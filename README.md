@@ -100,12 +100,12 @@ export default defineConfig({
   There are two configurations an extension needs to make for experimental manifest V3 support:
   
   1. Background service workers are not supported, so you are required to use a background script.
-  2. The `use_dynamic_url` property is not supported for web accessible resources. In the plugin options, set `useDynamicUrlContentScripts` to false:
+  2. The `use_dynamic_url` property is not supported for web accessible resources. In the plugin options, set `useDynamicUrlWebAccessibleResources` to false:
 
       ```js
         webExtension({
           ...
-          useDynamicUrlContentScripts: false,
+          useDynamicUrlWebAccessibleResources: false,
         }),
       ```
 
@@ -161,7 +161,7 @@ manifest
 - The [manifest](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) definition for your extension
 - All manifest property file names should be relative to the root of the project.
 
-useDynamicUrlContentScripts (optional)
+useDynamicUrlWebAccessibleResources (optional)
 
 - Type: `boolean`
 - Default: `true`
