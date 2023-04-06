@@ -163,6 +163,13 @@ export {
     "type": "asset",
   },
   {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/script7.js",
+    "name": undefined,
+    "source": "console.log(\\"script7\\");
+",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
     "name": undefined,
     "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"))})();",
@@ -184,7 +191,16 @@ export {
   \\"web_accessible_resources\\": [
     {
       \\"resources\\": [
-        \\"test/manifest/resources/additionalInputsWebAccessible/script6.js\\"
+        \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\"
+      ],
+      \\"matches\\": [
+        \\"https://example.com/\\"
+      ],
+      \\"use_dynamic_url\\": true
+    },
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsWebAccessible/script7.js\\"
       ],
       \\"extension_ids\\": [
         \\"oilkjaldkfjlasdf\\"
