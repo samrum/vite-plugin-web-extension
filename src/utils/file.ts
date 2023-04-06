@@ -1,6 +1,5 @@
 import path from "path";
 import { normalizePath } from "vite";
-import { AdditionalInput } from "../../types";
 
 export function getNormalizedFileName(
   fileName: string,
@@ -23,20 +22,4 @@ export function getInputFileName(inputFileName: string, root: string): string {
 
 export function getOutputFileName(inputFileName: string): string {
   return getNormalizedFileName(inputFileName, false);
-}
-
-export function getAdditionalInput(
-  input: AdditionalInput
-): Exclude<AdditionalInput, string> {
-  return typeof input === "string"
-    ? {
-        fileName: input,
-        webAccessible: true,
-        isEntryWebAccessible: false,
-      }
-    : {
-        webAccessible: true,
-        isEntryWebAccessible: false,
-        ...input,
-      };
 }

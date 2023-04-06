@@ -185,11 +185,13 @@ export {
     {
       \\"resources\\": [
         \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-        \\"assets/log.js\\"
+        \\"assets/log.js\\",
+        \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"
       ],
       \\"matches\\": [
         \\"https://example.com/\\"
-      ]
+      ],
+      \\"use_dynamic_url\\": true
     },
     {
       \\"resources\\": [
@@ -198,7 +200,8 @@ export {
       ],
       \\"matches\\": [
         \\"https://example.com/\\"
-      ]
+      ],
+      \\"use_dynamic_url\\": true
     }
   ]
 }",

@@ -4,7 +4,7 @@ import ManifestParser from "./manifestParser";
 import DevBuilder from "./../devBuilder/devBuilder";
 import { OutputBundle } from "rollup";
 import { ViteWebExtensionOptions } from "../../types";
-import { getAdditionalInput } from "../utils/file";
+import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 
 type Manifest = chrome.runtime.ManifestV2;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -98,7 +98,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       this.pluginOptions.additionalInputs
     )) {
       for (const input of inputs) {
-        const additionalInput = getAdditionalInput(input);
+        const additionalInput = getNormalizedAdditionalInput(input);
 
         const parsedFile = this.parseOutputAdditionalInput(
           type as keyof NonNullable<

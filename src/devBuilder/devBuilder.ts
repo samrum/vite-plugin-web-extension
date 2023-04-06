@@ -2,18 +2,12 @@ import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
 import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
 import { getScriptLoaderFile } from "../utils/loader";
-import {
-  getAdditionalInput,
-  getInputFileName,
-  getOutputFileName,
-} from "../utils/file";
+import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
-import {
-  AdditionalInput,
-  ViteWebExtensionOptions,
-  WebAccessibleDefinition,
-} from "../../types";
+import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
+import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInputAsWebAccessibleResource";
+import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -41,10 +35,14 @@ export default abstract class DevBuilder<
 
   protected abstract addWebAccessibleResource({
     fileName,
-    webAccessible,
+    webAccessibleResource,
   }: {
     fileName: string;
-    webAccessible: WebAccessibleDefinition;
+    webAccessibleResource: {
+      matches: string[] | undefined;
+      extension_ids: string[] | undefined;
+      use_dynamic_url?: boolean;
+    };
   }): void;
 
   async writeBuild({
@@ -256,8 +254,8 @@ export default abstract class DevBuilder<
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
     input: AdditionalInput
   ): Promise<void> {
-    const { fileName, webAccessible, isEntryWebAccessible } =
-      getAdditionalInput(input);
+    const additionalInput = getNormalizedAdditionalInput(input);
+    const { fileName, webAccessible } = additionalInput;
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
@@ -284,16 +282,16 @@ export default abstract class DevBuilder<
         throw new Error(`Invalid additionalInput type of ${type}`);
     }
 
-    if (webAccessible && isEntryWebAccessible) {
-      this.addWebAccessibleResource({
-        fileName: outputFileName,
-        webAccessible:
-          webAccessible === true
-            ? {
-                matches: ["<all_urls>"],
-              }
-            : webAccessible,
-      });
+    if (webAccessible?.includeEntryFile) {
+      const webAccessibleResource =
+        getAdditionalInputAsWebAccessibleResource(additionalInput);
+
+      if (webAccessibleResource) {
+        this.addWebAccessibleResource({
+          fileName: outputFileName,
+          webAccessibleResource,
+        });
+      }
     }
   }
 

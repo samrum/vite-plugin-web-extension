@@ -23,21 +23,20 @@ runManifestV2Test("additionalInputsWebAccessible", () => ({}), {
       {
         fileName: `${resourceDir}/script5.ts`,
         webAccessible: {
-          extension_ids: ["oilkjaldkfjlasdf"],
+          extensionIds: ["oilkjaldkfjlasdf"],
         },
       },
       {
         fileName: `${resourceDir}/script6.js`,
         webAccessible: {
           matches: ["https://example.com/"],
-          use_dynamic_url: true,
         },
       },
       {
         fileName: `${resourceDir}/chunkedScript1.js`,
-        isEntryWebAccessible: false,
         webAccessible: {
           matches: ["https://example.com/"],
+          includeEntryFile: true,
         },
       },
       {

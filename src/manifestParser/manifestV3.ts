@@ -6,7 +6,8 @@ import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
 import { getChunkInfoFromBundle } from "../utils/rollup";
 import { ViteWebExtensionOptions } from "../../types";
-import { getAdditionalInput } from "../utils/file";
+import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInputAsWebAccessibleResource";
+import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -142,8 +143,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       this.pluginOptions.additionalInputs
     )) {
       for (const input of inputs) {
-        const additionalInput = getAdditionalInput(input);
-        const { webAccessible } = additionalInput;
+        const additionalInput = getNormalizedAdditionalInput(input);
 
         const parsedFile = this.parseOutputAdditionalInput(
           type as keyof NonNullable<
@@ -155,18 +155,23 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
         );
 
         if (parsedFile.webAccessibleFiles.size) {
-          result.manifest.web_accessible_resources ??= [];
-          const resourceProperties =
-            webAccessible === true
-              ? {
-                  matches: ["<all_urls>"],
-                }
-              : webAccessible;
+          const webAccessibleResource =
+            getAdditionalInputAsWebAccessibleResource(additionalInput);
+          if (!webAccessibleResource) {
+            continue;
+          }
 
+          if (
+            this.pluginOptions.useDynamicUrlWebAccessibleResources === false
+          ) {
+            delete webAccessibleResource["use_dynamic_url"];
+          }
+
+          result.manifest.web_accessible_resources ??= [];
           // @ts-expect-error - allow additional web_accessible_resources properties
           result.manifest.web_accessible_resources.push({
             resources: [...parsedFile.webAccessibleFiles],
-            ...resourceProperties,
+            ...webAccessibleResource,
           });
         }
       }

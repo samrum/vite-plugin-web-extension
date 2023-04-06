@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { ViteWebExtensionOptions, WebAccessibleDefinition } from "../../types";
+import { ViteWebExtensionOptions } from "../../types";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.ManifestV2> {
@@ -51,7 +51,11 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
     fileName,
   }: {
     fileName: string;
-    webAccessible: WebAccessibleDefinition;
+    webAccessibleResource: {
+      matches: string[] | undefined;
+      extension_ids: string[] | undefined;
+      use_dynamic_url?: boolean;
+    };
   }): void {
     this.manifest.web_accessible_resources ??= [];
     this.manifest.web_accessible_resources.push(fileName);

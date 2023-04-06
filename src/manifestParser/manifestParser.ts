@@ -13,7 +13,10 @@ import {
   getChunkInfoFromBundle,
   getOutputInfoFromBundle,
 } from "../utils/rollup";
-import type { AdditionalInput, ViteWebExtensionOptions } from "../../types";
+import type {
+  NormalizedAdditionalInput,
+  ViteWebExtensionOptions,
+} from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
 
@@ -206,11 +209,11 @@ export default abstract class ManifestParser<
 
   protected parseOutputAdditionalInput(
     type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
-    additionalInput: Exclude<AdditionalInput, string>,
+    additionalInput: NormalizedAdditionalInput,
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): { webAccessibleFiles: Set<string> } {
-    const { fileName, webAccessible, isEntryWebAccessible } = additionalInput;
+    const { fileName, webAccessible } = additionalInput;
 
     const chunkInfo = getOutputInfoFromBundle(type, bundle, fileName);
     if (!chunkInfo) {
@@ -222,11 +225,11 @@ export default abstract class ManifestParser<
         ? this.parseOutputAsset(type, fileName, chunkInfo, result, bundle)
         : this.parseOutputChunk(fileName, chunkInfo, result, bundle);
 
-    if (isEntryWebAccessible) {
+    if (webAccessible?.includeEntryFile) {
       parseResult.webAccessibleFiles.add(parseResult.fileName);
     }
 
-    if (!Boolean(webAccessible)) {
+    if (webAccessible === null) {
       parseResult.webAccessibleFiles.clear();
     }
 

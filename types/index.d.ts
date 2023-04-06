@@ -3,22 +3,26 @@ import type { Plugin, ChunkMetadata, FilterPattern } from "vite";
 type WebAccessibleDefinition =
   | {
       matches: string[];
-      extension_ids?: string[];
-      use_dynamic_url?: boolean;
+      extensionIds?: string[];
+      includeEntryFile?: boolean;
     }
   | {
       matches?: string[];
-      extension_ids: string[];
-      use_dynamic_url?: boolean;
+      extensionIds: string[];
+      includeEntryFile?: boolean;
     };
 
 type AdditionalInput =
   | string
   | {
       fileName: string;
-      webAccessible?: boolean | WebAccessibleDefinition;
-      isEntryWebAccessible?: boolean;
+      webAccessible: boolean | WebAccessibleDefinition;
     };
+
+type NormalizedAdditionalInput = {
+  fileName: string;
+  webAccessible: WebAccessibleDefinition | null;
+};
 
 interface ViteWebExtensionOptions {
   /**
@@ -41,8 +45,15 @@ interface ViteWebExtensionOptions {
   /**
    * Additional input files that should be processed and treated as web extension inputs.
    * Useful for dynamically injected scripts and dynamically opened HTML pages.
-   * The webAccessible option configures whether the input file's dependencies are included in `web_accessible_resources`. Defaults to true and `matches: [<all_urls>]`.
-   * The isEntryWebAccessible option configures whether the input file itself is included in `web_accessible_resources`. Defaults to false.
+   * The webAccessible option configures whether the input file and its depdendencies are included in the manifest `web_accessible_resources` property. Defaults to true.
+   *  When set to `true`, defaults to:
+        ```ts
+          {
+            matches: ['<all_urls>'],
+            includeEntryFile: false,
+          }
+        ```
+   *  The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to false.
    */
   additionalInputs?: {
     scripts?: AdditionalInput[];

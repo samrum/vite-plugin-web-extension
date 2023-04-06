@@ -184,6 +184,7 @@ export {
   \\"web_accessible_resources\\": [
     \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
     \\"assets/log.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
     \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"
   ]
 }",

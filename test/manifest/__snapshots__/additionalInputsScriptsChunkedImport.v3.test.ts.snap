@@ -147,7 +147,8 @@ export {
       ],
       \\"matches\\": [
         \\"<all_urls>\\"
-      ]
+      ],
+      \\"use_dynamic_url\\": true
     },
     {
       \\"resources\\": [
@@ -156,7 +157,8 @@ export {
       ],
       \\"matches\\": [
         \\"<all_urls>\\"
-      ]
+      ],
+      \\"use_dynamic_url\\": true
     }
   ]
 }",
