@@ -25,7 +25,7 @@ export default function getNormalizedAdditionalInput(
   return {
     ...input,
     webAccessible: {
-      ...webAccessibleDefaults,
+      includeEntryFile: webAccessibleDefaults.includeEntryFile,
       ...input.webAccessible,
     },
   };

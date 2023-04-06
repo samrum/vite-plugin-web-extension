@@ -182,6 +182,7 @@ export {
   \\"name\\": \\"Manifest Name\\",
   \\"manifest_version\\": 2,
   \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsWebAccessible/script6.js\\",
     \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
     \\"assets/log.js\\",
     \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",

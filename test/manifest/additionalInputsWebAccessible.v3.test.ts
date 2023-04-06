@@ -29,7 +29,8 @@ runManifestV3Test("additionalInputsWebAccessible", () => ({}), {
       {
         fileName: `${resourceDir}/script6.js`,
         webAccessible: {
-          matches: ["https://example.com/"],
+          extensionIds: ["oilkjaldkfjlasdf"],
+          includeEntryFile: true,
         },
       },
       {
