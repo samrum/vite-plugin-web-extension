@@ -210,26 +210,26 @@ additionalInputs (optional)
     ```ts
       {
         matches: ['<all_urls>'],
-        includeEntryFile: false,
+        includeEntryFile: true,
       }
     ```
-  - The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to false.
+  - The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to true.
 - Example
   ```ts
     webExtension({
       manifest: ...,
       additionalInputs: {
         scripts: [
-          'src/entries/dynamicallyInjectedScript.js', // defaults to webAccessible: true
+          'src/entries/webAccessibleScript.js', // defaults to webAccessible: true
           {
-            fileName: 'src/entries/privateScript.js',
+            fileName: 'src/entries/privateScript.js', // entry file and dependencies are not web accessible
             webAccessible: false,
           },
           {
-            fileName: 'src/entries/webAccessibleEntryFile.js',
+            fileName: 'src/entries/entryFileExcluded.js', // entry file is not web accessible and dependencies are
             webAccessible: {
               matches: ['<all_urls>'],
-              includeEntryFile: true,
+              includeEntryFile: false,
             },
           },
         ],

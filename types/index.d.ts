@@ -50,10 +50,10 @@ interface ViteWebExtensionOptions {
         ```ts
           {
             matches: ['<all_urls>'],
-            includeEntryFile: false,
+            includeEntryFile: true,
           }
         ```
-   *  The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to false.
+   *  The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to true.
    */
   additionalInputs?: {
     scripts?: AdditionalInput[];

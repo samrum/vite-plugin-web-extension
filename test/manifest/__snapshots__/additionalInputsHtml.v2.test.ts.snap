@@ -99,7 +99,10 @@ const style = \\"\\";
     "source": "{
   \\"version\\": \\"1.0.0\\",
   \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsHtml/html.html\\"
+  ]
 }",
     "type": "asset",
   },

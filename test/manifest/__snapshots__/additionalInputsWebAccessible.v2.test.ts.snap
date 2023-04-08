@@ -189,8 +189,10 @@ export {
   \\"name\\": \\"Manifest Name\\",
   \\"manifest_version\\": 2,
   \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script7.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script4.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script6.js\\",
     \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
     \\"assets/log.js\\",
     \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
