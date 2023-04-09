@@ -92,16 +92,6 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     {
       \\"resources\\": [
         \\"assets/content1.css\\",
-        \\"assets/contentShared.css\\"
-      ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
-      ],
-      \\"use_dynamic_url\\": true
-    },
-    {
-      \\"resources\\": [
         \\"assets/content2.css\\",
         \\"assets/contentShared.css\\"
       ],

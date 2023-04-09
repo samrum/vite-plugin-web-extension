@@ -164,8 +164,8 @@ export {
     }
   ],
   \\"web_accessible_resources\\": [
-    \\"assets/test/manifest/resources/contentWithDynamicImport/content1.js\\",
     \\"assets/log.js\\",
+    \\"assets/test/manifest/resources/contentWithDynamicImport/content1.js\\",
     \\"assets/test/manifest/resources/contentWithDynamicImport/content2.js\\"
   ]
 }",

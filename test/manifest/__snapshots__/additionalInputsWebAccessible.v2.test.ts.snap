@@ -219,17 +219,17 @@ export {
   \\"name\\": \\"Manifest Name\\",
   \\"manifest_version\\": 2,
   \\"web_accessible_resources\\": [
+    \\"assets/log.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
     \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\",
     \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
     \\"test/manifest/resources/additionalInputsWebAccessible/script4.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"assets/log.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\"
+    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\"
   ]
 }",
     "type": "asset",

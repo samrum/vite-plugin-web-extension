@@ -170,23 +170,9 @@ export {
   \\"web_accessible_resources\\": [
     {
       \\"resources\\": [
+        \\"assets/log.js\\",
         \\"assets/test/manifest/resources/contentWithChunkedImport/content1.js\\",
-        \\"assets/log.js\\"
-      ],
-      \\"matches\\": [
-        \\"*://*/*\\",
-        \\"https://*/*\\",
-        \\"*://example.com/\\",
-        \\"https://example.com/\\",
-        \\"*://example.com/*\\",
-        \\"https://example.com/*\\"
-      ],
-      \\"use_dynamic_url\\": true
-    },
-    {
-      \\"resources\\": [
-        \\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\",
-        \\"assets/log.js\\"
+        \\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\"
       ],
       \\"matches\\": [
         \\"*://*/*\\",
