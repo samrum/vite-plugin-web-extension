@@ -140,10 +140,10 @@ export {
   \\"name\\": \\"Manifest Name\\",
   \\"manifest_version\\": 2,
   \\"web_accessible_resources\\": [
-    \\"assets/test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\",
     \\"assets/log.js\\",
-    \\"test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\",
+    \\"assets/test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\",
     \\"assets/test/manifest/resources/additionalInputsScriptsChunkedImport/script2.js\\",
+    \\"test/manifest/resources/additionalInputsScriptsChunkedImport/script1.js\\",
     \\"test/manifest/resources/additionalInputsScriptsChunkedImport/script2.js\\"
   ]
 }",

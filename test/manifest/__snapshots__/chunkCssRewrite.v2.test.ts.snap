@@ -90,8 +90,8 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
   ],
   \\"web_accessible_resources\\": [
     \\"assets/content1.css\\",
-    \\"assets/contentShared.css\\",
-    \\"assets/content2.css\\"
+    \\"assets/content2.css\\",
+    \\"assets/contentShared.css\\"
   ]
 }",
     "type": "asset",

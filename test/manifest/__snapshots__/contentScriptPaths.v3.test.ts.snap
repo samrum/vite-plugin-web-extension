@@ -162,19 +162,9 @@ export {
   \\"web_accessible_resources\\": [
     {
       \\"resources\\": [
+        \\"assets/log.js\\",
         \\"assets/test/manifest/resources/contentWithChunkedImport/content1.js\\",
-        \\"assets/log.js\\"
-      ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
-      ],
-      \\"use_dynamic_url\\": true
-    },
-    {
-      \\"resources\\": [
-        \\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\",
-        \\"assets/log.js\\"
+        \\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",

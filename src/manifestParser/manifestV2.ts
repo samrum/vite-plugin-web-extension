@@ -120,4 +120,17 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
 
     return result;
   }
+
+  protected optimizeWebAccessibleResources(
+    result: ParseResult<chrome.runtime.ManifestV2>
+  ): ParseResult<chrome.runtime.ManifestV2> {
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
+
+    result.manifest.web_accessible_resources =
+      result.manifest.web_accessible_resources.sort();
+
+    return result;
+  }
 }

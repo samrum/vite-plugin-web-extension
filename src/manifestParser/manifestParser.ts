@@ -80,6 +80,10 @@ export default abstract class ManifestParser<
       result = await parseMethod(result, bundle);
     }
 
+    if (this.pluginOptions.optimizeWebAccessibleResources !== false) {
+      result = this.optimizeWebAccessibleResources(result);
+    }
+
     result.emitFiles.push({
       type: "asset",
       fileName: "manifest.json",
@@ -115,6 +119,10 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
+
+  protected abstract optimizeWebAccessibleResources(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest>;
 
   protected parseInputAdditionalInputs(
     result: ParseResult<Manifest>

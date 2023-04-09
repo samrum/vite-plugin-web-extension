@@ -207,4 +207,39 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
 
     return result;
   }
+
+  protected optimizeWebAccessibleResources(
+    result: ParseResult<chrome.runtime.ManifestV3>
+  ): ParseResult<chrome.runtime.ManifestV3> {
+    if (!result.manifest.web_accessible_resources) {
+      return result;
+    }
+
+    const resourceMap = new Map();
+
+    result.manifest.web_accessible_resources.forEach((resource) => {
+      const resourceKey = JSON.stringify({
+        ...resource,
+        resources: [],
+      });
+
+      if (resourceMap.has(resourceKey)) {
+        const existingEntry = resourceMap.get(resourceKey);
+
+        resourceMap.set(resourceKey, {
+          ...existingEntry,
+          ...resource,
+          resources: [
+            ...new Set([...existingEntry.resources, ...resource.resources]),
+          ].sort(),
+        });
+      } else {
+        resourceMap.set(resourceKey, resource);
+      }
+    });
+
+    result.manifest.web_accessible_resources = [...resourceMap.values()];
+
+    return result;
+  }
 }
