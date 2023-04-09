@@ -282,7 +282,7 @@ export default abstract class DevBuilder<
         throw new Error(`Invalid additionalInput type of ${type}`);
     }
 
-    if (webAccessible?.includeEntryFile) {
+    if (webAccessible && !webAccessible.excludeEntryFile) {
       const webAccessibleResource =
         getAdditionalInputAsWebAccessibleResource(additionalInput);
 

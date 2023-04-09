@@ -225,12 +225,10 @@ export default abstract class ManifestParser<
         ? this.parseOutputAsset(type, fileName, chunkInfo, result, bundle)
         : this.parseOutputChunk(fileName, chunkInfo, result, bundle);
 
-    if (webAccessible?.includeEntryFile) {
-      parseResult.webAccessibleFiles.add(parseResult.fileName);
-    }
-
     if (webAccessible === null) {
       parseResult.webAccessibleFiles.clear();
+    } else if (!webAccessible.excludeEntryFile) {
+      parseResult.webAccessibleFiles.add(parseResult.fileName);
     }
 
     return parseResult;

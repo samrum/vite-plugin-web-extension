@@ -5,7 +5,7 @@ export default function getNormalizedAdditionalInput(
 ): NormalizedAdditionalInput {
   const webAccessibleDefaults = {
     matches: ["<all_urls>"],
-    includeEntryFile: true,
+    excludeEntryFile: false,
   };
 
   if (typeof input === "string") {
@@ -25,7 +25,7 @@ export default function getNormalizedAdditionalInput(
   return {
     ...input,
     webAccessible: {
-      includeEntryFile: webAccessibleDefaults.includeEntryFile,
+      excludeEntryFile: webAccessibleDefaults.excludeEntryFile,
       ...input.webAccessible,
     },
   };

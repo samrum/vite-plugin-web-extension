@@ -187,12 +187,12 @@ additionalInputs (optional)
             | {
                 matches: string[];
                 extensionIds?: string[];
-                includeEntryFile?: boolean;
+                excludeEntryFile?: boolean;
               }
             | {
                 matches?: string[];
                 extensionIds: string[];
-                includeEntryFile?: boolean;
+                excludeEntryFile?: boolean;
               };
         };
 
@@ -205,15 +205,15 @@ additionalInputs (optional)
 
 - Additional input files that should be processed and treated as web extension inputs.
 - Useful for dynamically injected scripts or dynamically opened HTML pages.
-- The webAccessible option configures whether the input file and its depdendencies are included in the manifest `web_accessible_resources` property. Defaults to true.
+- The webAccessible option configures whether the input file and its dependencies are included in the manifest `web_accessible_resources` property. Defaults to true.
   - When set to `true`, defaults to:
     ```ts
       {
         matches: ['<all_urls>'],
-        includeEntryFile: true,
+        excludeEntryFile: false,
       }
     ```
-  - The `includeEntryFile` option configures whether the entry file is included as a web accessible resource. Defaults to true.
+  - The `excludeEntryFile` option prevents the entry file from being added as a web accessible resource. Defaults to false.
 - Example
   ```ts
     webExtension({
@@ -222,6 +222,10 @@ additionalInputs (optional)
         scripts: [
           'src/entries/webAccessibleScript.js', // defaults to webAccessible: true
           {
+            fileName: 'src/entries/webAccessibleScript2.js',
+            webAccessible: true,
+          },
+          {
             fileName: 'src/entries/privateScript.js', // entry file and dependencies are not web accessible
             webAccessible: false,
           },
@@ -229,7 +233,7 @@ additionalInputs (optional)
             fileName: 'src/entries/entryFileExcluded.js', // entry file is not web accessible and dependencies are
             webAccessible: {
               matches: ['<all_urls>'],
-              includeEntryFile: false,
+              excludeEntryFile: true,
             },
           },
         ],

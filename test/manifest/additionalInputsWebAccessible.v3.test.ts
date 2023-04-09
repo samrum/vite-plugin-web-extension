@@ -24,7 +24,7 @@ runManifestV3Test("additionalInputsWebAccessible", () => ({}), {
         fileName: `${resourceDir}/script5.ts`,
         webAccessible: {
           matches: ["https://example.com/"],
-          includeEntryFile: false,
+          excludeEntryFile: true,
         },
       },
       {
@@ -37,7 +37,7 @@ runManifestV3Test("additionalInputsWebAccessible", () => ({}), {
         fileName: `${resourceDir}/script7.js`,
         webAccessible: {
           extensionIds: ["oilkjaldkfjlasdf"],
-          includeEntryFile: false,
+          excludeEntryFile: true,
         },
       },
       {
@@ -50,7 +50,7 @@ runManifestV3Test("additionalInputsWebAccessible", () => ({}), {
         fileName: `${resourceDir}/chunkedScript2.js`,
         webAccessible: {
           matches: ["https://example.com/"],
-          includeEntryFile: false,
+          excludeEntryFile: true,
         },
       },
     ],
