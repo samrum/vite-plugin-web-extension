@@ -1,21 +1,13 @@
 import crypto from "crypto";
-import { ensureDir, writeFile } from "fs-extra";
-import path from "path";
-import { createFilter } from "vite";
-import { getOutputFileName } from "../utils/file";
-import { getScriptLoaderFile } from "../utils/loader";
+import { ViteWebExtensionOptions } from "../../types";
 import DevBuilder from "./devBuilder";
 
 export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.ManifestV2> {
-  protected updateContentSecurityPolicyForHmr(
-    manifest: chrome.runtime.ManifestV2
-  ): chrome.runtime.ManifestV2 {
-    manifest.content_security_policy =
+  protected updateContentSecurityPolicyForHmr(): void {
+    this.manifest.content_security_policy =
       this.getContentSecurityPolicyWithHmrSupport(
-        manifest.content_security_policy
+        this.manifest.content_security_policy
       );
-
-    return manifest;
   }
 
   protected parseInlineScriptHashes(content: string) {
@@ -28,41 +20,44 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
     }
   }
 
-  protected async writeManifestWebAccessibleScriptFiles(
-    manifest: chrome.runtime.ManifestV2,
-    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
-  ) {
-    if (!manifest.web_accessible_resources) {
+  protected async writeManifestAdditionalInputFiles(): Promise<void> {
+    if (!this.pluginOptions.additionalInputs) {
       return;
     }
 
-    for (const [
-      webAccessibleResourceIndex,
-      resourceFileName,
-    ] of manifest.web_accessible_resources.entries()) {
-      if (!resourceFileName) {
-        continue;
+    for (const [type, inputs] of Object.entries(
+      this.pluginOptions.additionalInputs
+    )) {
+      if (!inputs) {
+        return;
       }
 
-      if (!webAccessibleScriptsFilter(resourceFileName)) continue;
+      for (const input of inputs) {
+        if (!input) {
+          continue;
+        }
 
-      const outputFileName = getOutputFileName(resourceFileName);
-
-      const scriptLoaderFile = getScriptLoaderFile(
-        outputFileName,
-        `${this.hmrServerOrigin}/${resourceFileName}`
-      );
-
-      manifest.web_accessible_resources[webAccessibleResourceIndex] =
-        scriptLoaderFile.fileName;
-
-      const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
-
-      const outFileDir = path.dirname(outFile);
-
-      await ensureDir(outFileDir);
-
-      await writeFile(outFile, scriptLoaderFile.source);
+        await this.writeManifestAdditionalInputFile(
+          type as keyof NonNullable<
+            ViteWebExtensionOptions["additionalInputs"]
+          >,
+          input
+        );
+      }
     }
+  }
+
+  protected addWebAccessibleResource({
+    fileName,
+  }: {
+    fileName: string;
+    webAccessibleResource: {
+      matches: string[] | undefined;
+      extension_ids: string[] | undefined;
+      use_dynamic_url?: boolean;
+    };
+  }): void {
+    this.manifest.web_accessible_resources ??= [];
+    this.manifest.web_accessible_resources.push(fileName);
   }
 }

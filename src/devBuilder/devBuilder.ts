@@ -1,17 +1,13 @@
 import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
 import path from "path";
-import {
-  ResolvedConfig,
-  ViteDevServer,
-  normalizePath,
-  createFilter,
-} from "vite";
+import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
 import { getScriptLoaderFile } from "../utils/loader";
 import { getInputFileName, getOutputFileName } from "../utils/file";
 import { getVirtualModule } from "../utils/virtualModule";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
-import { ViteWebExtensionOptions } from "../../types";
-import { createWebAccessibleScriptsFilter } from "../utils/filter";
+import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
+import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInputAsWebAccessibleResource";
+import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -19,31 +15,41 @@ export default abstract class DevBuilder<
   protected hmrServerOrigin = "";
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
-  protected webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
 
   constructor(
-    private viteConfig: ResolvedConfig,
-    private pluginOptions: ViteWebExtensionOptions,
-    private viteDevServer?: ViteDevServer
+    protected viteConfig: ResolvedConfig,
+    protected pluginOptions: ViteWebExtensionOptions,
+    private viteDevServer: ViteDevServer | undefined,
+    protected manifest: Manifest
   ) {
     this.outDir = path.resolve(
       process.cwd(),
       this.viteConfig.root,
       this.viteConfig.build.outDir
     );
-
-    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
-      this.pluginOptions.webAccessibleScripts
-    );
   }
+
+  protected abstract updateContentSecurityPolicyForHmr(): void;
+
+  protected abstract writeManifestAdditionalInputFiles(): Promise<void>;
+
+  protected abstract addWebAccessibleResource({
+    fileName,
+    webAccessibleResource,
+  }: {
+    fileName: string;
+    webAccessibleResource: {
+      matches: string[] | undefined;
+      extension_ids: string[] | undefined;
+      use_dynamic_url?: boolean;
+    };
+  }): void;
 
   async writeBuild({
     devServerPort,
-    manifest,
     manifestHtmlFiles,
   }: {
     devServerPort: number;
-    manifest: Manifest;
     manifestHtmlFiles: string[];
   }) {
     this.hmrServerOrigin = this.getHmrServerOrigin(devServerPort);
@@ -57,29 +63,21 @@ export default abstract class DevBuilder<
     copy(publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
-    await this.writeManifestContentScriptFiles(manifest);
-    await this.writeManifestContentCssFiles(manifest);
-    await this.writeManifestWebAccessibleScriptFiles(
-      manifest,
-      this.webAccessibleScriptsFilter
-    );
+    await this.writeManifestContentScriptFiles();
+    await this.writeManifestContentCssFiles();
+    await this.writeManifestAdditionalInputFiles();
 
-    await this.writeBuildFiles(manifest, manifestHtmlFiles);
+    await this.writeBuildFiles(manifestHtmlFiles);
 
-    this.updateContentSecurityPolicyForHmr(manifest);
+    this.updateContentSecurityPolicyForHmr();
 
     await writeFile(
       `${this.outDir}/manifest.json`,
-      JSON.stringify(manifest, null, 2)
+      JSON.stringify(this.manifest, null, 2)
     );
   }
 
-  protected abstract updateContentSecurityPolicyForHmr(
-    manifest: Manifest
-  ): Manifest;
-
   protected async writeBuildFiles(
-    _manifest: Manifest,
     _manifestHtmlFiles: string[]
   ): Promise<void> {}
 
@@ -109,10 +107,10 @@ export default abstract class DevBuilder<
     }
   }
 
-  private async writeManifestHtmlFile(
+  protected async writeManifestHtmlFile(
     fileName: string,
     absoluteFileName: string
-  ): Promise<void> {
+  ): Promise<string> {
     let content =
       getVirtualModule(absoluteFileName) ??
       (await readFile(absoluteFileName, {
@@ -144,54 +142,62 @@ export default abstract class DevBuilder<
     await ensureDir(outFileDir);
 
     await writeFile(outFile, content);
+
+    return fileName;
   }
 
   protected parseInlineScriptHashes(_content: string): void {}
 
-  protected async writeManifestContentScriptFiles(manifest: Manifest) {
-    if (!manifest.content_scripts) {
+  protected async writeManifestContentScriptFiles() {
+    if (!this.manifest.content_scripts) {
       return;
     }
 
     for (const [
       contentScriptIndex,
       script,
-    ] of manifest.content_scripts.entries()) {
+    ] of this.manifest.content_scripts.entries()) {
       if (!script.js) {
         continue;
       }
 
       for (const [scriptJsIndex, fileName] of script.js.entries()) {
-        const outputFileName = getOutputFileName(fileName);
+        const loaderFileName = await this.writeManifestScriptFile(fileName);
 
-        const scriptLoaderFile = getScriptLoaderFile(
-          outputFileName,
-          `${this.hmrServerOrigin}/${fileName}`
-        );
-
-        manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
-          scriptLoaderFile.fileName;
-
-        const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
-
-        const outFileDir = path.dirname(outFile);
-
-        await ensureDir(outFileDir);
-
-        await writeFile(outFile, scriptLoaderFile.source);
+        this.manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
+          loaderFileName;
       }
     }
   }
 
-  protected async writeManifestContentCssFiles(manifest: Manifest) {
-    if (!manifest.content_scripts) {
+  protected async writeManifestScriptFile(fileName: string): Promise<string> {
+    const outputFileName = getOutputFileName(fileName);
+
+    const scriptLoaderFile = getScriptLoaderFile(
+      outputFileName,
+      `${this.hmrServerOrigin}/${fileName}`
+    );
+
+    const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
+
+    const outFileDir = path.dirname(outFile);
+
+    await ensureDir(outFileDir);
+
+    await writeFile(outFile, scriptLoaderFile.source);
+
+    return scriptLoaderFile.fileName;
+  }
+
+  protected async writeManifestContentCssFiles() {
+    if (!this.manifest.content_scripts) {
       return;
     }
 
     for (const [
       contentScriptIndex,
       script,
-    ] of manifest.content_scripts.entries()) {
+    ] of this.manifest.content_scripts.entries()) {
       if (!script.css) {
         continue;
       }
@@ -204,29 +210,26 @@ export default abstract class DevBuilder<
 
         const outputFileName = `${getOutputFileName(fileName)}.css`;
 
-        manifest.content_scripts[contentScriptIndex].css![cssIndex] =
+        this.manifest.content_scripts[contentScriptIndex].css![cssIndex] =
           outputFileName;
 
-        await this.writeManifestContentCssFile(
-          outputFileName,
-          absoluteFileName
-        );
+        await this.writeManifestAssetFile(outputFileName, absoluteFileName);
 
         this.viteDevServer!.watcher.on("change", async (path) => {
           if (normalizePath(path) !== absoluteFileName) {
             return;
           }
 
-          await this.writeManifestContentCssFile(outputFileName, fileName);
+          await this.writeManifestAssetFile(outputFileName, fileName);
         });
       }
     }
   }
 
-  protected async writeManifestContentCssFile(
+  protected async writeManifestAssetFile(
     outputFileName: string,
     fileName: string
-  ) {
+  ): Promise<string> {
     const { default: source } = (await this.viteDevServer!.ssrLoadModule(
       fileName
     )) as { default: string };
@@ -243,12 +246,54 @@ export default abstract class DevBuilder<
     await ensureDir(outFileDir);
 
     await writeFile(outFile, loaderFile.source);
+
+    return loaderFile.fileName;
   }
 
-  protected abstract writeManifestWebAccessibleScriptFiles(
-    manifest: Manifest,
-    webAccessibleScriptsFilter: ReturnType<typeof createFilter>
-  ): Promise<void>;
+  protected async writeManifestAdditionalInputFile(
+    type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
+    input: AdditionalInput
+  ): Promise<void> {
+    const additionalInput = getNormalizedAdditionalInput(input);
+    const { fileName, webAccessible } = additionalInput;
+
+    const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
+
+    let outputFileName = "";
+
+    switch (type) {
+      case "html":
+        outputFileName = await this.writeManifestHtmlFile(
+          fileName,
+          absoluteFileName
+        );
+        break;
+      case "scripts":
+        outputFileName = await this.writeManifestScriptFile(fileName);
+        break;
+      case "styles":
+        const cssFileName = `${getOutputFileName(fileName)}.css`;
+        outputFileName = await this.writeManifestAssetFile(
+          cssFileName,
+          absoluteFileName
+        );
+        break;
+      default:
+        throw new Error(`Invalid additionalInput type of ${type}`);
+    }
+
+    if (webAccessible && !webAccessible.excludeEntryFile) {
+      const webAccessibleResource =
+        getAdditionalInputAsWebAccessibleResource(additionalInput);
+
+      if (webAccessibleResource) {
+        this.addWebAccessibleResource({
+          fileName: outputFileName,
+          webAccessibleResource,
+        });
+      }
+    }
+  }
 
   private getHmrServerOrigin(devServerPort: number): string {
     if (typeof this.viteConfig.server.hmr! === "boolean") {

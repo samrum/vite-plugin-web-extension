@@ -157,37 +157,6 @@ console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
     },
   },
   {
-    "code": "console.log(\\"lib.js\\");
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/lib.js",
-    "fileName": "assets/test/manifest/resources/fullExtension/src/lib.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/lib.js": {
-        "code": "console.log(\\"lib.js\\");",
-        "originalLength": 23,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 22,
-      },
-    },
-    "name": "test/manifest/resources/fullExtension/src/lib",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
-  },
-  {
     "code": "browser.runtime.onInstalled.addListener(() => {
   console.log(\\"Extension installed\\");
 });
@@ -3439,13 +3408,13 @@ img {
   },
   \\"web_accessible_resources\\": [
     {
+      \\"resources\\": [
+        \\"test/manifest/resources/fullExtension/src/lib.js\\"
+      ],
       \\"matches\\": [
         \\"<all_urls>\\"
       ],
-      \\"resources\\": [
-        \\"test/manifest/resources/fullExtension/src/lib.js\\",
-        \\"assets/test/manifest/resources/fullExtension/src/lib.js\\"
-      ]
+      \\"use_dynamic_url\\": true
     },
     {
       \\"resources\\": [

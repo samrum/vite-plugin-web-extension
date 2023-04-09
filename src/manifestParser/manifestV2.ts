@@ -1,13 +1,10 @@
 import { ParseResult } from "./manifestParser";
-import {
-  isSingleHtmlFilename,
-  getOutputFileName,
-  getInputFileName,
-} from "../utils/file";
 import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
 import ManifestParser from "./manifestParser";
 import DevBuilder from "./../devBuilder/devBuilder";
 import { OutputBundle } from "rollup";
+import { ViteWebExtensionOptions } from "../../types";
+import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 
 type Manifest = chrome.runtime.ManifestV2;
 type ManifestParseResult = ParseResult<Manifest>;
@@ -17,7 +14,8 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
     return new DevBuilderManifestV2(
       this.viteConfig,
       this.pluginOptions,
-      this.viteDevServer
+      this.viteDevServer,
+      this.inputManifest
     );
   }
 
@@ -30,7 +28,6 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
       manifest.chrome_url_overrides?.newtab,
       manifest.chrome_url_overrides?.history,
       manifest.chrome_url_overrides?.bookmarks,
-      ...(manifest.web_accessible_resources ?? []).filter(isSingleHtmlFilename),
     ].filter((fileName): fileName is string => typeof fileName === "string");
   }
 
@@ -43,24 +40,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
   protected getParseOutputMethods(): ((
     result: ManifestParseResult
   ) => Promise<ManifestParseResult>)[] {
-    return [this.parseWatchModeSupport.bind(this)];
-  }
-
-  protected parseInputWebAccessibleScripts(
-    result: ParseResult<Manifest>
-  ): ParseResult<Manifest> {
-    result.manifest.web_accessible_resources?.forEach((resource) => {
-      if (resource.includes("*")) return;
-
-      const inputFile = getInputFileName(resource, this.viteConfig.root);
-      const outputFile = getOutputFileName(resource);
-
-      if (this.webAccessibleScriptsFilter(inputFile)) {
-        result.inputScripts.push([outputFile, inputFile]);
-      }
-    });
-
-    return result;
+    return [];
   }
 
   protected async parseOutputContentScripts(
@@ -79,7 +59,7 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
           bundle
         );
 
-        script.js![index] = parsedContentScript.scriptFileName;
+        script.js![index] = parsedContentScript.fileName;
 
         parsedContentScript.webAccessibleFiles.forEach(
           webAccessibleResources.add,
@@ -106,50 +86,36 @@ export default class ManifestV2 extends ManifestParser<Manifest> {
     return result;
   }
 
-  protected async parseOutputWebAccessibleScripts(
+  protected async parseOutputAdditionalInputs(
     result: ManifestParseResult,
     bundle: OutputBundle
   ): Promise<ManifestParseResult> {
-    if (!result.manifest.web_accessible_resources) {
+    if (!this.pluginOptions.additionalInputs) {
       return result;
     }
 
-    for (const resource of result.manifest.web_accessible_resources) {
-      if (
-        resource.includes("*") ||
-        !this.webAccessibleScriptsFilter(resource)
-      ) {
-        continue;
+    for (const [type, inputs] of Object.entries(
+      this.pluginOptions.additionalInputs
+    )) {
+      for (const input of inputs) {
+        const additionalInput = getNormalizedAdditionalInput(input);
+
+        const parsedFile = this.parseOutputAdditionalInput(
+          type as keyof NonNullable<
+            ViteWebExtensionOptions["additionalInputs"]
+          >,
+          additionalInput,
+          result,
+          bundle
+        );
+
+        if (parsedFile.webAccessibleFiles.size) {
+          result.manifest.web_accessible_resources = [
+            ...(result.manifest.web_accessible_resources ?? []),
+            ...parsedFile.webAccessibleFiles,
+          ];
+        }
       }
-
-      const parsedContentScript = this.parseOutputWebAccessibleScript(
-        resource,
-        result,
-        bundle
-      );
-
-      result.manifest.web_accessible_resources = [
-        ...result.manifest.web_accessible_resources,
-        ...parsedContentScript.webAccessibleFiles,
-      ];
-    }
-
-    return result;
-  }
-
-  protected async parseWatchModeSupport(
-    result: ManifestParseResult
-  ): Promise<ManifestParseResult> {
-    if (!result.manifest.web_accessible_resources) {
-      return result;
-    }
-
-    if (
-      result.manifest.web_accessible_resources.length > 0 &&
-      this.viteConfig.build.watch
-    ) {
-      // expose all files in watch mode to allow web-ext reloading to work when manifest changes are not applied on reload (eg. Firefox)
-      result.manifest.web_accessible_resources.push("*.js");
     }
 
     return result;

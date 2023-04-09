@@ -1,0 +1,53 @@
+// Vitest Snapshot v1
+
+exports[`additionalInputsStylesTypes - Manifest V3 1`] = `
+[
+  {
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style1.css",
+    "name": undefined,
+    "source": "body {
+  color: red;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style2.css",
+    "name": undefined,
+    "source": "body {
+  color: green;
+}",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsStylesTypes/style1.css\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ],
+      \\"use_dynamic_url\\": true
+    },
+    {
+      \\"resources\\": [
+        \\"test/manifest/resources/additionalInputsStylesTypes/style2.css\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ],
+      \\"use_dynamic_url\\": true
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

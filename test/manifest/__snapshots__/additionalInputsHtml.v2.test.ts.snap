@@ -1,0 +1,110 @@
+// Vitest Snapshot v1
+
+exports[`additionalInputsHtml - Manifest V2 1`] = `
+[
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+log(\\"webAccessible\\");
+const style = \\"\\";
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/html.html",
+    "fileName": "assets/test/manifest/resources/additionalInputsHtml/html.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/html.html": {
+        "code": null,
+        "originalLength": 290,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 0,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/script.js": {
+        "code": "log(\\"webAccessible\\");",
+        "originalLength": 58,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 21,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/style.css": {
+        "code": "const style = '';",
+        "originalLength": 23,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 17,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "test/manifest/resources/additionalInputsHtml/html",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {
+        "assets/html.css",
+      },
+    },
+  },
+  {
+    "fileName": "assets/html.css",
+    "name": "html.css",
+    "source": "body {
+  color: red;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsHtml/html.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    
+
+    
+    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/additionalInputsHtml/html.js\\"></script>
+    <link rel=\\"stylesheet\\" href=\\"/assets/html.css\\">
+  </head>
+</html>
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsHtml/html.html\\"
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;

@@ -1,20 +1,24 @@
-import { createFilter } from "vite";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import DevBuilder from "../devBuilder/devBuilder";
 import { getInputFileName, getOutputFileName } from "../utils/file";
-import type { EmittedFile, OutputBundle } from "rollup";
-import {
-  getContentScriptLoaderForOutputChunk,
-  getWebAccessibleScriptLoaderForOutputChunk,
-} from "../utils/loader";
+import type {
+  EmittedFile,
+  OutputAsset,
+  OutputBundle,
+  OutputChunk,
+} from "rollup";
+import { getScriptLoaderForOutputChunk } from "../utils/loader";
 import {
   getCssAssetInfoFromBundle,
   getChunkInfoFromBundle,
+  getOutputInfoFromBundle,
 } from "../utils/rollup";
-import type { ViteWebExtensionOptions } from "../../types";
+import type {
+  NormalizedAdditionalInput,
+  ViteWebExtensionOptions,
+} from "../../types";
 import { getScriptHtmlLoaderFile } from "../utils/loader";
 import { setVirtualModule } from "../utils/virtualModule";
-import { createWebAccessibleScriptsFilter } from "../utils/filter";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {
   inputScripts: [string, string][];
@@ -26,7 +30,6 @@ export default abstract class ManifestParser<
   Manifest extends chrome.runtime.Manifest
 > {
   protected inputManifest: Manifest;
-  protected webAccessibleScriptsFilter: ReturnType<typeof createFilter>;
   protected viteDevServer: ViteDevServer | undefined;
   protected parsedMetaDataChunkIds = new Set<string>();
 
@@ -36,10 +39,6 @@ export default abstract class ManifestParser<
   ) {
     this.inputManifest = JSON.parse(
       JSON.stringify(this.pluginOptions.manifest)
-    );
-
-    this.webAccessibleScriptsFilter = createWebAccessibleScriptsFilter(
-      this.pluginOptions.webAccessibleScripts
     );
   }
 
@@ -54,8 +53,8 @@ export default abstract class ManifestParser<
       parseResult,
       this.parseInputHtmlFiles,
       this.parseInputContentScripts,
-      this.parseInputWebAccessibleScripts,
       this.parseInputBackgroundScripts,
+      this.parseInputAdditionalInputs,
       ...this.getParseInputMethods()
     );
   }
@@ -63,7 +62,6 @@ export default abstract class ManifestParser<
   async writeDevBuild(devServerPort: number): Promise<void> {
     await this.createDevBuilder().writeBuild({
       devServerPort,
-      manifest: this.inputManifest,
       manifestHtmlFiles: this.getHtmlFileNames(this.inputManifest),
     });
   }
@@ -75,7 +73,7 @@ export default abstract class ManifestParser<
       manifest: this.inputManifest,
     };
 
-    result = await this.parseOutputWebAccessibleScripts(result, bundle);
+    result = await this.parseOutputAdditionalInputs(result, bundle);
     result = await this.parseOutputContentScripts(result, bundle);
 
     for (const parseMethod of this.getParseOutputMethods()) {
@@ -113,10 +111,39 @@ export default abstract class ManifestParser<
     bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
 
-  protected abstract parseOutputWebAccessibleScripts(
+  protected abstract parseOutputAdditionalInputs(
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): Promise<ParseResult<Manifest>>;
+
+  protected parseInputAdditionalInputs(
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    if (!this.pluginOptions.additionalInputs) {
+      return result;
+    }
+
+    Object.values(this.pluginOptions.additionalInputs).forEach(
+      (additionalInputArray) => {
+        additionalInputArray.forEach((additionalInput) => {
+          const fileName =
+            typeof additionalInput === "string"
+              ? additionalInput
+              : additionalInput.fileName;
+
+          if (fileName.includes("*")) {
+            throw new Error(
+              `additionalInput "${fileName}" is invalid. Must be a single file.`
+            );
+          }
+
+          this.addInputToParseResult(fileName, result);
+        });
+      }
+    );
+
+    return result;
+  }
 
   protected parseInputHtmlFiles(result: ParseResult<Manifest>) {
     this.getHtmlFileNames(result.manifest).forEach((htmlFileName) =>
@@ -130,27 +157,17 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
     result.manifest.content_scripts?.forEach((script) => {
-      script.js?.forEach((scriptFile) => {
-        const inputFile = getInputFileName(scriptFile, this.viteConfig.root);
-        const outputFile = getOutputFileName(scriptFile);
+      script.js?.forEach((fileName) =>
+        this.addInputToParseResult(fileName, result)
+      );
 
-        result.inputScripts.push([outputFile, inputFile]);
-      });
-
-      script.css?.forEach((cssFile) => {
-        const inputFile = getInputFileName(cssFile, this.viteConfig.root);
-        const outputFile = `${getOutputFileName(cssFile)}css`;
-
-        result.inputScripts.push([outputFile, inputFile]);
-      });
+      script.css?.forEach((fileName) =>
+        this.addInputToParseResult(fileName, result)
+      );
     });
 
     return result;
   }
-
-  protected abstract parseInputWebAccessibleScripts(
-    result: ParseResult<Manifest>
-  ): ParseResult<Manifest>;
 
   protected parseInputHtmlFile(
     htmlFileName: string | undefined,
@@ -160,12 +177,7 @@ export default abstract class ManifestParser<
       return result;
     }
 
-    const inputFile = getInputFileName(htmlFileName, this.viteConfig.root);
-    const outputFile = getOutputFileName(htmlFileName);
-
-    result.inputScripts.push([outputFile, inputFile]);
-
-    return result;
+    return this.addInputToParseResult(htmlFileName, result);
   }
 
   protected parseOutputContentCss(
@@ -186,78 +198,141 @@ export default abstract class ManifestParser<
     scriptFileName: string,
     result: ParseResult<Manifest>,
     bundle: OutputBundle
-  ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
+  ): { fileName: string; webAccessibleFiles: Set<string> } {
     const chunkInfo = getChunkInfoFromBundle(bundle, scriptFileName);
     if (!chunkInfo) {
       throw new Error(`Failed to find chunk info for ${scriptFileName}`);
     }
 
-    const scriptLoaderFile = getContentScriptLoaderForOutputChunk(
-      scriptFileName,
-      chunkInfo
-    );
-
-    if (scriptLoaderFile.source) {
-      result.emitFiles.push({
-        type: "asset",
-        fileName: scriptLoaderFile.fileName,
-        source: scriptLoaderFile.source,
-      });
-    }
-
-    const metadata = this.getMetadataforChunk(
-      chunkInfo.fileName,
-      bundle,
-      Boolean(scriptLoaderFile.source)
-    );
-
-    chunkInfo.code = chunkInfo.code.replace(
-      new RegExp("import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS", "g"),
-      `[${[...metadata.css].map((path) => `"${path}"`).join(",")}]`
-    );
-
-    return {
-      scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: new Set([...metadata.assets, ...metadata.css]),
-    };
+    return this.parseOutputChunk(scriptFileName, chunkInfo, result, bundle);
   }
 
-  protected parseOutputWebAccessibleScript(
-    scriptFileName: string,
+  protected parseOutputAdditionalInput(
+    type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
+    additionalInput: NormalizedAdditionalInput,
     result: ParseResult<Manifest>,
     bundle: OutputBundle
-  ): { scriptFileName: string; webAccessibleFiles: Set<string> } {
-    const chunkInfo = getChunkInfoFromBundle(bundle, scriptFileName);
+  ): { webAccessibleFiles: Set<string> } {
+    const { fileName, webAccessible } = additionalInput;
+
+    const chunkInfo = getOutputInfoFromBundle(type, bundle, fileName);
     if (!chunkInfo) {
-      throw new Error(`Failed to find chunk info for ${scriptFileName}`);
+      throw new Error(`Failed to find chunk info for ${fileName}`);
     }
 
-    const scriptLoaderFile = getWebAccessibleScriptLoaderForOutputChunk(
-      scriptFileName,
-      chunkInfo
-    );
+    const parseResult =
+      chunkInfo.type === "asset"
+        ? this.parseOutputAsset(type, fileName, chunkInfo, result, bundle)
+        : this.parseOutputChunk(fileName, chunkInfo, result, bundle);
+
+    if (webAccessible === null) {
+      parseResult.webAccessibleFiles.clear();
+    } else if (!webAccessible.excludeEntryFile) {
+      parseResult.webAccessibleFiles.add(parseResult.fileName);
+    }
+
+    return parseResult;
+  }
+
+  private parseOutputAsset(
+    type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>,
+    inputFileName: string,
+    outputAsset: OutputAsset,
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
+  ): { fileName: string; webAccessibleFiles: Set<string> } {
+    delete bundle[outputAsset.fileName];
+
+    const fileName = `${getOutputFileName(
+      inputFileName
+    )}.${this.getAdditionalInputTypeFileExtension(type)}`;
 
     result.emitFiles.push({
       type: "asset",
-      fileName: scriptLoaderFile.fileName,
-      source: scriptLoaderFile.source,
+      fileName,
+      source: outputAsset.source,
     });
 
-    const metadata = this.getMetadataforChunk(
-      chunkInfo.fileName,
-      bundle,
-      Boolean(scriptLoaderFile.source)
+    return {
+      fileName,
+      webAccessibleFiles: new Set<string>(),
+    };
+  }
+
+  private parseOutputChunk(
+    inputFileName: string,
+    outputChunk: OutputChunk,
+    result: ParseResult<Manifest>,
+    bundle: OutputBundle
+  ): { fileName: string; webAccessibleFiles: Set<string> } {
+    const scriptLoaderFile = getScriptLoaderForOutputChunk(
+      inputFileName,
+      outputChunk
     );
 
-    chunkInfo.code = chunkInfo.code.replace(
+    const metadata = this.getMetadataforChunk(
+      outputChunk.fileName,
+      bundle,
+      Boolean(scriptLoaderFile)
+    );
+
+    outputChunk.code = outputChunk.code.replace(
       new RegExp("import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS", "g"),
       `[${[...metadata.css].map((path) => `"${path}"`).join(",")}]`
     );
 
+    const fileName = scriptLoaderFile?.fileName ?? `${outputChunk.name}.js`;
+
+    if (scriptLoaderFile) {
+      result.emitFiles.push({
+        type: "asset",
+        fileName,
+        source: scriptLoaderFile.source,
+      });
+    } else {
+      delete bundle[outputChunk.fileName];
+
+      result.emitFiles.push({
+        type: "asset",
+        fileName,
+        source: outputChunk.code,
+      });
+    }
+
     return {
-      scriptFileName: scriptLoaderFile.fileName,
-      webAccessibleFiles: new Set([...metadata.assets, ...metadata.css]),
+      fileName,
+      webAccessibleFiles: new Set<string>([
+        ...metadata.assets,
+        ...metadata.css,
+      ]),
     };
+  }
+
+  private getAdditionalInputTypeFileExtension(
+    type: keyof NonNullable<ViteWebExtensionOptions["additionalInputs"]>
+  ): string {
+    switch (type) {
+      case "html":
+        return "html";
+      case "scripts":
+        return "js";
+      case "styles":
+        return "css";
+      default:
+        throw new Error(`Unknown additionalInput type of ${type}`);
+    }
+  }
+
+  protected addInputToParseResult(
+    fileName: string,
+    result: ParseResult<Manifest>
+  ): ParseResult<Manifest> {
+    const inputFile = getInputFileName(fileName, this.viteConfig.root);
+    const outputFile = getOutputFileName(fileName);
+
+    result.inputScripts.push([outputFile, inputFile]);
+
+    return result;
   }
 
   protected pipe<T>(initialValue: T, ...fns: ((result: T) => T)[]): T {
@@ -270,7 +345,7 @@ export default abstract class ManifestParser<
   private getMetadataforChunk(
     chunkId: string,
     bundle: OutputBundle,
-    includeChunkAsAsset: boolean,
+    includeChunkAsAsset: boolean = false,
     metadata: {
       css: Set<string>;
       assets: Set<string>;
@@ -325,14 +400,14 @@ export default abstract class ManifestParser<
   private parseInputBackgroundScripts(
     result: ParseResult<Manifest>
   ): ParseResult<Manifest> {
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     if (!result.manifest.background?.scripts) {
       return result;
     }
 
     const htmlLoaderFile = getScriptHtmlLoaderFile(
       "background",
-      // @ts-expect-error - Force support of event pages in manifest V3
+      // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
       result.manifest.background.scripts.map((script) => {
         if (/^[\.\/]/.test(script)) {
           return script;
@@ -352,9 +427,9 @@ export default abstract class ManifestParser<
 
     setVirtualModule(inputFile, htmlLoaderFile.source);
 
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     delete result.manifest.background.scripts;
-    // @ts-expect-error - Force support of event pages in manifest V3
+    // @ts-expect-error - Force support of event pages in manifest V3 (Firefox)
     result.manifest.background.page = htmlLoaderFile.fileName;
 
     return result;

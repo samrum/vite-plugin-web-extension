@@ -1,8 +1,9 @@
 import path from "path";
 import { expect, test } from "vitest";
-import { build, normalizePath } from "vite";
+import { build, InlineConfig, normalizePath } from "vite";
 import type { RollupOutput } from "rollup";
 import webExtension from "../../src/index";
+import { ViteWebExtensionOptions } from "../../types";
 
 type InputManifestGenerator<ManifestType> = () => Partial<ManifestType>;
 
@@ -11,7 +12,7 @@ function normalizeFileName(fileName: string): string {
 }
 
 async function bundleGenerate(
-  manifest: chrome.runtime.Manifest
+  options: ViteWebExtensionOptions
 ): Promise<RollupOutput> {
   const bundle = await build({
     logLevel: "warn",
@@ -26,11 +27,7 @@ async function bundleGenerate(
         },
       },
     },
-    plugins: [
-      webExtension({
-        manifest,
-      }),
-    ],
+    plugins: [webExtension(options)],
   });
 
   return bundle as RollupOutput;
@@ -40,10 +37,15 @@ function trimFilePathToRepoDirectory(filePath: string): string {
   return filePath.substring(filePath.lastIndexOf("vite-plugin-web-extension"));
 }
 
-export async function runTest<ManifestType extends chrome.runtime.Manifest>(
-  inputManifestGenerator: InputManifestGenerator<ManifestType>,
-  manifestVersion: ManifestType["manifest_version"]
-): Promise<void> {
+export async function runTest<ManifestType extends chrome.runtime.Manifest>({
+  manifestGenerator,
+  manifestVersion,
+  pluginOptions,
+}: {
+  manifestVersion: ManifestType["manifest_version"];
+  manifestGenerator: InputManifestGenerator<ManifestType>;
+  pluginOptions: Partial<ViteWebExtensionOptions>;
+}): Promise<void> {
   const [repoDir] = __dirname.split("/test/manifest");
 
   const baseManifest: chrome.runtime.Manifest = {
@@ -53,8 +55,11 @@ export async function runTest<ManifestType extends chrome.runtime.Manifest>(
   };
 
   let { output } = await bundleGenerate({
-    ...baseManifest,
-    ...inputManifestGenerator(),
+    manifest: {
+      ...baseManifest,
+      ...manifestGenerator(),
+    },
+    ...pluginOptions,
   });
 
   expect(
@@ -111,18 +116,28 @@ export function getResourceDir(path: string): string {
 
 export async function runManifestV2Test(
   testName: string,
-  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV2>
+  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV2>,
+  pluginOptions: Partial<ViteWebExtensionOptions> = {}
 ) {
   test(`${testName} - Manifest V2`, async () => {
-    await runTest(manifestGenerator, 2);
+    await runTest({
+      manifestVersion: 2,
+      manifestGenerator,
+      pluginOptions,
+    });
   });
 }
 
 export async function runManifestV3Test(
   testName: string,
-  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV3>
+  manifestGenerator: InputManifestGenerator<chrome.runtime.ManifestV3>,
+  pluginOptions: Partial<ViteWebExtensionOptions> = {}
 ) {
   test(`${testName} - Manifest V3`, async () => {
-    await runTest(manifestGenerator, 3);
+    await runTest({
+      manifestVersion: 3,
+      manifestGenerator,
+      pluginOptions,
+    });
   });
 }

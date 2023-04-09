@@ -1,0 +1,292 @@
+// Vitest Snapshot v1
+
+exports[`useDynamicUrlWebAccessibleResourcesDisabled - Manifest V3 1`] = `
+[
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"content\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js": {
+        "code": "log(\\"content\\");",
+        "originalLength": 52,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 15,
+      },
+    },
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content1",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"content2\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js": {
+        "code": "log(\\"content2\\");",
+        "originalLength": 53,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 16,
+      },
+    },
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content2",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"script1\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js": {
+        "code": "log(\\"script1\\");",
+        "originalLength": 50,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 15,
+      },
+    },
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script1",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "import { l as log } from \\"../../../../log.js\\";
+log(\\"script2\\");
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/log.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/log.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js": {
+        "code": "log(\\"script2\\");",
+        "originalLength": 50,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 15,
+      },
+    },
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script2",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "code": "function log(message) {
+  console.log(message);
+}
+export {
+  log as l
+};
+",
+    "dynamicImports": [],
+    "exports": [
+      "l",
+    ],
+    "facadeModuleId": null,
+    "fileName": "assets/log.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": false,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "log",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"content_scripts\\": [
+    {
+      \\"js\\": [
+        \\"test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
+    {
+      \\"js\\": [
+        \\"test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    }
+  ],
+  \\"web_accessible_resources\\": [
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js\\",
+        \\"assets/log.js\\",
+        \\"test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js\\",
+        \\"assets/log.js\\",
+        \\"test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js\\",
+        \\"assets/log.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    },
+    {
+      \\"resources\\": [
+        \\"assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js\\",
+        \\"assets/log.js\\"
+      ],
+      \\"matches\\": [
+        \\"<all_urls>\\"
+      ]
+    }
+  ]
+}",
+    "type": "asset",
+  },
+]
+`;
