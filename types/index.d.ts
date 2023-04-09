@@ -37,7 +37,7 @@ interface ViteWebExtensionOptions {
   useDynamicUrlWebAccessibleResources?: boolean;
 
   /**
-   * On build, attempt to merge similar web accessible resource definitions and sort `resources` within them
+   * On build, in Manifest V3, merge web accessible resource definitions that have matching non-`resource` properties and sort `resources`. In Manifest V2, sort web accessible resources.
    * Default: true
    */
   optimizeWebAccessibleResources?: boolean;
