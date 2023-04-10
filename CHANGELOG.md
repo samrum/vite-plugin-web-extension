@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v3.1.1...v4.0.0) (2023-04-10)
+
+### ⚠ BREAKING CHANGES
+
+Check MIGRATION.md for migration instructions
+
+- The webAccessibleScripts option has been removed and replaced by the additionalInputs option. For similar functionality, move scripts to additionalInputs.scripts and html files to additionalInputs.html. Check the README or MIGRATION files for detailed usage instructions.
+- useDynamicUrlContentScripts option renamed to useDynamicUrlWebAccessibleResources
+- dev mode plugin HTML transforms are no longer applied by default. Use the devHtmlTransform option to enable if needed.
+- optimize web accessible resources (#89)
+
+### Features
+
+- additionalInputs option ([#88](https://github.com/samrum/vite-plugin-web-extension/issues/88)) ([cd9590e](https://github.com/samrum/vite-plugin-web-extension/commit/cd9590ee65cc4cf227c388bd56c69b3ca5206de0))
+- optimize web accessible resources ([#89](https://github.com/samrum/vite-plugin-web-extension/issues/89)) ([d673de2](https://github.com/samrum/vite-plugin-web-extension/commit/d673de263da760697f77aba3e26131acb541e42d))
+
+### Bug Fixes
+
+- react HMR HTML errors due to CSP in manifest V3 ([#86](https://github.com/samrum/vite-plugin-web-extension/issues/86)) ([49db181](https://github.com/samrum/vite-plugin-web-extension/commit/49db1817ae2c648065283c77a87189e2ef92e969))
+- Input TypeScript file extensions not being correctly converted to .js in output manifest.json
+
 ### [3.1.1](https://github.com/samrum/vite-plugin-web-extension/compare/v3.1.0...v3.1.1) (2023-02-25)
 
 ### Bug Fixes
