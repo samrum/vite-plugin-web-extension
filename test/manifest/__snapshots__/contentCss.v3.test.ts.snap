@@ -20,13 +20,6 @@ exports[`contentCss - Manifest V3 1`] = `
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/contentCss/content.js",
-    "name": undefined,
-    "source": "console.log(\\"content\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -49,6 +42,13 @@ exports[`contentCss - Manifest V3 1`] = `
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentCss/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content\\");
+",
     "type": "asset",
   },
 ]

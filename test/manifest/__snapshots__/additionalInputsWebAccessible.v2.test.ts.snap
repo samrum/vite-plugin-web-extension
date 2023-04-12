@@ -3,6 +3,48 @@
 exports[`additionalInputsWebAccessible - Manifest V2 1`] = `
 [
   {
+    "code": "function log(message) {
+  console.log(message);
+}
+export {
+  log as l
+};
+",
+    "dynamicImports": [],
+    "exports": [
+      "l",
+    ],
+    "facadeModuleId": null,
+    "fileName": "assets/log.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {},
+    "imports": [],
+    "isDynamicEntry": false,
+    "isEntry": false,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
+        "code": "function log(message) {
+  console.log(message);
+}",
+        "originalLength": 65,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 49,
+      },
+    },
+    "name": "log",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {},
+    },
+  },
+  {
     "code": "import { l as log } from \\"../../../../log.js\\";
 log(\\"chunkedScript1\\");
 ",
@@ -117,46 +159,45 @@ log(\\"chunkedScript3\\");
     },
   },
   {
-    "code": "function log(message) {
-  console.log(message);
-}
-export {
-  log as l
-};
-",
-    "dynamicImports": [],
-    "exports": [
-      "l",
-    ],
-    "facadeModuleId": null,
-    "fileName": "assets/log.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
-    "imports": [],
-    "isDynamicEntry": false,
-    "isEntry": false,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"assets/log.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
+    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script4.js\\",
+    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\"
+  ]
 }",
-        "originalLength": 65,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 49,
-      },
-    },
-    "name": "log",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {},
-    },
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\"))})();",
+    "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script1.js",
@@ -191,47 +232,6 @@ export {
     "name": undefined,
     "source": "console.log(\\"script5\\");
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
-    "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"))})();",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
-    "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"))})();",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
-    "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\"))})();",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"assets/log.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script4.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\"
-  ]
-}",
     "type": "asset",
   },
 ]

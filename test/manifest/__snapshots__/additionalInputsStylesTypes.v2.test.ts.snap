@@ -3,6 +3,20 @@
 exports[`additionalInputsStylesTypes - Manifest V2 1`] = `
 [
   {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsStylesTypes/style1.css\\",
+    \\"test/manifest/resources/additionalInputsStylesTypes/style2.css\\"
+  ]
+}",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/additionalInputsStylesTypes/style1.css",
     "name": undefined,
     "source": "body {
@@ -16,20 +30,6 @@ exports[`additionalInputsStylesTypes - Manifest V2 1`] = `
     "name": undefined,
     "source": "body {
   color: green;
-}",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsStylesTypes/style1.css\\",
-    \\"test/manifest/resources/additionalInputsStylesTypes/style2.css\\"
-  ]
 }",
     "type": "asset",
   },

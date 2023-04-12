@@ -3,6 +3,15 @@
 exports[`additionalInputsHtml - Manifest V2 1`] = `
 [
   {
+    "fileName": "assets/html.css",
+    "name": "html.css",
+    "source": "body {
+  color: red;
+}
+",
+    "type": "asset",
+  },
+  {
     "code": "function log(message) {
   console.log(message);
 }
@@ -67,12 +76,16 @@ const style = \\"\\";
     },
   },
   {
-    "fileName": "assets/html.css",
-    "name": "html.css",
-    "source": "body {
-  color: red;
-}
-",
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"web_accessible_resources\\": [
+    \\"test/manifest/resources/additionalInputsHtml/html.html\\"
+  ]
+}",
     "type": "asset",
   },
   {
@@ -91,19 +104,6 @@ const style = \\"\\";
   </head>
 </html>
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsHtml/html.html\\"
-  ]
-}",
     "type": "asset",
   },
 ]

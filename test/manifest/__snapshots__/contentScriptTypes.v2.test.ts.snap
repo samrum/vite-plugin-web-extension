@@ -3,20 +3,6 @@
 exports[`contentScriptTypes - Manifest V2 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/contentScriptTypes/content1.js",
-    "name": undefined,
-    "source": "console.log(\\"content1\\");
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/contentScriptTypes/content2.js",
-    "name": undefined,
-    "source": "console.log(\\"content2\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -42,6 +28,20 @@ exports[`contentScriptTypes - Manifest V2 1`] = `
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentScriptTypes/content1.js",
+    "name": undefined,
+    "source": "console.log(\\"content1\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentScriptTypes/content2.js",
+    "name": undefined,
+    "source": "console.log(\\"content2\\");
+",
     "type": "asset",
   },
 ]

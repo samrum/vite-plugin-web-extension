@@ -3,23 +3,6 @@
 exports[`additionalInputsScriptsUnchunkedImport - Manifest V3 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js",
-    "name": undefined,
-    "source": "function log(message) {
-  console.log(message);
-}
-log(\\"script1\\");
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js",
-    "name": undefined,
-    "source": "console.log(\\"script2\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -39,6 +22,23 @@ log(\\"script1\\");
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js",
+    "name": undefined,
+    "source": "function log(message) {
+  console.log(message);
+}
+log(\\"script1\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js",
+    "name": undefined,
+    "source": "console.log(\\"script2\\");
+",
     "type": "asset",
   },
 ]

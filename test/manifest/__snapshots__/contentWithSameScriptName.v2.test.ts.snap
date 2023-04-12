@@ -3,20 +3,6 @@
 exports[`contentWithSameScriptName - Manifest V2 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/contentWithSameScriptName/content1/content.js",
-    "name": undefined,
-    "source": "console.log(\\"content1\\");
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/contentWithSameScriptName/content2/content.js",
-    "name": undefined,
-    "source": "console.log(\\"content2\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -44,6 +30,20 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentWithSameScriptName/content1/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content1\\");
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentWithSameScriptName/content2/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content2\\");
+",
     "type": "asset",
   },
 ]

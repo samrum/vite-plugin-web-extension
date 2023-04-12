@@ -3,13 +3,6 @@
 exports[`contentWithNoImports - Manifest V2 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/contentWithNoImports/content.js",
-    "name": undefined,
-    "source": "console.log(\\"content\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -28,6 +21,13 @@ exports[`contentWithNoImports - Manifest V2 1`] = `
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentWithNoImports/content.js",
+    "name": undefined,
+    "source": "console.log(\\"content\\");
+",
     "type": "asset",
   },
 ]

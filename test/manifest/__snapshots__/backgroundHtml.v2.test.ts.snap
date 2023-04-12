@@ -55,6 +55,20 @@ log(\\"background\\");
     },
   },
   {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"background\\": {
+    \\"page\\": \\"test/manifest/resources/backgroundHtml/background.html\\",
+    \\"persistent\\": false
+  }
+}",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/backgroundHtml/background.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
@@ -68,20 +82,6 @@ log(\\"background\\");
   </head>
 </html>
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"background\\": {
-    \\"page\\": \\"test/manifest/resources/backgroundHtml/background.html\\",
-    \\"persistent\\": false
-  }
-}",
     "type": "asset",
   },
 ]

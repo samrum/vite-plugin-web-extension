@@ -63,50 +63,52 @@ export async function runTest<ManifestType extends chrome.runtime.Manifest>({
   });
 
   expect(
-    output.map((file) => {
-      if (file.type === "chunk") {
-        const modules = {};
-        for (const [key, value] of Object.entries(file.modules)) {
-          modules[trimFilePathToRepoDirectory(key)] = value;
+    output
+      .map((file) => {
+        if (file.type === "chunk") {
+          const modules = {};
+          for (const [key, value] of Object.entries(file.modules)) {
+            modules[trimFilePathToRepoDirectory(key)] = value;
+          }
+
+          return {
+            code: file.code,
+            dynamicImports: file.dynamicImports,
+            exports: file.exports,
+            facadeModuleId: file.facadeModuleId
+              ? trimFilePathToRepoDirectory(file.facadeModuleId)
+              : null,
+            fileName: normalizeFileName(file.fileName),
+            implicitlyLoadedBefore: file.implicitlyLoadedBefore,
+            importedBindings: file.importedBindings,
+            imports: file.imports,
+            isDynamicEntry: file.isDynamicEntry,
+            isEntry: file.isEntry,
+            isImplicitEntry: file.isImplicitEntry,
+            map: file.map,
+            modules: modules,
+            name: normalizeFileName(file.name),
+            referencedFiles: file.referencedFiles,
+            type: file.type,
+            viteMetadata: file.viteMetadata,
+          };
         }
 
-        return {
-          code: file.code,
-          dynamicImports: file.dynamicImports,
-          exports: file.exports,
-          facadeModuleId: file.facadeModuleId
-            ? trimFilePathToRepoDirectory(file.facadeModuleId)
-            : null,
-          fileName: normalizeFileName(file.fileName),
-          implicitlyLoadedBefore: file.implicitlyLoadedBefore,
-          importedBindings: file.importedBindings,
-          imports: file.imports,
-          isDynamicEntry: file.isDynamicEntry,
-          isEntry: file.isEntry,
-          isImplicitEntry: file.isImplicitEntry,
-          map: file.map,
-          modules: modules,
-          name: normalizeFileName(file.name),
-          referencedFiles: file.referencedFiles,
-          type: file.type,
-          viteMetadata: file.viteMetadata,
-        };
-      }
+        if (file.type === "asset") {
+          return {
+            fileName: normalizeFileName(file.fileName),
+            name:
+              typeof file.name === "undefined"
+                ? undefined
+                : normalizeFileName(file.name),
+            source: file.source,
+            type: file.type,
+          };
+        }
 
-      if (file.type === "asset") {
-        return {
-          fileName: normalizeFileName(file.fileName),
-          name:
-            typeof file.name === "undefined"
-              ? undefined
-              : normalizeFileName(file.name),
-          source: file.source,
-          type: file.type,
-        };
-      }
-
-      return file;
-    })
+        return file;
+      })
+      .sort((a, b) => a.fileName.localeCompare(b.fileName))
   ).toMatchSnapshot();
 }
 
