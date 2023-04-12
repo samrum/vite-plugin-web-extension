@@ -30,29 +30,6 @@ exports[`chunkCssRewrite - Manifest V3 1`] = `
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
-    "name": undefined,
-    "source": "/* empty css                         */const content1 = \\"\\";
-console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
-    "name": undefined,
-    "source": "/* empty css                         */const content2 = \\"\\";
-console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/chunkCssRewrite/contentNoCss.js",
-    "name": undefined,
-    "source": "console.log([]);
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -103,6 +80,29 @@ console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
+    "name": undefined,
+    "source": "/* empty css                         */const content1 = \\"\\";
+console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
+    "name": undefined,
+    "source": "/* empty css                         */const content2 = \\"\\";
+console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/chunkCssRewrite/contentNoCss.js",
+    "name": undefined,
+    "source": "console.log([]);
+",
     "type": "asset",
   },
 ]

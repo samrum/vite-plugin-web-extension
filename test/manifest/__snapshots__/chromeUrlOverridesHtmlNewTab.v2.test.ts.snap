@@ -55,6 +55,19 @@ log(\\"chromeUrlOverridesHtml\\");
     },
   },
   {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 2,
+  \\"chrome_url_overrides\\": {
+    \\"newtab\\": \\"test/manifest/resources/chromeUrlOverridesHtml/newtab.html\\"
+  }
+}",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/chromeUrlOverridesHtml/newtab.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
@@ -68,19 +81,6 @@ log(\\"chromeUrlOverridesHtml\\");
   </head>
 </html>
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"chrome_url_overrides\\": {
-    \\"newtab\\": \\"test/manifest/resources/chromeUrlOverridesHtml/newtab.html\\"
-  }
-}",
     "type": "asset",
   },
 ]

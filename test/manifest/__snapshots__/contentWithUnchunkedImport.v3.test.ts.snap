@@ -3,16 +3,6 @@
 exports[`contentWithUnchunkedImport - Manifest V3 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/contentWithUnchunkedImport/content.js",
-    "name": undefined,
-    "source": "function log(message) {
-  console.log(message);
-}
-log(\\"content\\");
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -35,6 +25,16 @@ log(\\"content\\");
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/contentWithUnchunkedImport/content.js",
+    "name": undefined,
+    "source": "function log(message) {
+  console.log(message);
+}
+log(\\"content\\");
+",
     "type": "asset",
   },
 ]

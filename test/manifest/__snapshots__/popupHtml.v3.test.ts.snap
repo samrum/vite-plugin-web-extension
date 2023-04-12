@@ -55,6 +55,19 @@ log(\\"popup\\");
     },
   },
   {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"action\\": {
+    \\"default_popup\\": \\"test/manifest/resources/popupHtml/popup.html\\"
+  }
+}",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/popupHtml/popup.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
@@ -68,19 +81,6 @@ log(\\"popup\\");
   </head>
 </html>
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"action\\": {
-    \\"default_popup\\": \\"test/manifest/resources/popupHtml/popup.html\\"
-  }
-}",
     "type": "asset",
   },
 ]

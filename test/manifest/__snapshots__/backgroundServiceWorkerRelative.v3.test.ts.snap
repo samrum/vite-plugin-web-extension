@@ -34,12 +34,6 @@ exports[`backgroundServiceWorker - Manifest V3 1`] = `
     },
   },
   {
-    "fileName": "serviceWorker.js",
-    "name": undefined,
-    "source": "import \\"/assets/test/manifest/resources/backgroundServiceWorker/serviceWorker.js\\";",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -51,6 +45,12 @@ exports[`backgroundServiceWorker - Manifest V3 1`] = `
     \\"type\\": \\"module\\"
   }
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "serviceWorker.js",
+    "name": undefined,
+    "source": "import \\"/assets/test/manifest/resources/backgroundServiceWorker/serviceWorker.js\\";",
     "type": "asset",
   },
 ]

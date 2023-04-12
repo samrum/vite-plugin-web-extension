@@ -3,6 +3,15 @@
 exports[`additionalInputsHtml - Manifest V3 1`] = `
 [
   {
+    "fileName": "assets/html.css",
+    "name": "html.css",
+    "source": "body {
+  color: red;
+}
+",
+    "type": "asset",
+  },
+  {
     "code": "function log(message) {
   console.log(message);
 }
@@ -67,33 +76,6 @@ const style = \\"\\";
     },
   },
   {
-    "fileName": "assets/html.css",
-    "name": "html.css",
-    "source": "body {
-  color: red;
-}
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsHtml/html.html",
-    "name": undefined,
-    "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
-  <head>
-    <meta charset=\\"UTF-8\\" />
-    
-
-    
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/additionalInputsHtml/html.js\\"></script>
-    <link rel=\\"stylesheet\\" href=\\"/assets/html.css\\">
-  </head>
-</html>
-",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -112,6 +94,24 @@ const style = \\"\\";
     }
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsHtml/html.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    
+
+    
+    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/additionalInputsHtml/html.js\\"></script>
+    <link rel=\\"stylesheet\\" href=\\"/assets/html.css\\">
+  </head>
+</html>
+",
     "type": "asset",
   },
 ]

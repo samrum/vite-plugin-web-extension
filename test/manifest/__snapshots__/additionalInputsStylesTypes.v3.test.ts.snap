@@ -3,23 +3,6 @@
 exports[`additionalInputsStylesTypes - Manifest V3 1`] = `
 [
   {
-    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style1.css",
-    "name": undefined,
-    "source": "body {
-  color: red;
-}
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style2.css",
-    "name": undefined,
-    "source": "body {
-  color: green;
-}",
-    "type": "asset",
-  },
-  {
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
@@ -38,6 +21,23 @@ exports[`additionalInputsStylesTypes - Manifest V3 1`] = `
       \\"use_dynamic_url\\": true
     }
   ]
+}",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style1.css",
+    "name": undefined,
+    "source": "body {
+  color: red;
+}
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/additionalInputsStylesTypes/style2.css",
+    "name": undefined,
+    "source": "body {
+  color: green;
 }",
     "type": "asset",
   },

@@ -3,160 +3,6 @@
 exports[`fullExtension - Manifest V2 1`] = `
 [
   {
-    "code": "import { l as logo } from \\"../../../../../../../logo.js\\";
-const style = \\"\\";
-const imageUrl = new URL(logo, import.meta.url).href;
-document.querySelector(\\"#app\\").innerHTML = \`
-  <img src=\\"\${imageUrl}\\" height=\\"45\\" alt=\\"\\" />
-  <h1>Options</h1>
-  <a href=\\"https://vitejs.dev/guide/features.html\\" target=\\"_blank\\">Vite Docs</a>
-\`;
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html",
-    "fileName": "assets/test/manifest/resources/fullExtension/src/entries/options/index.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/logo.js": [
-        "l",
-      ],
-    },
-    "imports": [
-      "assets/logo.js",
-    ],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html": {
-        "code": null,
-        "originalLength": 212,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 0,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/main.js": {
-        "code": "const imageUrl = new URL(logo, import.meta.url).href;
-
-document.querySelector(\\"#app\\").innerHTML = \`
-  <img src=\\"\${imageUrl}\\" height=\\"45\\" alt=\\"\\" />
-  <h1>Options</h1>
-  <a href=\\"https://vitejs.dev/guide/features.html\\" target=\\"_blank\\">Vite Docs</a>
-\`;",
-        "originalLength": 315,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 249,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/style.css": {
-        "code": "const style = '';",
-        "originalLength": 202,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 17,
-      },
-    },
-    "name": "test/manifest/resources/fullExtension/src/entries/options/index",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {
-        "assets/index.css",
-      },
-    },
-  },
-  {
-    "code": "import { l as logo } from \\"../../../../../../../../logo.js\\";
-async function renderContent(cssPaths, render = (_appRoot) => {
-}) {
-  console.log(\\"renderContent\\", cssPaths);
-}
-const style = \\"\\";
-renderContent([\\"assets/main.css\\"], (appRoot) => {
-  const logoImageUrl = new URL(logo, import.meta.url).href;
-  appRoot.innerHTML = \`
-    <div class=\\"logo\\">
-      <img src=\\"\${logoImageUrl}\\" height=\\"50\\" alt=\\"\\" />
-    </div>
-  \`;
-});
-console.log(chrome.runtime.getURL(\\"src/lib.js\\"));
-",
-    "dynamicImports": [],
-    "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
-    "fileName": "assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/logo.js": [
-        "l",
-      ],
-    },
-    "imports": [
-      "assets/logo.js",
-    ],
-    "isDynamicEntry": false,
-    "isEntry": true,
-    "isImplicitEntry": false,
-    "map": null,
-    "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js": {
-        "code": "renderContent(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS, (appRoot) => {
-  const logoImageUrl = new URL(logo, import.meta.url).href;
-
-  appRoot.innerHTML = \`
-    <div class=\\"logo\\">
-      <img src=\\"\${logoImageUrl}\\" height=\\"50\\" alt=\\"\\" />
-    </div>
-  \`;
-});
-
-console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
-        "originalLength": 421,
-        "removedExports": [],
-        "renderedExports": [],
-        "renderedLength": 306,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/style.css": {
-        "code": "const style = '';",
-        "originalLength": 296,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 17,
-      },
-      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/renderContent.js": {
-        "code": "async function renderContent(
-  cssPaths,
-  render = (_appRoot) => {}
-) {
-  console.log(\\"renderContent\\", cssPaths);
-}",
-        "originalLength": 133,
-        "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 117,
-      },
-    },
-    "name": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main",
-    "referencedFiles": [],
-    "type": "chunk",
-    "viteMetadata": {
-      "importedAssets": Set {},
-      "importedCss": Set {
-        "assets/main.css",
-      },
-    },
-  },
-  {
     "code": "browser.runtime.onInstalled.addListener(() => {
   console.log(\\"Extension installed\\");
 });
@@ -224,6 +70,23 @@ async function getCurrentTab() {
       "importedAssets": Set {},
       "importedCss": Set {},
     },
+  },
+  {
+    "fileName": "assets/index.css",
+    "name": "index.css",
+    "source": "#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+h1 {
+  margin: 5px;
+}
+",
+    "type": "asset",
   },
   {
     "code": "const logo = \\"/assets/logo.svg\\";
@@ -3294,23 +3157,6 @@ export {
     "type": "asset",
   },
   {
-    "fileName": "assets/index.css",
-    "name": "index.css",
-    "source": "#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-h1 {
-  margin: 5px;
-}
-",
-    "type": "asset",
-  },
-  {
     "fileName": "assets/main.css",
     "name": "main.css",
     "source": ".logo {
@@ -3336,42 +3182,164 @@ img {
     "type": "asset",
   },
   {
+    "code": "import { l as logo } from \\"../../../../../../../../logo.js\\";
+async function renderContent(cssPaths, render = (_appRoot) => {
+}) {
+  console.log(\\"renderContent\\", cssPaths);
+}
+const style = \\"\\";
+renderContent([\\"assets/main.css\\"], (appRoot) => {
+  const logoImageUrl = new URL(logo, import.meta.url).href;
+  appRoot.innerHTML = \`
+    <div class=\\"logo\\">
+      <img src=\\"\${logoImageUrl}\\" height=\\"50\\" alt=\\"\\" />
+    </div>
+  \`;
+});
+console.log(chrome.runtime.getURL(\\"src/lib.js\\"));
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
+    "fileName": "assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/logo.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/logo.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js": {
+        "code": "renderContent(import.meta.PLUGIN_WEB_EXT_CHUNK_CSS_PATHS, (appRoot) => {
+  const logoImageUrl = new URL(logo, import.meta.url).href;
+
+  appRoot.innerHTML = \`
+    <div class=\\"logo\\">
+      <img src=\\"\${logoImageUrl}\\" height=\\"50\\" alt=\\"\\" />
+    </div>
+  \`;
+});
+
+console.log(chrome.runtime.getURL(\\"src/lib.js\\"));",
+        "originalLength": 421,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 306,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/primary/style.css": {
+        "code": "const style = '';",
+        "originalLength": 296,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 17,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/contentScript/renderContent.js": {
+        "code": "async function renderContent(
+  cssPaths,
+  render = (_appRoot) => {}
+) {
+  console.log(\\"renderContent\\", cssPaths);
+}",
+        "originalLength": 133,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 117,
+      },
+    },
+    "name": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {
+        "assets/main.css",
+      },
+    },
+  },
+  {
+    "code": "import { l as logo } from \\"../../../../../../../logo.js\\";
+const style = \\"\\";
+const imageUrl = new URL(logo, import.meta.url).href;
+document.querySelector(\\"#app\\").innerHTML = \`
+  <img src=\\"\${imageUrl}\\" height=\\"45\\" alt=\\"\\" />
+  <h1>Options</h1>
+  <a href=\\"https://vitejs.dev/guide/features.html\\" target=\\"_blank\\">Vite Docs</a>
+\`;
+",
+    "dynamicImports": [],
+    "exports": [],
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html",
+    "fileName": "assets/test/manifest/resources/fullExtension/src/entries/options/index.js",
+    "implicitlyLoadedBefore": [],
+    "importedBindings": {
+      "assets/logo.js": [
+        "l",
+      ],
+    },
+    "imports": [
+      "assets/logo.js",
+    ],
+    "isDynamicEntry": false,
+    "isEntry": true,
+    "isImplicitEntry": false,
+    "map": null,
+    "modules": {
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/index.html": {
+        "code": null,
+        "originalLength": 212,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 0,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/main.js": {
+        "code": "const imageUrl = new URL(logo, import.meta.url).href;
+
+document.querySelector(\\"#app\\").innerHTML = \`
+  <img src=\\"\${imageUrl}\\" height=\\"45\\" alt=\\"\\" />
+  <h1>Options</h1>
+  <a href=\\"https://vitejs.dev/guide/features.html\\" target=\\"_blank\\">Vite Docs</a>
+\`;",
+        "originalLength": 315,
+        "removedExports": [],
+        "renderedExports": [],
+        "renderedLength": 249,
+      },
+      "vite-plugin-web-extension/test/manifest/resources/fullExtension/src/entries/options/style.css": {
+        "code": "const style = '';",
+        "originalLength": 202,
+        "removedExports": [],
+        "renderedExports": [
+          "default",
+        ],
+        "renderedLength": 17,
+      },
+    },
+    "name": "test/manifest/resources/fullExtension/src/entries/options/index",
+    "referencedFiles": [],
+    "type": "chunk",
+    "viteMetadata": {
+      "importedAssets": Set {},
+      "importedCss": Set {
+        "assets/index.css",
+      },
+    },
+  },
+  {
     "fileName": "background.html",
     "name": undefined,
     "source": "<!DOCTYPE html><html lang=\\"en\\"><head><meta charset=\\"UTF-8\\" />  <script type=\\"module\\" crossorigin src=\\"/assets/background.js\\"></script>
 </head></html>",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/fullExtension/src/entries/options/index.html",
-    "name": undefined,
-    "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
-  <head>
-    <meta charset=\\"UTF-8\\" />
-    <title>Options</title>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/fullExtension/src/entries/options/index.js\\"></script>
-    <link rel=\\"stylesheet\\" href=\\"/assets/index.css\\">
-  </head>
-  <body>
-    <div id=\\"app\\"></div>
-    
-  </body>
-</html>
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/fullExtension/src/lib.js",
-    "name": undefined,
-    "source": "console.log(\\"lib.js\\");
-",
-    "type": "asset",
-  },
-  {
-    "fileName": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
-    "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js\\"))})();",
     "type": "asset",
   },
   {
@@ -3416,6 +3384,38 @@ img {
     \\"test/manifest/resources/fullExtension/src/lib.js\\"
   ]
 }",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js",
+    "name": undefined,
+    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/fullExtension/src/entries/contentScript/primary/main.js\\"))})();",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/fullExtension/src/entries/options/index.html",
+    "name": undefined,
+    "source": "<!DOCTYPE html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    <title>Options</title>
+    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/fullExtension/src/entries/options/index.js\\"></script>
+    <link rel=\\"stylesheet\\" href=\\"/assets/index.css\\">
+  </head>
+  <body>
+    <div id=\\"app\\"></div>
+    
+  </body>
+</html>
+",
+    "type": "asset",
+  },
+  {
+    "fileName": "test/manifest/resources/fullExtension/src/lib.js",
+    "name": undefined,
+    "source": "console.log(\\"lib.js\\");
+",
     "type": "asset",
   },
 ]

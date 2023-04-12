@@ -55,6 +55,17 @@ log(\\"devtools\\");
     },
   },
   {
+    "fileName": "manifest.json",
+    "name": undefined,
+    "source": "{
+  \\"version\\": \\"1.0.0\\",
+  \\"name\\": \\"Manifest Name\\",
+  \\"manifest_version\\": 3,
+  \\"devtools_page\\": \\"test/manifest/resources/devtoolsHtml/devtools.html\\"
+}",
+    "type": "asset",
+  },
+  {
     "fileName": "test/manifest/resources/devtoolsHtml/devtools.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
@@ -68,17 +79,6 @@ log(\\"devtools\\");
   </head>
 </html>
 ",
-    "type": "asset",
-  },
-  {
-    "fileName": "manifest.json",
-    "name": undefined,
-    "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"devtools_page\\": \\"test/manifest/resources/devtoolsHtml/devtools.html\\"
-}",
     "type": "asset",
   },
 ]
