@@ -15,9 +15,9 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v2.2.4
 
       - uses: actions/setup-node@v2
         with:
@@ -27,11 +27,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Lint
-        run: pnpm lint:check
+      - name: Format
+        run: pnpm run format:check
+
+      - name: Typecheck
+        run: pnpm run typecheck
 
       - name: Test
-        run: pnpm test
+        run: pnpm run test
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build
