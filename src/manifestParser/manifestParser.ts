@@ -155,7 +155,7 @@ export default abstract class ManifestParser<
 
   protected parseInputHtmlFiles(result: ParseResult<Manifest>) {
     this.getHtmlFileNames(result.manifest).forEach((htmlFileName) =>
-      this.parseInputHtmlFile(htmlFileName, result)
+      this.addInputToParseResult(htmlFileName, result)
     );
 
     return result;
@@ -175,17 +175,6 @@ export default abstract class ManifestParser<
     });
 
     return result;
-  }
-
-  protected parseInputHtmlFile(
-    htmlFileName: string | undefined,
-    result: ParseResult<Manifest>
-  ): ParseResult<Manifest> {
-    if (!htmlFileName) {
-      return result;
-    }
-
-    return this.addInputToParseResult(htmlFileName, result);
   }
 
   protected parseOutputContentCss(
