@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v4.0.0...v4.1.0) (2023-04-13)
+
+### Features
+
+- support hash and query properties in manifest HTML filenames ([#92](https://github.com/samrum/vite-plugin-web-extension/issues/92)) ([12950b1](https://github.com/samrum/vite-plugin-web-extension/commit/12950b1418141b4d5315ad9d48ad13b01b64cf36)), closes [#90](https://github.com/samrum/vite-plugin-web-extension/issues/90)
+
 ## [4.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v3.1.1...v4.0.0) (2023-04-10)
 
 ### ⚠ BREAKING CHANGES
