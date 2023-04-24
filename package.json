@@ -24,6 +24,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "prepare": "husky install",
+    "prepublishOnly": "pnpm run build",
     "release": "standard-version --sign"
   },
   "standard-version": {
