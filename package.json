@@ -8,7 +8,7 @@
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
-  "packageManager": "pnpm@7.6.0",
+  "packageManager": "pnpm@8.3.1",
   "files": [
     "client.js",
     "client.d.ts",
@@ -24,6 +24,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "prepare": "husky install",
+    "prepublishOnly": "pnpm run build",
     "release": "standard-version --sign"
   },
   "standard-version": {
