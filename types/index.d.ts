@@ -1,4 +1,4 @@
-import type { Plugin, ChunkMetadata, FilterPattern } from "vite";
+import type { Plugin } from "vite";
 
 type WebAccessibleDefinition =
   | {
