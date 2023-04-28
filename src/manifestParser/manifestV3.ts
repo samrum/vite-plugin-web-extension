@@ -197,7 +197,9 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
       throw new Error(`Failed to find chunk info for ${serviceWorkerFileName}`);
     }
 
-    const serviceWorkerLoader = getServiceWorkerLoaderFile(chunkInfo.fileName);
+    const serviceWorkerLoader = getServiceWorkerLoaderFile([
+      chunkInfo.fileName,
+    ]);
 
     result.manifest.background!.service_worker = serviceWorkerLoader.fileName;
 

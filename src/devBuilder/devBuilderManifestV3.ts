@@ -27,9 +27,10 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
 
     const fileName = manifest.background?.service_worker;
 
-    const serviceWorkerLoader = getServiceWorkerLoaderFile(
-      `${this.hmrServerOrigin}/${fileName}`
-    );
+    const serviceWorkerLoader = getServiceWorkerLoaderFile([
+      this.hmrViteEnvFileUrl,
+      `${this.hmrServerOrigin}/${fileName}`,
+    ]);
 
     manifest.background.service_worker = serviceWorkerLoader.fileName;
 

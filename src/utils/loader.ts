@@ -16,31 +16,41 @@ export function getScriptHtmlLoaderFile(name: string, scriptSrcs: string[]) {
 
 export function getScriptLoaderFile(
   scriptFileName: string,
-  outputChunkFileName: string
+  inputFileNames: string[]
 ): {
   fileName: string;
   source: string;
 } {
   const outputFile = getOutputFileName(scriptFileName);
 
-  const importPath = outputChunkFileName.startsWith("http")
-    ? `'${outputChunkFileName}'`
-    : `chrome.runtime.getURL("${outputChunkFileName}")`;
+  const importStatements = inputFileNames
+    .filter((fileName) => Boolean(fileName))
+    .map((fileName) => {
+      return fileName.startsWith("http")
+        ? `"${fileName}"`
+        : `chrome.runtime.getURL("${fileName}")`;
+    })
+    .map((importPath) => `await import(${importPath})`)
+    .join(";");
 
   return {
     fileName: `${outputFile}.js`,
-    source: `(async()=>{await import(${importPath})})();`,
+    source: `(async()=>{${importStatements}})();`,
   };
 }
 
-export function getServiceWorkerLoaderFile(serviceWorkerFileName: string) {
-  const importPath = serviceWorkerFileName.startsWith("http")
-    ? `${serviceWorkerFileName}`
-    : `/${serviceWorkerFileName}`;
+export function getServiceWorkerLoaderFile(inputFileNames: string[]) {
+  const importStatements = inputFileNames
+    .filter((fileName) => Boolean(fileName))
+    .map((fileName) => {
+      return fileName.startsWith("http") ? fileName : `/${fileName}`;
+    })
+    .map((importPath) => `import "${importPath}";`)
+    .join("\n");
 
   return {
     fileName: `serviceWorker.js`,
-    source: `import "${importPath}";`,
+    source: importStatements,
   };
 }
 
@@ -52,5 +62,5 @@ export function getScriptLoaderForOutputChunk(
     return null;
   }
 
-  return getScriptLoaderFile(contentScriptFileName, chunk.fileName);
+  return getScriptLoaderFile(contentScriptFileName, [chunk.fileName]);
 }
