@@ -15,6 +15,7 @@ export default abstract class DevBuilder<
   protected hmrServerOrigin = "";
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
+  protected hmrViteEnvFileUrl = "";
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -53,6 +54,7 @@ export default abstract class DevBuilder<
     manifestHtmlFiles: string[];
   }) {
     this.hmrServerOrigin = this.getHmrServerOrigin(devServerPort);
+    this.hmrViteEnvFileUrl = this.getHmrViteEnvFileUrl();
 
     await emptyDir(this.outDir);
     const publicDir = path.resolve(
@@ -173,10 +175,10 @@ export default abstract class DevBuilder<
   protected async writeManifestScriptFile(fileName: string): Promise<string> {
     const outputFileName = getOutputFileName(fileName);
 
-    const scriptLoaderFile = getScriptLoaderFile(
-      outputFileName,
-      `${this.hmrServerOrigin}/${fileName}`
-    );
+    const scriptLoaderFile = getScriptLoaderFile(outputFileName, [
+      this.hmrViteEnvFileUrl,
+      `${this.hmrServerOrigin}/${fileName}`,
+    ]);
 
     const outFile = `${this.outDir}/${scriptLoaderFile.fileName}`;
 
@@ -301,5 +303,22 @@ export default abstract class DevBuilder<
     }
 
     return `http://${this.viteConfig.server.hmr!.host}:${devServerPort}`;
+  }
+
+  private getHmrViteEnvFileUrl(): string {
+    const envFileName = this.viteConfig.resolve?.alias
+      ?.reverse()
+      .find((pattern) =>
+        pattern.replacement.endsWith("vite/dist/client/env.mjs")
+      )?.replacement;
+
+    if (!envFileName) {
+      return "";
+    }
+
+    let envPath = normalizePath(envFileName);
+    envPath = envPath.slice(envPath.indexOf("node_modules"));
+
+    return `${this.hmrServerOrigin}/${envPath}`;
   }
 }
