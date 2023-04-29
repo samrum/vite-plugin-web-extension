@@ -87,6 +87,17 @@ function addCustomStyleFunctionality(source: string): string {
   return source;
 }
 
+function guardDocumentUsageWithDefault(
+  source: string,
+  documentUsage: string,
+  defaultValue: string
+): string {
+  return source.replace(
+    documentUsage,
+    `('document' in globalThis ? ${documentUsage} : ${defaultValue})`
+  );
+}
+
 function addServiceWorkerSupport(source: string): string {
   // update location.reload usages
   source = source.replaceAll(
@@ -95,27 +106,27 @@ function addServiceWorkerSupport(source: string): string {
   );
 
   // add document guards
-  const errorOverlayCheck = "document.querySelectorAll(overlayId).length";
-  source = source.replace(
-    errorOverlayCheck,
-    `('document' in globalThis ? ${errorOverlayCheck} : false)`
+  source = guardDocumentUsageWithDefault(
+    source,
+    "document.querySelectorAll(overlayId).length",
+    "false"
   );
 
-  const visibilityState = "document.visibilityState";
-  source = source.replaceAll(
-    visibilityState,
-    `('document' in globalThis ? ${visibilityState} : 'visible')`
+  source = guardDocumentUsageWithDefault(
+    source,
+    "document.visibilityState",
+    `"visible"`
   );
 
-  const queryLink = `document.querySelectorAll('link')`;
-  source = source.replace(
-    queryLink,
-    `('document' in globalThis ? ${queryLink} : [])`
+  source = guardDocumentUsageWithDefault(
+    source,
+    `document.querySelectorAll('link')`,
+    "[]"
   );
 
   source = source.replace(
     "const enableOverlay =",
-    `const enableOverlay = 'document' in globalThis &&`
+    `const enableOverlay = ('document' in globalThis) &&`
   );
 
   return source;
