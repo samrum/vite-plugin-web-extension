@@ -316,9 +316,6 @@ export default abstract class DevBuilder<
       return "";
     }
 
-    let envPath = normalizePath(envFileName);
-    envPath = envPath.slice(envPath.indexOf("node_modules"));
-
-    return `${this.hmrServerOrigin}/${envPath}`;
+    return `${this.hmrServerOrigin}${normalizePath(envFileName)}`;
   }
 }
