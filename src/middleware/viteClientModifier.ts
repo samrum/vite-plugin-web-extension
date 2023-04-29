@@ -3,7 +3,7 @@ import getEtag from "etag";
 
 // Modifies the vite HMR client to support various web extension features including:
 //  Exporting a function to add HMR style injection targets
-//  Service worker support: update usages of location.reload to fallback to chrome.runtime.reload
+//  Tweaks to support running in a service worker context
 const viteClientModifier: Connect.NextHandleFunction = (req, res, next) => {
   const _originalEnd = res.end;
 
@@ -88,10 +88,37 @@ function addCustomStyleFunctionality(source: string): string {
 }
 
 function addServiceWorkerSupport(source: string): string {
-  return source.replaceAll(
+  // update location.reload usages
+  source = source.replaceAll(
     /(window\.)?location.reload\(\)/g,
     "(location.reload?.() ?? (typeof chrome !== 'undefined' ? chrome.runtime?.reload?.() : ''))"
   );
+
+  // add document guards
+  const errorOverlayCheck = "document.querySelectorAll(overlayId).length";
+  source = source.replace(
+    errorOverlayCheck,
+    `('document' in globalThis ? ${errorOverlayCheck} : false)`
+  );
+
+  const visibilityState = "document.visibilityState";
+  source = source.replaceAll(
+    visibilityState,
+    `('document' in globalThis ? ${visibilityState} : 'visible')`
+  );
+
+  const queryLink = `document.querySelectorAll('link')`;
+  source = source.replace(
+    queryLink,
+    `('document' in globalThis ? ${queryLink} : [])`
+  );
+
+  source = source.replace(
+    "const enableOverlay =",
+    `const enableOverlay = 'document' in globalThis &&`
+  );
+
+  return source;
 }
 
 export default viteClientModifier;
