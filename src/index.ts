@@ -5,7 +5,7 @@ import { addInputScriptsToOptionsInput } from "./utils/rollup";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
 import { getVirtualModule } from "./utils/virtualModule";
-import contentScriptStyleHandler from "./middleware/contentScriptStyleHandler";
+import viteClientModifier from "./middleware/viteClientModifier";
 import {
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
@@ -37,7 +37,7 @@ export default function webExtension(
     },
 
     configureServer(server) {
-      server.middlewares.use(contentScriptStyleHandler);
+      server.middlewares.use(viteClientModifier);
 
       server.httpServer!.once("listening", () => {
         manifestParser.setDevServer(server);
