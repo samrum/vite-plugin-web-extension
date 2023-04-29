@@ -7,18 +7,18 @@
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./types/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./client": {
+      "types": "./client.d.ts",
       "import": "./client.js",
-      "require": "./client.js",
-      "types": "./client.d.ts"
+      "require": "./client.js"
     }
   },
   "engines": {
-    "node": "^14.18.0 || >=16.0.0"
+    "node": ">=16.0.0"
   },
   "packageManager": "pnpm@8.3.1",
   "files": [

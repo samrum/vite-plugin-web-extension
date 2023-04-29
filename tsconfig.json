@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["es6"],
+    "lib": ["es2021"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -12,7 +12,7 @@
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2017",
+    "target": "es2021",
     "skipLibCheck": true
   },
   "exclude": ["dist", "node_modules", "test/types"],
