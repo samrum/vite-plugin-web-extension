@@ -1,23 +1,25 @@
-import { ResolvedConfig, ViteDevServer } from "vite";
-import DevBuilder from "../devBuilder/devBuilder";
-import { getInputFileName, getOutputFileName } from "../utils/file";
 import type {
   EmittedFile,
   OutputAsset,
   OutputBundle,
   OutputChunk,
 } from "rollup";
-import { getScriptLoaderForOutputChunk } from "../utils/loader";
-import {
-  getCssAssetInfoFromBundle,
-  getChunkInfoFromBundle,
-  getOutputInfoFromBundle,
-} from "../utils/rollup";
+import { ResolvedConfig, ViteDevServer } from "vite";
 import type {
   NormalizedAdditionalInput,
   ViteWebExtensionOptions,
 } from "../../types";
-import { getScriptHtmlLoaderFile } from "../utils/loader";
+import DevBuilder from "../devBuilder/devBuilder";
+import { getInputFileName, getOutputFileName } from "../utils/file";
+import {
+  getScriptHtmlLoaderFile,
+  getScriptLoaderForOutputChunk,
+} from "../utils/loader";
+import {
+  getChunkInfoFromBundle,
+  getCssAssetInfoFromBundle,
+  getOutputInfoFromBundle,
+} from "../utils/rollup";
 import { setVirtualModule } from "../utils/virtualModule";
 
 export interface ParseResult<Manifest extends chrome.runtime.Manifest> {

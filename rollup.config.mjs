@@ -1,7 +1,7 @@
 import typescript from "@rollup/plugin-typescript";
 import pkg from "./package.json" assert { type: "json" };
 
-const external = ["path", "fs", "crypto"].concat(
+const external = ["node:crypto", "node:fs/promises", "node:path"].concat(
   Object.keys(pkg.dependencies ?? {})
 );
 

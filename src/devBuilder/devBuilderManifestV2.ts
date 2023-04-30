@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { createHash } from "node:crypto";
 import { ViteWebExtensionOptions } from "../../types";
 import DevBuilder from "./devBuilder";
 
@@ -13,7 +13,7 @@ export default class DevBuilderManifestV2 extends DevBuilder<chrome.runtime.Mani
   protected parseInlineScriptHashes(content: string) {
     const matches = content.matchAll(/<script.*?>([^<]+)<\/script>/gs);
     for (const match of matches) {
-      const shasum = crypto.createHash("sha256");
+      const shasum = createHash("sha256");
       shasum.update(match[1]);
 
       this.inlineScriptHashes.add(`'sha256-${shasum.digest("base64")}'`);

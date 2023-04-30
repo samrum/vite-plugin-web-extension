@@ -1,13 +1,14 @@
-import { copy, emptyDir, ensureDir, readFile, writeFile } from "fs-extra";
-import path from "path";
+import { copy, emptyDir, ensureDir } from "fs-extra";
+import { readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
-import { getScriptLoaderFile } from "../utils/loader";
-import { getInputFileName, getOutputFileName } from "../utils/file";
-import { getVirtualModule } from "../utils/virtualModule";
-import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
+import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
+import { getInputFileName, getOutputFileName } from "../utils/file";
 import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInputAsWebAccessibleResource";
 import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
+import { getScriptLoaderFile } from "../utils/loader";
+import { getVirtualModule } from "../utils/virtualModule";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest

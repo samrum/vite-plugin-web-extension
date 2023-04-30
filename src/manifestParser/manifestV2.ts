@@ -1,10 +1,9 @@
-import { ParseResult } from "./manifestParser";
-import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
-import ManifestParser from "./manifestParser";
-import DevBuilder from "./../devBuilder/devBuilder";
 import { OutputBundle } from "rollup";
 import { ViteWebExtensionOptions } from "../../types";
+import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
 import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
+import DevBuilder from "./../devBuilder/devBuilder";
+import ManifestParser, { ParseResult } from "./manifestParser";
 
 type Manifest = chrome.runtime.ManifestV2;
 type ManifestParseResult = ParseResult<Manifest>;
