@@ -13,9 +13,15 @@ export function addInputScriptsToOptionsInput(
 ): { [entryAlias: string]: string } {
   const optionsInputObject = getOptionsInputAsObject(optionsInput);
 
-  inputScripts.forEach(
-    ([output, input]) => (optionsInputObject[output] = input)
-  );
+  inputScripts.forEach(([output, input]) => {
+    if (optionsInputObject[output]) {
+      throw new Error(
+        `Inputs (${optionsInputObject[output]}) and (${input}) share an output identifier of (${output}). Rename one of the inputs to prevent output resolution issues.`
+      );
+    }
+
+    optionsInputObject[output] = input;
+  });
 
   return optionsInputObject;
 }
