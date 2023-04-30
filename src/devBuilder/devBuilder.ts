@@ -15,7 +15,7 @@ export default abstract class DevBuilder<
   protected hmrServerOrigin = "";
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
-  protected hmrViteEnvFileUrl = "";
+  protected hmrViteClientUrl = "";
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -54,7 +54,7 @@ export default abstract class DevBuilder<
     manifestHtmlFiles: string[];
   }) {
     this.hmrServerOrigin = this.getHmrServerOrigin(devServerPort);
-    this.hmrViteEnvFileUrl = this.getHmrViteEnvFileUrl();
+    this.hmrViteClientUrl = `${this.hmrServerOrigin}/@vite/client`;
 
     await emptyDir(this.outDir);
     const publicDir = path.resolve(
@@ -122,16 +122,27 @@ export default abstract class DevBuilder<
     if (this.pluginOptions.devHtmlTransform) {
       // apply plugin transforms
       content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+    } else {
+      // add vite client
+      const viteClientScript = `<script type="module" src="${this.hmrViteClientUrl}"></script>`;
+
+      if (content.includes("<head")) {
+        content = content.replace(/<head(.*)>/, `<head$1>${viteClientScript}`);
+      } else {
+        content = content.replace(
+          /<html(.*)>/,
+          `<html$1><head>${viteClientScript}</head>`
+        );
+      }
     }
 
     // update root paths
-    content = content.replace(/src="\//g, `src="${this.hmrServerOrigin}/`);
-    content = content.replace(/from "\//g, `from "${this.hmrServerOrigin}/`);
+    content = content.replaceAll('src="/', `src="${this.hmrServerOrigin}/`);
 
     // update relative paths
     const inputFileDir = path.dirname(fileName);
-    content = content.replace(
-      /src="\.\//g,
+    content = content.replaceAll(
+      'src="./',
       `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
     );
 
@@ -176,7 +187,7 @@ export default abstract class DevBuilder<
     const outputFileName = getOutputFileName(fileName);
 
     const scriptLoaderFile = getScriptLoaderFile(outputFileName, [
-      this.hmrViteEnvFileUrl,
+      this.hmrViteClientUrl,
       `${this.hmrServerOrigin}/${fileName}`,
     ]);
 
@@ -303,19 +314,5 @@ export default abstract class DevBuilder<
     }
 
     return `http://${this.viteConfig.server.hmr!.host}:${devServerPort}`;
-  }
-
-  private getHmrViteEnvFileUrl(): string {
-    const envFileName = this.viteConfig.resolve?.alias
-      ?.reverse()
-      .find((pattern) =>
-        pattern.replacement.endsWith("vite/dist/client/env.mjs")
-      )?.replacement;
-
-    if (!envFileName) {
-      return "";
-    }
-
-    return `${this.hmrServerOrigin}${normalizePath(envFileName)}`;
   }
 }
