@@ -13,8 +13,8 @@
     },
     "./client": {
       "types": "./client.d.ts",
-      "import": "./client.js",
-      "require": "./client.js"
+      "import": "./client.mjs",
+      "require": "./client.mjs"
     }
   },
   "engines": {
@@ -22,7 +22,7 @@
   },
   "packageManager": "pnpm@8.3.1",
   "files": [
-    "client.js",
+    "client.mjs",
     "client.d.ts",
     "dist",
     "README.md",
