@@ -14,7 +14,12 @@ export function addInputScriptsToOptionsInput(
   const optionsInputObject = getOptionsInputAsObject(optionsInput);
 
   inputScripts.forEach(([output, input]) => {
-    if (optionsInputObject[output]) {
+    input = input.trim();
+
+    if (
+      optionsInputObject[output] &&
+      optionsInputObject[output].trim() !== input
+    ) {
       throw new Error(
         `Inputs (${optionsInputObject[output]}) and (${input}) share an output identifier of (${output}). Rename one of the inputs to prevent output resolution issues.`
       );
