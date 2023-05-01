@@ -1,13 +1,12 @@
 import { OutputBundle } from "rollup";
-import { ParseResult } from "./manifestParser";
-import ManifestParser from "./manifestParser";
-import DevBuilder from "../devBuilder/devBuilder";
-import { getServiceWorkerLoaderFile } from "../utils/loader";
-import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
-import { getChunkInfoFromBundle } from "../utils/rollup";
 import { ViteWebExtensionOptions } from "../../types";
+import DevBuilder from "../devBuilder/devBuilder";
+import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";
 import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInputAsWebAccessibleResource";
 import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
+import { getServiceWorkerLoaderFile } from "../utils/loader";
+import { getChunkInfoFromBundle } from "../utils/rollup";
+import ManifestParser, { ParseResult } from "./manifestParser";
 
 type Manifest = chrome.runtime.ManifestV3;
 type ManifestParseResult = ParseResult<Manifest>;

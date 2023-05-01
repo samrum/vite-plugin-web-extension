@@ -1,7 +1,7 @@
-import path from "path";
-import { expect, test } from "vitest";
-import { build, InlineConfig, normalizePath } from "vite";
+import path from "node:path";
 import type { RollupOutput } from "rollup";
+import { build, normalizePath } from "vite";
+import { expect, test } from "vitest";
 import webExtension from "../../src/index";
 import { ViteWebExtensionOptions } from "../../types";
 

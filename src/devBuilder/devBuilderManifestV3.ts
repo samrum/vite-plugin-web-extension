@@ -1,5 +1,6 @@
-import { ensureDir, writeFile } from "fs-extra";
-import path from "path";
+import { ensureDir } from "fs-extra";
+import { writeFile } from "node:fs/promises";
+import path from "node:path";
 import { ViteWebExtensionOptions } from "../../types";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";

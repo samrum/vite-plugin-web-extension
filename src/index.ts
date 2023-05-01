@@ -1,11 +1,11 @@
 import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
-import { addInputScriptsToOptionsInput } from "./utils/rollup";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
-import { getVirtualModule } from "./utils/virtualModule";
 import viteClientModifier from "./middleware/viteClientModifier";
+import { addInputScriptsToOptionsInput } from "./utils/rollup";
+import { getVirtualModule } from "./utils/virtualModule";
 import {
   transformSelfLocationAssets,
   updateConfigForExtensionSupport,
