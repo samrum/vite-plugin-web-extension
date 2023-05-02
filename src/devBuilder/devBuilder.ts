@@ -63,7 +63,7 @@ export default abstract class DevBuilder<
       this.viteConfig.root,
       this.viteConfig.publicDir
     );
-    copy(publicDir, this.outDir);
+    await copy(publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles();
