@@ -3,6 +3,7 @@ import type {
   OutputAsset,
   OutputBundle,
   OutputChunk,
+  PluginContext,
 } from "rollup";
 import { ResolvedConfig, ViteDevServer } from "vite";
 import type {
@@ -61,10 +62,14 @@ export default abstract class ManifestParser<
     );
   }
 
-  async writeDevBuild(devServerPort: number): Promise<void> {
+  async writeDevBuild(
+    devServerPort: number,
+    resolveImport: PluginContext["resolve"]
+  ): Promise<void> {
     await this.createDevBuilder().writeBuild({
       devServerPort,
       manifestHtmlFiles: this.getHtmlFileNames(this.inputManifest),
+      resolveImport,
     });
   }
 

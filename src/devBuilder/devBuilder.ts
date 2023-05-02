@@ -1,7 +1,10 @@
-import { copy, emptyDir, ensureDir } from "fs-extra";
+import { copy, emptyDir, ensureDir, exists } from "fs-extra";
+import MagicString from "magic-string";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
+import { PluginContext } from "rollup";
+import type { ResolvedConfig, ViteDevServer } from "vite";
+import { normalizePath } from "vite";
 import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import { getInputFileName, getOutputFileName } from "../utils/file";
@@ -17,6 +20,7 @@ export default abstract class DevBuilder<
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
   protected hmrViteClientUrl = "";
+  protected resolveImport: PluginContext["resolve"] | null = null;
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -50,10 +54,13 @@ export default abstract class DevBuilder<
   async writeBuild({
     devServerPort,
     manifestHtmlFiles,
+    resolveImport,
   }: {
     devServerPort: number;
     manifestHtmlFiles: string[];
+    resolveImport: PluginContext["resolve"];
   }) {
+    this.resolveImport = resolveImport;
     this.hmrServerOrigin = this.getHmrServerOrigin(devServerPort);
     this.hmrViteClientUrl = `${this.hmrServerOrigin}/@vite/client`;
 
@@ -137,15 +144,43 @@ export default abstract class DevBuilder<
       }
     }
 
-    // update root paths
-    content = content.replaceAll('src="/', `src="${this.hmrServerOrigin}/`);
+    // update resource urls to be served from dev server
+    if (this.resolveImport) {
+      const matches = content.matchAll(/src="(.*)"/g);
 
-    // update relative paths
-    const inputFileDir = path.dirname(fileName);
-    content = content.replaceAll(
-      'src="./',
-      `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
-    );
+      let updatedContent: MagicString | null = null;
+
+      for (const { 0: attr, 1: src, index } of matches) {
+        if (!index) {
+          continue;
+        }
+
+        const resolved = await this.resolveImport(src, absoluteFileName);
+
+        if (!resolved || resolved.external) {
+          continue;
+        }
+
+        let urlPath = resolved.id;
+        if (urlPath.startsWith(this.viteConfig.root)) {
+          urlPath = resolved.id.slice(this.viteConfig.root.length);
+        } else if (await exists(urlPath)) {
+          urlPath = `/@fs${urlPath}`;
+        }
+
+        updatedContent ??= new MagicString(content);
+
+        updatedContent.overwrite(
+          index,
+          index + attr.length,
+          attr.replace(src, `${this.hmrServerOrigin}${urlPath}`)
+        );
+      }
+
+      if (updatedContent) {
+        content = updatedContent.toString();
+      }
+    }
 
     this.parseInlineScriptHashes(content);
 

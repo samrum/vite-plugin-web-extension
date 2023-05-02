@@ -1,5 +1,5 @@
 import type { EmittedFile, OutputBundle } from "rollup";
-import type { Plugin, ResolvedConfig } from "vite";
+import type { Plugin, ResolvedConfig, ViteDevServer } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
@@ -23,6 +23,7 @@ export default function webExtension(
   let manifestParser:
     | ManifestParser<chrome.runtime.ManifestV2>
     | ManifestParser<chrome.runtime.ManifestV3>;
+  let devServer: ViteDevServer | null = null;
 
   return {
     name: "webExtension",
@@ -39,10 +40,7 @@ export default function webExtension(
     configureServer(server) {
       server.middlewares.use(viteClientModifier);
 
-      server.httpServer!.once("listening", () => {
-        manifestParser.setDevServer(server);
-        manifestParser.writeDevBuild(server.config.server.port!);
-      });
+      devServer = server;
     },
 
     async options(options) {
@@ -64,6 +62,14 @@ export default function webExtension(
     },
 
     buildStart() {
+      devServer?.httpServer!.once("listening", () => {
+        manifestParser.setDevServer(devServer!);
+        manifestParser.writeDevBuild(
+          devServer!.config.server.port!,
+          this.resolve
+        );
+      });
+
       emitQueue.forEach((file) => {
         this.emitFile(file);
         this.addWatchFile(file.fileName ?? file.name!);
