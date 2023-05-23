@@ -138,12 +138,15 @@ export default abstract class DevBuilder<
     }
 
     // update root paths
-    content = content.replaceAll('src="/', `src="${this.hmrServerOrigin}/`);
+    content = content.replaceAll(
+      /(src=['"]\/)/g,
+      `src="${this.hmrServerOrigin}/`
+    );
 
     // update relative paths
     const inputFileDir = path.dirname(fileName);
     content = content.replaceAll(
-      'src="./',
+      /(src=['"]\.\/)/g,
       `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
     );
 
