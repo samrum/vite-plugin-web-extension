@@ -12,6 +12,9 @@ import getAdditionalInputAsWebAccessibleResource from "../utils/getAdditionalInp
 import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";
 import { getScriptLoaderFile } from "../utils/loader";
 import { getVirtualModule } from "../utils/virtualModule";
+import isExternalUrl from "../utils/isExternalUrl";
+import isDataUrl from "../utils/isDataUrl";
+import checkPublicFile from "../utils/checkPublicFile";
 
 export default abstract class DevBuilder<
   Manifest extends chrome.runtime.Manifest
@@ -146,12 +149,19 @@ export default abstract class DevBuilder<
 
     // update resource urls to be served from dev server
     if (this.resolveImport) {
-      const matches = content.matchAll(/src="(.*)"/g);
+      // TODO: match vite: traverse html to update other nodes like stylesheet links
+      const matches = content.matchAll(/src=['"](.*)['"]/g);
 
       let updatedContent: MagicString | null = null;
 
       for (const { 0: attr, 1: src, index } of matches) {
-        if (!index) {
+        if (
+          !index ||
+          src[0] === "#" ||
+          isExternalUrl(src) ||
+          isDataUrl(src) ||
+          checkPublicFile(src, this.viteConfig)
+        ) {
           continue;
         }
 
