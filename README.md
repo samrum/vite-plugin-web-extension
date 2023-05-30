@@ -174,12 +174,6 @@ optimizeWebAccessibleResources (optional)
 - Default: `true`
 - On build, in Manifest V3, merge web accessible resource definitions that have matching non-`resource` properties and dedupe and sort `resources`. In Manifest V2, sort web accessible resources.
 
-devHtmlTransform (optional)
-
-- Type: `boolean`
-- Default: `false`
-- In dev mode, apply Vite plugins to manifest HTML files by calling transformIndexHtml on them
-
 additionalInputs (optional)
 
 - Type:
