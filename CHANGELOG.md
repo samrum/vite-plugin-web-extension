@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v4.1.0...v5.0.0) (2023-06-01)
+
+### ⚠ BREAKING CHANGES
+
+Check MIGRATION.md for migration instructions
+
+- drop vite 3 support, minimum version is now vite 4 (#99)
+- drop node 14 support, minimum version is now node 16 (#98)
+- throw an error when inputs have matching output identifiers (#103)
+- **hmr:** always use transformIndexHtml for HTML processing, remove devHtmlTransform option (#115)
+
+### Features
+
+- support Vite config.define properties in dev mode ([#97](https://github.com/samrum/vite-plugin-web-extension/issues/97)) ([c0edbab](https://github.com/samrum/vite-plugin-web-extension/commit/c0edbab04e939fd549707871ba7de750c5eb4d51))
+
+### Bug Fixes
+
+- **hmr:** directory already exists error on server start ([#108](https://github.com/samrum/vite-plugin-web-extension/issues/108)) ([e177115](https://github.com/samrum/vite-plugin-web-extension/commit/e1771155a6ec4910dadb0f793ecad919ae1dc549))
+- **hmr:** location.reload/document errors in service worker ([#100](https://github.com/samrum/vite-plugin-web-extension/issues/100)) ([5527320](https://github.com/samrum/vite-plugin-web-extension/commit/5527320b977ba7dd8591ba4c63897e11feb27702))
+- **hmr:** readFile, writeFile not exported by fs-extra ([#106](https://github.com/samrum/vite-plugin-web-extension/issues/106)) ([c9c2ebf](https://github.com/samrum/vite-plugin-web-extension/commit/c9c2ebf13d7c0374b6ee7f00c00af48b40873dd1))
+- **hmr:** vite env client path is wrong in workspaces ([#101](https://github.com/samrum/vite-plugin-web-extension/issues/101)) ([c9eb6be](https://github.com/samrum/vite-plugin-web-extension/commit/c9eb6be45b1fb5440b0b55af94b703f15630fc83))
+- shared output id error is triggered on same input/output pair ([#107](https://github.com/samrum/vite-plugin-web-extension/issues/107)) ([0c0a822](https://github.com/samrum/vite-plugin-web-extension/commit/0c0a8225a7a4bdeb7494f2f0b6d2fe4875818591))
+
+- **devBuilder:** always use transformIndexHtml for HTML processing ([#115](https://github.com/samrum/vite-plugin-web-extension/issues/115)) ([3e7da0c](https://github.com/samrum/vite-plugin-web-extension/commit/3e7da0c88873a603e2626761a9cec062b8dca8b9))
+- drop node 14 support, minimum version is now node 16 ([#98](https://github.com/samrum/vite-plugin-web-extension/issues/98)) ([79a3542](https://github.com/samrum/vite-plugin-web-extension/commit/79a354221a25981eeb6fa51edf8a137296b1342e))
+- drop vite 3 support, minimum version is now vite 4 ([#99](https://github.com/samrum/vite-plugin-web-extension/issues/99)) ([aa72014](https://github.com/samrum/vite-plugin-web-extension/commit/aa72014001f9175ae0f0e6b219e91a484b8c35fe))
+- throw an error when inputs have matching output identifiers ([#103](https://github.com/samrum/vite-plugin-web-extension/issues/103)) ([f929057](https://github.com/samrum/vite-plugin-web-extension/commit/f9290572be1cbc32b422aa9e409d6255dbcafe4b))
+
 ## [4.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v4.0.0...v4.1.0) (2023-04-13)
 
 ### Features
