@@ -43,12 +43,6 @@ interface ViteWebExtensionOptions {
   optimizeWebAccessibleResources?: boolean;
 
   /**
-   * In dev mode, apply Vite plugins to manifest HTML files by calling transformIndexHtml on them
-   * Default: false
-   */
-  devHtmlTransform?: boolean;
-
-  /**
    * Additional input files that should be processed and treated as web extension inputs.
    * Useful for dynamically injected scripts and dynamically opened HTML pages.
    * The webAccessible option configures whether the entry file and its dependencies are included in the manifest `web_accessible_resources` property. Defaults to true.

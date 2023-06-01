@@ -1,8 +1,13 @@
 # Migration
 
+- [Version 4.x.x to 5.0.0](#version-4xx-to-500)
 - [Version 3.x.x to 4.0.0](#version-3xx-to-400)
 - [Version 2.x.x to 3.0.0](#version-2xx-to-300)
 - [Version 0.x.x to 1.0.0](#version-0xx-to-100)
+
+## Version 4.x.x to 5.0.0
+
+- The `devHtmlTransform` plugin option has been removed. Vite's dev HTML transform functionality is now required to support HTML files in dev (HMR) mode. In dev mode, a <base> element with the dev server url for the HTML file is injected into the page. This replaces incomplete custom logic for handling resources in HTML files.
 
 ## Version 3.x.x to 4.0.0
 

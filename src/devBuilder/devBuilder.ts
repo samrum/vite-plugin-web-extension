@@ -120,35 +120,24 @@ export default abstract class DevBuilder<
         encoding: "utf-8",
       }));
 
-    if (this.pluginOptions.devHtmlTransform) {
-      // apply plugin transforms
-      content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+    content = await this.viteDevServer!.transformIndexHtml(fileName, content);
+
+    const devServerFileName = `${this.hmrServerOrigin}${path
+      .resolve(this.viteConfig.root, fileName)
+      .slice(this.viteConfig.root.length)}`;
+
+    const baseElement = `<base href="${devServerFileName}">`;
+
+    const headRE = /<head.*?>/ims;
+
+    if (content.match(headRE)) {
+      content = content.replace(headRE, `$&${baseElement}`);
     } else {
-      // add vite client
-      const viteClientScript = `<script type="module" src="${this.hmrViteClientUrl}"></script>`;
-
-      if (content.includes("<head")) {
-        content = content.replace(/<head(.*)>/, `<head$1>${viteClientScript}`);
-      } else {
-        content = content.replace(
-          /<html(.*)>/,
-          `<html$1><head>${viteClientScript}</head>`
-        );
-      }
+      content = content.replace(
+        /<html.*?>/ims,
+        `$&<head>${baseElement}</head>`
+      );
     }
-
-    // update root paths
-    content = content.replaceAll(
-      /(src=['"]\/)/g,
-      `src="${this.hmrServerOrigin}/`
-    );
-
-    // update relative paths
-    const inputFileDir = path.dirname(fileName);
-    content = content.replaceAll(
-      /(src=['"]\.\/)/g,
-      `src="${this.hmrServerOrigin}/${inputFileDir ? `${inputFileDir}/` : ""}`
-    );
 
     this.parseInlineScriptHashes(content);
 
