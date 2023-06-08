@@ -58,12 +58,6 @@ export default abstract class DevBuilder<
     this.hmrViteClientUrl = `${this.hmrServerOrigin}/@vite/client`;
 
     await emptyDir(this.outDir);
-    const publicDir = path.resolve(
-      process.cwd(),
-      this.viteConfig.root,
-      this.viteConfig.publicDir
-    );
-    await copy(publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles();
@@ -71,6 +65,13 @@ export default abstract class DevBuilder<
     await this.writeManifestAdditionalInputFiles();
 
     await this.writeBuildFiles(manifestHtmlFiles);
+
+    const publicDir = path.resolve(
+      process.cwd(),
+      this.viteConfig.root,
+      this.viteConfig.publicDir
+    );
+    await copy(publicDir, this.outDir);
 
     this.updateContentSecurityPolicyForHmr();
 
