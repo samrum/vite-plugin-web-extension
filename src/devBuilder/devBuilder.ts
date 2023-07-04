@@ -171,20 +171,20 @@ export default abstract class DevBuilder<
       for (const [scriptJsIndex, fileName] of script.js.entries()) {
         const loaderFileName = await this.writeManifestScriptFile(fileName);
 
-        if (loaderFileName) {
-          this.manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
-            loaderFileName;
-        }
+        this.manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
+          loaderFileName;
       }
     }
   }
 
-  protected async writeManifestScriptFile(
-    fileName: string
-  ): Promise<string | null> {
+  protected async writeManifestScriptFile(fileName: string): Promise<string> {
     const publicDirName = path.basename(this.publicDir);
     if (path.dirname(fileName) === publicDirName) {
-      return null;
+      await copy(
+        `${this.publicDir}/${path.basename(fileName)}`,
+        `${this.outDir}/${fileName}`
+      );
+      return fileName;
     }
 
     const outputFileName = getOutputFileName(fileName);
@@ -275,7 +275,7 @@ export default abstract class DevBuilder<
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
-    let outputFileName: string | null = "";
+    let outputFileName = "";
 
     switch (type) {
       case "html":
@@ -302,7 +302,7 @@ export default abstract class DevBuilder<
       const webAccessibleResource =
         getAdditionalInputAsWebAccessibleResource(additionalInput);
 
-      if (webAccessibleResource && outputFileName) {
+      if (webAccessibleResource) {
         this.addWebAccessibleResource({
           fileName: outputFileName,
           webAccessibleResource,
