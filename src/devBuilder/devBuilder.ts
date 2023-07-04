@@ -17,6 +17,7 @@ export default abstract class DevBuilder<
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
   protected hmrViteClientUrl = "";
+  protected publicDir: string;
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -28,6 +29,11 @@ export default abstract class DevBuilder<
       process.cwd(),
       this.viteConfig.root,
       this.viteConfig.build.outDir
+    );
+    this.publicDir = path.resolve(
+      process.cwd(),
+      this.viteConfig.root,
+      this.viteConfig.publicDir
     );
   }
 
@@ -58,6 +64,7 @@ export default abstract class DevBuilder<
     this.hmrViteClientUrl = `${this.hmrServerOrigin}/@vite/client`;
 
     await emptyDir(this.outDir);
+    await copy(this.publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles();
@@ -65,13 +72,6 @@ export default abstract class DevBuilder<
     await this.writeManifestAdditionalInputFiles();
 
     await this.writeBuildFiles(manifestHtmlFiles);
-
-    const publicDir = path.resolve(
-      process.cwd(),
-      this.viteConfig.root,
-      this.viteConfig.publicDir
-    );
-    await copy(publicDir, this.outDir);
 
     this.updateContentSecurityPolicyForHmr();
 
@@ -171,13 +171,22 @@ export default abstract class DevBuilder<
       for (const [scriptJsIndex, fileName] of script.js.entries()) {
         const loaderFileName = await this.writeManifestScriptFile(fileName);
 
-        this.manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
-          loaderFileName;
+        if (loaderFileName) {
+          this.manifest.content_scripts[contentScriptIndex].js![scriptJsIndex] =
+            loaderFileName;
+        }
       }
     }
   }
 
-  protected async writeManifestScriptFile(fileName: string): Promise<string> {
+  protected async writeManifestScriptFile(
+    fileName: string
+  ): Promise<string | null> {
+    const publicDirName = path.basename(this.publicDir);
+    if (path.dirname(fileName) === publicDirName) {
+      return null;
+    }
+
     const outputFileName = getOutputFileName(fileName);
 
     const scriptLoaderFile = getScriptLoaderFile(outputFileName, [
@@ -266,7 +275,7 @@ export default abstract class DevBuilder<
 
     const absoluteFileName = getInputFileName(fileName, this.viteConfig.root);
 
-    let outputFileName = "";
+    let outputFileName: string | null = "";
 
     switch (type) {
       case "html":
@@ -293,7 +302,7 @@ export default abstract class DevBuilder<
       const webAccessibleResource =
         getAdditionalInputAsWebAccessibleResource(additionalInput);
 
-      if (webAccessibleResource) {
+      if (webAccessibleResource && outputFileName) {
         this.addWebAccessibleResource({
           fileName: outputFileName,
           webAccessibleResource,
