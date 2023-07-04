@@ -179,11 +179,8 @@ export default abstract class DevBuilder<
 
   protected async writeManifestScriptFile(fileName: string): Promise<string> {
     const publicDirName = path.basename(this.publicDir);
-    if (path.dirname(fileName) === publicDirName) {
-      await copy(
-        `${this.publicDir}/${path.basename(fileName)}`,
-        `${this.outDir}/${fileName}`
-      );
+    if (fileName.split(path.sep)[0] === publicDirName) {
+      await copy(fileName, `${this.outDir}/${fileName}`);
       return fileName;
     }
 
