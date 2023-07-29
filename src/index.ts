@@ -1,9 +1,10 @@
 import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
-import type { ViteWebExtensionOptions } from "../types";
+import type { SafariBuildOptions, ViteWebExtensionOptions } from "../types";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
 import viteClientModifier from "./middleware/viteClientModifier";
+import { convertToSafariWebExtension } from "./utils/convertToSafariWebExtension";
 import { addInputScriptsToOptionsInput } from "./utils/rollup";
 import { getVirtualModule } from "./utils/virtualModule";
 import {
@@ -89,6 +90,23 @@ export default function webExtension(
       );
 
       emitFiles.forEach(this.emitFile);
+    },
+
+    async writeBundle(options) {
+      if (!pluginOptions.safari || !options.dir) {
+        return;
+      }
+
+      (this as any).info("Building safari extension...");
+
+      try {
+        await convertToSafariWebExtension(options.dir, {
+          appName: pluginOptions.manifest.name,
+          ...(pluginOptions.safari as SafariBuildOptions),
+        });
+      } catch (error) {
+        this.error(`Could not create Safari build: ${error}`);
+      }
     },
   };
 }
