@@ -39,7 +39,7 @@ export default function webExtension(
     configureServer(server) {
       server.middlewares.use(viteClientModifier);
 
-      server.httpServer!.once("listening", () => {
+      server.httpServer?.once("listening", () => {
         manifestParser.setDevServer(server);
         manifestParser.writeDevBuild(server.config.server.port!);
       });
