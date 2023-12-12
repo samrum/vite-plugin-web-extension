@@ -26,7 +26,7 @@ Create a new Vite web extension project
 npm init @samrum/vite-plugin-web-extension@latest
 ```
 
-Supports choice of Manifest version, TypeScript support, and framework (Vanilla, Vue, React, Preact, Svelte).
+Supports choice of Manifest version, TypeScript support, and framework (Preact, React, Solid, Svelte, Vanilla, Vue).
 
 Check the README of the generated extension for usage information.
 
