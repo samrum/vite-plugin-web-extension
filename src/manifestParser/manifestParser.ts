@@ -4,7 +4,7 @@ import type {
   OutputBundle,
   OutputChunk,
 } from "rollup";
-import { ResolvedConfig, ViteDevServer } from "vite";
+import type { ResolvedConfig, ViteDevServer } from "vite";
 import type {
   NormalizedAdditionalInput,
   ViteWebExtensionOptions,

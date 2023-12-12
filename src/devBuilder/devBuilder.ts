@@ -1,7 +1,8 @@
 import { copy, emptyDir, ensureDir } from "fs-extra";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { ResolvedConfig, ViteDevServer, normalizePath } from "vite";
+import { normalizePath } from "vite";
+import type { ResolvedConfig, ViteDevServer } from "vite";
 import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
 import { getInputFileName, getOutputFileName } from "../utils/file";

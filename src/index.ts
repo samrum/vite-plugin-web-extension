@@ -66,7 +66,13 @@ export default function webExtension(
     buildStart() {
       emitQueue.forEach((file) => {
         this.emitFile(file);
-        this.addWatchFile(file.fileName ?? file.name!);
+
+        const fileName =
+          file.type === "prebuilt-chunk"
+            ? file.fileName
+            : file.fileName ?? file.name!;
+
+        this.addWatchFile(fileName);
       });
       emitQueue = [];
     },

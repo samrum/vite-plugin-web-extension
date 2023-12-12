@@ -1,4 +1,4 @@
-import { ResolvedConfig } from "vite";
+import type { ResolvedConfig } from "vite";
 import { ViteWebExtensionOptions } from "../../types";
 import ManifestParser from "./manifestParser";
 import ManifestV2 from "./manifestV2";
