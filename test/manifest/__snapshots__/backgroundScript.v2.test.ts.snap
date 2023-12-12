@@ -21,7 +21,7 @@ log(\\"background\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/background.html": {
-        "code": null,
+        "code": "",
         "originalLength": 168,
         "removedExports": [],
         "renderedExports": [],

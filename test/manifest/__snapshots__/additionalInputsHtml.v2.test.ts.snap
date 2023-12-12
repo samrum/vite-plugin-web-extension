@@ -16,7 +16,6 @@ exports[`additionalInputsHtml - Manifest V2 1`] = `
   console.log(message);
 }
 log(\\"webAccessible\\");
-const style = \\"\\";
 ",
     "dynamicImports": [],
     "exports": [],
@@ -31,7 +30,7 @@ const style = \\"\\";
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/html.html": {
-        "code": null,
+        "code": "",
         "originalLength": 290,
         "removedExports": [],
         "renderedExports": [],
@@ -45,13 +44,11 @@ const style = \\"\\";
         "renderedLength": 21,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/style.css": {
-        "code": "const style = '';",
+        "code": "",
         "originalLength": 23,
         "removedExports": [],
-        "renderedExports": [
-          "default",
-        ],
-        "renderedLength": 17,
+        "renderedExports": [],
+        "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
         "code": "function log(message) {
@@ -95,12 +92,10 @@ const style = \\"\\";
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
-    
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/additionalInputsHtml/html.js\\"></script>
-    <link rel=\\"stylesheet\\" href=\\"/assets/html.css\\">
+    <link rel=\\"stylesheet\\" crossorigin href=\\"/assets/html.css\\">
   </head>
 </html>
 ",

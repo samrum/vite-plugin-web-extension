@@ -21,7 +21,7 @@ log(\\"chromeUrlOverridesHtml\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html": {
-        "code": null,
+        "code": "",
         "originalLength": 241,
         "removedExports": [],
         "renderedExports": [],
@@ -74,7 +74,6 @@ log(\\"chromeUrlOverridesHtml\\");
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.js\\"></script>

@@ -3,8 +3,8 @@
 exports[`contentCss - Manifest V3 1`] = `
 [
   {
-    "fileName": "assets/content1.css",
-    "name": "content1.css",
+    "fileName": "assets/test/manifest/resources/contentCss/content1.css",
+    "name": "test/manifest/resources/contentCss/content1.css",
     "source": ".css {
   color: red;
 }
@@ -12,8 +12,8 @@ exports[`contentCss - Manifest V3 1`] = `
     "type": "asset",
   },
   {
-    "fileName": "assets/content2.css",
-    "name": "content2.css",
+    "fileName": "assets/test/manifest/resources/contentCss/content2.css",
+    "name": "test/manifest/resources/contentCss/content2.css",
     "source": ".css {
   color: green;
 }",
@@ -32,8 +32,8 @@ exports[`contentCss - Manifest V3 1`] = `
         \\"test/manifest/resources/contentCss/content.js\\"
       ],
       \\"css\\": [
-        \\"assets/content1.css\\",
-        \\"assets/content2.css\\"
+        \\"assets/test/manifest/resources/contentCss/content1.css\\",
+        \\"assets/test/manifest/resources/contentCss/content2.css\\"
       ],
       \\"matches\\": [
         \\"https://*/*\\",

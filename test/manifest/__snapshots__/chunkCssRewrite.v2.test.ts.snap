@@ -76,7 +76,7 @@ exports[`chunkCssRewrite - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
     "name": undefined,
-    "source": "/* empty css                         */const content1 = \\"\\";
+    "source": "/* empty css                        */
 console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
 ",
     "type": "asset",
@@ -84,7 +84,7 @@ console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
   {
     "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
     "name": undefined,
-    "source": "/* empty css                         */const content2 = \\"\\";
+    "source": "/* empty css                        */
 console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
 ",
     "type": "asset",
