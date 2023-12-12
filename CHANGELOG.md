@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v5.0.0...v5.1.0) (2023-12-12)
+
+### Features
+
+- side_panel manifest property ([#121](https://github.com/samrum/vite-plugin-web-extension/issues/121)) ([ebe613f](https://github.com/samrum/vite-plugin-web-extension/commit/ebe613f0f05aec56eaff1dbf75a08ab9a9b79c23))
+
+### Bug Fixes
+
+- only use the httpServer if it exists ([#133](https://github.com/samrum/vite-plugin-web-extension/issues/133)) ([aede4fa](https://github.com/samrum/vite-plugin-web-extension/commit/aede4faf9c42cd88aeb79c4e45b93336aba00405))
+
 ## [5.0.0](https://github.com/samrum/vite-plugin-web-extension/compare/v4.1.0...v5.0.0) (2023-06-01)
 
 ### ⚠ BREAKING CHANGES
