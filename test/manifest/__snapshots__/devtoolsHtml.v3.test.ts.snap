@@ -6,7 +6,7 @@ exports[`devtoolsHtml - Manifest V3 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"devtools\\");
+log("devtools");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -28,7 +28,7 @@ log(\\"devtools\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.js": {
-        "code": "log(\\"devtools\\");",
+        "code": "log("devtools");",
         "originalLength": 53,
         "removedExports": [],
         "renderedExports": [],
@@ -58,10 +58,10 @@ log(\\"devtools\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"devtools_page\\": \\"test/manifest/resources/devtoolsHtml/devtools.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "devtools_page": "test/manifest/resources/devtoolsHtml/devtools.html"
 }",
     "type": "asset",
   },
@@ -69,12 +69,12 @@ log(\\"devtools\\");
     "fileName": "test/manifest/resources/devtoolsHtml/devtools.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/devtoolsHtml/devtools.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/devtoolsHtml/devtools.js"></script>
   </head>
 </html>
 ",

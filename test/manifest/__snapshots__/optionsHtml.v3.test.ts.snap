@@ -6,7 +6,7 @@ exports[`optionsHtml - Manifest V3 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"options\\");
+log("options");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -28,7 +28,7 @@ log(\\"options\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.js": {
-        "code": "log(\\"options\\");",
+        "code": "log("options");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
@@ -58,11 +58,11 @@ log(\\"options\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"options_ui\\": {
-    \\"page\\": \\"test/manifest/resources/optionsHtml/options.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "options_ui": {
+    "page": "test/manifest/resources/optionsHtml/options.html"
   }
 }",
     "type": "asset",
@@ -71,12 +71,12 @@ log(\\"options\\");
     "fileName": "test/manifest/resources/optionsHtml/options.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/optionsHtml/options.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/optionsHtml/options.js"></script>
   </head>
 </html>
 ",

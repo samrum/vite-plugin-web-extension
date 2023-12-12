@@ -6,7 +6,7 @@ exports[`popupHtml - Manifest V3 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"popup\\");
+log("popup");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -28,7 +28,7 @@ log(\\"popup\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.js": {
-        "code": "log(\\"popup\\");",
+        "code": "log("popup");",
         "originalLength": 50,
         "removedExports": [],
         "renderedExports": [],
@@ -58,11 +58,11 @@ log(\\"popup\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"action\\": {
-    \\"default_popup\\": \\"test/manifest/resources/popupHtml/popup.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "test/manifest/resources/popupHtml/popup.html"
   }
 }",
     "type": "asset",
@@ -71,12 +71,12 @@ log(\\"popup\\");
     "fileName": "test/manifest/resources/popupHtml/popup.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/popupHtml/popup.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/popupHtml/popup.js"></script>
   </head>
 </html>
 ",

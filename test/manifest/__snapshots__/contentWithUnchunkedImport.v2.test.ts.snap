@@ -6,17 +6,17 @@ exports[`contentWithUnchunkedImport - Manifest V2 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithUnchunkedImport/content.js\\"
+      "js": [
+        "test/manifest/resources/contentWithUnchunkedImport/content.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     }
   ]
@@ -29,7 +29,7 @@ exports[`contentWithUnchunkedImport - Manifest V2 1`] = `
     "source": "function log(message) {
   console.log(message);
 }
-log(\\"content\\");
+log("content");
 ",
     "type": "asset",
   },

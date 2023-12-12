@@ -6,26 +6,26 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithSameScriptName/content1/content.js\\"
+      "js": [
+        "test/manifest/resources/contentWithSameScriptName/content1/content.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithSameScriptName/content2/content.js\\"
+      "js": [
+        "test/manifest/resources/contentWithSameScriptName/content2/content.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     }
   ]
@@ -35,14 +35,14 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/contentWithSameScriptName/content1/content.js",
     "name": undefined,
-    "source": "console.log(\\"content1\\");
+    "source": "console.log("content1");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/contentWithSameScriptName/content2/content.js",
     "name": undefined,
-    "source": "console.log(\\"content2\\");
+    "source": "console.log("content2");
 ",
     "type": "asset",
   },

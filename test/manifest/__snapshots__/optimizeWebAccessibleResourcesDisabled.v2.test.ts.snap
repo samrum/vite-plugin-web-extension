@@ -45,8 +45,8 @@ export {
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"content\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("content");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -67,7 +67,7 @@ log(\\"content\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content1.js": {
-        "code": "log(\\"content\\");",
+        "code": "log("content");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
@@ -83,8 +83,8 @@ log(\\"content\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"content2\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("content2");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -105,7 +105,7 @@ log(\\"content2\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content2.js": {
-        "code": "log(\\"content2\\");",
+        "code": "log("content2");",
         "originalLength": 53,
         "removedExports": [],
         "renderedExports": [],
@@ -121,8 +121,8 @@ log(\\"content2\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"script1\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("script1");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -143,7 +143,7 @@ log(\\"script1\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script1.js": {
-        "code": "log(\\"script1\\");",
+        "code": "log("script1");",
         "originalLength": 50,
         "removedExports": [],
         "renderedExports": [],
@@ -159,8 +159,8 @@ log(\\"script1\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"script2\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("script2");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -181,7 +181,7 @@ log(\\"script2\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script2.js": {
-        "code": "log(\\"script2\\");",
+        "code": "log("script2");",
         "originalLength": 50,
         "removedExports": [],
         "renderedExports": [],
@@ -200,35 +200,35 @@ log(\\"script2\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/optimizeWebAccessibleResources/content1.js\\"
+      "js": [
+        "test/manifest/resources/optimizeWebAccessibleResources/content1.js"
       ],
-      \\"matches\\": [
-        \\"<all_urls>\\"
+      "matches": [
+        "<all_urls>"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/optimizeWebAccessibleResources/content2.js\\"
+      "js": [
+        "test/manifest/resources/optimizeWebAccessibleResources/content2.js"
       ],
-      \\"matches\\": [
-        \\"<all_urls>\\"
+      "matches": [
+        "<all_urls>"
       ]
     }
   ],
-  \\"web_accessible_resources\\": [
-    \\"assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js\\",
-    \\"assets/log.js\\",
-    \\"test/manifest/resources/optimizeWebAccessibleResources/script1.js\\",
-    \\"assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js\\",
-    \\"test/manifest/resources/optimizeWebAccessibleResources/script2.js\\",
-    \\"assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js\\",
-    \\"assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js\\"
+  "web_accessible_resources": [
+    "assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js",
+    "assets/log.js",
+    "test/manifest/resources/optimizeWebAccessibleResources/script1.js",
+    "assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js",
+    "test/manifest/resources/optimizeWebAccessibleResources/script2.js",
+    "assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js",
+    "assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js"
   ]
 }",
     "type": "asset",
@@ -236,25 +236,25 @@ log(\\"script2\\");
   {
     "fileName": "test/manifest/resources/optimizeWebAccessibleResources/content1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/optimizeWebAccessibleResources/content2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/optimizeWebAccessibleResources/script1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/optimizeWebAccessibleResources/script2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js"))})();",
     "type": "asset",
   },
 ]

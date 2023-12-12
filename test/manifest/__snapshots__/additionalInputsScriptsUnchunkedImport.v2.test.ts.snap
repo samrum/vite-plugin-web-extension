@@ -6,12 +6,12 @@ exports[`additionalInputsScriptsUnchunkedImport - Manifest V2 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js\\",
-    \\"test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js",
+    "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js"
   ]
 }",
     "type": "asset",
@@ -22,14 +22,14 @@ exports[`additionalInputsScriptsUnchunkedImport - Manifest V2 1`] = `
     "source": "function log(message) {
   console.log(message);
 }
-log(\\"script1\\");
+log("script1");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js",
     "name": undefined,
-    "source": "console.log(\\"script2\\");
+    "source": "console.log("script2");
 ",
     "type": "asset",
   },

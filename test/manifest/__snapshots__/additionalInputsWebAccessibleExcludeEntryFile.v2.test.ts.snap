@@ -45,8 +45,8 @@ export {
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"chunkedScript1\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("chunkedScript1");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -67,7 +67,7 @@ log(\\"chunkedScript1\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js": {
-        "code": "log(\\"chunkedScript1\\");",
+        "code": "log("chunkedScript1");",
         "originalLength": 57,
         "removedExports": [],
         "renderedExports": [],
@@ -83,8 +83,8 @@ log(\\"chunkedScript1\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"chunkedScript2\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("chunkedScript2");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -105,7 +105,7 @@ log(\\"chunkedScript2\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js": {
-        "code": "log(\\"chunkedScript2\\");",
+        "code": "log("chunkedScript2");",
         "originalLength": 57,
         "removedExports": [],
         "renderedExports": [],
@@ -121,8 +121,8 @@ log(\\"chunkedScript2\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"chunkedScript3\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("chunkedScript3");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -143,7 +143,7 @@ log(\\"chunkedScript3\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js": {
-        "code": "log(\\"chunkedScript3\\");",
+        "code": "log("chunkedScript3");",
         "originalLength": 57,
         "removedExports": [],
         "renderedExports": [],
@@ -162,21 +162,21 @@ log(\\"chunkedScript3\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"assets/log.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script1.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script2.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script3.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script5.js\\",
-    \\"test/manifest/resources/additionalInputsWebAccessible/script6.js\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "assets/log.js",
+    "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
+    "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
+    "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
+    "test/manifest/resources/additionalInputsWebAccessible/script1.js",
+    "test/manifest/resources/additionalInputsWebAccessible/script2.js",
+    "test/manifest/resources/additionalInputsWebAccessible/script3.js",
+    "test/manifest/resources/additionalInputsWebAccessible/script5.js",
+    "test/manifest/resources/additionalInputsWebAccessible/script6.js"
   ]
 }",
     "type": "asset",
@@ -184,67 +184,67 @@ log(\\"chunkedScript3\\");
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script1.js",
     "name": undefined,
-    "source": "console.log(\\"script1\\");
+    "source": "console.log("script1");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script2.js",
     "name": undefined,
-    "source": "console.log(\\"script2\\");
+    "source": "console.log("script2");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script3.js",
     "name": undefined,
-    "source": "console.log(\\"script3\\");
+    "source": "console.log("script3");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script4.js",
     "name": undefined,
-    "source": "console.log(\\"script4\\");
+    "source": "console.log("script4");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script5.js",
     "name": undefined,
-    "source": "console.log(\\"script5\\");
+    "source": "console.log("script5");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script6.js",
     "name": undefined,
-    "source": "console.log(\\"script6\\");
+    "source": "console.log("script6");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script7.js",
     "name": undefined,
-    "source": "console.log(\\"script7\\");
+    "source": "console.log("script7");
 ",
     "type": "asset",
   },
