@@ -67,7 +67,7 @@ log(\\"devtools\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/devtools.html": {
-        "code": null,
+        "code": "",
         "originalLength": 227,
         "removedExports": [],
         "renderedExports": [],
@@ -112,7 +112,7 @@ log(\\"options\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/options.html": {
-        "code": null,
+        "code": "",
         "originalLength": 226,
         "removedExports": [],
         "renderedExports": [],
@@ -157,7 +157,7 @@ log(\\"popup\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/popup.html": {
-        "code": null,
+        "code": "",
         "originalLength": 224,
         "removedExports": [],
         "renderedExports": [],
@@ -203,7 +203,6 @@ log(\\"popup\\");
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/devtools.js\\"></script>
@@ -219,7 +218,6 @@ log(\\"popup\\");
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/options.js\\"></script>
@@ -235,7 +233,6 @@ log(\\"popup\\");
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/popup.js\\"></script>

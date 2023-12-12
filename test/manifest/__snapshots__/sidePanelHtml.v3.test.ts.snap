@@ -32,7 +32,7 @@ log(\\"sidepanel\\");
         "renderedLength": 49,
       },
       "vite-plugin-web-extension/test/manifest/resources/sidePanelHtml/sidepanel.html": {
-        "code": null,
+        "code": "",
         "originalLength": 228,
         "removedExports": [],
         "renderedExports": [],
@@ -74,7 +74,6 @@ log(\\"sidepanel\\");
 <html lang=\\"en\\">
   <head>
     <meta charset=\\"UTF-8\\" />
-    
 
     <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
     <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/sidePanelHtml/sidepanel.js\\"></script>

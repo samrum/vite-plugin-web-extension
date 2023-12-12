@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "lib": ["es2021"],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "noEmitOnError": false,
     "noUnusedLocals": true,

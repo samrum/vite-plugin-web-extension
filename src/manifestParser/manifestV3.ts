@@ -1,4 +1,4 @@
-import { OutputBundle } from "rollup";
+import type { OutputBundle } from "rollup";
 import { ViteWebExtensionOptions } from "../../types";
 import DevBuilder from "../devBuilder/devBuilder";
 import DevBuilderManifestV3 from "../devBuilder/devBuilderManifestV3";

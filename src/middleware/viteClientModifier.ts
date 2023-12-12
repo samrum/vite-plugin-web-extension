@@ -1,5 +1,5 @@
 import getEtag from "etag";
-import { Connect } from "vite";
+import type { Connect } from "vite";
 
 // Modifies the vite HMR client to support various web extension features including:
 //  Exporting a function to add HMR style injection targets

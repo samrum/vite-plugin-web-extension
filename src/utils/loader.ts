@@ -1,4 +1,4 @@
-import { OutputChunk } from "rollup";
+import type { OutputChunk } from "rollup";
 import { getOutputFileName } from "./file";
 
 export function getScriptHtmlLoaderFile(name: string, scriptSrcs: string[]) {

@@ -24,7 +24,7 @@ type NormalizedAdditionalInput = {
   webAccessible: WebAccessibleDefinition | null;
 };
 
-interface ViteWebExtensionOptions {
+export interface ViteWebExtensionOptions {
   /**
    * The manifest file to use as a base for the generated extension
    */
