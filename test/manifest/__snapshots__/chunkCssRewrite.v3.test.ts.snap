@@ -33,50 +33,50 @@ exports[`chunkCssRewrite - Manifest V3 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/chunkCssRewrite/content1.js\\"
+      "js": [
+        "test/manifest/resources/chunkCssRewrite/content1.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/chunkCssRewrite/content2.js\\"
+      "js": [
+        "test/manifest/resources/chunkCssRewrite/content2.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/chunkCssRewrite/contentNoCss.js\\"
+      "js": [
+        "test/manifest/resources/chunkCssRewrite/contentNoCss.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     }
   ],
-  \\"web_accessible_resources\\": [
+  "web_accessible_resources": [
     {
-      \\"resources\\": [
-        \\"assets/content1.css\\",
-        \\"assets/content2.css\\",
-        \\"assets/contentShared.css\\"
+      "resources": [
+        "assets/content1.css",
+        "assets/content2.css",
+        "assets/contentShared.css"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ],
-      \\"use_dynamic_url\\": true
+      "use_dynamic_url": true
     }
   ]
 }",
@@ -86,7 +86,7 @@ exports[`chunkCssRewrite - Manifest V3 1`] = `
     "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
     "name": undefined,
     "source": "/* empty css                        */
-console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
+console.log(["assets/content1.css","assets/contentShared.css"]);
 ",
     "type": "asset",
   },
@@ -94,7 +94,7 @@ console.log([\\"assets/content1.css\\",\\"assets/contentShared.css\\"]);
     "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
     "name": undefined,
     "source": "/* empty css                        */
-console.log([\\"assets/content2.css\\",\\"assets/contentShared.css\\"]);
+console.log(["assets/content2.css","assets/contentShared.css"]);
 ",
     "type": "asset",
   },

@@ -6,21 +6,21 @@ exports[`contentWithNoImports - Manifest V3 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithNoImports/content.js\\"
+      "js": [
+        "test/manifest/resources/contentWithNoImports/content.js"
       ],
-      \\"matches\\": [
-        \\"*://*/*\\",
-        \\"https://*/*\\",
-        \\"*://example.com/\\",
-        \\"https://example.com/\\",
-        \\"*://example.com/subpath/*\\",
-        \\"https://example.com/subpath/*\\"
+      "matches": [
+        "*://*/*",
+        "https://*/*",
+        "*://example.com/",
+        "https://example.com/",
+        "*://example.com/subpath/*",
+        "https://example.com/subpath/*"
       ]
     }
   ]
@@ -30,7 +30,7 @@ exports[`contentWithNoImports - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/contentWithNoImports/content.js",
     "name": undefined,
-    "source": "console.log(\\"content\\");
+    "source": "console.log("content");
 ",
     "type": "asset",
   },

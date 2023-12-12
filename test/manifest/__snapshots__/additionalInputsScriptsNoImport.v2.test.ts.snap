@@ -6,12 +6,12 @@ exports[`additionalInputsScriptsNoImport - Manifest V2 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsScriptsNoImport/script1.js\\",
-    \\"test/manifest/resources/additionalInputsScriptsNoImport/script2.js\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "test/manifest/resources/additionalInputsScriptsNoImport/script1.js",
+    "test/manifest/resources/additionalInputsScriptsNoImport/script2.js"
   ]
 }",
     "type": "asset",
@@ -19,14 +19,14 @@ exports[`additionalInputsScriptsNoImport - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/additionalInputsScriptsNoImport/script1.js",
     "name": undefined,
-    "source": "console.log(\\"script1\\");
+    "source": "console.log("script1");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsScriptsNoImport/script2.js",
     "name": undefined,
-    "source": "console.log(\\"script2\\");
+    "source": "console.log("script2");
 ",
     "type": "asset",
   },

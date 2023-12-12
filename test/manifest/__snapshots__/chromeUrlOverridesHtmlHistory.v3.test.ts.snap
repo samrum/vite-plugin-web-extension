@@ -6,7 +6,7 @@ exports[`chromeUrlOverridesHtmlHistory - Manifest V3 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"chromeUrlOverridesHtml\\");
+log("chromeUrlOverridesHtml");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -21,7 +21,7 @@ log(\\"chromeUrlOverridesHtml\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js": {
-        "code": "log(\\"chromeUrlOverridesHtml\\");",
+        "code": "log("chromeUrlOverridesHtml");",
         "originalLength": 67,
         "removedExports": [],
         "renderedExports": [],
@@ -58,11 +58,11 @@ log(\\"chromeUrlOverridesHtml\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"chrome_url_overrides\\": {
-    \\"history\\": \\"test/manifest/resources/chromeUrlOverridesHtml/history.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "chrome_url_overrides": {
+    "history": "test/manifest/resources/chromeUrlOverridesHtml/history.html"
   }
 }",
     "type": "asset",
@@ -71,12 +71,12 @@ log(\\"chromeUrlOverridesHtml\\");
     "fileName": "test/manifest/resources/chromeUrlOverridesHtml/history.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/chromeUrlOverridesHtml/history.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/chromeUrlOverridesHtml/history.js"></script>
   </head>
 </html>
 ",

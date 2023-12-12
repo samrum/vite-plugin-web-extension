@@ -6,7 +6,7 @@ exports[`backgroundScript - Manifest V2 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"background\\");
+log("background");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -28,7 +28,7 @@ log(\\"background\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/backgroundScript/background.js": {
-        "code": "log(\\"background\\");",
+        "code": "log("background");",
         "originalLength": 55,
         "removedExports": [],
         "renderedExports": [],
@@ -57,7 +57,7 @@ log(\\"background\\");
   {
     "fileName": "background.html",
     "name": undefined,
-    "source": "<!DOCTYPE html><html lang=\\"en\\"><head><meta charset=\\"UTF-8\\" />  <script type=\\"module\\" crossorigin src=\\"/assets/background.js\\"></script>
+    "source": "<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" />  <script type="module" crossorigin src="/assets/background.js"></script>
 </head></html>",
     "type": "asset",
   },
@@ -65,12 +65,12 @@ log(\\"background\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"background\\": {
-    \\"persistent\\": false,
-    \\"page\\": \\"background.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "background": {
+    "persistent": false,
+    "page": "background.html"
   }
 }",
     "type": "asset",

@@ -45,8 +45,8 @@ export {
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"devtools\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("devtools");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -74,7 +74,7 @@ log(\\"devtools\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/devtools.js": {
-        "code": "log(\\"devtools\\");",
+        "code": "log("devtools");",
         "originalLength": 53,
         "removedExports": [],
         "renderedExports": [],
@@ -90,8 +90,8 @@ log(\\"devtools\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"options\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("options");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -119,7 +119,7 @@ log(\\"options\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/options.js": {
-        "code": "log(\\"options\\");",
+        "code": "log("options");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
@@ -135,8 +135,8 @@ log(\\"options\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"popup\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("popup");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -164,7 +164,7 @@ log(\\"popup\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/popup.js": {
-        "code": "log(\\"popup\\");",
+        "code": "log("popup");",
         "originalLength": 50,
         "removedExports": [],
         "renderedExports": [],
@@ -183,15 +183,15 @@ log(\\"popup\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"browser_action\\": {
-    \\"default_popup\\": \\"test/manifest/resources/htmlUrlProperties/popup.html#hashValue\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "test/manifest/resources/htmlUrlProperties/popup.html#hashValue"
   },
-  \\"devtools_page\\": \\"test/manifest/resources/htmlUrlProperties/devtools.html?query=1\\",
-  \\"options_ui\\": {
-    \\"page\\": \\"test/manifest/resources/htmlUrlProperties/options.html?query=1#hashValue\\"
+  "devtools_page": "test/manifest/resources/htmlUrlProperties/devtools.html?query=1",
+  "options_ui": {
+    "page": "test/manifest/resources/htmlUrlProperties/options.html?query=1#hashValue"
   }
 }",
     "type": "asset",
@@ -200,12 +200,12 @@ log(\\"popup\\");
     "fileName": "test/manifest/resources/htmlUrlProperties/devtools.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/devtools.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/htmlUrlProperties/devtools.js"></script>
   </head>
 </html>
 ",
@@ -215,12 +215,12 @@ log(\\"popup\\");
     "fileName": "test/manifest/resources/htmlUrlProperties/options.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/options.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/htmlUrlProperties/options.js"></script>
   </head>
 </html>
 ",
@@ -230,12 +230,12 @@ log(\\"popup\\");
     "fileName": "test/manifest/resources/htmlUrlProperties/popup.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/htmlUrlProperties/popup.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/htmlUrlProperties/popup.js"></script>
   </head>
 </html>
 ",

@@ -6,7 +6,7 @@ exports[`backgroundHtml - Manifest V2 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"background\\");
+log("background");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -28,7 +28,7 @@ log(\\"background\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/backgroundHtml/background.js": {
-        "code": "log(\\"background\\");",
+        "code": "log("background");",
         "originalLength": 55,
         "removedExports": [],
         "renderedExports": [],
@@ -58,12 +58,12 @@ log(\\"background\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"background\\": {
-    \\"page\\": \\"test/manifest/resources/backgroundHtml/background.html\\",
-    \\"persistent\\": false
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "background": {
+    "page": "test/manifest/resources/backgroundHtml/background.html",
+    "persistent": false
   }
 }",
     "type": "asset",
@@ -72,12 +72,12 @@ log(\\"background\\");
     "fileName": "test/manifest/resources/backgroundHtml/background.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/backgroundHtml/background.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/backgroundHtml/background.js"></script>
   </head>
 </html>
 ",

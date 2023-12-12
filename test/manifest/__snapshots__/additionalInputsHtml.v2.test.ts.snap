@@ -15,7 +15,7 @@ exports[`additionalInputsHtml - Manifest V2 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"webAccessible\\");
+log("webAccessible");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -37,7 +37,7 @@ log(\\"webAccessible\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/script.js": {
-        "code": "log(\\"webAccessible\\");",
+        "code": "log("webAccessible");",
         "originalLength": 58,
         "removedExports": [],
         "renderedExports": [],
@@ -76,11 +76,11 @@ log(\\"webAccessible\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"web_accessible_resources\\": [
-    \\"test/manifest/resources/additionalInputsHtml/html.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "test/manifest/resources/additionalInputsHtml/html.html"
   ]
 }",
     "type": "asset",
@@ -89,13 +89,13 @@ log(\\"webAccessible\\");
     "fileName": "test/manifest/resources/additionalInputsHtml/html.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/additionalInputsHtml/html.js\\"></script>
-    <link rel=\\"stylesheet\\" crossorigin href=\\"/assets/html.css\\">
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/additionalInputsHtml/html.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/html.css">
   </head>
 </html>
 ",

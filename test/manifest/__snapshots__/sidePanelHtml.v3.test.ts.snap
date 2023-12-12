@@ -6,7 +6,7 @@ exports[`sidePanelHtml - Manifest V3 1`] = `
     "code": "function log(message) {
   console.log(message);
 }
-log(\\"sidepanel\\");
+log("sidepanel");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -39,7 +39,7 @@ log(\\"sidepanel\\");
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/sidePanelHtml/sidepanel.js": {
-        "code": "log(\\"sidepanel\\");",
+        "code": "log("sidepanel");",
         "originalLength": 54,
         "removedExports": [],
         "renderedExports": [],
@@ -58,11 +58,11 @@ log(\\"sidepanel\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"side_panel\\": {
-    \\"default_path\\": \\"test/manifest/resources/sidePanelHtml/sidepanel.html\\"
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "side_panel": {
+    "default_path": "test/manifest/resources/sidePanelHtml/sidepanel.html"
   }
 }",
     "type": "asset",
@@ -71,12 +71,12 @@ log(\\"sidepanel\\");
     "fileName": "test/manifest/resources/sidePanelHtml/sidepanel.html",
     "name": undefined,
     "source": "<!DOCTYPE html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
+    <meta charset="UTF-8" />
 
-    <script type=\\"module\\" src=\\"http://example.com/httpModuleScript.js\\"></script>
-    <script type=\\"module\\" crossorigin src=\\"/assets/test/manifest/resources/sidePanelHtml/sidepanel.js\\"></script>
+    <script type="module" src="http://example.com/httpModuleScript.js"></script>
+    <script type="module" crossorigin src="/assets/test/manifest/resources/sidePanelHtml/sidepanel.js"></script>
   </head>
 </html>
 ",

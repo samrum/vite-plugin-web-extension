@@ -6,24 +6,24 @@ exports[`contentScriptTypes - Manifest V3 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentScriptTypes/content1.js\\"
+      "js": [
+        "test/manifest/resources/contentScriptTypes/content1.js"
       ],
-      \\"matches\\": [
-        \\"https://example.com/\\"
+      "matches": [
+        "https://example.com/"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentScriptTypes/content2.js\\"
+      "js": [
+        "test/manifest/resources/contentScriptTypes/content2.js"
       ],
-      \\"matches\\": [
-        \\"https://example.com/\\"
+      "matches": [
+        "https://example.com/"
       ]
     }
   ]
@@ -33,14 +33,14 @@ exports[`contentScriptTypes - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/contentScriptTypes/content1.js",
     "name": undefined,
-    "source": "console.log(\\"content1\\");
+    "source": "console.log("content1");
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/contentScriptTypes/content2.js",
     "name": undefined,
-    "source": "console.log(\\"content2\\");
+    "source": "console.log("content2");
 ",
     "type": "asset",
   },

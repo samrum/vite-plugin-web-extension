@@ -23,21 +23,21 @@ exports[`contentCss - Manifest V2 1`] = `
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 2,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 2,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentCss/content.js\\"
+      "js": [
+        "test/manifest/resources/contentCss/content.js"
       ],
-      \\"css\\": [
-        \\"assets/test/manifest/resources/contentCss/content1.css\\",
-        \\"assets/test/manifest/resources/contentCss/content2.css\\"
+      "css": [
+        "assets/test/manifest/resources/contentCss/content1.css",
+        "assets/test/manifest/resources/contentCss/content2.css"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     }
   ]
@@ -47,7 +47,7 @@ exports[`contentCss - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/contentCss/content.js",
     "name": undefined,
-    "source": "console.log(\\"content\\");
+    "source": "console.log("content");
 ",
     "type": "asset",
   },

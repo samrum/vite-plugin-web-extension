@@ -45,8 +45,8 @@ export {
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"content\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("content");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -67,7 +67,7 @@ log(\\"content\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content1.js": {
-        "code": "log(\\"content\\");",
+        "code": "log("content");",
         "originalLength": 52,
         "removedExports": [],
         "renderedExports": [],
@@ -83,8 +83,8 @@ log(\\"content\\");
     },
   },
   {
-    "code": "import { l as log } from \\"../../../../log.js\\";
-log(\\"content2\\");
+    "code": "import { l as log } from "../../../../log.js";
+log("content2");
 ",
     "dynamicImports": [],
     "exports": [],
@@ -105,7 +105,7 @@ log(\\"content2\\");
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/contentWithChunkedImport/content2.js": {
-        "code": "log(\\"content2\\");",
+        "code": "log("content2");",
         "originalLength": 53,
         "removedExports": [],
         "renderedExports": [],
@@ -124,41 +124,41 @@ log(\\"content2\\");
     "fileName": "manifest.json",
     "name": undefined,
     "source": "{
-  \\"version\\": \\"1.0.0\\",
-  \\"name\\": \\"Manifest Name\\",
-  \\"manifest_version\\": 3,
-  \\"content_scripts\\": [
+  "version": "1.0.0",
+  "name": "Manifest Name",
+  "manifest_version": 3,
+  "content_scripts": [
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithChunkedImport/content1.js\\"
+      "js": [
+        "test/manifest/resources/contentWithChunkedImport/content1.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     },
     {
-      \\"js\\": [
-        \\"test/manifest/resources/contentWithChunkedImport/content2.js\\"
+      "js": [
+        "test/manifest/resources/contentWithChunkedImport/content2.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ]
     }
   ],
-  \\"web_accessible_resources\\": [
+  "web_accessible_resources": [
     {
-      \\"resources\\": [
-        \\"assets/log.js\\",
-        \\"assets/test/manifest/resources/contentWithChunkedImport/content1.js\\",
-        \\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\"
+      "resources": [
+        "assets/log.js",
+        "assets/test/manifest/resources/contentWithChunkedImport/content1.js",
+        "assets/test/manifest/resources/contentWithChunkedImport/content2.js"
       ],
-      \\"matches\\": [
-        \\"https://*/*\\",
-        \\"http://*/*\\"
+      "matches": [
+        "https://*/*",
+        "http://*/*"
       ],
-      \\"use_dynamic_url\\": true
+      "use_dynamic_url": true
     }
   ]
 }",
@@ -167,13 +167,13 @@ log(\\"content2\\");
   {
     "fileName": "test/manifest/resources/contentWithChunkedImport/content1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/contentWithChunkedImport/content1.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/contentWithChunkedImport/content1.js"))})();",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/contentWithChunkedImport/content2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL(\\"assets/test/manifest/resources/contentWithChunkedImport/content2.js\\"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/contentWithChunkedImport/content2.js"))})();",
     "type": "asset",
   },
 ]
