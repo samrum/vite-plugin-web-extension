@@ -18,6 +18,7 @@ export default abstract class DevBuilder<
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
   protected hmrViteClientUrl = "";
+  protected publicDir: string;
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -29,6 +30,11 @@ export default abstract class DevBuilder<
       process.cwd(),
       this.viteConfig.root,
       this.viteConfig.build.outDir
+    );
+    this.publicDir = path.resolve(
+      process.cwd(),
+      this.viteConfig.root,
+      this.viteConfig.publicDir
     );
   }
 
@@ -59,12 +65,7 @@ export default abstract class DevBuilder<
     this.hmrViteClientUrl = `${this.hmrServerOrigin}/@vite/client`;
 
     await emptyDir(this.outDir);
-    const publicDir = path.resolve(
-      process.cwd(),
-      this.viteConfig.root,
-      this.viteConfig.publicDir
-    );
-    await copy(publicDir, this.outDir);
+    await copy(this.publicDir, this.outDir);
 
     await this.writeManifestHtmlFiles(manifestHtmlFiles);
     await this.writeManifestContentScriptFiles();
@@ -178,6 +179,12 @@ export default abstract class DevBuilder<
   }
 
   protected async writeManifestScriptFile(fileName: string): Promise<string> {
+    const publicDirName = path.basename(this.publicDir);
+    if (fileName.split(path.sep)[0] === publicDirName) {
+      await copy(fileName, `${this.outDir}/${fileName}`);
+      return fileName;
+    }
+
     const outputFileName = getOutputFileName(fileName);
 
     const scriptLoaderFile = getScriptLoaderFile(outputFileName, [
