@@ -103,9 +103,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
             }),
           };
 
-          if (
-            this.pluginOptions.useDynamicUrlWebAccessibleResources !== false
-          ) {
+          if (this.pluginOptions.useDynamicUrlWebAccessibleResources === true) {
             // @ts-ignore - use_dynamic_url is supported, but not typed
             resource.use_dynamic_url = true;
           }
@@ -163,9 +161,7 @@ export default class ManifestV3 extends ManifestParser<Manifest> {
             continue;
           }
 
-          if (
-            this.pluginOptions.useDynamicUrlWebAccessibleResources === false
-          ) {
+          if (this.pluginOptions.useDynamicUrlWebAccessibleResources !== true) {
             delete webAccessibleResource["use_dynamic_url"];
           }
 

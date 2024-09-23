@@ -157,8 +157,7 @@ log("content2");
       "matches": [
         "https://*/*",
         "http://*/*"
-      ],
-      "use_dynamic_url": true
+      ]
     }
   ]
 }",

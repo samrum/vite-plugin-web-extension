@@ -75,8 +75,7 @@ exports[`chunkCssRewrite - Manifest V3 1`] = `
       "matches": [
         "https://*/*",
         "http://*/*"
-      ],
-      "use_dynamic_url": true
+      ]
     }
   ]
 }",
