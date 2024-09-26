@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/samrum/vite-plugin-web-extension/compare/v5.1.0...v5.1.1) (2024-09-26)
+
+### Bug Fixes
+
+- use_dynamic_url with content scripts does not work in Chrome 130 ([#145](https://github.com/samrum/vite-plugin-web-extension/issues/145)) ([b014902](https://github.com/samrum/vite-plugin-web-extension/commit/b014902daa5eee1d17fc4a58963d6343094446c3))
+
 ## [5.1.0](https://github.com/samrum/vite-plugin-web-extension/compare/v5.0.0...v5.1.0) (2023-12-12)
 
 ### Features
