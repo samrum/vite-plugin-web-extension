@@ -172,8 +172,7 @@ log("chunkedScript3");
       ],
       "matches": [
         "<all_urls>"
-      ],
-      "use_dynamic_url": true
+      ]
     },
     {
       "resources": [
@@ -188,8 +187,7 @@ log("chunkedScript3");
       ],
       "matches": [
         "https://example.com/"
-      ],
-      "use_dynamic_url": true
+      ]
     },
     {
       "resources": [
@@ -198,8 +196,7 @@ log("chunkedScript3");
       ],
       "extension_ids": [
         "oilkjaldkfjlasdf"
-      ],
-      "use_dynamic_url": true
+      ]
     }
   ]
 }",

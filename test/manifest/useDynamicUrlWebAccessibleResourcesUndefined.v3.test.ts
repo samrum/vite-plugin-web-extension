@@ -20,6 +20,5 @@ runManifestV3Test(
     additionalInputs: {
       scripts: [`${resourceDir}/script1.js`, `${resourceDir}/script2.js`],
     },
-    useDynamicUrlWebAccessibleResources: true,
   }
 );

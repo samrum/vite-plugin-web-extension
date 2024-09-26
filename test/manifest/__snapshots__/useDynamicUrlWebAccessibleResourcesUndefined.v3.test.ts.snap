@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`optimizeWebAccessibleResourcesDisabled - Manifest V3 1`] = `
+exports[`useDynamicUrlWebAccessibleResourcesEnabled - Manifest V3 1`] = `
 [
   {
     "code": "function log(message) {
@@ -50,8 +50,8 @@ log("content");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content1.js",
-    "fileName": "assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
       "assets/log.js": [
@@ -66,7 +66,7 @@ log("content");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js": {
         "code": "log("content");",
         "originalLength": 52,
         "removedExports": [],
@@ -74,7 +74,7 @@ log("content");
         "renderedLength": 15,
       },
     },
-    "name": "test/manifest/resources/optimizeWebAccessibleResources/content1",
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content1",
     "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
@@ -88,8 +88,8 @@ log("content2");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content2.js",
-    "fileName": "assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
       "assets/log.js": [
@@ -104,7 +104,7 @@ log("content2");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/content2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js": {
         "code": "log("content2");",
         "originalLength": 53,
         "removedExports": [],
@@ -112,7 +112,7 @@ log("content2");
         "renderedLength": 16,
       },
     },
-    "name": "test/manifest/resources/optimizeWebAccessibleResources/content2",
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content2",
     "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
@@ -126,8 +126,8 @@ log("script1");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script1.js",
-    "fileName": "assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
       "assets/log.js": [
@@ -142,7 +142,7 @@ log("script1");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script1.js": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js": {
         "code": "log("script1");",
         "originalLength": 50,
         "removedExports": [],
@@ -150,7 +150,7 @@ log("script1");
         "renderedLength": 15,
       },
     },
-    "name": "test/manifest/resources/optimizeWebAccessibleResources/script1",
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script1",
     "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
@@ -164,8 +164,8 @@ log("script2");
 ",
     "dynamicImports": [],
     "exports": [],
-    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script2.js",
-    "fileName": "assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js",
+    "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
+    "fileName": "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
     "implicitlyLoadedBefore": [],
     "importedBindings": {
       "assets/log.js": [
@@ -180,7 +180,7 @@ log("script2");
     "isImplicitEntry": false,
     "map": null,
     "modules": {
-      "vite-plugin-web-extension/test/manifest/resources/optimizeWebAccessibleResources/script2.js": {
+      "vite-plugin-web-extension/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js": {
         "code": "log("script2");",
         "originalLength": 50,
         "removedExports": [],
@@ -188,7 +188,7 @@ log("script2");
         "renderedLength": 15,
       },
     },
-    "name": "test/manifest/resources/optimizeWebAccessibleResources/script2",
+    "name": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script2",
     "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
@@ -206,7 +206,7 @@ log("script2");
   "content_scripts": [
     {
       "js": [
-        "test/manifest/resources/optimizeWebAccessibleResources/content1.js"
+        "test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js"
       ],
       "matches": [
         "<all_urls>"
@@ -214,7 +214,7 @@ log("script2");
     },
     {
       "js": [
-        "test/manifest/resources/optimizeWebAccessibleResources/content2.js"
+        "test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js"
       ],
       "matches": [
         "<all_urls>"
@@ -224,37 +224,13 @@ log("script2");
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js",
         "assets/log.js",
-        "test/manifest/resources/optimizeWebAccessibleResources/script1.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js",
-        "assets/log.js",
-        "test/manifest/resources/optimizeWebAccessibleResources/script2.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js",
-        "assets/log.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js",
-        "assets/log.js"
+        "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
+        "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
+        "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+        "assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
+        "test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
+        "test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js"
       ],
       "matches": [
         "<all_urls>"
@@ -265,27 +241,27 @@ log("script2");
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/optimizeWebAccessibleResources/content1.js",
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/content1.js"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content1.js"))})();",
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/optimizeWebAccessibleResources/content2.js",
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/content2.js"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/content2.js"))})();",
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/optimizeWebAccessibleResources/script1.js",
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/script1.js"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script1.js"))})();",
     "type": "asset",
   },
   {
-    "fileName": "test/manifest/resources/optimizeWebAccessibleResources/script2.js",
+    "fileName": "test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js",
     "name": undefined,
-    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/optimizeWebAccessibleResources/script2.js"))})();",
+    "source": "(async()=>{await import(chrome.runtime.getURL("assets/test/manifest/resources/useDynamicUrlWebAccessibleResources/script2.js"))})();",
     "type": "asset",
   },
 ]

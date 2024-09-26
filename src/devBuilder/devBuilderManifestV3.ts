@@ -84,7 +84,7 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
   }): void {
     this.manifest.web_accessible_resources ??= [];
 
-    if (this.pluginOptions.useDynamicUrlWebAccessibleResources === false) {
+    if (this.pluginOptions.useDynamicUrlWebAccessibleResources !== true) {
       delete webAccessibleResource["use_dynamic_url"];
     }
 
