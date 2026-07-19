@@ -2,6 +2,7 @@ import { ensureDir } from "fs-extra";
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ViteWebExtensionOptions } from "../../types";
+import { SERVICE_WORKER_CLIENT_URL } from "../middleware/devClient";
 import { getServiceWorkerLoaderFile } from "../utils/loader";
 import DevBuilder from "./devBuilder";
 
@@ -29,7 +30,7 @@ export default class DevBuilderManifestV3 extends DevBuilder<chrome.runtime.Mani
     const fileName = manifest.background?.service_worker;
 
     const serviceWorkerLoader = getServiceWorkerLoaderFile([
-      this.hmrViteClientUrl,
+      `${this.hmrServerOrigin}${SERVICE_WORKER_CLIENT_URL}`,
       `${this.hmrServerOrigin}/${fileName}`,
     ]);
 

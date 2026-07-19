@@ -2,7 +2,7 @@ import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
-import viteClientModifier from "./middleware/viteClientModifier";
+import devClientMiddleware from "./middleware/devClient";
 import {
   addInputScriptsToOptionsInput,
   type EmittedFile,
@@ -37,12 +37,20 @@ export default function webExtension(
     },
 
     configureServer(server) {
-      server.middlewares.use(viteClientModifier);
+      server.middlewares.use(devClientMiddleware);
 
       server.httpServer?.once("listening", () => {
         manifestParser.setDevServer(server);
         manifestParser.writeDevBuild(server.config.server.port!);
       });
+    },
+
+    hotUpdate({ type, file }) {
+      if (this.environment.name !== "client" || type !== "update") {
+        return;
+      }
+
+      manifestParser?.handleFileChange(file);
     },
 
     async options(options) {

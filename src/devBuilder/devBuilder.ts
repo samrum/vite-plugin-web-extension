@@ -18,6 +18,7 @@ export default abstract class DevBuilder<
   protected inlineScriptHashes = new Set<string>();
   protected outDir: string;
   protected hmrViteClientUrl = "";
+  private fileChangeHandlers = new Map<string, () => Promise<unknown>>();
 
   constructor(
     protected viteConfig: ResolvedConfig,
@@ -101,14 +102,14 @@ export default abstract class DevBuilder<
 
       await this.writeManifestHtmlFile(fileName, absoluteFileName);
 
-      this.viteDevServer!.watcher.on("change", async (path) => {
-        if (normalizePath(path) !== absoluteFileName) {
-          return;
-        }
-
-        await this.writeManifestHtmlFile(fileName, absoluteFileName);
-      });
+      this.fileChangeHandlers.set(absoluteFileName, () =>
+        this.writeManifestHtmlFile(fileName, absoluteFileName)
+      );
     }
+  }
+
+  async handleFileChange(file: string): Promise<void> {
+    await this.fileChangeHandlers.get(normalizePath(file))?.();
   }
 
   protected async writeManifestHtmlFile(
@@ -222,13 +223,9 @@ export default abstract class DevBuilder<
 
         await this.writeManifestAssetFile(outputFileName, absoluteFileName);
 
-        this.viteDevServer!.watcher.on("change", async (path) => {
-          if (normalizePath(path) !== absoluteFileName) {
-            return;
-          }
-
-          await this.writeManifestAssetFile(outputFileName, fileName);
-        });
+        this.fileChangeHandlers.set(absoluteFileName, () =>
+          this.writeManifestAssetFile(outputFileName, absoluteFileName)
+        );
       }
     }
   }
@@ -283,6 +280,10 @@ export default abstract class DevBuilder<
           fileName,
           absoluteFileName
         );
+
+        this.fileChangeHandlers.set(absoluteFileName, () =>
+          this.writeManifestHtmlFile(fileName, absoluteFileName)
+        );
         break;
       case "scripts":
         outputFileName = await this.writeManifestScriptFile(fileName);
@@ -292,6 +293,10 @@ export default abstract class DevBuilder<
         outputFileName = await this.writeManifestAssetFile(
           cssFileName,
           absoluteFileName
+        );
+
+        this.fileChangeHandlers.set(absoluteFileName, () =>
+          this.writeManifestAssetFile(cssFileName, absoluteFileName)
         );
         break;
       default:
