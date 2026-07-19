@@ -3,51 +3,51 @@
 exports[`popupHtml - Manifest V3 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/popupHtml/popup.js
 log("popup");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.html",
     "fileName": "assets/test/manifest/resources/popupHtml/popup.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.html": {
-        "code": "",
-        "originalLength": 224,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/popupHtml/popup.js": {
-        "code": "log("popup");",
-        "originalLength": 50,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/popupHtml/popup.js
+log("popup");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 13,
+        "renderedLength": 80,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "test/manifest/resources/popupHtml/popup",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

@@ -3,51 +3,51 @@
 exports[`optionsHtml - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/optionsHtml/options.js
 log("options");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.html",
     "fileName": "assets/test/manifest/resources/optionsHtml/options.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.html": {
-        "code": "",
-        "originalLength": 226,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/optionsHtml/options.js": {
-        "code": "log("options");",
-        "originalLength": 52,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/optionsHtml/options.js
+log("options");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 15,
+        "renderedLength": 86,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "test/manifest/resources/optionsHtml/options",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

@@ -26,17 +26,23 @@ exports[`additionalInputsScriptsUnchunkedImport - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js",
     "name": undefined,
-    "source": "function log(message) {
-  console.log(message);
+    "source": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/additionalInputsScriptsUnchunkedImport/script1.js
 log("script1");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js",
     "name": undefined,
-    "source": "console.log("script2");
+    "source": "//#region test/manifest/resources/additionalInputsScriptsUnchunkedImport/script2.js
+console.log("script2");
+//#endregion
 ",
     "type": "asset",
   },

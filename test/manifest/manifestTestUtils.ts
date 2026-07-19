@@ -1,6 +1,5 @@
 import path from "node:path";
-import type { RollupOutput } from "rollup";
-import { build, normalizePath } from "vite";
+import { build, normalizePath, type Rolldown } from "vite";
 import { expect, test } from "vitest";
 import webExtension from "../../src/index";
 import { ViteWebExtensionOptions } from "../../types";
@@ -13,13 +12,13 @@ function normalizeFileName(fileName: string): string {
 
 async function bundleGenerate(
   options: ViteWebExtensionOptions
-): Promise<RollupOutput> {
+): Promise<Rolldown.RolldownOutput> {
   const bundle = await build({
     logLevel: "warn",
     build: {
       write: false,
       minify: false,
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           entryFileNames: `assets/[name].js`,
           chunkFileNames: `assets/[name].js`,
@@ -30,7 +29,7 @@ async function bundleGenerate(
     plugins: [webExtension(options)],
   });
 
-  return bundle as RollupOutput;
+  return bundle as Rolldown.RolldownOutput;
 }
 
 function trimFilePathToRepoDirectory(filePath: string): string {
@@ -79,18 +78,19 @@ export async function runTest<ManifestType extends chrome.runtime.Manifest>({
               ? trimFilePathToRepoDirectory(file.facadeModuleId)
               : null,
             fileName: normalizeFileName(file.fileName),
-            implicitlyLoadedBefore: file.implicitlyLoadedBefore,
-            importedBindings: file.importedBindings,
             imports: file.imports,
             isDynamicEntry: file.isDynamicEntry,
             isEntry: file.isEntry,
-            isImplicitEntry: file.isImplicitEntry,
             map: file.map,
             modules: modules,
             name: normalizeFileName(file.name),
-            referencedFiles: file.referencedFiles,
             type: file.type,
-            viteMetadata: file.viteMetadata,
+            viteMetadata: file.viteMetadata
+              ? {
+                  importedAssets: file.viteMetadata.importedAssets,
+                  importedCss: file.viteMetadata.importedCss,
+                }
+              : file.viteMetadata,
           };
         }
 

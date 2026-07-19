@@ -77,7 +77,9 @@ exports[`chunkCssRewrite - Manifest V2 1`] = `
     "fileName": "test/manifest/resources/chunkCssRewrite/content1.js",
     "name": undefined,
     "source": "/* empty css                        */
+//#region test/manifest/resources/chunkCssRewrite/content1.js
 console.log(["assets/content1.css","assets/contentShared.css"]);
+//#endregion
 ",
     "type": "asset",
   },
@@ -85,14 +87,18 @@ console.log(["assets/content1.css","assets/contentShared.css"]);
     "fileName": "test/manifest/resources/chunkCssRewrite/content2.js",
     "name": undefined,
     "source": "/* empty css                        */
+//#region test/manifest/resources/chunkCssRewrite/content2.js
 console.log(["assets/content2.css","assets/contentShared.css"]);
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/chunkCssRewrite/contentNoCss.js",
     "name": undefined,
-    "source": "console.log([]);
+    "source": "//#region test/manifest/resources/chunkCssRewrite/contentNoCss.js
+console.log([]);
+//#endregion
 ",
     "type": "asset",
   },

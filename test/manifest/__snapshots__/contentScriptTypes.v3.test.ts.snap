@@ -33,14 +33,18 @@ exports[`contentScriptTypes - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/contentScriptTypes/content1.js",
     "name": undefined,
-    "source": "console.log("content1");
+    "source": "//#region test/manifest/resources/contentScriptTypes/content1.js
+console.log("content1");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/contentScriptTypes/content2.js",
     "name": undefined,
-    "source": "console.log("content2");
+    "source": "//#region test/manifest/resources/contentScriptTypes/content2.ts
+console.log("content2");
+//#endregion
 ",
     "type": "asset",
   },

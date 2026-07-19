@@ -1,9 +1,20 @@
 # Migration
 
+- [Version 5.x.x to 6.0.0](#version-5xx-to-600)
 - [Version 4.x.x to 5.0.0](#version-4xx-to-500)
 - [Version 3.x.x to 4.0.0](#version-3xx-to-400)
 - [Version 2.x.x to 3.0.0](#version-2xx-to-300)
 - [Version 0.x.x to 1.0.0](#version-0xx-to-100)
+
+## Version 5.x.x to 6.0.0
+
+- Upgrade Vite to 8.x (now powered by Rolldown)
+
+  - Upgrade any Vite framework plugins
+
+- Node `^20.19.0 || >=22.12.0` is now required
+- The package is now ESM-only. The `require()` entry points have been removed. Vite 8 config files are ESM-only, so this should not require changes in most projects.
+- If your Vite config sets `build.rollupOptions`, prefer `build.rolldownOptions` (Vite auto-converts the old name but warns)
 
 ## Version 4.x.x to 5.0.0
 

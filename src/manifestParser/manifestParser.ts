@@ -1,10 +1,10 @@
+import type { ResolvedConfig, ViteDevServer } from "vite";
 import type {
   EmittedFile,
   OutputAsset,
   OutputBundle,
   OutputChunk,
-} from "rollup";
-import type { ResolvedConfig, ViteDevServer } from "vite";
+} from "../utils/rollup";
 import type {
   NormalizedAdditionalInput,
   ViteWebExtensionOptions,
@@ -240,17 +240,22 @@ export default abstract class ManifestParser<
     result: ParseResult<Manifest>,
     bundle: OutputBundle
   ): { fileName: string; webAccessibleFiles: Set<string> } {
-    delete bundle[outputAsset.fileName];
-
     const fileName = `${getOutputFileName(
       inputFileName
     )}.${this.getAdditionalInputTypeFileExtension(type)}`;
 
-    result.emitFiles.push({
-      type: "asset",
-      fileName,
-      source: outputAsset.source,
-    });
+    // Renaming an asset requires a delete + re-emit. Rolldown drops files
+    //   re-emitted under a fileName that was deleted from the bundle in the
+    //   same generateBundle hook, so only do this when the name changes.
+    if (fileName !== outputAsset.fileName) {
+      delete bundle[outputAsset.fileName];
+
+      result.emitFiles.push({
+        type: "asset",
+        fileName,
+        source: outputAsset.source,
+      });
+    }
 
     return {
       fileName,
@@ -288,7 +293,10 @@ export default abstract class ManifestParser<
         fileName,
         source: scriptLoaderFile.source,
       });
-    } else {
+    } else if (fileName !== outputChunk.fileName) {
+      // Renaming a chunk requires a delete + re-emit. Rolldown drops files
+      //   re-emitted under a fileName that was deleted from the bundle in the
+      //   same generateBundle hook, so only do this when the name changes.
       delete bundle[outputChunk.fileName];
 
       result.emitFiles.push({

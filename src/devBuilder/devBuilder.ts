@@ -1,7 +1,7 @@
 import { copy, emptyDir, ensureDir } from "fs-extra";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { normalizePath } from "vite";
+import { isRunnableDevEnvironment, normalizePath } from "vite";
 import type { ResolvedConfig, ViteDevServer } from "vite";
 import { AdditionalInput, ViteWebExtensionOptions } from "../../types";
 import { addHmrSupportToCsp } from "../utils/addHmrSupportToCsp";
@@ -237,9 +237,18 @@ export default abstract class DevBuilder<
     outputFileName: string,
     fileName: string
   ): Promise<string> {
-    const { default: source } = (await this.viteDevServer!.ssrLoadModule(
-      fileName
-    )) as { default: string };
+    const ssrEnvironment = this.viteDevServer!.environments.ssr;
+
+    // ?inline makes vite export style file content as the default export
+    const inlineFileName = `${fileName}?inline`;
+
+    const { default: source } = (
+      isRunnableDevEnvironment(ssrEnvironment)
+        ? await ssrEnvironment.runner.import(inlineFileName)
+        : await this.viteDevServer!.ssrLoadModule(inlineFileName)
+    ) as {
+      default: string;
+    };
 
     const loaderFile = {
       fileName: outputFileName,

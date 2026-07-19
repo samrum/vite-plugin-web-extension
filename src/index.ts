@@ -1,15 +1,15 @@
-import type { EmittedFile, OutputBundle } from "rollup";
 import type { Plugin, ResolvedConfig } from "vite";
 import type { ViteWebExtensionOptions } from "../types";
 import ManifestParser from "./manifestParser/manifestParser";
 import ManifestParserFactory from "./manifestParser/manifestParserFactory";
 import viteClientModifier from "./middleware/viteClientModifier";
-import { addInputScriptsToOptionsInput } from "./utils/rollup";
-import { getVirtualModule } from "./utils/virtualModule";
 import {
-  transformSelfLocationAssets,
-  updateConfigForExtensionSupport,
-} from "./utils/vite";
+  addInputScriptsToOptionsInput,
+  type EmittedFile,
+  type OutputBundle,
+} from "./utils/rollup";
+import { getVirtualModule } from "./utils/virtualModule";
+import { updateConfigForExtensionSupport } from "./utils/vite";
 
 export default function webExtension(
   pluginOptions: ViteWebExtensionOptions
@@ -26,7 +26,7 @@ export default function webExtension(
 
   return {
     name: "webExtension",
-    enforce: "post", // required to revert vite asset self.location transform to import.meta.url
+    enforce: "post", // run after vite's internal plugins so bundle output is final in generateBundle
 
     config(config) {
       return updateConfigForExtensionSupport(config, pluginOptions.manifest);
@@ -83,10 +83,6 @@ export default function webExtension(
 
     load(id) {
       return getVirtualModule(id);
-    },
-
-    transform(code) {
-      return transformSelfLocationAssets(code, viteConfig);
     },
 
     async generateBundle(_options, bundle) {

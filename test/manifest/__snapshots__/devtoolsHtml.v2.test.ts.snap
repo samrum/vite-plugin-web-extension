@@ -3,51 +3,51 @@
 exports[`devtoolsHtml - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/devtoolsHtml/devtools.js
 log("devtools");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.html",
     "fileName": "assets/test/manifest/resources/devtoolsHtml/devtools.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.html": {
-        "code": "",
-        "originalLength": 227,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/devtoolsHtml/devtools.js": {
-        "code": "log("devtools");",
-        "originalLength": 53,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/devtoolsHtml/devtools.js
+log("devtools");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 16,
+        "renderedLength": 89,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "test/manifest/resources/devtoolsHtml/devtools",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
