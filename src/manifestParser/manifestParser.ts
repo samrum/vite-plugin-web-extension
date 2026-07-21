@@ -33,6 +33,7 @@ export default abstract class ManifestParser<
 > {
   protected inputManifest: Manifest;
   protected viteDevServer: ViteDevServer | undefined;
+  protected devBuilder: DevBuilder<Manifest> | undefined;
   protected parsedMetaDataChunkIds = new Set<string>();
 
   constructor(
@@ -62,10 +63,16 @@ export default abstract class ManifestParser<
   }
 
   async writeDevBuild(devServerPort: number): Promise<void> {
-    await this.createDevBuilder().writeBuild({
+    this.devBuilder = this.createDevBuilder();
+
+    await this.devBuilder.writeBuild({
       devServerPort,
       manifestHtmlFiles: this.getHtmlFileNames(this.inputManifest),
     });
+  }
+
+  async handleFileChange(file: string): Promise<void> {
+    await this.devBuilder?.handleFileChange(file);
   }
 
   async parseOutput(bundle: OutputBundle): Promise<ParseResult<Manifest>> {
