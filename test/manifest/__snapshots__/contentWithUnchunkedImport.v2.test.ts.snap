@@ -26,10 +26,14 @@ exports[`contentWithUnchunkedImport - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/contentWithUnchunkedImport/content.js",
     "name": undefined,
-    "source": "function log(message) {
-  console.log(message);
+    "source": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/contentWithUnchunkedImport/content.js
 log("content");
+//#endregion
 ",
     "type": "asset",
   },

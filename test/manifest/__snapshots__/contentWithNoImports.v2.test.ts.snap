@@ -26,7 +26,9 @@ exports[`contentWithNoImports - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/contentWithNoImports/content.js",
     "name": undefined,
-    "source": "console.log("content");
+    "source": "//#region test/manifest/resources/contentWithNoImports/content.js
+console.log("content");
+//#endregion
 ",
     "type": "asset",
   },

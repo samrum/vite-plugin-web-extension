@@ -32,7 +32,12 @@ Check the README of the generated extension for usage information.
 
 ## Usage
 
-Requires Vite 3+
+Requires Vite 8+ and Node `^20.19.0 || >=22.12.0`
+
+| Plugin Version | Vite Version |
+| -------------- | ------------ |
+| 6.x            | 8            |
+| 5.x            | 4, 5         |
 
 ```sh
 npm install @samrum/vite-plugin-web-extension

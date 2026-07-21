@@ -3,41 +3,38 @@
 exports[`additionalInputsWebAccessible - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
-export {
-  log as l
-};
+//#endregion
+export { log as t };
 ",
     "dynamicImports": [],
     "exports": [
-      "l",
+      "t",
     ],
     "facadeModuleId": null,
     "fileName": "assets/log.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": false,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "log",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -45,37 +42,32 @@ export {
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js
 log("chunkedScript1");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
     "fileName": "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js": {
-        "code": "log("chunkedScript1");",
-        "originalLength": 57,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript1.js
+log("chunkedScript1");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 22,
+        "renderedLength": 118,
       },
     },
     "name": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript1",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -83,37 +75,32 @@ log("chunkedScript1");
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js
 log("chunkedScript2");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
     "fileName": "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js": {
-        "code": "log("chunkedScript2");",
-        "originalLength": 57,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript2.js
+log("chunkedScript2");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 22,
+        "renderedLength": 118,
       },
     },
     "name": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript2",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -121,37 +108,32 @@ log("chunkedScript2");
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js
 log("chunkedScript3");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
     "fileName": "assets/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js": {
-        "code": "log("chunkedScript3");",
-        "originalLength": 57,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/additionalInputsWebAccessible/chunkedScript3.js
+log("chunkedScript3");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 22,
+        "renderedLength": 118,
       },
     },
     "name": "test/manifest/resources/additionalInputsWebAccessible/chunkedScript3",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -202,49 +184,63 @@ log("chunkedScript3");
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script1.js",
     "name": undefined,
-    "source": "console.log("script1");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script1.js
+console.log("script1");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script2.js",
     "name": undefined,
-    "source": "console.log("script2");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script2.js
+console.log("script2");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script3.js",
     "name": undefined,
-    "source": "console.log("script3");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script3.js
+console.log("script3");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script4.js",
     "name": undefined,
-    "source": "console.log("script4");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script4.js
+console.log("script4");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script5.js",
     "name": undefined,
-    "source": "console.log("script5");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script5.ts
+console.log("script5");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script6.js",
     "name": undefined,
-    "source": "console.log("script6");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script6.js
+console.log("script6");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/additionalInputsWebAccessible/script7.js",
     "name": undefined,
-    "source": "console.log("script7");
+    "source": "//#region test/manifest/resources/additionalInputsWebAccessible/script7.js
+console.log("script7");
+//#endregion
 ",
     "type": "asset",
   },

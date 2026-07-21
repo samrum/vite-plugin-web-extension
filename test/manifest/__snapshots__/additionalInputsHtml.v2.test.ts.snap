@@ -12,58 +12,56 @@ exports[`additionalInputsHtml - Manifest V2 1`] = `
     "type": "asset",
   },
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/additionalInputsHtml/script.js
 log("webAccessible");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/html.html",
     "fileName": "assets/test/manifest/resources/additionalInputsHtml/html.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/html.html": {
-        "code": "",
-        "originalLength": 290,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/script.js": {
-        "code": "log("webAccessible");",
-        "originalLength": 58,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/additionalInputsHtml/script.js
+log("webAccessible");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 21,
+        "renderedLength": 100,
       },
       "vite-plugin-web-extension/test/manifest/resources/additionalInputsHtml/style.css": {
-        "code": "",
-        "originalLength": 23,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "test/manifest/resources/additionalInputsHtml/html",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

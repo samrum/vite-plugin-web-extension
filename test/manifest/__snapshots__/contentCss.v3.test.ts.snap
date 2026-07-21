@@ -47,7 +47,9 @@ exports[`contentCss - Manifest V3 1`] = `
   {
     "fileName": "test/manifest/resources/contentCss/content.js",
     "name": undefined,
-    "source": "console.log("content");
+    "source": "//#region test/manifest/resources/contentCss/content.js
+console.log("content");
+//#endregion
 ",
     "type": "asset",
   },

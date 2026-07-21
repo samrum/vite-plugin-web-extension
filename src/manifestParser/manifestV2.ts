@@ -1,4 +1,4 @@
-import type { OutputBundle } from "rollup";
+import type { OutputBundle } from "../utils/rollup";
 import { ViteWebExtensionOptions } from "../../types";
 import DevBuilderManifestV2 from "../devBuilder/devBuilderManifestV2";
 import getNormalizedAdditionalInput from "../utils/getNormalizedAdditionalInput";

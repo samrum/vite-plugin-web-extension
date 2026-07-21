@@ -3,51 +3,51 @@
 exports[`backgroundScript - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/backgroundScript/background.js
 log("background");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/background.html",
     "fileName": "assets/background.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/background.html": {
-        "code": "",
-        "originalLength": 168,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/backgroundScript/background.js": {
-        "code": "log("background");",
-        "originalLength": 55,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/backgroundScript/background.js
+log("background");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 18,
+        "renderedLength": 97,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "background",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

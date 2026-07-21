@@ -3,51 +3,51 @@
 exports[`chromeUrlOverridesHtmlBookmarks - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
+//#endregion
+//#region test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js
 log("chromeUrlOverridesHtml");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html",
     "fileName": "assets/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/bookmarks.html": {
-        "code": "",
-        "originalLength": 241,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js": {
-        "code": "log("chromeUrlOverridesHtml");",
-        "originalLength": 67,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/chromeUrlOverridesHtml/chromeUrlOverridesHtml.js
+log("chromeUrlOverridesHtml");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 30,
+        "renderedLength": 127,
       },
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "test/manifest/resources/chromeUrlOverridesHtml/bookmarks",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

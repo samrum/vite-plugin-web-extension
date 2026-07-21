@@ -1,11 +1,14 @@
-import type {
-  InputOptions,
-  OutputAsset,
-  OutputBundle,
-  OutputChunk,
-} from "rollup";
+import type { Rolldown } from "vite";
 import { ViteWebExtensionOptions } from "../../types";
 import { getNormalizedFileName } from "./file";
+
+// Bundler types re-exported from vite so they always match the installed
+// vite's bundled rolldown version
+export type EmittedFile = Rolldown.EmittedFile;
+export type InputOptions = Rolldown.InputOptions;
+export type OutputAsset = Rolldown.OutputAsset;
+export type OutputBundle = Rolldown.OutputBundle;
+export type OutputChunk = Rolldown.OutputChunk;
 
 export function addInputScriptsToOptionsInput(
   inputScripts: [string, string][],

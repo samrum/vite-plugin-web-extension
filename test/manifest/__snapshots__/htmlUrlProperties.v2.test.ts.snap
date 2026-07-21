@@ -3,41 +3,38 @@
 exports[`htmlUrlProperties - Manifest V2 1`] = `
 [
   {
-    "code": "function log(message) {
-  console.log(message);
+    "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
 }
-export {
-  log as l
-};
+//#endregion
+export { log as t };
 ",
     "dynamicImports": [],
     "exports": [
-      "l",
+      "t",
     ],
     "facadeModuleId": null,
     "fileName": "assets/log.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {},
     "imports": [],
     "isDynamicEntry": false,
     "isEntry": false,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/shared/log.js": {
-        "code": "function log(message) {
-  console.log(message);
-}",
-        "originalLength": 65,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/shared/log.js
+function log(message) {
+	console.log(message);
+}
+
+//#endregion",
         "renderedExports": [
           "default",
         ],
-        "renderedLength": 49,
+        "renderedLength": 110,
       },
     },
     "name": "log",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -45,44 +42,37 @@ export {
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/htmlUrlProperties/devtools.js
 log("devtools");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/devtools.html",
     "fileName": "assets/test/manifest/resources/htmlUrlProperties/devtools.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/devtools.html": {
-        "code": "",
-        "originalLength": 227,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/devtools.js": {
-        "code": "log("devtools");",
-        "originalLength": 53,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/htmlUrlProperties/devtools.js
+log("devtools");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 16,
+        "renderedLength": 94,
       },
     },
     "name": "test/manifest/resources/htmlUrlProperties/devtools",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -90,44 +80,37 @@ log("devtools");
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/htmlUrlProperties/options.js
 log("options");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/options.html",
     "fileName": "assets/test/manifest/resources/htmlUrlProperties/options.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/options.html": {
-        "code": "",
-        "originalLength": 226,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/options.js": {
-        "code": "log("options");",
-        "originalLength": 52,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/htmlUrlProperties/options.js
+log("options");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 15,
+        "renderedLength": 92,
       },
     },
     "name": "test/manifest/resources/htmlUrlProperties/options",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},
@@ -135,44 +118,37 @@ log("options");
     },
   },
   {
-    "code": "import { l as log } from "../../../../log.js";
+    "code": "import { t as log } from "../../../../log.js";
+//#region test/manifest/resources/htmlUrlProperties/popup.js
 log("popup");
+//#endregion
 ",
     "dynamicImports": [],
     "exports": [],
     "facadeModuleId": "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/popup.html",
     "fileName": "assets/test/manifest/resources/htmlUrlProperties/popup.js",
-    "implicitlyLoadedBefore": [],
-    "importedBindings": {
-      "assets/log.js": [
-        "l",
-      ],
-    },
     "imports": [
       "assets/log.js",
     ],
     "isDynamicEntry": false,
     "isEntry": true,
-    "isImplicitEntry": false,
     "map": null,
     "modules": {
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/popup.html": {
-        "code": "",
-        "originalLength": 224,
-        "removedExports": [],
+        "code": null,
         "renderedExports": [],
         "renderedLength": 0,
       },
       "vite-plugin-web-extension/test/manifest/resources/htmlUrlProperties/popup.js": {
-        "code": "log("popup");",
-        "originalLength": 50,
-        "removedExports": [],
+        "code": "//#region test/manifest/resources/htmlUrlProperties/popup.js
+log("popup");
+
+//#endregion",
         "renderedExports": [],
-        "renderedLength": 13,
+        "renderedLength": 88,
       },
     },
     "name": "test/manifest/resources/htmlUrlProperties/popup",
-    "referencedFiles": [],
     "type": "chunk",
     "viteMetadata": {
       "importedAssets": Set {},

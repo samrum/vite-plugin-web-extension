@@ -35,14 +35,18 @@ exports[`contentWithSameScriptName - Manifest V2 1`] = `
   {
     "fileName": "test/manifest/resources/contentWithSameScriptName/content1/content.js",
     "name": undefined,
-    "source": "console.log("content1");
+    "source": "//#region test/manifest/resources/contentWithSameScriptName/content1/content.js
+console.log("content1");
+//#endregion
 ",
     "type": "asset",
   },
   {
     "fileName": "test/manifest/resources/contentWithSameScriptName/content2/content.js",
     "name": undefined,
-    "source": "console.log("content2");
+    "source": "//#region test/manifest/resources/contentWithSameScriptName/content2/content.js
+console.log("content2");
+//#endregion
 ",
     "type": "asset",
   },
